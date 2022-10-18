@@ -140,10 +140,10 @@ export const ProfileScreen = ({ navigation }) => {
         </LinearGradient>
         <View style={{ marginVertical: 5 }}>
           <Text style={{ ...Fonts.Black18Bold, textAlign: "center" }}>
-            Johan villiam
+            Pasquale Marasca
           </Text>
           <Text style={{ ...Fonts.Grey14Bold, textAlign: "center" }}>
-            +91 8834567897
+            +39 3271131707
           </Text>
         </View>
         <ScrollView

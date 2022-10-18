@@ -100,7 +100,7 @@ export const LoginScreen = ({ navigation }) => {
             marginLeft:50,
             marginTop:20,
           }}
-          source={require("../../../assets/images/logo-store.png")}
+          source={require("../../../assets/images/header_login.png")}
         >
        
         </ImageBackground>
@@ -138,8 +138,8 @@ export const LoginScreen = ({ navigation }) => {
           }}
         >
                     <View style={{ marginVertical: 10, top:20, buttom:20}}>
-            <Text style={{ ...Fonts.Black24Bold, marginHorizontal: 15, marginLeft:150 }}>
-              {t("Accedi")}
+            <Text style={{ ...Fonts.Black24Bold, marginHorizontal: 15, marginLeft:140 }}>
+              {t("welcome")}
             </Text>
             <Text style={{ ...Fonts.Black14Medium, marginHorizontal: 15, marginLeft:70 }}>
               {t("Collegati per consultare i nostri servizi")}

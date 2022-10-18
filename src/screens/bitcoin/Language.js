@@ -136,6 +136,20 @@ export const Language = ({ navigation, route }) => {
                 {t("chinese")}
               </Radio>
             </TouchableOpacity>
+            <TouchableOpacity
+              style={{ ...styles.languageOption, ...ConstantStyle.shadow }}
+              onPress={() => changeLanguage("it")}
+            >
+              <Radio
+                value="it"
+                colorScheme="primary"
+                size="lg"
+                my={1}
+                _text={{ ...Fonts.Black16Regular }}
+              >
+                {t("Italiano")}
+              </Radio>
+            </TouchableOpacity>
           </Radio.Group>
         </View>
       </View>

@@ -192,7 +192,7 @@ export const HomeScreen = ({ navigation }) => {
         />
       </View> */}
       <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={{ marginHorizontal: 15 }}>
+        <View style={{ marginHorizontal: 15, marginTop:20 }}>
           <Text style={{ ...Fonts.Black16Bold, textAlign: "left" }}>
             {t("what_s_new")}
           </Text>
@@ -254,7 +254,7 @@ export const HomeScreen = ({ navigation }) => {
                 style={{
                   flexDirection: "row",
                   height: 145,
-                  alignItems: "center",
+                  alignItems: "left",
                   marginHorizontal: 15,
                 }}
               >
@@ -269,14 +269,14 @@ export const HomeScreen = ({ navigation }) => {
                 <View
                   style={{
                     flex: 1,
-                    alignItems: "center",
-                    justifyContent: "center",
+                    alignItems: "left",
+                    justifyContent: "left",
                   }}
                 >
                   <Image
-                    source={require("../../../assets/images/bitcoin.png")}
+                    source={require("../../../assets/images/TuTela.png")}
                     style={{
-                      width: 110,
+                      width: 200,
                       height: 110,
                     }}
                   />

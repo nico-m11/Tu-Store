@@ -18,7 +18,7 @@ const MainButton = (props) => {
           height: 45,
           borderRadius: 10,
         }}
-        colors={["#0076DE", "#00D6D6"]}
+        colors={["#1e26a1", "#1d3e9e"]}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 0 }}
       >

@@ -5,6 +5,7 @@ import hi from "./hi.json";
 import ar from "./ar.json";
 import id from "./id.json";
 import chi from "./chi.json";
+import it from "./it.json";
 import * as RNLocalize from "expo-localization";
 import { I18nManager } from "react-native";
 
@@ -30,6 +31,7 @@ i18next
       ar: ar,
       id: id,
       chi: chi,
+      it: it,
     },
     lng: I18nManager.isRTL ? "ar" : "en",
     interpolation: {

@@ -246,7 +246,7 @@ export const RegisterScreen = ({ navigation }) => {
               flexDirection: "row",
             }}
           >
-            <TouchableOpacity
+            {/* <TouchableOpacity
               activeOpacity={0.7}
               style={{ marginHorizontal: 10 }}
             >
@@ -275,7 +275,7 @@ export const RegisterScreen = ({ navigation }) => {
                 alt="goggle"
                 source={require("../../../assets/icons/google.png")}
               />
-            </TouchableOpacity>
+            </TouchableOpacity> */}
           </View>
         </View>
         <View
