@@ -259,27 +259,30 @@ export const HomeScreen = ({ navigation }) => {
                 }}
               >
                 <View style={{ flex: 2 }}>
-                  <Text style={{ ...Fonts.Red18Bold, textAlign: "left" }}>
+                  {/* <Text style={{ ...Fonts.Red18Bold, textAlign: "left" }}>
                     {t("earn_coin")}
                   </Text>
                   <Text style={{ ...Fonts.Red16Medium, textAlign: "left" }}>
                     {t("earn_coin_text")}
-                  </Text>
+                  </Text> */}
+                   <Image
+                    source={require("../../../assets/images/TuTela.png")}
+                    style={{
+                      width: 200,
+                      height: 100,
+                      marginLeft: 80,
+                      marginTop: 20,
+                    }}
+                  />
                 </View>
                 <View
                   style={{
                     flex: 1,
-                    alignItems: "left",
-                    justifyContent: "left",
+                    alignItems: "center",
+                    justifyContent: "center",
                   }}
                 >
-                  <Image
-                    source={require("../../../assets/images/TuTela.png")}
-                    style={{
-                      width: 200,
-                      height: 110,
-                    }}
-                  />
+                 
                 </View>
               </View>
             </LinearGradient>
