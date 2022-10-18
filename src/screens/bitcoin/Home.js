@@ -275,7 +275,7 @@ export const HomeScreen = ({ navigation }) => {
                     }}
                   />
                 </View>
-                <View
+                {/* <View
                   style={{
                     flex: 1,
                     alignItems: "center",
@@ -283,7 +283,7 @@ export const HomeScreen = ({ navigation }) => {
                   }}
                 >
                  
-                </View>
+                </View> */}
               </View>
             </LinearGradient>
           </TouchableOpacity>
