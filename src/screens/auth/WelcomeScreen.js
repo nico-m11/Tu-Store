@@ -22,15 +22,15 @@ export const WelcomeScreen = ({ navigation }) => {
     <SafeAreaView style={ConstantStyle.container}>
       <ImageBackground
         style={{ flex: 1, width: width, justifyContent: "space-between",marginTop:20 }}
-        source={require("../../../assets/images/header.png")}
+        source={require("../../../assets/images/headerwhite.png")}
       >
         <ScrollView style={{ height: height }}>
           <View style={{ alignItems: "center" }}>
             <WelcomeImg />
-            <Text style={{ ...Fonts.White22Bold, textAlign:"center",marginTop:20 }}>{t("welcome_text")}</Text>
+            <Text style={{ ...Fonts.Black18Bold, textAlign:"center",marginTop:20 }}>{t("welcome_text")}</Text>
             <Text
               style={{
-                ...Fonts.White14Medium,
+                ...Fonts.Black14Medium,
                 marginHorizontal: 30,
                 textAlign: "center",
                 marginVertical: 12,
@@ -45,7 +45,7 @@ export const WelcomeScreen = ({ navigation }) => {
               onPress={() => navigation.navigate("LoginScreen")}
               style={{
                 borderWidth: 1,
-                borderColor: Colors.white,
+                borderColor: Colors.black,
                 height: 45,
                 borderRadius: 10,
                 marginVertical: 20,
@@ -53,7 +53,7 @@ export const WelcomeScreen = ({ navigation }) => {
                 justifyContent: "center",
               }}
             >
-              <Text style={{ ...Fonts.White18Bold }}>{t("sign_in")}</Text>
+              <Text style={{ ...Fonts.Black18Bold }}>{t("sign_in")}</Text>
             </TouchableOpacity>
             <MainButton
               name={t("sign_up")}
