@@ -12,7 +12,7 @@ export const PlayGame = ({ navigation }) => {
   const { height, width } = Dimensions.get("window");
   return (
     <SafeAreaView style={{ ...ConstantStyle.container }}>
-      <CustomHeader navigation={navigation} title={t("play_game")} />
+      <CustomHeader navigation={navigation} title={t("F24")} />
       <View
         style={{
           flex: 1,
@@ -28,7 +28,7 @@ export const PlayGame = ({ navigation }) => {
           style={{ flex: 2, alignItems: "center", justifyContent: "center" }}
         >
           <Image
-            source={require("../../../assets/images/game.png")}
+            source={require("../../../assets/images/arton142.jpeg")}
             style={{ width: width - 30, borderRadius: 10 }}
           />
         </View>
@@ -46,6 +46,7 @@ export const PlayGame = ({ navigation }) => {
           >
             {t("welcome_play_game_text")}
           </Text>
+          
         </View>
         <View
           style={{ flex: 1, justifyContent: "flex-end", marginVertical: 20 }}

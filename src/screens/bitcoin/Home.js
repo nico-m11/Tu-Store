@@ -20,34 +20,35 @@ import { LinearGradient } from "expo-linear-gradient";
 import Images from "../../themes/Images";
 import { useTranslation } from "react-i18next";
 import ExitModel from "../components/ExitModel";
+import CustomHeader from "../components/CustomHeader";
 
 export const HomeScreen = ({ navigation }) => {
-  const NewData = [
-    {
-      id: 1,
-      image: Images.news4,
-      text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque aliquam ipsum, in.",
-      date: "12-02-2021",
-    },
-    {
-      id: 2,
-      image: Images.news5,
-      text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque aliquam ipsum, in.",
-      date: "12-02-2021",
-    },
-    {
-      id: 3,
-      image: Images.news6,
-      text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque aliquam ipsum, in.",
-      date: "12-02-2021",
-    },
-    {
-      id: 4,
-      image: Images.news7,
-      text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque aliquam ipsum, in.",
-      date: "12-02-2021",
-    },
-  ];
+  // const NewData = [
+  //   {
+  //     id: 1,
+  //     image: Images.news4,
+  //     text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque aliquam ipsum, in.",
+  //     date: "12-02-2021",
+  //   },
+  //   {
+  //     id: 2,
+  //     image: Images.news5,
+  //     text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque aliquam ipsum, in.",
+  //     date: "12-02-2021",
+  //   },
+  //   {
+  //     id: 3,
+  //     image: Images.news6,
+  //     text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque aliquam ipsum, in.",
+  //     date: "12-02-2021",
+  //   },
+  //   {
+  //     id: 4,
+  //     image: Images.news7,
+  //     text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque aliquam ipsum, in.",
+  //     date: "12-02-2021",
+  //   },
+  // ];
   const { t, i18n } = useTranslation();
   const [exitModel, setExitModel] = useState(false);
   useEffect(() => {
@@ -66,6 +67,7 @@ export const HomeScreen = ({ navigation }) => {
 
   return (
     <SafeAreaView style={{ ...ConstantStyle.container }}>
+      
       {/* <View style={{ height: "40%" }}>
         <ImageBackground
           style={{
@@ -246,7 +248,7 @@ export const HomeScreen = ({ navigation }) => {
           >
             <LinearGradient
               style={{ borderTopRightRadius: 50,borderBottomRightRadius: 50, marginTop: 15, marginBottom: 20 }}
-              colors={["#DDD6F3", "#FAACA8"]}
+              colors={["#01541e", "#00a839"]}
               start={{ x: 0, y: 0 }}
               end={{ x: 1, y: 0 }}
             >
@@ -287,13 +289,13 @@ export const HomeScreen = ({ navigation }) => {
               </View>
             </LinearGradient>
           </TouchableOpacity>
-                    <TouchableOpacity
+          <TouchableOpacity
             activeOpacity={0.7}
             onPress={() => navigation.navigate("PlayGame")}
           >
             <LinearGradient
               style={{ borderTopRightRadius: 50,borderBottomRightRadius: 50, marginTop: 15, marginBottom: 20 }}
-              colors={["#DDD6F3", "#FAACA8"]}
+              colors={["#9b7116", "#cda82d"]}
               start={{ x: 0, y: 0 }}
               end={{ x: 1, y: 0 }}
             >
@@ -301,33 +303,36 @@ export const HomeScreen = ({ navigation }) => {
                 style={{
                   flexDirection: "row",
                   height: 145,
-                  alignItems: "center",
+                  alignItems: "left",
                   marginHorizontal: 15,
                 }}
               >
                 <View style={{ flex: 2 }}>
-                  <Text style={{ ...Fonts.Red18Bold, textAlign: "left" }}>
+                  {/* <Text style={{ ...Fonts.Red18Bold, textAlign: "left" }}>
                     {t("earn_coin")}
                   </Text>
                   <Text style={{ ...Fonts.Red16Medium, textAlign: "left" }}>
                     {t("earn_coin_text")}
-                  </Text>
+                  </Text> */}
+                   <Image
+                    source={require("../../../assets/images/CrediTu.png")}
+                    style={{
+                      width: 200,
+                      height: 100,
+                      marginLeft: 80,
+                      marginTop: 20,
+                    }}
+                  />
                 </View>
-                <View
+                {/* <View
                   style={{
                     flex: 1,
                     alignItems: "center",
                     justifyContent: "center",
                   }}
                 >
-                  <Image
-                    source={require("../../../assets/images/bitcoin.png")}
-                    style={{
-                      width: 110,
-                      height: 110,
-                    }}
-                  />
-                </View>
+                 
+                </View> */}
               </View>
             </LinearGradient>
           </TouchableOpacity>
@@ -337,7 +342,7 @@ export const HomeScreen = ({ navigation }) => {
           >
             <LinearGradient
               style={{ borderTopRightRadius: 50,borderBottomRightRadius: 50, marginTop: 15, marginBottom: 20 }}
-              colors={["#DDD6F3", "#FAACA8"]}
+              colors={["#ac0f10", "#d8161b"]}
               start={{ x: 0, y: 0 }}
               end={{ x: 1, y: 0 }}
             >
@@ -345,33 +350,36 @@ export const HomeScreen = ({ navigation }) => {
                 style={{
                   flexDirection: "row",
                   height: 145,
-                  alignItems: "center",
+                  alignItems: "left",
                   marginHorizontal: 15,
                 }}
               >
                 <View style={{ flex: 2 }}>
-                  <Text style={{ ...Fonts.Red18Bold, textAlign: "left" }}>
+                  {/* <Text style={{ ...Fonts.Red18Bold, textAlign: "left" }}>
                     {t("earn_coin")}
                   </Text>
                   <Text style={{ ...Fonts.Red16Medium, textAlign: "left" }}>
                     {t("earn_coin_text")}
-                  </Text>
+                  </Text> */}
+                   <Image
+                    source={require("../../../assets/images/ComparaTu.png")}
+                    style={{
+                      width: 200,
+                      height: 100,
+                      marginLeft: 80,
+                      marginTop: 20,
+                    }}
+                  />
                 </View>
-                <View
+                {/* <View
                   style={{
                     flex: 1,
                     alignItems: "center",
                     justifyContent: "center",
                   }}
                 >
-                  <Image
-                    source={require("../../../assets/images/bitcoin.png")}
-                    style={{
-                      width: 110,
-                      height: 110,
-                    }}
-                  />
-                </View>
+                 
+                </View> */}
               </View>
             </LinearGradient>
           </TouchableOpacity>
@@ -381,7 +389,7 @@ export const HomeScreen = ({ navigation }) => {
           >
             <LinearGradient
               style={{ borderTopRightRadius: 50,borderBottomRightRadius: 50, marginTop: 15, marginBottom: 20 }}
-              colors={["#DDD6F3", "#FAACA8"]}
+              colors={["#5929a5", "#5d29a6"]}
               start={{ x: 0, y: 0 }}
               end={{ x: 1, y: 0 }}
             >
@@ -389,33 +397,36 @@ export const HomeScreen = ({ navigation }) => {
                 style={{
                   flexDirection: "row",
                   height: 145,
-                  alignItems: "center",
+                  alignItems: "left",
                   marginHorizontal: 15,
                 }}
               >
                 <View style={{ flex: 2 }}>
-                  <Text style={{ ...Fonts.Red18Bold, textAlign: "left" }}>
+                  {/* <Text style={{ ...Fonts.Red18Bold, textAlign: "left" }}>
                     {t("earn_coin")}
                   </Text>
                   <Text style={{ ...Fonts.Red16Medium, textAlign: "left" }}>
                     {t("earn_coin_text")}
-                  </Text>
+                  </Text> */}
+                   <Image
+                    source={require("../../../assets/images/TuMarket.png")}
+                    style={{
+                      width: 200,
+                      height: 100,
+                      marginLeft: 80,
+                      marginTop: 20,
+                    }}
+                  />
                 </View>
-                <View
+                {/* <View
                   style={{
                     flex: 1,
                     alignItems: "center",
                     justifyContent: "center",
                   }}
                 >
-                  <Image
-                    source={require("../../../assets/images/bitcoin.png")}
-                    style={{
-                      width: 110,
-                      height: 110,
-                    }}
-                  />
-                </View>
+                 
+                </View> */}
               </View>
             </LinearGradient>
           </TouchableOpacity>
@@ -425,7 +436,7 @@ export const HomeScreen = ({ navigation }) => {
           >
             <LinearGradient
               style={{ borderTopRightRadius: 50,borderBottomRightRadius: 50, marginTop: 15, marginBottom: 20 }}
-              colors={["#DDD6F3", "#FAACA8"]}
+              colors={["#1f2d5f", "#294284"]}
               start={{ x: 0, y: 0 }}
               end={{ x: 1, y: 0 }}
             >
@@ -433,36 +444,40 @@ export const HomeScreen = ({ navigation }) => {
                 style={{
                   flexDirection: "row",
                   height: 145,
-                  alignItems: "center",
+                  alignItems: "left",
                   marginHorizontal: 15,
                 }}
               >
                 <View style={{ flex: 2 }}>
-                  <Text style={{ ...Fonts.Red18Bold, textAlign: "left" }}>
+                  {/* <Text style={{ ...Fonts.Red18Bold, textAlign: "left" }}>
                     {t("earn_coin")}
                   </Text>
                   <Text style={{ ...Fonts.Red16Medium, textAlign: "left" }}>
                     {t("earn_coin_text")}
-                  </Text>
+                  </Text> */}
+                   <Image
+                    source={require("../../../assets/images/AssicuraTu.png")}
+                    style={{
+                      width: 200,
+                      height: 100,
+                      marginLeft: 80,
+                      marginTop: 20,
+                    }}
+                  />
                 </View>
-                <View
+                {/* <View
                   style={{
                     flex: 1,
                     alignItems: "center",
                     justifyContent: "center",
                   }}
                 >
-                  <Image
-                    source={require("../../../assets/images/bitcoin.png")}
-                    style={{
-                      width: 110,
-                      height: 110,
-                    }}
-                  />
-                </View>
+                 
+                </View> */}
               </View>
             </LinearGradient>
           </TouchableOpacity>
+        
         </View>
         
         {/* <View style={{ marginHorizontal: 15 }}>

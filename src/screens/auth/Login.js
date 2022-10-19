@@ -94,10 +94,10 @@ export const LoginScreen = ({ navigation }) => {
       <View style={{ flexDirection: isRtl ? "column" : "column-reverse" }}>
         <ImageBackground
           style={{
-            width: width/1.5 ,
-            height: height / 7,
+            width: "auto" ,
+            height: height / 3.5,
             justifyContent: "flex-center",
-            marginLeft:50,
+           
             marginTop:20,
           }}
           source={require("../../../assets/images/header_login.png")}

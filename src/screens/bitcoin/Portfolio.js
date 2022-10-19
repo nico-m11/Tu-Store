@@ -189,7 +189,7 @@ export const PortfolioScreen = ({ navigation }) => {
                 marginVertical: 25,
               }}
             >
-              <TouchableOpacity
+              {/* <TouchableOpacity
                 activeOpacity={0.7}
                 onPress={() =>
                   navigation.navigate("Deposit", {
@@ -243,7 +243,7 @@ export const PortfolioScreen = ({ navigation }) => {
                 }}
               >
                 <Text style={{ ...Fonts.Primary16Bold }}>{t("history")}</Text>
-              </TouchableOpacity>
+              </TouchableOpacity> */}
             </View>
             <Text
               style={{

@@ -72,7 +72,7 @@ const ImgPicker = (props) => {
                   height: 50,
                   width: 50,
                   borderRadius: 25,
-                  backgroundColor: "purple",
+                  backgroundColor: "#1e26a1",
                   justifyContent: "center",
                   alignItems: "center",
                 }}
@@ -91,7 +91,7 @@ const ImgPicker = (props) => {
                   height: 50,
                   width: 50,
                   borderRadius: 25,
-                  backgroundColor: "#00D6D6",
+                  backgroundColor: "#1e26a1",
                   justifyContent: "center",
                   alignItems: "center",
                 }}

@@ -21,13 +21,13 @@ export const WelcomeScreen = ({ navigation }) => {
   return (
     <SafeAreaView style={ConstantStyle.container}>
       <ImageBackground
-        style={{ flex: 1, width: width, justifyContent: "space-between" }}
+        style={{ flex: 1, width: width, justifyContent: "space-between",marginTop:20 }}
         source={require("../../../assets/images/header.png")}
       >
         <ScrollView style={{ height: height }}>
           <View style={{ alignItems: "center" }}>
             <WelcomeImg />
-            <Text style={{ ...Fonts.White24Bold }}>{t("welcome_text")}</Text>
+            <Text style={{ ...Fonts.White22Bold, textAlign:"center",marginTop:20 }}>{t("welcome_text")}</Text>
             <Text
               style={{
                 ...Fonts.White14Medium,
