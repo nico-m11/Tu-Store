@@ -1,13 +1,13 @@
 {
   "expo": {
-    "name": "Bitcoin",
-    "slug": "Bitcoin",
+    "name": "Tu-Store",
+    "slug": "TuStore",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/images/header.png",
       "resizeMode": "cover",
       "backgroundColor": "#ffffff"
     },
