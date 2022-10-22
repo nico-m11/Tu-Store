@@ -25,6 +25,7 @@ import { Help } from "../screens/bitcoin/Help";
 import { About } from "../screens/bitcoin/About";
 import { Language } from "../screens/bitcoin/Language";
 import { useTranslation } from "react-i18next";
+import { TesoScreen } from "../screens/bitcoin/Teso";
 
 const BottomTabNavigator = createBottomTabNavigator();
 
@@ -101,6 +102,11 @@ export const TabNavigator = () => {
         name="Profile"
         component={ProfileScreen}
         options={{ headerShown: false, tabBarLabel: t("profile") }}
+      />
+       <BottomTabNavigator.Screen
+        name="Teso"
+        component={TesoScreen}
+        options={{ headerShown: false, tabBarLabel: t("Teso") }}
       />
     </BottomTabNavigator.Navigator>
   );

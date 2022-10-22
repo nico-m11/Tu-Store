@@ -56,6 +56,8 @@ export const MarketScreen = ({ navigation }) => {
             keyExtractor={(item, index) => item.item.id}
             contentContainerStyle={{ paddingBottom: 5 }}
             renderItem={({ item, index }) => (
+
+              
               <TouchableOpacity
                 activeOpacity={0.8}
                 onPress={() =>
