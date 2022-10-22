@@ -96,7 +96,7 @@ export const LoginScreen = ({ navigation }) => {
           style={{
             width: "auto" ,
             height: height / 3.5,
-            justifyContent: "flex-center",
+            //justifyContent: "flex-center",
            
             marginTop:20,
           }}

@@ -195,7 +195,7 @@ export const HomeScreen = ({ navigation }) => {
       </View> */}
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={{ marginHorizontal: 15, marginTop:20 }}>
-          <Text style={{ ...Fonts.Black16Bold, textAlign: "left" }}>
+          <Text style={{ ...Fonts.Black16Bold, textAlign: "center" }}>
             {t("what_s_new")}
           </Text>
           {/* <TouchableOpacity
@@ -256,7 +256,6 @@ export const HomeScreen = ({ navigation }) => {
                 style={{
                   flexDirection: "row",
                   height: 145,
-                  alignItems: "left",
                   marginHorizontal: 15,
                 }}
               >
@@ -303,7 +302,7 @@ export const HomeScreen = ({ navigation }) => {
                 style={{
                   flexDirection: "row",
                   height: 145,
-                  alignItems: "left",
+                  //alignItems: "left",
                   marginHorizontal: 15,
                 }}
               >
@@ -350,7 +349,7 @@ export const HomeScreen = ({ navigation }) => {
                 style={{
                   flexDirection: "row",
                   height: 145,
-                  alignItems: "left",
+                //  alignItems: "left",
                   marginHorizontal: 15,
                 }}
               >
@@ -397,7 +396,7 @@ export const HomeScreen = ({ navigation }) => {
                 style={{
                   flexDirection: "row",
                   height: 145,
-                  alignItems: "left",
+                 // alignItems: "left",
                   marginHorizontal: 15,
                 }}
               >
@@ -444,7 +443,7 @@ export const HomeScreen = ({ navigation }) => {
                 style={{
                   flexDirection: "row",
                   height: 145,
-                  alignItems: "left",
+                 // alignItems: "left",
                   marginHorizontal: 15,
                 }}
               >

@@ -85,7 +85,7 @@ export const ProfileScreen = ({ navigation }) => {
           }}
         >
           <View style={{ flex: 1, marginHorizontal: 15 }}>
-            <Text style={{ ...Fonts.White22Bold, textAlign: "left" }}>
+            <Text style={{ ...Fonts.White22Bold, textAlign: "left", marginTop: 35}}>
               {t("profile")}
             </Text>
           </View>
