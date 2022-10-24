@@ -15,6 +15,7 @@ import CustomHeader from "../components/CustomHeader";
 import MarketData from "../../data/MarketData";
 import { useTranslation } from "react-i18next";
 import ExitModel from "../components/ExitModel";
+import { Provider } from "react-redux";
 
 export const TesoScreen = ({ navigation }) => {
   const { t, i18n } = useTranslation();
@@ -25,7 +26,7 @@ export const TesoScreen = ({ navigation }) => {
   }, []);
 
   const Data = () => {
-    fetch("https://be.control-room.app/api/salesChannels?page=1&limit=20", {
+    fetch("https://be.control-room.app/api/salesChannels?page=1&limit=10", {
       method: "GET",
       headers: {
         Authorization:
@@ -60,11 +61,31 @@ export const TesoScreen = ({ navigation }) => {
           borderTopRightRadius: 30,
           flex: 1,
         }}
-      >
-        {listData.map((value) => {
-          var products = value.offers;
-            console.log(products)
-          //products.map((hello) => console.log(hello) )
+        >
+        {listData.map((value, index) => {
+          console.log(value)
+          
+    
+        
+
+          // if(value.code === 'CompraTu') {
+          //  console.log(value.offers)
+          // } else if (value.code === 'CrediTu') {
+
+          // } else if (value.code === ' AssicuraTu') {
+
+          // } else if(value.code === 'TuMarket') {
+
+          // } else if(value.code === 'Tutela') {
+
+          // } 
+  
+          // console.log(products[0].name)
+          // return(
+          //   <View key={index} style={{marginTop: 50}}>
+          //     <Text key= {products[0].id} >{products[0].name}</Text>
+          //   </View>
+          // );
         })}
       </View>
       {/* <ExitModel

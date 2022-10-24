@@ -26,6 +26,10 @@ import { About } from "../screens/bitcoin/About";
 import { Language } from "../screens/bitcoin/Language";
 import { useTranslation } from "react-i18next";
 import { TesoScreen } from "../screens/bitcoin/Teso";
+import { CrediTu } from "../screens/bitcoin/CrediTu";
+import { Tutela } from "../screens/bitcoin/Tutela";
+import { ComparaTu } from "../screens/bitcoin/ComparaTu";
+import { TuMarket } from "../screens/bitcoin/TuMarket";
 
 const BottomTabNavigator = createBottomTabNavigator();
 
@@ -135,6 +139,26 @@ export const AppNavigator = () => {
       <AppStackNavigator.Screen
         name="PlayGame"
         component={PlayGame}
+        options={{ headerShown: false }}
+      />
+      <AppStackNavigator.Screen
+        name="CrediTu"
+        component={CrediTu}
+        options={{ headerShown: false }}
+      />
+       <AppStackNavigator.Screen
+        name="Tutela"
+        component={Tutela}
+        options={{ headerShown: false }}
+      />
+      <AppStackNavigator.Screen
+        name="ComparaTu"
+        component={ComparaTu}
+        options={{ headerShown: false }}
+      />
+      <AppStackNavigator.Screen
+        name="TuMarket"
+        component={TuMarket}
         options={{ headerShown: false }}
       />
       <AppStackNavigator.Screen

@@ -21,6 +21,10 @@ import Images from "../../themes/Images";
 import { useTranslation } from "react-i18next";
 import ExitModel from "../components/ExitModel";
 import CustomHeader from "../components/CustomHeader";
+import { CrediTu } from "./CrediTu";
+import { Tutela } from "./Tutela";
+import { ComparaTu } from "./ComparaTu";
+import { TuMarket } from "./TuMarket";
 
 export const HomeScreen = ({ navigation }) => {
   // const NewData = [
@@ -244,7 +248,7 @@ export const HomeScreen = ({ navigation }) => {
           </TouchableOpacity> */}
           <TouchableOpacity
             activeOpacity={0.7}
-            onPress={() => navigation.navigate("PlayGame")}
+            onPress={() => navigation.navigate("Tutela")}
           >
             <LinearGradient
               style={{ borderTopRightRadius: 50,borderBottomRightRadius: 50, marginTop: 15, marginBottom: 20 }}
@@ -290,7 +294,7 @@ export const HomeScreen = ({ navigation }) => {
           </TouchableOpacity>
           <TouchableOpacity
             activeOpacity={0.7}
-            onPress={() => navigation.navigate("PlayGame")}
+            onPress={() => navigation.navigate("CrediTu")}
           >
             <LinearGradient
               style={{ borderTopRightRadius: 50,borderBottomRightRadius: 50, marginTop: 15, marginBottom: 20 }}
@@ -337,7 +341,7 @@ export const HomeScreen = ({ navigation }) => {
           </TouchableOpacity>
           <TouchableOpacity
             activeOpacity={0.7}
-            onPress={() => navigation.navigate("PlayGame")}
+            onPress={() => navigation.navigate("ComparaTu")}
           >
             <LinearGradient
               style={{ borderTopRightRadius: 50,borderBottomRightRadius: 50, marginTop: 15, marginBottom: 20 }}
@@ -384,7 +388,7 @@ export const HomeScreen = ({ navigation }) => {
           </TouchableOpacity>
           <TouchableOpacity
             activeOpacity={0.7}
-            onPress={() => navigation.navigate("PlayGame")}
+            onPress={() => navigation.navigate("TuMarket")}
           >
             <LinearGradient
               style={{ borderTopRightRadius: 50,borderBottomRightRadius: 50, marginTop: 15, marginBottom: 20 }}
