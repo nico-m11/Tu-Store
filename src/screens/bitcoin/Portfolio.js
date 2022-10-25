@@ -189,7 +189,7 @@ export const PortfolioScreen = ({ navigation }) => {
                 marginVertical: 25,
               }}
             >
-              {/* <TouchableOpacity
+              <TouchableOpacity
                 activeOpacity={0.7}
                 onPress={() =>
                   navigation.navigate("Deposit", {
@@ -205,29 +205,10 @@ export const PortfolioScreen = ({ navigation }) => {
                   borderColor: Colors.primary,
                   alignItems: "center",
                   justifyContent: "center",
+                  margin:20,
                 }}
               >
                 <Text style={{ ...Fonts.Primary16Bold }}>{t("deposit")}</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                activeOpacity={0.7}
-                onPress={() =>
-                  navigation.navigate("Deposit", {
-                    name: t("withdraw"),
-                    isDeposit: false,
-                  })
-                }
-                style={{
-                  width: "30%",
-                  height: 40,
-                  borderWidth: 2,
-                  borderRadius: 10,
-                  borderColor: Colors.primary,
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                <Text style={{ ...Fonts.Primary16Bold }}>{t("withdraw")}</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 activeOpacity={0.7}
@@ -240,10 +221,11 @@ export const PortfolioScreen = ({ navigation }) => {
                   borderColor: Colors.primary,
                   alignItems: "center",
                   justifyContent: "center",
+                  margin:20,
                 }}
               >
                 <Text style={{ ...Fonts.Primary16Bold }}>{t("history")}</Text>
-              </TouchableOpacity> */}
+              </TouchableOpacity>
             </View>
             <Text
               style={{

@@ -25,6 +25,7 @@ import { CrediTu } from "./CrediTu";
 import { Tutela } from "./Tutela";
 import { ComparaTu } from "./ComparaTu";
 import { TuMarket } from "./TuMarket";
+import { AssicuraTu } from "./AssicuraTu";
 
 export const HomeScreen = ({ navigation }) => {
   // const NewData = [
@@ -435,7 +436,7 @@ export const HomeScreen = ({ navigation }) => {
           </TouchableOpacity>
           <TouchableOpacity
             activeOpacity={0.7}
-            onPress={() => navigation.navigate("PlayGame")}
+            onPress={() => navigation.navigate("AssicuraTu")}
           >
             <LinearGradient
               style={{ borderTopRightRadius: 50,borderBottomRightRadius: 50, marginTop: 15, marginBottom: 20 }}

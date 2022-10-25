@@ -30,6 +30,7 @@ import { CrediTu } from "../screens/bitcoin/CrediTu";
 import { Tutela } from "../screens/bitcoin/Tutela";
 import { ComparaTu } from "../screens/bitcoin/ComparaTu";
 import { TuMarket } from "../screens/bitcoin/TuMarket";
+import { AssicuraTu } from "../screens/bitcoin/AssicuraTu";
 
 const BottomTabNavigator = createBottomTabNavigator();
 
@@ -159,6 +160,11 @@ export const AppNavigator = () => {
       <AppStackNavigator.Screen
         name="TuMarket"
         component={TuMarket}
+        options={{ headerShown: false }}
+      />
+          <AppStackNavigator.Screen
+        name="AssicuraTu"
+        component={AssicuraTu}
         options={{ headerShown: false }}
       />
       <AppStackNavigator.Screen

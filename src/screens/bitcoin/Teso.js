@@ -38,7 +38,7 @@ export const TesoScreen = ({ navigation }) => {
       })
       .then((value) => {
         var data = value.items;
-        //console.log(data)
+        console.log(data)
         setListData(data);
       })
       .catch((err) => {
