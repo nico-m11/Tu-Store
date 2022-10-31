@@ -80,6 +80,10 @@ export const TesoScreen = ({ navigation }) => {
             {listData.map((element, index) =>
               element.offers.map((el, i) => (
                 <View style={{ marginLeft: 30, marginBottom: 3}}>
+                   <Image
+                    source={{ uri: el.image }}
+                    style={{ width: 45, height: 45, marginRight: 15 }}
+                  />
                   <Text key={i}>{el.name}</Text>
                   <Text key={i}>{el.value}</Text>
                 </View>
