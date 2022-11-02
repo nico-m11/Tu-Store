@@ -25,8 +25,9 @@ export const TesoScreen = ({ navigation }) => {
     Data();
   }, []);
 
-
-  {/** fetch data GET COMPARA TU*/}
+  {
+    /** fetch data GET COMPARA TU*/
+  }
   const Data = () => {
     fetch(
       "https://be.control-room.app/api/salesChannels?page=1&limit=10&code=ComparaTu",
@@ -67,7 +68,7 @@ export const TesoScreen = ({ navigation }) => {
         }}
       >
         {/*** fetch title */}
-        <ScrollView showsVerticalScrollIndicator={false}>
+        <ScrollView showsVerticalScrollIndicator={true}>
           <View style={{marginLeft: 30, marginTop: 10, marginBottom: 30}}>
             {listData.map((element, index) => (
               <View>
@@ -79,14 +80,66 @@ export const TesoScreen = ({ navigation }) => {
           <View>
             {listData.map((element, index) =>
               element.offers.map((el, i) => (
-                <View style={{ marginLeft: 30, marginBottom: 3}}>
-                   <Image
-                    source={{ uri: el.image }}
-                    style={{ width: 45, height: 45, marginRight: 15 }}
-                  />
-                  <Text key={i}>{el.name}</Text>
-                  <Text key={i}>{el.value}</Text>
-                </View>
+                <>
+                  <TouchableOpacity
+                    activeOpacity={0.8}
+                    // onPress={() =>
+                    //   navigation.navigate("CoinDetails", { item: item.item })
+                    // }
+                    style={{
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                      flexDirection: "row",
+                      marginHorizontal: 15,
+                      marginVertical: 12,
+                    }}
+                  >
+                    <View style={{ alignItems: "center" }}>
+                      <Image
+                        source={{ uri: el.image }}
+                        style={{ width: 50, height: 15, marginRight: 15 }}
+                      />
+                    </View>
+                    <View style={{ flex: 1 }}>
+                      <View
+                        style={{
+                          alignItems: "center",
+                          justifyContent: "space-between",
+                          flexDirection: "row",
+                        }}
+                      >
+                        <Text
+                          style={{ ...Fonts.Black16Medium, textAlign: "left" }}
+                        >
+                          {el.name}
+                        </Text>
+                        <View>
+                          <Text
+                            style={{
+                              ...Fonts.Black16Regular,
+                              textAlign: "right",
+                            }}
+                          ></Text>
+
+                          <Text
+                            style={{
+                              ...Fonts.Green14Medium,
+                              textAlign: "right",
+                            }}
+                          >
+                            {el.value}
+                          </Text>
+
+                          <Text
+                            style={{ ...Fonts.Red14Medium, textAlign: "right" }}
+                          >
+                            CashBack
+                          </Text>
+                        </View>
+                      </View>
+                    </View>
+                  </TouchableOpacity>
+                </>
               ))
             )}
           </View>

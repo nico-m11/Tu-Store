@@ -1,5 +1,14 @@
-import React, { useState } from "react";
-import { SafeAreaView, Text, View, Image, Dimensions } from "react-native";
+import React, { useState, useEffect } from "react";
+import {
+  SafeAreaView,
+  Text,
+  View,
+  FlatList,
+  TouchableOpacity,
+  Image,
+  ScrollView,
+  BackHandler,
+} from "react-native";
 import { Fonts } from "../../themes/fonts";
 import ConstantStyle from "../../themes/styles";
 import { Colors } from "../../themes/colors";
@@ -9,51 +18,132 @@ import { useTranslation } from "react-i18next";
 
 export const AssicuraTu = ({ navigation }) => {
   const { t, i18n } = useTranslation();
-  const { height, width } = Dimensions.get("window");
+  const [listData, setListData] = useState([]); // salvo i dati del fetch
+
+  useEffect(() => {
+    Data();
+  }, []);
+
+  {
+    /** fetch data GET COMPARA TU*/
+  }
+  const Data = () => {
+    fetch(
+      "https://be.control-room.app/api/salesChannels?code=AssicuraTu",
+      {
+        method: "GET",
+        headers: {
+          Authorization:
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlRVTzYiLCJpZCI6NiwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNjY1MTQ4MDU5LCJleHAiOjE2Njc4MjY0NTl9.ake1PT2VGDret0lEFtXDTEA_HQR3CS5nVIFkeVF8XFI",
+        },
+      }
+    )
+      .then((res) => {
+        return res.json();
+      })
+      .then((value) => {
+        //console.log(value)
+        setListData(value.items); // salvo nel array i dati del fetch
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <SafeAreaView style={{ ...ConstantStyle.container }}>
-      <CustomHeader navigation={navigation} title={t("Assicura TU")} />
+      <CustomHeader
+        navigation={navigation}
+        title={t("Assicura Tu")}
+        isMain={true}
+        isSearch={true}
+      />
       <View
         style={{
-          flex: 1,
-          flexDirection: "column",
           backgroundColor: Colors.white,
           borderTopLeftRadius: 30,
           borderTopRightRadius: 30,
-          paddingTop: 25,
-          paddingHorizontal: 15,
+          flex: 1,
         }}
       >
-        <View
-          style={{ flex: 2, alignItems: "center", justifyContent: "center" }}
-        >
-          <Image
-            source={require("../../../assets/images/arton142.jpeg")}
-            style={{ width: width - 30, borderRadius: 10 }}
-          />
-        </View>
-        <View
-          style={{ flex: 2, alignItems: "center", justifyContent: "center" }}
-        >
-          <Text style={{ ...Fonts.Primary22Bold }}>{t("Assicura Tu")}</Text>
-          <Text
-            style={{
-              ...Fonts.Grey16Medium,
-              marginHorizontal: 30,
-              textAlign: "center",
-              marginVertical: 10,
-            }}
-          >
-            {t("Assicura Tu")}
-          </Text>
-          
-        </View>
-        <View
-          style={{ flex: 1, justifyContent: "flex-end", marginVertical: 20 }}
-        >
-          <MainButton name={t("Go")} />
-        </View>
+        <ScrollView showsVerticalScrollIndicator={true}>
+          {/*** fetch data */}
+          <View>
+            {listData.map((element, index) =>
+              element.offers.map((el, i) => (
+                <>
+                  <TouchableOpacity
+                    activeOpacity={0.8}
+                    // onPress={() =>
+                    //   navigation.navigate("CoinDetails", { item: item.item })
+                    // }
+                    style={{
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                      flexDirection: "row",
+                      marginHorizontal: 15,
+                      marginVertical: 12,
+                    }}
+                  >
+                    <View style={{ alignItems: "center" }}>
+                      <Image
+                        source={{ uri: el.image }}
+                        style={{ width: 45, height: 55, marginRight: 15 }}
+                      />
+                    </View>
+                    <View style={{ flex: 1 }}>
+                      <View
+                        style={{
+                          alignItems: "center",
+                          justifyContent: "space-between",
+                          flexDirection: "row",
+                        }}
+                      >
+                        <Text
+                          style={{ ...Fonts.Black16Medium, textAlign: "left" }}
+                        >
+                          {el.name}
+                        </Text>
+                        <View>
+                          <Text
+                            style={{
+                              ...Fonts.Black16Regular,
+                              textAlign: "right",
+                            }}
+                          ></Text>
+
+                          <Text
+                            style={{
+                              ...Fonts.Green14Medium,
+                              textAlign: "right",
+                            }}
+                          >
+                            {el.value !== '0' ? el.value : ''}
+                          </Text>
+
+                          <Text
+                            style={{ ...Fonts.Red14Medium, textAlign: "right" }}
+                          >
+                            CashBack
+                          </Text>
+                        </View>
+                      </View>
+                    </View>
+                  </TouchableOpacity>
+                </>
+              ))
+            )}
+          </View>
+        </ScrollView>
       </View>
+      {/* <ExitModel
+        onCancel={() => setExitModel(!exitModel)}
+        title={t("exit_Text")}
+        cancel={t("cancel")}
+        btnName={t("exit")}
+        btnOnPress={() => BackHandler.exitApp()}
+        visible={exitModel}
+      /> */}
     </SafeAreaView>
   );
 };
