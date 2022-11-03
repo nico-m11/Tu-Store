@@ -29,7 +29,7 @@ export const ComparaTu = ({ navigation }) => {
   }
   const Data = () => {
     fetch(
-      "https://be.control-room.app/api/salesChannels?page=1&limit=10&code=ComparaTu",
+      "https://be.control-room.app/api/offers?limit=10&sale_channel_id=0",
       {
         method: "GET",
         headers: {
@@ -69,70 +69,68 @@ export const ComparaTu = ({ navigation }) => {
         <ScrollView showsVerticalScrollIndicator={true}>
           {/*** fetch data */}
           <View>
-            {listData.map((element, index) =>
-              element.offers.map((el, i) => (
-                <>
-                  <TouchableOpacity
-                    activeOpacity={0.8}
-                    // onPress={() =>
-                    //   navigation.navigate("CoinDetails", { item: item.item })
-                    // }
-                    style={{
-                      justifyContent: "space-between",
-                      alignItems: "center",
-                      flexDirection: "row",
-                      marginHorizontal: 15,
-                      marginVertical: 12,
-                    }}
-                  >
-                    <View style={{ alignItems: "center" }}>
-                      <Image
-                        source={{ uri: el.image }}
-                        style={{ width: 50, height: 15, marginRight: 15 }}
-                      />
-                    </View>
-                    <View style={{ flex: 1 }}>
-                      <View
-                        style={{
-                          alignItems: "center",
-                          justifyContent: "space-between",
-                          flexDirection: "row",
-                        }}
+            {listData.map((element, index) => (
+              <>
+                <TouchableOpacity
+                  activeOpacity={0.8}
+                  // onPress={() =>
+                  //   navigation.navigate("CoinDetails", { item: item.item })
+                  // }
+                  style={{
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    flexDirection: "row",
+                    marginHorizontal: 15,
+                    marginVertical: 12,
+                  }}
+                >
+                  <View style={{ alignItems: "center" }}>
+                    <Image
+                      source={{ uri: element.image }}
+                      style={{ width: 50, height: 15, marginRight: 15 }}
+                    />
+                  </View>
+                  <View style={{ flex: 1 }}>
+                    <View
+                      style={{
+                        alignItems: "center",
+                        justifyContent: "space-between",
+                        flexDirection: "row",
+                      }}
+                    >
+                      <Text
+                        style={{ ...Fonts.Black16Medium, textAlign: "left" }}
                       >
+                        {element.name}
+                      </Text>
+                      <View>
                         <Text
-                          style={{ ...Fonts.Black16Medium, textAlign: "left" }}
+                          style={{
+                            ...Fonts.Black16Regular,
+                            textAlign: "right",
+                          }}
+                        ></Text>
+
+                        <Text
+                          style={{
+                            ...Fonts.Green14Medium,
+                            textAlign: "right",
+                          }}
                         >
-                          {el.name}
+                          {element.value !== '0' ? element.value + '€' : '0€'}
                         </Text>
-                        <View>
-                          <Text
-                            style={{
-                              ...Fonts.Black16Regular,
-                              textAlign: "right",
-                            }}
-                          ></Text>
 
-                          <Text
-                            style={{
-                              ...Fonts.Green14Medium,
-                              textAlign: "right",
-                            }}
-                          >
-                            {el.value}
-                          </Text>
-
-                          <Text
-                            style={{ ...Fonts.Red14Medium, textAlign: "right" }}
-                          >
-                            CashBack
-                          </Text>
-                        </View>
+                        <Text
+                          style={{ ...Fonts.Red14Medium, textAlign: "right" }}
+                        >
+                          CashBack
+                        </Text>
                       </View>
                     </View>
-                  </TouchableOpacity>
-                </>
-              ))
-            )}
+                  </View>
+                </TouchableOpacity>
+              </>
+            ))}
           </View>
         </ScrollView>
       </View>

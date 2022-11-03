@@ -29,7 +29,7 @@ export const AssicuraTu = ({ navigation }) => {
   }
   const Data = () => {
     fetch(
-      "https://be.control-room.app/api/salesChannels?code=AssicuraTu",
+      "https://be.control-room.app/api/offers?limit=10&sale_channel_id=5",
       {
         method: "GET",
         headers: {
@@ -42,7 +42,6 @@ export const AssicuraTu = ({ navigation }) => {
         return res.json();
       })
       .then((value) => {
-        //console.log(value)
         setListData(value.items); // salvo nel array i dati del fetch
       })
       .catch((err) => {
@@ -70,7 +69,7 @@ export const AssicuraTu = ({ navigation }) => {
           {/*** fetch data */}
           <View>
             {listData.map((element, index) =>
-              element.offers.map((el, i) => (
+            
                 <>
                   <TouchableOpacity
                     activeOpacity={0.8}
@@ -87,7 +86,7 @@ export const AssicuraTu = ({ navigation }) => {
                   >
                     <View style={{ alignItems: "center" }}>
                       <Image
-                        source={{ uri: el.image }}
+                        source={{ uri: element.image }}
                         style={{ width: 45, height: 55, marginRight: 15 }}
                       />
                     </View>
@@ -102,7 +101,7 @@ export const AssicuraTu = ({ navigation }) => {
                         <Text
                           style={{ ...Fonts.Black16Medium, textAlign: "left" }}
                         >
-                          {el.name}
+                          {element.name}
                         </Text>
                         <View>
                           <Text
@@ -118,7 +117,7 @@ export const AssicuraTu = ({ navigation }) => {
                               textAlign: "right",
                             }}
                           >
-                            {el.value !== '0' ? el.value : ''}
+                            {element.value !== '0' ? element.value + '€' : '0€'}
                           </Text>
 
                           <Text
@@ -131,7 +130,7 @@ export const AssicuraTu = ({ navigation }) => {
                     </View>
                   </TouchableOpacity>
                 </>
-              ))
+              
             )}
           </View>
         </ScrollView>

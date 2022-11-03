@@ -29,7 +29,7 @@ export const CrediTu = ({ navigation }) => {
   }
   const Data = () => {
     fetch(
-      "https://be.control-room.app/api/salesChannels?code=CrediTu",
+      "https://be.control-room.app/api/offers?sale_channel_id=1&limit=10",
       {
         method: "GET",
         headers: {
@@ -70,7 +70,7 @@ export const CrediTu = ({ navigation }) => {
           {/*** fetch data */}
           <View>
             {listData.map((element, index) =>
-              element.offers.map((el, i) => (
+              
                 <>
                   <TouchableOpacity
                     activeOpacity={0.8}
@@ -87,7 +87,7 @@ export const CrediTu = ({ navigation }) => {
                   >
                     <View style={{ alignItems: "center" }}>
                       <Image
-                        source={{ uri: el.image }}
+                        source={{ uri: element.image }}
                         style={{ width: 50, height: 55, marginRight: 15 }}
                       />
                     </View>
@@ -102,7 +102,7 @@ export const CrediTu = ({ navigation }) => {
                         <Text
                           style={{ ...Fonts.Black16Medium, textAlign: "left" }}
                         >
-                          {el.name}
+                          {element.name}
                         </Text>
                         <View>
                           <Text
@@ -118,7 +118,7 @@ export const CrediTu = ({ navigation }) => {
                               textAlign: "right",
                             }}
                           >
-                            {el.value !== '0' ? el.value : ''}
+                            {element.value !== '0' ? element.value + '€'  : '0€'}
                           </Text>
 
                           <Text
@@ -131,7 +131,7 @@ export const CrediTu = ({ navigation }) => {
                     </View>
                   </TouchableOpacity>
                 </>
-              ))
+            
             )}
           </View>
         </ScrollView>
