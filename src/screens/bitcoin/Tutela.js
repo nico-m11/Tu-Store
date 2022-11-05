@@ -74,9 +74,9 @@ export const Tutela = ({ navigation }) => {
                 <>
                   <TouchableOpacity
                     activeOpacity={0.8}
-                    // onPress={() =>
-                    //   navigation.navigate("CoinDetails", { item: item.item })
-                    // }
+                    onPress={() =>
+                      navigation.navigate("CoinDetails", { item: element.name })
+                    }
                     style={{
                       justifyContent: "space-between",
                       alignItems: "center",

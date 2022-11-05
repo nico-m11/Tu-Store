@@ -1,8 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Component } from "react";
 import {
   SafeAreaView,
   Text,
+  TextInput,
   View,
+  Button,
+  Alert,
   FlatList,
   TouchableOpacity,
   Image,
@@ -16,40 +19,11 @@ import CustomHeader from "../components/CustomHeader";
 import { useTranslation } from "react-i18next";
 import ExitModel from "../components/ExitModel";
 import { Provider } from "react-redux";
+import { Formik } from 'formik';
+import * as yup from 'yup'
 
 export const TesoScreen = ({ navigation }) => {
   const { t, i18n } = useTranslation();
-  const [listData, setListData] = useState([]); // salvo i dati del fetch
-
-  useEffect(() => {
-    Data();
-  }, []);
-
-  {
-    /** fetch data GET COMPARA TU*/
-  }
-  const Data = () => {
-    fetch(
-      "https://be.control-room.app/api/salesChannels?page=1&limit=10&code=ComparaTu",
-      {
-        method: "GET",
-        headers: {
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlRVTzYiLCJpZCI6NiwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNjY1MTQ4MDU5LCJleHAiOjE2Njc4MjY0NTl9.ake1PT2VGDret0lEFtXDTEA_HQR3CS5nVIFkeVF8XFI",
-        },
-      }
-    )
-      .then((res) => {
-        return res.json();
-      })
-      .then((value) => {
-        //console.log(value)
-        setListData(value.items); // salvo nel array i dati del fetch
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
 
   return (
     <SafeAreaView style={{ ...ConstantStyle.container }}>
@@ -67,82 +41,86 @@ export const TesoScreen = ({ navigation }) => {
           flex: 1,
         }}
       >
-        {/*** fetch title */}
         <ScrollView showsVerticalScrollIndicator={true}>
-          <View style={{marginLeft: 30, marginTop: 10, marginBottom: 30}}>
-            {listData.map((element, index) => (
-              <View>
-                <Text key={index} style={{fontSize: 20}}>{element.code}</Text>
-              </View>
-            ))}
+       
+      <Formik
+        initialValues={{ 
+          name: '',
+          surname: '',
+          email: '', 
+          password: '' 
+        }}
+        onSubmit={values => Alert.alert(JSON.stringify(values))}
+        validationSchema={yup.object().shape({
+          name: yup
+            .string()
+            .required('Please, provide your name!'),
+          surname: yup
+            .string()
+            .required('Please, provide your Surname!'),
+          email: yup
+            .string()
+            .email()
+            .required(),
+          password: yup
+            .string()
+            .min(4)
+            .max(10, 'Password should not excced 10 chars.')
+            .required(),
+        })}
+       >
+          {({ values, handleChange, errors, setFieldTouched, touched, isValid, handleSubmit }) =>  (
+          <View style={{marginLeft:30, marginBottom: 30, marginTop:70}}>
+            <TextInput
+              value={values.name}
+              style={{marginBottom:20}}
+              onChangeText={handleChange('name')}
+              onBlur={() => setFieldTouched('name')}
+              placeholder="Name"
+            />
+            {touched.name && errors.name &&
+              <Text style={{ fontSize: 12, color: '#FF0D10' }}>{errors.name}</Text>
+            }   
+            <TextInput
+              value={values.surname}
+              style={{marginBottom:20}}
+              onChangeText={handleChange('surname')}
+              onBlur={() => setFieldTouched('surname')}
+              placeholder="surname"
+            />
+            {touched.surname && errors.surname &&
+              <Text style={{ fontSize: 12, color: '#FF0D10' }}>{errors.surname}</Text>
+            }            
+            <TextInput
+              value={values.email}
+              style={{marginBottom:20}}
+              onChangeText={handleChange('email')}
+              onBlur={() => setFieldTouched('email')}
+              placeholder="E-mail"
+            />
+            {touched.email && errors.email &&
+              <Text style={{ fontSize: 12, color: '#FF0D10' }}>{errors.email}</Text>
+            }
+            <TextInput
+              value={values.password}
+              style={{marginBottom:20}}
+              onChangeText={handleChange('password')}
+              placeholder="Password"
+              onBlur={() => setFieldTouched('password')}
+              secureTextEntry={true}
+            />
+            {touched.password && errors.password &&
+              <Text style={{ fontSize: 12, color: '#FF0D10' }}>{errors.password}</Text>
+            }
+            <Button
+              color="#3740FE"
+              title='Submit'
+              disabled={!isValid}
+              onPress={handleSubmit}
+            />
           </View>
-          {/*** fetch data */}
-          <View>
-            {listData.map((element, index) =>
-              element.offers.map((el, i) => (
-                <>
-                  <TouchableOpacity
-                    activeOpacity={0.8}
-                    // onPress={() =>
-                    //   navigation.navigate("CoinDetails", { item: item.item })
-                    // }
-                    style={{
-                      justifyContent: "space-between",
-                      alignItems: "center",
-                      flexDirection: "row",
-                      marginHorizontal: 15,
-                      marginVertical: 12,
-                    }}
-                  >
-                    <View style={{ alignItems: "center" }}>
-                      <Image
-                        source={{ uri: el.image }}
-                        style={{ width: 50, height: 15, marginRight: 15 }}
-                      />
-                    </View>
-                    <View style={{ flex: 1 }}>
-                      <View
-                        style={{
-                          alignItems: "center",
-                          justifyContent: "space-between",
-                          flexDirection: "row",
-                        }}
-                      >
-                        <Text
-                          style={{ ...Fonts.Black16Medium, textAlign: "left" }}
-                        >
-                          {el.name}
-                        </Text>
-                        <View>
-                          <Text
-                            style={{
-                              ...Fonts.Black16Regular,
-                              textAlign: "right",
-                            }}
-                          ></Text>
-
-                          <Text
-                            style={{
-                              ...Fonts.Green14Medium,
-                              textAlign: "right",
-                            }}
-                          >
-                            {el.value}
-                          </Text>
-
-                          <Text
-                            style={{ ...Fonts.Red14Medium, textAlign: "right" }}
-                          >
-                            CashBack
-                          </Text>
-                        </View>
-                      </View>
-                    </View>
-                  </TouchableOpacity>
-                </>
-              ))
-            )}
-          </View>
+        )}
+      </Formik>
         </ScrollView>
       </View>
       {/* <ExitModel
