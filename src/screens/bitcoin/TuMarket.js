@@ -73,7 +73,7 @@ export const TuMarket = ({ navigation }) => {
                 <TouchableOpacity
                   activeOpacity={0.8}
                   onPress={() =>
-                    navigation.navigate("CoinDetails", { item: element })
+                    navigation.navigate("Details", { item: element })
                   }
                   style={{
                     justifyContent: "space-between",

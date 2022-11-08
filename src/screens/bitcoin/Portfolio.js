@@ -243,7 +243,7 @@ export const PortfolioScreen = ({ navigation }) => {
                       <View key={index + ""}>
                         <TouchableOpacity
                           onPress={() =>
-                            navigation.navigate("CoinDetails", {
+                            navigation.navigate("Details", {
                               item: item.item,
                             })
                           }

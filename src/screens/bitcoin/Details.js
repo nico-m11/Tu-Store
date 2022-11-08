@@ -18,7 +18,7 @@ import { LineChart } from "react-native-chart-kit";
 import { Link } from "native-base";
 import { useTranslation } from "react-i18next";
 
-export const CoinDetails = ({ navigation, route }) => {
+export const Details = ({ navigation, route }) => {
   const item = route.params.item;
   console.log(item)
   const { t, i18n } = useTranslation();

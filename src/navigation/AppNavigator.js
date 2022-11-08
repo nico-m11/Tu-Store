@@ -13,7 +13,7 @@ import { NewsDetails } from "../screens/bitcoin/NewsDetails";
 import { PlayGame } from "../screens/bitcoin/PlayGame";
 import { Reward } from "../screens/bitcoin/Reward";
 import { Notifications } from "../screens/bitcoin/Notifications";
-import { CoinDetails } from "../screens/bitcoin/CoinDetails";
+import { Details } from "../screens/bitcoin/Details";
 import { BuyBitcoin } from "../screens/bitcoin/BuyBitcoin";
 import { Deposit } from "../screens/bitcoin/Deposit";
 import { History } from "../screens/bitcoin/History";
@@ -178,8 +178,8 @@ export const AppNavigator = () => {
         options={{ headerShown: false }}
       />
       <AppStackNavigator.Screen
-        name="CoinDetails"
-        component={CoinDetails}
+        name="Details"
+        component={Details}
         options={{ headerShown: false }}
       />
       <AppStackNavigator.Screen

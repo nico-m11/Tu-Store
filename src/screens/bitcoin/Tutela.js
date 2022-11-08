@@ -83,7 +83,7 @@ export const Tutela = ({ navigation }) => {
                     <TouchableOpacity
                       activeOpacity={0.8}
                       onPress={() =>
-                        navigation.navigate("CoinDetails", {
+                        navigation.navigate("Details", {
                           item: element,
                         })
                       }

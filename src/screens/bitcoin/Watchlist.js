@@ -93,7 +93,7 @@ export const WatchList = ({ navigation, route }) => {
         <TouchableOpacity
           activeOpacity={0.8}
           onPress={() =>
-            navigation.navigate("CoinDetails", { item: data.item })
+            navigation.navigate("Details", { item: data.item })
           }
           style={{
             margin: 15,

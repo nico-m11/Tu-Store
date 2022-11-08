@@ -30,7 +30,7 @@ export const TesoScreen = ({ navigation }) => {
       <CustomHeader
         navigation={navigation}
         title={t("Teso")}
-        isMain={true}
+        //isMain={true}
         isSearch={true}
       />
       <View

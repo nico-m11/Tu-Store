@@ -41,7 +41,7 @@ export const History = ({ navigation }) => {
               <TouchableOpacity
                 activeOpacity={0.8}
                 onPress={() =>
-                  navigation.navigate("CoinDetails", { item: item.item })
+                  navigation.navigate("Details", { item: item.item })
                 }
                 style={{
                   ...ConstantStyle.shadow,

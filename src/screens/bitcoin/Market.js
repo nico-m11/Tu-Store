@@ -61,7 +61,7 @@ export const MarketScreen = ({ navigation }) => {
               <TouchableOpacity
                 activeOpacity={0.8}
                 onPress={() =>
-                  navigation.navigate("CoinDetails", { item: item.item })
+                  navigation.navigate("Details", { item: item.item })
                 }
                 style={{
                   justifyContent: "space-between",
