@@ -28,16 +28,13 @@ export const ComparaTu = ({ navigation }) => {
     /** fetch data GET COMPARA TU*/
   }
   const Data = () => {
-    fetch(
-      "https://be.control-room.app/api/offers?limit=10&sale_channel_id=0",
-      {
-        method: "GET",
-        headers: {
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlRVTzYiLCJpZCI6NiwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNjY3OTAwOTcxLCJleHAiOjE2NzA1NzkzNzF9.523N8oDpL_AufsFeSydhthNFrIls_0Q1ttA3LGHT8TQ",
-        },
-      }
-    )
+    fetch("https://be.control-room.app/api/offers?limit=10&sale_channel_id=0", {
+      method: "GET",
+      headers: {
+        Authorization:
+          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlRVTzYiLCJpZCI6NiwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNjY3OTAwOTcxLCJleHAiOjE2NzA1NzkzNzF9.523N8oDpL_AufsFeSydhthNFrIls_0Q1ttA3LGHT8TQ",
+      },
+    })
       .then((res) => {
         return res.json();
       })
@@ -55,15 +52,17 @@ export const ComparaTu = ({ navigation }) => {
       <CustomHeader
         navigation={navigation}
         title={t("Compara Tu")}
-        isMain={true}
         isSearch={true}
       />
       <View
         style={{
+          flex: 1,
+          flexDirection: "column",
           backgroundColor: Colors.white,
           borderTopLeftRadius: 30,
           borderTopRightRadius: 30,
-          flex: 1,
+          paddingTop: 25,
+          paddingHorizontal: 15,
         }}
       >
         <ScrollView showsVerticalScrollIndicator={true}>
@@ -117,7 +116,7 @@ export const ComparaTu = ({ navigation }) => {
                             textAlign: "right",
                           }}
                         >
-                          {element.value !== '0' ? element.value + '€' : '0€'}
+                          {element.value !== "0" ? element.value + "€" : "0€"}
                         </Text>
 
                         <Text

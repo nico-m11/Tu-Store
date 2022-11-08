@@ -28,16 +28,13 @@ export const AssicuraTu = ({ navigation }) => {
     /** fetch data GET COMPARA TU*/
   }
   const Data = () => {
-    fetch(
-      "https://be.control-room.app/api/offers?limit=10&sale_channel_id=5",
-      {
-        method: "GET",
-        headers: {
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlRVTzYiLCJpZCI6NiwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNjY3OTAwOTcxLCJleHAiOjE2NzA1NzkzNzF9.523N8oDpL_AufsFeSydhthNFrIls_0Q1ttA3LGHT8TQ",
-        },
-      }
-    )
+    fetch("https://be.control-room.app/api/offers?limit=10&sale_channel_id=5", {
+      method: "GET",
+      headers: {
+        Authorization:
+          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlRVTzYiLCJpZCI6NiwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNjY3OTAwOTcxLCJleHAiOjE2NzA1NzkzNzF9.523N8oDpL_AufsFeSydhthNFrIls_0Q1ttA3LGHT8TQ",
+      },
+    })
       .then((res) => {
         return res.json();
       })
@@ -54,84 +51,86 @@ export const AssicuraTu = ({ navigation }) => {
       <CustomHeader
         navigation={navigation}
         title={t("Assicura Tu")}
-        isMain={true}
         isSearch={true}
       />
       <View
         style={{
+          flex: 1,
+          flexDirection: "column",
           backgroundColor: Colors.white,
           borderTopLeftRadius: 30,
           borderTopRightRadius: 30,
-          flex: 1,
+          paddingTop: 25,
+          paddingHorizontal: 15,
         }}
       >
         <ScrollView showsVerticalScrollIndicator={true}>
           {/*** fetch data */}
           <View>
-            {listData.map((element, index) =>
-            
-                <>
-                  <TouchableOpacity
-                    activeOpacity={0.8}
-                    // onPress={() =>
-                    //   navigation.navigate("CoinDetails", { item: item.item })
-                    // }
-                    style={{
-                      justifyContent: "space-between",
-                      alignItems: "center",
-                      flexDirection: "row",
-                      marginHorizontal: 15,
-                      marginVertical: 12,
-                    }}
-                  >
-                    <View style={{ alignItems: "center" }}>
-                      <Image
-                        source={{ uri: element.image }}
-                        style={{ width: 45, height: 55, marginRight: 15 }}
-                      />
-                    </View>
-                    <View style={{ flex: 1 }}>
-                      <View
-                        style={{
-                          alignItems: "center",
-                          justifyContent: "space-between",
-                          flexDirection: "row",
-                        }}
+            {listData.map((element, index) => (
+              <>
+                <TouchableOpacity
+                  activeOpacity={0.8}
+                  onPress={() =>
+                    navigation.navigate("CoinDetails", {
+                      element: element.name,
+                    })
+                  }
+                  style={{
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    flexDirection: "row",
+                    marginHorizontal: 15,
+                    marginVertical: 12,
+                  }}
+                >
+                  <View style={{ alignItems: "center" }}>
+                    <Image
+                      source={{ uri: element.image }}
+                      style={{ width: 45, height: 55, marginRight: 15 }}
+                    />
+                  </View>
+                  <View style={{ flex: 1 }}>
+                    <View
+                      style={{
+                        alignItems: "center",
+                        justifyContent: "space-between",
+                        flexDirection: "row",
+                      }}
+                    >
+                      <Text
+                        style={{ ...Fonts.Black16Medium, textAlign: "left" }}
                       >
+                        {element.name}
+                      </Text>
+                      <View>
                         <Text
-                          style={{ ...Fonts.Black16Medium, textAlign: "left" }}
+                          style={{
+                            ...Fonts.Black16Regular,
+                            textAlign: "right",
+                          }}
+                        ></Text>
+
+                        <Text
+                          style={{
+                            ...Fonts.Green14Medium,
+                            textAlign: "right",
+                          }}
                         >
-                          {element.name}
+                          {element.value !== "0" ? element.value + "€" : "0€"}
                         </Text>
-                        <View>
-                          <Text
-                            style={{
-                              ...Fonts.Black16Regular,
-                              textAlign: "right",
-                            }}
-                          ></Text>
 
-                          <Text
-                            style={{
-                              ...Fonts.Green14Medium,
-                              textAlign: "right",
-                            }}
-                          >
-                            {element.value !== '0' ? element.value + '€' : '0€'}
-                          </Text>
-
-                          <Text
-                            style={{ ...Fonts.Red14Medium, textAlign: "right" }}
-                          >
-                            CashBack
-                          </Text>
-                        </View>
+                        <Text
+                          style={{ ...Fonts.Red14Medium, textAlign: "right" }}
+                        >
+                          CashBack
+                        </Text>
                       </View>
                     </View>
-                  </TouchableOpacity>
-                </>
-              
-            )}
+                  </View>
+                </TouchableOpacity>
+              </>
+            ))}
           </View>
         </ScrollView>
       </View>

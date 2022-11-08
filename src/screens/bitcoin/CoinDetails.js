@@ -20,6 +20,7 @@ import { useTranslation } from "react-i18next";
 
 export const CoinDetails = ({ navigation, route }) => {
   const item = route.params.item;
+  console.log(item)
   const { t, i18n } = useTranslation();
   const width = Dimensions.get("window").width - 60;
   return (

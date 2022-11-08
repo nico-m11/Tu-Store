@@ -24,15 +24,15 @@ export const TuMarket = ({ navigation }) => {
           paddingHorizontal: 15,
         }}
       >
-        <View
+        {/* <View
           style={{ flex: 2, alignItems: "center", justifyContent: "center" }}
         >
           <Image
             source={require("../../../assets/images/arton142.jpeg")}
             style={{ width: width - 30, borderRadius: 10 }}
           />
-        </View>
-        <View
+        </View> */}
+        {/* <View
           style={{ flex: 2, alignItems: "center", justifyContent: "center" }}
         >
           <Text style={{ ...Fonts.Primary22Bold }}>{t("Tu Market")}</Text>
@@ -47,12 +47,12 @@ export const TuMarket = ({ navigation }) => {
             {t("Tu Market")}
           </Text>
           
-        </View>
-        <View
+        </View> */}
+        {/* <View
           style={{ flex: 1, justifyContent: "flex-end", marginVertical: 20 }}
         >
           <MainButton name={t("Go")} />
-        </View>
+        </View> */}
       </View>
     </SafeAreaView>
   );
