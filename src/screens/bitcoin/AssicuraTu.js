@@ -73,7 +73,7 @@ export const AssicuraTu = ({ navigation }) => {
                   activeOpacity={0.8}
                   onPress={() =>
                     navigation.navigate("CoinDetails", {
-                      element: element.name,
+                      item: element,
                     })
                   }
                   style={{
