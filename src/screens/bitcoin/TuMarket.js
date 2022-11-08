@@ -34,7 +34,7 @@ export const TuMarket = ({ navigation }) => {
         method: "GET",
         headers: {
           Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlRVTzYiLCJpZCI6NiwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNjY1MTQ4MDU5LCJleHAiOjE2Njc4MjY0NTl9.ake1PT2VGDret0lEFtXDTEA_HQR3CS5nVIFkeVF8XFI",
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlRVTzYiLCJpZCI6NiwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNjY3OTAwOTcxLCJleHAiOjE2NzA1NzkzNzF9.523N8oDpL_AufsFeSydhthNFrIls_0Q1ttA3LGHT8TQ",
         },
       }
     )
@@ -88,7 +88,7 @@ export const TuMarket = ({ navigation }) => {
                     <View style={{ alignItems: "center" }}>
                       <Image
                         source={{ uri: element.image }}
-                        style={{ width: 50, height: 55, marginRight: 15 }}
+                        style={{ width: 85, height: 50, marginRight: 15 }}
                       />
                     </View>
                     <View style={{ flex: 1 }}>
