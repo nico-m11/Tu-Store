@@ -4,7 +4,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { FontAwesome, Foundation } from "react-native-vector-icons";
 import { Colors } from "../themes/colors";
 import { HomeScreen } from "../screens/bitcoin/Home";
-import { MarketScreen } from "../screens/bitcoin/Market";
+import { ServiziScreen } from "../screens/bitcoin/Servizi";
 import { PortfolioScreen } from "../screens/bitcoin/Portfolio";
 import { ProfileScreen } from "../screens/bitcoin/Profile";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
@@ -25,12 +25,16 @@ import { Help } from "../screens/bitcoin/Help";
 import { About } from "../screens/bitcoin/About";
 import { Language } from "../screens/bitcoin/Language";
 import { useTranslation } from "react-i18next";
-import { TesoScreen } from "../screens/bitcoin/Teso";
 import { CrediTu } from "../screens/bitcoin/CrediTu";
 import { Tutela } from "../screens/bitcoin/Tutela";
 import { ComparaTu } from "../screens/bitcoin/ComparaTu";
 import { TuMarket } from "../screens/bitcoin/TuMarket";
 import { AssicuraTu } from "../screens/bitcoin/AssicuraTu";
+
+
+
+
+//import { TesoScreen } from "../screens/bitcoin/Teso";
 
 const BottomTabNavigator = createBottomTabNavigator();
 
@@ -99,20 +103,20 @@ export const TabNavigator = () => {
         options={{ headerShown: false, tabBarLabel: t("portfolio") }}
       />
       <BottomTabNavigator.Screen
-        name="Market"
-        component={MarketScreen}
-        options={{ headerShown: false, tabBarLabel: t("market") }}
+        name="Servizi"
+        component={ServiziScreen}
+        options={{ headerShown: false, tabBarLabel: t("Servizi") }}
       />
       <BottomTabNavigator.Screen
         name="Profile"
         component={ProfileScreen}
         options={{ headerShown: false, tabBarLabel: t("profile") }}
       />
-       <BottomTabNavigator.Screen
+       {/* <BottomTabNavigator.Screen
         name="Teso"
         component={TesoScreen}
         options={{ headerShown: false, tabBarLabel: t("Teso") }}
-      />
+      /> */}
     </BottomTabNavigator.Navigator>
   );
 };

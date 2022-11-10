@@ -15,6 +15,7 @@ import { Colors } from "../../themes/colors";
 import CustomHeader from "../components/CustomHeader";
 import MainButton from "../components/MainButton";
 import { useTranslation } from "react-i18next";
+import { cos } from "react-native-reanimated";
 
 export const Tutela = ({ navigation }) => {
   const { t, i18n } = useTranslation();
@@ -25,7 +26,7 @@ export const Tutela = ({ navigation }) => {
   }, []);
 
   {
-    /** fetch data GET COMPARA TU*/
+    /** fetch data GET Tutela */
   }
   const Data = () => {
     fetch("https://be.control-room.app/api/offers?sale_channel_id=3&limit=10", {
@@ -47,6 +48,7 @@ export const Tutela = ({ navigation }) => {
       });
   };
 
+  
   return (
     <SafeAreaView style={{ ...ConstantStyle.container }}>
       <CustomHeader

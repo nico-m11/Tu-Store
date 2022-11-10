@@ -54,13 +54,20 @@ export const Details = ({ navigation, route }) => {
                   marginHorizontal: 10,
                 }}
               >
-
                 <Text>
                   Benvenuto
                 </Text>
+                
               </View>
               <View style={{ alignItems: "center" }}>
-                <Text> Hello</Text>
+              <Image
+                    source={{ uri: item.image }}
+                    style={{
+                      width: 40,
+                      height: 40,
+                      marginRight: 15,
+                    }}
+                  />
               </View>
             </View>
             <View
