@@ -22,11 +22,16 @@ export const ServiziScreen = ({ navigation }) => {
   const [listDataTutela, setListDataTutela] = useState([]); // salvo i dati del fetch
   const [listDataComparaTu, setListDataComparaTu] = useState([]); // salvo i dati del fetch
   const [listDataCrediTu, setListDataCrediTu] = useState([]);
+  const [listDataTuMarket, setListDataTuMarket] = useState([]);
+  const [listDataAssicuraTu, setListDataAssicuraTu] = useState([]);
+
 
   useEffect(() => {
     DataTutela();
     DataComparaTu();
     DataCrediTu();
+    DataTuMarket();
+    DataAssicuraTu();
   }, []);
 
   {
@@ -98,6 +103,50 @@ export const ServiziScreen = ({ navigation }) => {
         console.log(err);
       });
   };
+  {
+    /** fetch data GET TU MARKET*/
+  }
+  const DataTuMarket = () => {
+    fetch("https://be.control-room.app/api/offers?sale_channel_id=2&limit=3", {
+      method: "GET",
+      headers: {
+        Authorization:
+          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlRVTzYiLCJpZCI6NiwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNjY3OTAwOTcxLCJleHAiOjE2NzA1NzkzNzF9.523N8oDpL_AufsFeSydhthNFrIls_0Q1ttA3LGHT8TQ",
+      },
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((value) => {
+        //console.log(value)
+        setListDataTuMarket(value.items); // salvo nel array i dati del fetch
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  {
+    /** fetch data GET ASSICURA TU*/
+  }
+  const DataAssicuraTu = () => {
+    fetch("https://be.control-room.app/api/offers?limit=3&sale_channel_id=5", {
+      method: "GET",
+      headers: {
+        Authorization:
+          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlRVTzYiLCJpZCI6NiwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNjY3OTAwOTcxLCJleHAiOjE2NzA1NzkzNzF9.523N8oDpL_AufsFeSydhthNFrIls_0Q1ttA3LGHT8TQ",
+      },
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((value) => {
+        setListDataAssicuraTu(value.items); // salvo nel array i dati del fetch
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
 
   return (
     <SafeAreaView
@@ -324,6 +373,153 @@ export const ServiziScreen = ({ navigation }) => {
               </>
             ))}
           </View>
+           {/* TuMarket */}
+           <View>
+            {listDataTuMarket.map((element, index) => (
+              <>
+                <TouchableOpacity
+                  activeOpacity={0.8}
+                  onPress={() =>
+                    navigation.navigate("Details", {
+                      item: element,
+                    })
+                  }
+                  style={{
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    flexDirection: "row",
+                    marginHorizontal: 15,
+                    marginVertical: 12,
+                  }}
+                >
+                  <View style={{ alignItems: "center" }}>
+                    <Image
+                      source={{ uri: element.image }}
+                      style={{ width: 80, height: 45, marginRight: 15 }}
+                    />
+                  </View>
+                  <View style={{ flex: 1 }}>
+                    <View
+                      style={{
+                        alignItems: "center",
+                        justifyContent: "space-between",
+                        flexDirection: "row",
+                      }}
+                    >
+                      <Text
+                        style={{
+                          ...Fonts.Black16Medium,
+                          textAlign: "left",
+                        }}
+                      >
+                        {element.name}
+                      </Text>
+                      <View>
+                        <Text
+                          style={{
+                            ...Fonts.Black16Regular,
+                            textAlign: "right",
+                          }}
+                        ></Text>
+
+                        <Text
+                          style={{
+                            ...Fonts.Green14Medium,
+                            textAlign: "right",
+                          }}
+                        >
+                          {element.value !== "0" ? element.value + "€" : "0€"}
+                        </Text>
+
+                        <Text
+                          style={{
+                            ...Fonts.Red14Medium,
+                            textAlign: "right",
+                          }}
+                        >
+                          CashBack
+                        </Text>
+                      </View>
+                    </View>
+                  </View>
+                </TouchableOpacity>
+              </>
+            ))}
+          </View>
+                     {/* AssicuraTu */}
+                     <View>
+            {listDataAssicuraTu.map((element, index) => (
+              <>
+                <TouchableOpacity
+                  activeOpacity={0.8}
+                  onPress={() =>
+                    navigation.navigate("Details", {
+                      item: element,
+                    })
+                  }
+                  style={{
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    flexDirection: "row",
+                    marginHorizontal: 15,
+                    marginVertical: 12,
+                  }}
+                >
+                  <View style={{ alignItems: "center" }}>
+                    <Image
+                      source={{ uri: element.image }}
+                      style={{ width: 45, height: 55, marginRight: 15 }}
+                    />
+                  </View>
+                  <View style={{ flex: 1 }}>
+                    <View
+                      style={{
+                        alignItems: "center",
+                        justifyContent: "space-between",
+                        flexDirection: "row",
+                      }}
+                    >
+                      <Text
+                        style={{
+                          ...Fonts.Black16Medium,
+                          textAlign: "left",
+                        }}
+                      >
+                        {element.name}
+                      </Text>
+                      <View>
+                        <Text
+                          style={{
+                            ...Fonts.Black16Regular,
+                            textAlign: "right",
+                          }}
+                        ></Text>
+
+                        <Text
+                          style={{
+                            ...Fonts.Green14Medium,
+                            textAlign: "right",
+                          }}
+                        >
+                          {element.value !== "0" ? element.value + "€" : "0€"}
+                        </Text>
+
+                        <Text
+                          style={{
+                            ...Fonts.Red14Medium,
+                            textAlign: "right",
+                          }}
+                        >
+                          CashBack
+                        </Text>
+                      </View>
+                    </View>
+                  </View>
+                </TouchableOpacity>
+              </>
+            ))}
+          </View>
+
         </ScrollView>
       </View>
       {/* <ExitModel
