@@ -15,10 +15,13 @@ import { Colors } from "../../themes/colors";
 import CustomHeader from "../components/CustomHeader";
 import MainButton from "../components/MainButton";
 import { useTranslation } from "react-i18next";
+import Loader from "../components/Loader";
+
 
 export const CrediTu = ({ navigation }) => {
   const { t, i18n } = useTranslation();
   const [listData, setListData] = useState([]); // salvo i dati del fetch
+  const [loader, setLoader] = useState(false);
 
   useEffect(() => {
     Data();
@@ -138,9 +141,10 @@ export const CrediTu = ({ navigation }) => {
         title={t("exit_Text")}
         cancel={t("cancel")}
         btnName={t("exit")}
-        btnOnPress={() => BackHandler.exitApp()}
+        btnOnPress={() => loaderShow()}
         visible={exitModel}
       /> */}
+        <Loader visible={loader} />
     </SafeAreaView>
   );
 };

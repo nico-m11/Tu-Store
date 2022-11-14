@@ -31,9 +31,7 @@ import { ComparaTu } from "../screens/bitcoin/ComparaTu";
 import { TuMarket } from "../screens/bitcoin/TuMarket";
 import { AssicuraTu } from "../screens/bitcoin/AssicuraTu";
 
-
-
-
+// pagina test
 //import { TesoScreen } from "../screens/bitcoin/Teso";
 
 const BottomTabNavigator = createBottomTabNavigator();
@@ -78,7 +76,7 @@ export const TabNavigator = () => {
             return <Foundation name="home" color={color} size={26} />;
           } else if (route.name === "Portfolio") {
             return <Foundation name="graph-pie" color={color} size={26} />;
-          } else if (route.name === "Market") {
+          } else if (route.name === "Servizi") {
             return (
               <MaterialCommunityIcons
                 name="signal-cellular-3"
@@ -112,7 +110,9 @@ export const TabNavigator = () => {
         component={ProfileScreen}
         options={{ headerShown: false, tabBarLabel: t("profile") }}
       />
-       {/* <BottomTabNavigator.Screen
+
+      {/*pagina test*/}
+      {/* <BottomTabNavigator.Screen
         name="Teso"
         component={TesoScreen}
         options={{ headerShown: false, tabBarLabel: t("Teso") }}
@@ -151,7 +151,7 @@ export const AppNavigator = () => {
         component={CrediTu}
         options={{ headerShown: false }}
       />
-       <AppStackNavigator.Screen
+      <AppStackNavigator.Screen
         name="Tutela"
         component={Tutela}
         options={{ headerShown: false }}
@@ -166,7 +166,7 @@ export const AppNavigator = () => {
         component={TuMarket}
         options={{ headerShown: false }}
       />
-          <AppStackNavigator.Screen
+      <AppStackNavigator.Screen
         name="AssicuraTu"
         component={AssicuraTu}
         options={{ headerShown: false }}
