@@ -41,6 +41,21 @@ export const RegisterScreen = ({ navigation }) => {
       showPassword: fieldName === values.showPassword ? "" : fieldName,
     });
   };
+
+  const [step1, setStep1] = useState(true);
+  const [step2, setStep2] = useState(false);
+
+  const handlingStep = (step1, step2) => {
+    setStep1(step1);
+    setStep2(step2);
+
+    if (step1 === true) {
+      console.log("Step1");
+    } else if (step2 === true){
+      console.log("Step2");
+    }
+  };
+
   return (
     <SafeAreaView style={{ ...ConstantStyle.container }}>
       <View>
@@ -86,6 +101,17 @@ export const RegisterScreen = ({ navigation }) => {
           borderTopRightRadius: 30,
         }}
       >
+        <View className="PannelStep">
+          <Text className={step1 == true ? "step active" : "step"}>
+            Step <Text className="stepNumber">1</Text>
+          </Text>
+          <Text className="step-separator">&raquo;</Text>
+          <Text className={step2 == true ? "step active" : "step"}>
+            Step <Text className="stepNumber">2</Text>
+          </Text>
+          <Text className="step-separator">&raquo;</Text>
+        </View>
+
         <Formik
           initialValues={{
             name: "",
@@ -121,228 +147,271 @@ export const RegisterScreen = ({ navigation }) => {
                 paddingTop: 20,
               }}
             >
-              <Text style={{ ...Fonts.Grey14Bold, marginHorizontal: 15 }}>
-                {t("name_label")}
-              </Text>
-              <Input
-                placeholder={t("name")}
-                containerStyle={{
-                  marginTop: 8,
-                  marginBottom: -10,
-                  alignItems: "center",
-                  justifyContent: "center",
-                  textAlign: "center",
-                }}
-                inputContainerStyle={{
-                  borderBottomWidth: 0,
-                  ...ConstantStyle.shadow,
-                  backgroundColor: Colors.white,
-                  borderRadius: 10,
-                  paddingHorizontal: 15,
-                  width: width - 30,
-                  height: 45,
-                }}
-                inputStyle={{ ...Fonts.Black14Medium }}
-                secureTextEntry={false}
-                value={values.name}
-                onChangeText={handleChange("name")}
-                onBlur={() => setFieldTouched("name")}
-              />
-              {touched.name && errors.name && (
-                <Text
-                  style={{
-                    fontSize: 12,
-                    color: "#FF0D10",
-                    marginLeft: "5%",
-                    marginBottom: 15,
-                  }}
-                >
-                  {errors.name}
-                </Text>
-              )}
-              <Text style={{ ...Fonts.Grey14Bold, marginHorizontal: 15 }}>
-                {t("email")}
-              </Text>
-              <Input
-                placeholder={t("email")}
-                containerStyle={{
-                  marginTop: 8,
-                  marginBottom: -10,
-                  alignItems: "center",
-                  justifyContent: "center",
-                  textAlign: "center",
-                }}
-                inputContainerStyle={{
-                  borderBottomWidth: 0,
-                  ...ConstantStyle.shadow,
-                  backgroundColor: Colors.white,
-                  borderRadius: 10,
-                  paddingHorizontal: 15,
-                  width: width - 30,
-                  height: 45,
-                }}
-                inputStyle={{ ...Fonts.Black14Medium }}
-                keyboardType="email-address"
-                secureTextEntry={false}
-                value={values.email}
-                style={{ marginBottom: 20 }}
-                onChangeText={handleChange("email")}
-                onBlur={() => setFieldTouched("email")}
-              />
-              {touched.email && errors.email && (
-                <Text
-                  style={{
-                    fontSize: 12,
-                    color: "#FF0D10",
-                    marginLeft: "5%",
-                    marginBottom: 15,
-                  }}
-                >
-                  {errors.email}
-                </Text>
-              )}
-              <Text style={{ ...Fonts.Grey14Bold, marginHorizontal: 15 }}>
-                {t("mobile")}
-              </Text>
-              <Input
-                placeholder={t("mobile")}
-                containerStyle={{
-                  marginTop: 8,
-                  marginBottom: -10,
-                  alignItems: "center",
-                  justifyContent: "center",
-                  textAlign: "center",
-                }}
-                inputContainerStyle={{
-                  borderBottomWidth: 0,
-                  ...ConstantStyle.shadow,
-                  backgroundColor: Colors.white,
-                  borderRadius: 10,
-                  paddingHorizontal: 15,
-                  width: width - 30,
-                  height: 45,
-                }}
-                inputStyle={{ ...Fonts.Black14Medium }}
-                secureTextEntry={false}
-                keyboardType="number-pad"
-                maxLength={10}
-                value={values.mobile}
-                style={{ marginBottom: 20 }}
-                onChangeText={handleChange("mobile")}
-                onBlur={() => setFieldTouched("mobile")}
-              />
-              {touched.mobile && errors.mobile && (
-                <Text
-                  style={{
-                    fontSize: 12,
-                    color: "#FF0D10",
-                    marginLeft: "5%",
-                    marginBottom: 15,
-                  }}
-                >
-                  {errors.mobile}
-                </Text>
-              )}
-              <Text style={{ ...Fonts.Grey14Bold, marginHorizontal: 15 }}>
-                {t("password")}
-              </Text>
-              <Input
-                placeholder={t("password")}
-                containerStyle={{
-                  marginTop: 8,
-                  marginBottom: -10,
-                  alignItems: "center",
-                  justifyContent: "center",
-                  textAlign: "center",
-                }}
-                inputContainerStyle={{
-                  borderBottomWidth: 0,
-                  ...ConstantStyle.shadow,
-                  backgroundColor: Colors.white,
-                  borderRadius: 10,
-                  paddingHorizontal: 15,
-                  width: width - 30,
-                  height: 45,
-                }}
-                inputStyle={{ ...Fonts.Black14Medium }}
-                rightIcon={
-                  <Ionicons
-                    name={values.password === "Password" ? "eye" : "eye-off"}
-                    style={{ marginLeft: 15 }}
-                    color={Colors.grey}
-                    size={20}
+              {step1 == true ? (
+                <>
+                  <Text style={{ ...Fonts.Grey14Bold, marginHorizontal: 15 }}>
+                    {t("name_label")}
+                  </Text>
+                  <Input
+                    placeholder={t("name")}
+                    containerStyle={{
+                      marginTop: 8,
+                      marginBottom: -10,
+                      alignItems: "center",
+                      justifyContent: "center",
+                      textAlign: "center",
+                    }}
+                    inputContainerStyle={{
+                      borderBottomWidth: 0,
+                      ...ConstantStyle.shadow,
+                      backgroundColor: Colors.white,
+                      borderRadius: 10,
+                      paddingHorizontal: 15,
+                      width: width - 30,
+                      height: 45,
+                    }}
+                    inputStyle={{ ...Fonts.Black14Medium }}
+                    secureTextEntry={false}
+                    value={values.name}
+                    onChangeText={handleChange("name")}
+                    onBlur={() => setFieldTouched("name")}
                   />
-                }
-                secureTextEntry={values.password === "Password" ? false : true}
-                value={values.password}
-                onChangeText={handleChange("password")}
-                onBlur={() => setFieldTouched("password")}
-              />
-              {touched.password && errors.password && (
-                <Text
-                  style={{
-                    fontSize: 12,
-                    color: "#FF0D10",
-                    marginLeft: "5%",
-                    marginBottom: 15,
-                  }}
-                >
-                  {errors.password}
-                </Text>
-              )}
-              <Text style={{ ...Fonts.Grey14Bold, marginHorizontal: 15 }}>
-                {t("confirm_password")}
-              </Text>
-              <Input
-                placeholder={t("confirm_password")}
-                containerStyle={{
-                  marginTop: 8,
-                  marginBottom: -10,
-                  alignItems: "center",
-                  justifyContent: "center",
-                  textAlign: "center",
-                }}
-                inputContainerStyle={{
-                  borderBottomWidth: 0,
-                  ...ConstantStyle.shadow,
-                  backgroundColor: Colors.white,
-                  borderRadius: 10,
-                  paddingHorizontal: 15,
-                  width: width - 30,
-                  height: 45,
-                }}
-                inputStyle={{ ...Fonts.Black14Medium }}
-                rightIcon={
-                  <Ionicons
-                    name={
-                      values.showPassword === "currentPassword"
-                        ? "eye"
-                        : "eye-off"
-                    }
-                    style={{ marginLeft: 15 }}
-                    color={Colors.grey}
-                    size={20}
-                    onPress={() => handleClick("currentPassword")}
-                  />
-                }
-                secureTextEntry={
-                  values.showPassword === "currentPassword" ? false : true
-                }
-              />
+                  {touched.name && errors.name && (
+                    <Text
+                      style={{
+                        fontSize: 12,
+                        color: "#FF0D10",
+                        marginLeft: "5%",
+                        marginBottom: 15,
+                      }}
+                    >
+                      {errors.name}
+                    </Text>
+                  )}
 
-              <View style={{ marginHorizontal: 15, marginVertical: 20 }}>
-                <MainButton
-                  name={t("sign_up")}
-                  onPress={() => navigation.navigate("OtpScreen")}
-                />
-                <Button
-                  color="#3740FE"
-                  title="Submit"
-                  disabled={!isValid}
-                  //onPress={() => navigation.navigate("OtpScreen")}
-                  onPress={() => handleSubmit()}
-                />
-              </View>
+                  <Text style={{ ...Fonts.Grey14Bold, marginHorizontal: 15 }}>
+                    {t("email")}
+                  </Text>
+                  <Input
+                    placeholder={t("email")}
+                    containerStyle={{
+                      marginTop: 8,
+                      marginBottom: -10,
+                      alignItems: "center",
+                      justifyContent: "center",
+                      textAlign: "center",
+                    }}
+                    inputContainerStyle={{
+                      borderBottomWidth: 0,
+                      ...ConstantStyle.shadow,
+                      backgroundColor: Colors.white,
+                      borderRadius: 10,
+                      paddingHorizontal: 15,
+                      width: width - 30,
+                      height: 45,
+                    }}
+                    inputStyle={{ ...Fonts.Black14Medium }}
+                    keyboardType="email-address"
+                    secureTextEntry={false}
+                    value={values.email}
+                    style={{ marginBottom: 20 }}
+                    onChangeText={handleChange("email")}
+                    onBlur={() => setFieldTouched("email")}
+                  />
+                  {touched.email && errors.email && (
+                    <Text
+                      style={{
+                        fontSize: 12,
+                        color: "#FF0D10",
+                        marginLeft: "5%",
+                        marginBottom: 15,
+                      }}
+                    >
+                      {errors.email}
+                    </Text>
+                  )}
+
+                  <Text style={{ ...Fonts.Grey14Bold, marginHorizontal: 15 }}>
+                    {t("mobile")}
+                  </Text>
+                  <Input
+                    placeholder={t("mobile")}
+                    containerStyle={{
+                      marginTop: 8,
+                      marginBottom: -10,
+                      alignItems: "center",
+                      justifyContent: "center",
+                      textAlign: "center",
+                    }}
+                    inputContainerStyle={{
+                      borderBottomWidth: 0,
+                      ...ConstantStyle.shadow,
+                      backgroundColor: Colors.white,
+                      borderRadius: 10,
+                      paddingHorizontal: 15,
+                      width: width - 30,
+                      height: 45,
+                    }}
+                    inputStyle={{ ...Fonts.Black14Medium }}
+                    secureTextEntry={false}
+                    keyboardType="number-pad"
+                    maxLength={10}
+                    value={values.mobile}
+                    style={{ marginBottom: 20 }}
+                    onChangeText={handleChange("mobile")}
+                    onBlur={() => setFieldTouched("mobile")}
+                  />
+                  {touched.mobile && errors.mobile && (
+                    <Text
+                      style={{
+                        fontSize: 12,
+                        color: "#FF0D10",
+                        marginLeft: "5%",
+                        marginBottom: 15,
+                      }}
+                    >
+                      {errors.mobile}
+                    </Text>
+                  )}
+                  <View className="split-btn-wrap">
+                    <Button
+                      //color="#3740FE"
+                      title="Next"
+                      disabled= {
+                      values.name == '' &&
+                      values.email == '' 
+                      }
+                      //disabled={!isValid}
+                      //onPress={() => navigation.navigate("OtpScreen")}
+                      onPress={(e) => handlingStep(0, 1, 0, 0)}
+                    />
+                  </View>
+                </>
+              ) : (
+                <></>
+              )}
+
+              {step2 ? (
+                <>
+                  <Text style={{ ...Fonts.Grey14Bold, marginHorizontal: 15 }}>
+                    {t("password")}
+                  </Text>
+                  <Input
+                    placeholder={t("password")}
+                    containerStyle={{
+                      marginTop: 8,
+                      marginBottom: -10,
+                      alignItems: "center",
+                      justifyContent: "center",
+                      textAlign: "center",
+                    }}
+                    inputContainerStyle={{
+                      borderBottomWidth: 0,
+                      ...ConstantStyle.shadow,
+                      backgroundColor: Colors.white,
+                      borderRadius: 10,
+                      paddingHorizontal: 15,
+                      width: width - 30,
+                      height: 45,
+                    }}
+                    inputStyle={{ ...Fonts.Black14Medium }}
+                    rightIcon={
+                      <Ionicons
+                        name={
+                          values.password === "Password" ? "eye" : "eye-off"
+                        }
+                        style={{ marginLeft: 15 }}
+                        color={Colors.grey}
+                        size={20}
+                      />
+                    }
+                    secureTextEntry={
+                      values.password === "Password" ? false : true
+                    }
+                    value={values.password}
+                    onChangeText={handleChange("password")}
+                    onBlur={() => setFieldTouched("password")}
+                  />
+                  {touched.password && errors.password && (
+                    <Text
+                      style={{
+                        fontSize: 12,
+                        color: "#FF0D10",
+                        marginLeft: "5%",
+                        marginBottom: 15,
+                      }}
+                    >
+                      {errors.password}
+                    </Text>
+                  )}
+                  <Text style={{ ...Fonts.Grey14Bold, marginHorizontal: 15 }}>
+                    {t("confirm_password")}
+                  </Text>
+                  <Input
+                    placeholder={t("confirm_password")}
+                    containerStyle={{
+                      marginTop: 8,
+                      marginBottom: -10,
+                      alignItems: "center",
+                      justifyContent: "center",
+                      textAlign: "center",
+                    }}
+                    inputContainerStyle={{
+                      borderBottomWidth: 0,
+                      ...ConstantStyle.shadow,
+                      backgroundColor: Colors.white,
+                      borderRadius: 10,
+                      paddingHorizontal: 15,
+                      width: width - 30,
+                      height: 45,
+                    }}
+                    inputStyle={{ ...Fonts.Black14Medium }}
+                    rightIcon={
+                      <Ionicons
+                        name={
+                          values.showPassword === "currentPassword"
+                            ? "eye"
+                            : "eye-off"
+                        }
+                        style={{ marginLeft: 15 }}
+                        color={Colors.grey}
+                        size={20}
+                        onPress={() => handleClick("currentPassword")}
+                      />
+                    }
+                    secureTextEntry={
+                      values.showPassword === "currentPassword" ? false : true
+                    }
+                  />
+
+                  <View className="split-btn-wrap">
+                    <Button
+                      //color="#3740FE"
+                      title="Back"
+                      //disabled={!isValid}
+                      //onPress={() => navigation.navigate("OtpScreen")}
+                      onPress={(e) => handlingStep(1, 0, 0, 0)}
+                    />
+                  </View>
+
+                  <View style={{ marginHorizontal: 15, marginVertical: 20 }}>
+                    <MainButton
+                      name={t("sign_up")}
+                      onPress={() => navigation.navigate("OtpScreen")}
+                    />
+                    <Button
+                      color="#3740FE"
+                      title="Submit"
+                      disabled={!isValid}
+                      //onPress={() => navigation.navigate("OtpScreen")}
+                      onPress={() => handleSubmit()}
+                    />
+                  </View>
+                </>
+              ) : (
+                <></>
+              )}
+
               <Text style={{ ...Fonts.Grey14Bold, textAlign: "center" }}>
                 {t("or")}
               </Text>
