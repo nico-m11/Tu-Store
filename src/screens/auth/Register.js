@@ -148,14 +148,14 @@ export const RegisterScreen = ({ navigation }) => {
               .min(4)
               .max(10, "Password should not excced 10 chars.")
               .required(),
-            confirm_password: yup.string(),
-            is: (val) => (val && val.length > 0 ? true : false),
-            then: yup
-              .string()
-              .oneOf(
-                [yup.ref("password")],
-                "Password and Confirm Password didn't match"
-              ),
+            // confirm_password: yup.string(),
+            // is: (val) => (val && val.length > 0 ? true : false),
+            // then: yup
+            //   .string()
+            //   .oneOf(
+            //     [yup.ref("password")],
+            //     "Password and Confirm Password didn't match"
+            //   ),
           })}
         >
           {({
@@ -375,19 +375,22 @@ export const RegisterScreen = ({ navigation }) => {
                     rightIcon={
                       <Ionicons
                         name={
-                          values.showPassword === "currentPassword"
+                          values.confirm_password === "confirm_password"
                             ? "eye"
                             : "eye-off"
                         }
                         style={{ marginLeft: 15 }}
                         color={Colors.grey}
                         size={20}
-                        onPress={() => handleClick("currentPassword")}
+                        onPress={() => handleClick("confirm_password")}
                       />
                     }
                     secureTextEntry={
-                      values.showPassword === "currentPassword" ? false : true
+                      values.confirm_password === "confirm_password" ? false : true
                     }
+                    value={values.password}
+                    onChangeText={handleChange("confirm_password")}
+                    onBlur={() => setFieldTouched("confirm_password")}
                   />
                   {touched.confirm_password && errors.confirm_password && (
                     <Text
@@ -403,7 +406,7 @@ export const RegisterScreen = ({ navigation }) => {
                   )}
                   <View className="split-btn-wrap">
                     <Button
-                      //color="#3740FE"
+                      color="#3740FE"
                       title="Next"
                       disabled={
                         values.name == "" &&
@@ -450,14 +453,14 @@ export const RegisterScreen = ({ navigation }) => {
                   <Text>Step3</Text>
                   <View className="split-btn-wrap">
                     <Button
-                      //color="#3740FE"
+                      color="#3740FE"
                       title="Back"
                       //disabled={!isValid}
                       //onPress={() => navigation.navigate("OtpScreen")}
                       onPress={(e) => handlingStep(false, true, false, false)}
                     />
                     <Button
-                      //color="#3740FE"
+                      color="#3740FE"
                       title="Next"
                       //disabled={!isValid}
                       //onPress={() => navigation.navigate("OtpScreen")}
@@ -474,14 +477,14 @@ export const RegisterScreen = ({ navigation }) => {
                   <Text>Step4</Text>
                   <View className="split-btn-wrap">
                     <Button
-                      //color="#3740FE"
+                      color="#3740FE"
                       title="Back"
                       //disabled={!isValid}
                       //onPress={() => navigation.navigate("OtpScreen")}
                       onPress={(e) => handlingStep(false, false, true, false)}
                     />
                     <Button
-                      //color="#3740FE"
+                      color="#3740FE"
                       title="Next"
                       //disabled={!isValid}
                       //onPress={() => navigation.navigate("OtpScreen")}
