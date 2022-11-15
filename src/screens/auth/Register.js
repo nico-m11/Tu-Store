@@ -44,15 +44,23 @@ export const RegisterScreen = ({ navigation }) => {
 
   const [step1, setStep1] = useState(true);
   const [step2, setStep2] = useState(false);
+  const [step3, setStep3] = useState(false);
+  const [step4, setStep4] = useState(false);
 
-  const handlingStep = (step1, step2) => {
+  const handlingStep = (step1, step2, step3, step4) => {
     setStep1(step1);
     setStep2(step2);
+    setStep3(step3);
+    setStep4(step4);
 
     if (step1 === true) {
       console.log("Step1");
-    } else if (step2 === true){
+    } else if (step2 === true) {
       console.log("Step2");
+    } else if (step3 === true) {
+      console.log("Step3");
+    } else if (step4 === true) {
+      console.log("Step4");
     }
   };
 
@@ -110,6 +118,14 @@ export const RegisterScreen = ({ navigation }) => {
             Step <Text className="stepNumber">2</Text>
           </Text>
           <Text className="step-separator">&raquo;</Text>
+          <Text className={step3 == true ? "step active" : "step"}>
+            Step <Text className="stepNumber">3</Text>
+          </Text>
+          <Text className="step-separator">&raquo;</Text>
+          <Text className={step4 == true ? "step active" : "step"}>
+            Step <Text className="stepNumber">4</Text>
+          </Text>
+          <Text className="step-separator">&raquo;</Text>
         </View>
 
         <Formik
@@ -118,6 +134,7 @@ export const RegisterScreen = ({ navigation }) => {
             surname: "",
             email: "",
             password: "",
+            confirm_password: "",
           }}
           onSubmit={(values) => Alert.alert(JSON.stringify(values))}
           validationSchema={yup.object().shape({
@@ -131,6 +148,14 @@ export const RegisterScreen = ({ navigation }) => {
               .min(4)
               .max(10, "Password should not excced 10 chars.")
               .required(),
+            confirm_password: yup.string(),
+            is: (val) => (val && val.length > 0 ? true : false),
+            then: yup
+              .string()
+              .oneOf(
+                [yup.ref("password")],
+                "Password and Confirm Password didn't match"
+              ),
           })}
         >
           {({
@@ -273,26 +298,7 @@ export const RegisterScreen = ({ navigation }) => {
                       {errors.mobile}
                     </Text>
                   )}
-                  <View className="split-btn-wrap">
-                    <Button
-                      //color="#3740FE"
-                      title="Next"
-                      disabled= {
-                      values.name == '' &&
-                      values.email == '' 
-                      }
-                      //disabled={!isValid}
-                      //onPress={() => navigation.navigate("OtpScreen")}
-                      onPress={(e) => handlingStep(0, 1, 0, 0)}
-                    />
-                  </View>
-                </>
-              ) : (
-                <></>
-              )}
 
-              {step2 ? (
-                <>
                   <Text style={{ ...Fonts.Grey14Bold, marginHorizontal: 15 }}>
                     {t("password")}
                   </Text>
@@ -383,14 +389,103 @@ export const RegisterScreen = ({ navigation }) => {
                       values.showPassword === "currentPassword" ? false : true
                     }
                   />
+                  {touched.confirm_password && errors.confirm_password && (
+                    <Text
+                      style={{
+                        fontSize: 12,
+                        color: "#FF0D10",
+                        marginLeft: "5%",
+                        marginBottom: 15,
+                      }}
+                    >
+                      {errors.confirm_password}
+                    </Text>
+                  )}
+                  <View className="split-btn-wrap">
+                    <Button
+                      //color="#3740FE"
+                      title="Next"
+                      disabled={
+                        values.name == "" &&
+                        values.email == "" &&
+                        values.password == "" &&
+                        values.confirm_password == ""
+                      }
+                      //disabled={!isValid}
+                      //onPress={() => navigation.navigate("OtpScreen")}
+                      onPress={(e) => handlingStep(false, true, false, false)}
+                    />
+                  </View>
+                </>
+              ) : (
+                <></>
+              )}
 
+              {step2 == true ? (
+                <>
+                  <Text>Step2</Text>
                   <View className="split-btn-wrap">
                     <Button
                       //color="#3740FE"
                       title="Back"
                       //disabled={!isValid}
                       //onPress={() => navigation.navigate("OtpScreen")}
-                      onPress={(e) => handlingStep(1, 0, 0, 0)}
+                      onPress={(e) => handlingStep(true, false, false, false)}
+                    />
+                    <Button
+                      //color="#3740FE"
+                      title="Next"
+                      //disabled={!isValid}
+                      //onPress={() => navigation.navigate("OtpScreen")}
+                      onPress={(e) => handlingStep(false, false, true, false)}
+                    />
+                  </View>
+                </>
+              ) : (
+                <></>
+              )}
+
+              {step3 == true ? (
+                <>
+                  <Text>Step3</Text>
+                  <View className="split-btn-wrap">
+                    <Button
+                      //color="#3740FE"
+                      title="Back"
+                      //disabled={!isValid}
+                      //onPress={() => navigation.navigate("OtpScreen")}
+                      onPress={(e) => handlingStep(false, true, false, false)}
+                    />
+                    <Button
+                      //color="#3740FE"
+                      title="Next"
+                      //disabled={!isValid}
+                      //onPress={() => navigation.navigate("OtpScreen")}
+                      onPress={(e) => handlingStep(false, false, false, true)}
+                    />
+                  </View>
+                </>
+              ) : (
+                <></>
+              )}
+
+              {step4 == true ? (
+                <>
+                  <Text>Step4</Text>
+                  <View className="split-btn-wrap">
+                    <Button
+                      //color="#3740FE"
+                      title="Back"
+                      //disabled={!isValid}
+                      //onPress={() => navigation.navigate("OtpScreen")}
+                      onPress={(e) => handlingStep(false, false, true, false)}
+                    />
+                    <Button
+                      //color="#3740FE"
+                      title="Next"
+                      //disabled={!isValid}
+                      //onPress={() => navigation.navigate("OtpScreen")}
+                      onPress={(e) => handlingStep(false, false, false, true)}
                     />
                   </View>
 
@@ -412,18 +507,18 @@ export const RegisterScreen = ({ navigation }) => {
                 <></>
               )}
 
-              <Text style={{ ...Fonts.Grey14Bold, textAlign: "center" }}>
+              {/* <Text style={{ ...Fonts.Grey14Bold, textAlign: "center" }}>
                 {t("or")}
-              </Text>
-              <View
+              </Text> 
+               <View
                 style={{
                   alignItems: "center",
                   justifyContent: "center",
                   marginVertical: 15,
                   flexDirection: "row",
                 }}
-              >
-                {/* <TouchableOpacity
+              > 
+                <TouchableOpacity
               activeOpacity={0.7}
               style={{ marginHorizontal: 10 }}
             >
@@ -452,12 +547,12 @@ export const RegisterScreen = ({ navigation }) => {
                 alt="goggle"
                 source={require("../../../assets/icons/google.png")}
               />
-            </TouchableOpacity> */}
-              </View>
+            </TouchableOpacity> 
+              </View> */}
             </View>
           )}
         </Formik>
-        <View
+        {/* <View
           style={{
             alignItems: "center",
             flexDirection: "row",
@@ -472,7 +567,7 @@ export const RegisterScreen = ({ navigation }) => {
           >
             <Text style={{ ...Fonts.Primary16Medium }}> {t("sign_in")}</Text>
           </TouchableOpacity>
-        </View>
+        </View> */}
       </ScrollView>
     </SafeAreaView>
   );
