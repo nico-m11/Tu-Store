@@ -55,7 +55,7 @@ export const Details = ({ navigation, route }) => {
                 }}
               >
                 <Text>
-                  Benvenuto
+                  {item.salesChannels.description}
                 </Text>
                 
               </View>
@@ -80,7 +80,6 @@ export const Details = ({ navigation, route }) => {
             >
 
               <Text>
-
                 Benvenuto
               </Text>
 
