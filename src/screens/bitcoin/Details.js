@@ -61,7 +61,7 @@ export const Details = ({ navigation, route }) => {
               </View>
               <View style={{ alignItems: "center" }}>
               <Image
-                    source={{ uri: item.image }}
+                    source={{ uri: item.partners.image }}
                     style={{
                       width: 40,
                       height: 40,
@@ -101,7 +101,7 @@ export const Details = ({ navigation, route }) => {
                   marginHorizontal: 10,
                 }}
               >
-                <Text style={{ ...Fonts.Black16Regular }}>{t("website")}</Text>
+                <Text style={{ ...Fonts.Black16Regular }}>{item.appDescription.map((el)=>el.description)}</Text>
                 <Link
                   href="#"
                   _text={{ ...Fonts.Primary16Medium }}

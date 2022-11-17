@@ -28,11 +28,11 @@ export const ComparaTu = ({ navigation }) => {
     /** fetch data GET COMPARA TU*/
   }
   const Data = () => {
-    fetch("https://be.control-room.app/api/offers?limit=10&sale_channel_id=0", {
+    fetch("https://api.tu-store.soluzionitop.cloud/api/offers?sale_channel_id=4", {
       method: "GET",
       headers: {
         Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlRVTzYiLCJpZCI6NiwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNjY3OTAwOTcxLCJleHAiOjE2NzA1NzkzNzF9.523N8oDpL_AufsFeSydhthNFrIls_0Q1ttA3LGHT8TQ",
+          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlRVTzYiLCJpZCI6MSwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNjY3OTIxNDY2LCJleHAiOjE2NzA1OTk4NjZ9.CSxPPECi4PvvpxzDF7ZfQnaoIRlvko1qB03ZMyHJp9I",
       },
     })
       .then((res) => {
@@ -85,7 +85,7 @@ export const ComparaTu = ({ navigation }) => {
                 >
                   <View style={{ alignItems: "center" }}>
                     <Image
-                      source={{ uri: element.image }}
+                      source={{ uri: element.partners.image }}
                       style={{ width: 50, height: 15, marginRight: 15 }}
                     />
                   </View>
@@ -122,8 +122,7 @@ export const ComparaTu = ({ navigation }) => {
                         <Text
                           style={{ ...Fonts.Red14Medium, textAlign: "right" }}
                         >
-                          CashBack
-                        </Text>
+                          {element.appCashback.map((el) => " cash " + el.cashback + "€")}                        </Text>
                       </View>
                     </View>
                   </View>
