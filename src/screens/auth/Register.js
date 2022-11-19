@@ -17,10 +17,11 @@ import {
   FlatList,
   BackHandler,
 } from "react-native";
-
+import { DateTimePickerAndroid } from "@react-native-community/datetimepicker";
 import Checkbox from "expo-checkbox";
 import RNPickerSelect from "react-native-picker-select";
 import DatePicker from "react-native-datepicker";
+import DateTimePicker from "@react-native-community/datetimepicker";
 import { Ionicons, Feather } from "@expo/vector-icons";
 import { Fonts } from "../../themes/fonts";
 import ConstantStyle from "../../themes/styles";
@@ -34,6 +35,7 @@ import * as yup from "yup";
 export const RegisterScreen = ({ navigation }) => {
   const { height, width } = Dimensions.get("window");
   const { t, i18n } = useTranslation();
+
   // show and hide multiple input box
   const [values, setValues] = useState({
     password: "",
@@ -68,6 +70,13 @@ export const RegisterScreen = ({ navigation }) => {
     } else if (step4 === true) {
       console.log("Step4");
     }
+  };
+
+  const [date, setDate] = useState(new Date());
+
+  const onChange = (event, selectedDate) => {
+    const currentDate = selectedDate;
+    setDate(currentDate);
   };
 
   return (
@@ -810,60 +819,15 @@ export const RegisterScreen = ({ navigation }) => {
                     {t("Birth Date")}
                   </Text>
 
-                  <DatePicker
-                    placeholder={t("Birth date")}
-                    containerStyle={{
-                      marginTop: 8,
-                      marginBottom: -10,
-                      alignItems: "center",
-                      justifyContent: "center",
-                      textAlign: "center",
-                    }}
-                    inputContainerStyle={{
-                      borderBottomWidth: 0,
-                      ...ConstantStyle.shadow,
-                      backgroundColor: Colors.white,
-                      borderRadius: 10,
-                      paddingHorizontal: 15,
-                      width: width - 30,
-                      height: 45,
-                    }}
-                    inputStyle={{ ...Fonts.Black14Medium }}
-                    //date={null}
-                    mode="date"
-                    value={values.birth_date}
-                    onChangeText={handleChange("birth_date")}
-                    onBlur={() => setFieldTouched("birth_date")}
-                    format="YYYY-MM-DD"
-                    minDate="2016-05-01"
-                    maxDate="2016-06-01"
-                    confirmBtnText="Confirm"
-                    cancelBtnText="Cancel"
-                    customStyles={{
-                      dateIcon: {
-                        position: "absolute",
-                        left: 0,
-                        top: 4,
-                        marginLeft: 0,
-                      },
-                      dateInput: {
-                        marginLeft: 36,
-                      },
-                      // ... You can check the source to find the other keys.
-                    }}
+                  <DateTimePicker
+                    testID="dateTimePicker"
+                    value={date}
+                    //mode={mode}
+                    is24Hour={true}
+                    onChange={onChange}
                   />
-                  {touched.birth_date && errors.birth_date && (
-                    <Text
-                      style={{
-                        fontSize: 12,
-                        color: "#FF0D10",
-                        marginLeft: "5%",
-                        marginBottom: 15,
-                      }}
-                    >
-                      {errors.birth_date}
-                    </Text>
-                  )}
+                  <Text>selected: {date.toLocaleString()}</Text>
+
 
                   <Text style={{ ...Fonts.Grey14Bold, marginHorizontal: 15 }}>
                     {t("Birth Place")}
