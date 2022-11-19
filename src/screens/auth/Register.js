@@ -20,7 +20,6 @@ import {
 import { DateTimePickerAndroid } from "@react-native-community/datetimepicker";
 import Checkbox from "expo-checkbox";
 import RNPickerSelect from "react-native-picker-select";
-import DatePicker from "react-native-datepicker";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { Ionicons, Feather } from "@expo/vector-icons";
 import { Fonts } from "../../themes/fonts";
@@ -77,6 +76,20 @@ export const RegisterScreen = ({ navigation }) => {
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate;
     setDate(currentDate);
+  };
+
+
+  const showMode = (currentMode) => {
+    if (Platform.OS === 'android') {
+      setShow(false);
+      // for iOS, add a button that closes the picker
+    }
+    setMode(currentMode);
+  };
+
+
+  const showDatepicker = () => {
+    showMode('date');
   };
 
   return (
