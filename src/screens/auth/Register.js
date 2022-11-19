@@ -17,7 +17,6 @@ import {
   FlatList,
   BackHandler,
 } from "react-native";
-import { DateTimePickerAndroid } from "@react-native-community/datetimepicker";
 import Checkbox from "expo-checkbox";
 import RNPickerSelect from "react-native-picker-select";
 import DateTimePicker from "@react-native-community/datetimepicker";
@@ -837,10 +836,9 @@ export const RegisterScreen = ({ navigation }) => {
                   <Text style={{ ...Fonts.Grey14Bold, marginHorizontal: 15 }}>
                     {t("Birth Date")}
                   </Text>
-
-                  <Button onPress={showDatepicker} title="Show date picker!" />
      
                   <DateTimePicker
+                    title='select Birth Date'
                     testID="dateTimePicker"
                     value={date}
                     mode={mode}
