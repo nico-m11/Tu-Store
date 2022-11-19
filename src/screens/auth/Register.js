@@ -23,7 +23,7 @@ import {
 } from "react-native";
 import Checkbox from "expo-checkbox";
 import RNPickerSelect from "react-native-picker-select";
-import DatePicker from 'react-native-datepicker';
+import DatePicker from "react-native-datepicker";
 import DateTimePicker from "@react-native-community/datetimepicker";
 
 import { Ionicons, Feather } from "@expo/vector-icons";
@@ -39,7 +39,6 @@ import * as yup from "yup";
 export const RegisterScreen = ({ navigation }) => {
   const { height, width } = Dimensions.get("window");
   const { t, i18n } = useTranslation();
-
 
   // show and hide multiple input box
   const [values, setValues] = useState({
@@ -60,7 +59,6 @@ export const RegisterScreen = ({ navigation }) => {
   const [isCheckedF, setCheckedF] = useState(false);
   const [isCheckedM, setCheckedM] = useState(false);
 
-
   const handlingStep = (step1, step2, step3, step4) => {
     setStep1(step1);
     setStep2(step2);
@@ -78,17 +76,15 @@ export const RegisterScreen = ({ navigation }) => {
     }
   };
 
-
   const [date, setDate] = useState("");
   const [show, setShow] = useState(false);
 
   const onDateChange = (event, selectedDate) => {
-      setShow(false);
-      let newDate = new Date(selectedDate);
-      newDate = newDate.toISOString().substring(0, 10);
-      setDate(newDate);
-  }
-
+    setShow(false);
+    let newDate = new Date(selectedDate);
+    newDate = newDate.toISOString().substring(0, 10);
+    setDate(newDate);
+  };
 
   return (
     <SafeAreaView style={{ ...ConstantStyle.container }}>
@@ -205,6 +201,9 @@ export const RegisterScreen = ({ navigation }) => {
             >
               {step1 == true ? (
                 <>
+                  <Text style={{ textAlign: "center", fontSize: 20 }}>
+                    Step1
+                  </Text>
                   <Text style={{ ...Fonts.Grey14Bold, marginHorizontal: 15 }}>
                     {t("Name")}
                   </Text>
@@ -543,7 +542,9 @@ export const RegisterScreen = ({ navigation }) => {
               {step2 == true ? (
                 <>
                   <View>
-                    <Text>Address</Text>
+                    <Text style={{ textAlign: "center", fontSize: 20 }}>
+                      Address
+                    </Text>
                   </View>
 
                   <Text style={{ ...Fonts.Grey14Bold, marginHorizontal: 15 }}>
@@ -811,40 +812,109 @@ export const RegisterScreen = ({ navigation }) => {
 
               {step3 == true ? (
                 <>
-                  <Text>Step3</Text>
+                  <Text style={{ textAlign: "center", fontSize: 20 }}>
+                    Step3
+                  </Text>
 
-                  <Text style={{ ...Fonts.Grey14Bold, marginHorizontal: 15 }}>
+                  <Text
+                    style={{
+                      ...Fonts.Grey14Bold,
+                      marginHorizontal: 15,
+                      marginTop: 10,
+                      marginBottom: 10,
+                    }}
+                  >
                     {t("Customer type")}
                   </Text>
-                  <RNPickerSelect
-                    value={values.customer_type}
-                    onChangeValue={handleChange("customer_type")}
-                    items={[
-                      { label: "Customer", value: "customer" },
-                      { label: "Freelance", value: "freelance" },
-                      { label: "Company", value: "company" },
-                    ]}
-                  />
-
-
-                  <Text style={{ ...Fonts.Grey14Bold, marginHorizontal: 15 }}>
+                  <View
+                    style={{
+                      backgroundColor: Colors.white,
+                      borderRadius: 10,
+                      paddingHorizontal: 15,
+                      //width: 10,
+                      height: 25,
+                      ...ConstantStyle.shadow,
+                      backgroundColor: Colors.white,
+                      borderRadius: 10,
+                      paddingHorizontal: 15,
+                      width: "95%",
+                      marginLeft: 15,
+                      height: 45,
+                    }}
+                  >
+                    <RNPickerSelect
+                      value={values.customer_type}
+                      onChangeValue={handleChange("customer_type")}
+                      items={[
+                        { label: "Customer", value: "customer" },
+                        { label: "Freelance", value: "freelance" },
+                        { label: "Company", value: "company" },
+                      ]}
+                    />
+                  </View>
+                  <Text
+                    style={{
+                      ...Fonts.Grey14Bold,
+                      marginHorizontal: 15,
+                      marginTop: 10,
+                      marginBottom: 10,
+                    }}
+                  >
                     {t("Birth Date")}
                   </Text>
-                  <Pressable onPress={() => { setShow(true) }} style={{width:'100%'}}>
-                    <View style={{
-                        flexDirection: 'row',
-                        width: '100%',
-                        borderRadius: 10, borderColor: '#e0e0e0', borderWidth: 1.5, paddingVertical: 12, paddingHorizontal:8
-                    }}>
-                        <Feather name="calendar" size={20} color={Colors.grey} style={{ marginRight: 16 }} />
-                        <Text style={{ color: date === ""? Colors.grey:Colors.black, fontSize: 14, fontFamily:'Roboto-Regular' }}>{date === ""? "Date of birth":date}</Text>
+                  <Pressable
+                    onPress={() => {
+                      setShow(true);
+                    }}
+                    style={{ width: "100%" }}
+                  >
+                    <View
+                      style={{
+                        flexDirection: "row",
+                        width: "95%",
+                        marginLeft: 15,
+                        // alignItems: "center",
+                        // justifyContent: "center",
+                        // textAlign: "center",
+                        borderRadius: 10,
+                        borderColor: "#e0e0e0",
+                        borderWidth: 1.5,
+                        paddingVertical: 12,
+                        paddingHorizontal: 10,
+                      }}
+                    >
+                      <Feather
+                        name="calendar"
+                        size={20}
+                        color={Colors.grey}
+                        style={{ marginRight: 15 }}
+                      />
+                      <Text
+                        style={{
+                          color: date === "" ? Colors.grey : Colors.black,
+                          fontSize: 14,
+                          fontFamily: "Roboto-Regular",
+                        }}
+                      >
+                        {date === "" ? "Date of birth" : date}
+                      </Text>
                     </View>
-                </Pressable>
-                {show && <DateTimePicker value={new Date()} onChange={onDateChange} />}
+                  </Pressable>
+                  {show && (
+                    <DateTimePicker
+                      style={{ marginRight: 30, marginTop: 5 }}
+                      value={new Date()}
+                      onChange={onDateChange}
+                    />
+                  )}
 
-
-
-                  <Text style={{ ...Fonts.Grey14Bold, marginHorizontal: 15 }}>
+                  <Text
+                    style={{
+                      ...Fonts.Grey14Bold,
+                      marginHorizontal: 15,
+                      marginTop: 10,
+                    }}
+                  >
                     {t("Birth Place")}
                   </Text>
                   <Input
@@ -862,7 +932,7 @@ export const RegisterScreen = ({ navigation }) => {
                       backgroundColor: Colors.white,
                       borderRadius: 10,
                       paddingHorizontal: 15,
-                      width: width - 30,
+                      width: "100%",
                       height: 45,
                     }}
                     inputStyle={{ ...Fonts.Black14Medium }}
@@ -884,40 +954,112 @@ export const RegisterScreen = ({ navigation }) => {
                     </Text>
                   )}
 
-                  <Text style={{ ...Fonts.Grey14Bold, marginHorizontal: 15 }}>
+                  <Text
+                    style={{
+                      ...Fonts.Grey14Bold,
+                      marginHorizontal: 15,
+                      marginTop: 10,
+                      marginBottom: 5,
+                    }}
+                  >
                     {t("Gender")}
                   </Text>
-
-                  <Checkbox
-                    //style={styles.checkbox}
-                    value={isCheckedM}
-                    onValueChange={setCheckedM}
-                    color={isCheckedM ? "#4630EB" : undefined}
-                  />
-                  <Text>M</Text>
-                  <Checkbox
-                    //style={styles.checkbox}
-                    value={isCheckedF}
-                    onValueChange={setCheckedF}
-                    color={isCheckedF ? "#4630EB" : undefined}
-                  />
-                  <Text>F</Text>
-
-                  <Text style={{ ...Fonts.Grey14Bold, marginHorizontal: 15 }}>
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      width: "90%",
+                      marginLeft: 15,
+                      alignItems: "center",
+                      justifyContent: "center",
+                      textAlign: "center",
+                      paddingVertical: 12,
+                      paddingHorizontal: 10,
+                    }}
+                  >
+                    <Checkbox
+                      style={{
+                        marginRight: 5,
+                        borderRadius: 10,
+                        borderColor: "#e0e0e0",
+                        borderBottomWidth: 0,
+                        ...ConstantStyle.shadow,
+                        backgroundColor: Colors.white,
+                        borderWidth: 1.5,
+                      }}
+                      value={isCheckedM}
+                      onValueChange={setCheckedM}
+                      color={isCheckedM ? "#4630EB" : undefined}
+                    />
+                    <Text style={{ marginRight: 5 }}>M</Text>
+                    <Checkbox
+                      style={{
+                        marginRight: 5,
+                        borderRadius: 10,
+                        borderColor: "#e0e0e0",
+                        borderBottomWidth: 0,
+                        ...ConstantStyle.shadow,
+                        backgroundColor: Colors.white,
+                        borderWidth: 1.5,
+                      }}
+                      value={isCheckedF}
+                      onValueChange={setCheckedF}
+                      color={isCheckedF ? "#4630EB" : undefined}
+                    />
+                    <Text style={{ marginLeft: 5 }}>F</Text>
+                  </View>
+                  <Text
+                    style={{
+                      ...Fonts.Grey14Bold,
+                      marginHorizontal: 15,
+                      marginBottom: 10,
+                      marginTop: 10,
+                    }}
+                  >
                     {t("Marital status")}
                   </Text>
-                  <RNPickerSelect
-                    value={values.marital_status}
-                    onChangeValue={handleChange("marital_status")}
-                    items={[
-                      { label: "Single", value: "single" },
-                      { label: "Divorziato", value: "divorziato" },
-                      { label: "Sposato", value: "sposato" },
-                      { label: "Vedovo", value: "Vedovo" },
-                    ]}
-                  />
-
-                  <Text style={{ ...Fonts.Grey14Bold, marginHorizontal: 15 }}>
+                  <View
+                    style={{
+                      backgroundColor: Colors.white,
+                      borderRadius: 10,
+                      paddingHorizontal: 15,
+                      //width: 10,
+                      height: 25,
+                      ...ConstantStyle.shadow,
+                      backgroundColor: Colors.white,
+                      borderRadius: 10,
+                      paddingHorizontal: 15,
+                      width: "95%",
+                      marginLeft: 15,
+                      height: 45,
+                    }}
+                  >
+                    <RNPickerSelect
+                      style={{
+                        flexDirection: "row",
+                        width: "90%",
+                        marginLeft: 15,
+                        alignItems: "center",
+                        justifyContent: "center",
+                        textAlign: "center",
+                      }}
+                      value={values.marital_status}
+                      onChangeValue={handleChange("marital_status")}
+                      items={[
+                        { label: "Single", value: "single" },
+                        { label: "Divorziato", value: "divorziato" },
+                        { label: "Sposato", value: "sposato" },
+                        { label: "Vedovo", value: "Vedovo" },
+                      ]}
+                    />
+                  </View>
+                  <Text
+                    style={{
+                      ...Fonts.Grey14Bold,
+                      marginHorizontal: 15,
+                      marginBottom: 10,
+                      marginTop: 10,
+                    }}
+                  >
                     {t("Fiscal Code")}
                   </Text>
                   <Input
@@ -980,27 +1122,47 @@ export const RegisterScreen = ({ navigation }) => {
 
               {step4 == true ? (
                 <>
-                  <Text>Step4</Text>
-
-                  <Text style={{ ...Fonts.Grey14Bold, marginHorizontal: 15 }}>
-                    {t("Educational Qualification")}
+                  <Text style={{ textAlign: "center", fontSize: 20 }}>
+                    Step4
                   </Text>
 
-                  <RNPickerSelect
-                    value={values.marital_status}
-                    onChangeValue={handleChange("marital_status")}
-                    items={[
-                      { label: "Scuola Media", value: "scuola_media" },
-                      { label: "Diplomato", value: "diplomato" },
-                      { label: "Laurea Triennale", value: "laurea_triennale" },
-                      {
-                        label: "Laurea Magistrale",
-                        value: "laurea_magistrale",
-                      },
-                    ]}
-                  />
-
-                  <Text style={{ ...Fonts.Grey14Bold, marginHorizontal: 15 }}>
+                  <Text style={{ ...Fonts.Grey14Bold, marginHorizontal: 15, marginTop:10, marginBottom:10 }}>
+                    {t("Educational Qualification")}
+                  </Text>
+                  <View
+                    style={{
+                      backgroundColor: Colors.white,
+                      borderRadius: 10,
+                      paddingHorizontal: 15,
+                      //width: 10,
+                      height: 25,
+                      ...ConstantStyle.shadow,
+                      backgroundColor: Colors.white,
+                      borderRadius: 10,
+                      paddingHorizontal: 15,
+                      width: "95%",
+                      marginLeft: 15,
+                      height: 45,
+                    }}
+                  >
+                    <RNPickerSelect
+                      value={values.marital_status}
+                      onChangeValue={handleChange("marital_status")}
+                      items={[
+                        { label: "Scuola Media", value: "scuola_media" },
+                        { label: "Diplomato", value: "diplomato" },
+                        {
+                          label: "Laurea Triennale",
+                          value: "laurea_triennale",
+                        },
+                        {
+                          label: "Laurea Magistrale",
+                          value: "laurea_magistrale",
+                        },
+                      ]}
+                    />
+                  </View>
+                  <Text style={{ ...Fonts.Grey14Bold, marginHorizontal: 15, marginTop:10 }}>
                     {t("Job")}
                   </Text>
                   <Input
@@ -1335,7 +1497,4 @@ export const RegisterScreen = ({ navigation }) => {
       </ScrollView>
     </SafeAreaView>
   );
-
-
-
 };
