@@ -5,7 +5,10 @@ import {
   View,
   ImageBackground,
   TouchableOpacity,
+  SectionList,
   Image,
+  Item,
+  StatusBar,
   Pressable,
   ScrollView,
   StyleSheet,
@@ -37,6 +40,7 @@ export const RegisterScreen = ({ navigation }) => {
   const { height, width } = Dimensions.get("window");
   const { t, i18n } = useTranslation();
 
+
   // show and hide multiple input box
   const [values, setValues] = useState({
     password: "",
@@ -56,6 +60,7 @@ export const RegisterScreen = ({ navigation }) => {
   const [isCheckedF, setCheckedF] = useState(false);
   const [isCheckedM, setCheckedM] = useState(false);
 
+
   const handlingStep = (step1, step2, step3, step4) => {
     setStep1(step1);
     setStep2(step2);
@@ -74,8 +79,6 @@ export const RegisterScreen = ({ navigation }) => {
   };
 
 
-
-  // const [mode, setMode] = useState('date');
   const [date, setDate] = useState("");
   const [show, setShow] = useState(false);
 
@@ -85,27 +88,6 @@ export const RegisterScreen = ({ navigation }) => {
       newDate = newDate.toISOString().substring(0, 10);
       setDate(newDate);
   }
-
-
-
-  // const showDatepicker = () => {
-  //   showMode('date');
-  // };
-
-  // const showMode = (currentMode) => {
-  //   if (Platform.OS === 'android') {
-  //     setShow(false);
-  //     // for iOS, add a button that closes the picker
-  //   }
-  //   setMode(currentMode);
-  // };
-
-
-  // const onChange = (event, selectedDate) => {
-  //   const currentDate = selectedDate;
-  //   setShow(false);
-  //   setDate(currentDate);
-  // };
 
 
   return (
@@ -844,6 +826,7 @@ export const RegisterScreen = ({ navigation }) => {
                     ]}
                   />
 
+
                   <Text style={{ ...Fonts.Grey14Bold, marginHorizontal: 15 }}>
                     {t("Birth Date")}
                   </Text>
@@ -858,17 +841,7 @@ export const RegisterScreen = ({ navigation }) => {
                     </View>
                 </Pressable>
                 {show && <DateTimePicker value={new Date()} onChange={onDateChange} />}
-{/* 
-                  {show === false  && (
-                  <DateTimePicker
-                    testID="dateTimePicker"
-                    value={date}
-                    mode={mode}
-                    is24Hour={true}
-                    onChange={onChange}
-                  />
-                  )}
-                  <Text>selected: {date.toLocaleString()}</Text> */}
+
 
 
                   <Text style={{ ...Fonts.Grey14Bold, marginHorizontal: 15 }}>
@@ -1362,4 +1335,7 @@ export const RegisterScreen = ({ navigation }) => {
       </ScrollView>
     </SafeAreaView>
   );
+
+
+
 };

@@ -20,7 +20,7 @@ import { useTranslation } from "react-i18next";
 
 export const Details = ({ navigation, route }) => {
   const item = route.params.item;
-  console.log(item)
+  console.log(item);
   const { t, i18n } = useTranslation();
   const width = Dimensions.get("window").width - 60;
   return (
@@ -39,75 +39,47 @@ export const Details = ({ navigation, route }) => {
             <View
               style={{
                 backgroundColor: Colors.white,
-                borderRadius: 10,
-                marginTop: 10,
+                // borderRadius: 10,
+                //marginTop: 10,
                 marginHorizontal: 15,
-                marginBottom: 25,
+                //marginBottom: 25,
                 paddingTop: 15,
-                ...ConstantStyle.shadow,
               }}
             >
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                  marginHorizontal: 10,
-                }}
-              >
-                <Text>
-                  {item.salesChannels.description}
-                </Text>
-                
-              </View>
               <View style={{ alignItems: "center" }}>
-              <Image
-                    source={{ uri: item.partners.image }}
-                    style={{
-                      width: 40,
-                      height: 40,
-                      marginRight: 15,
-                    }}
-                  />
+                <Image
+                  source={{ uri: item.partners.image }}
+                  style={{
+                    width: "100%",
+                    height: 200,
+                    marginTop: 0,
+                  }}
+                />
               </View>
-            </View>
-            <View
-              style={{
-                flexDirection: "row",
-                flexWrap: "wrap",
-                paddingHorizontal: 8,
-                marginBottom: 25,
-              }}
-            >
-
-              <Text>
-                Benvenuto
-              </Text>
-
-            </View>
-            <View
-              style={{
-                backgroundColor: Colors.white,
-                borderRadius: 10,
-                marginHorizontal: 15,
-                marginBottom: 25,
-                paddingVertical: 15,
-                ...ConstantStyle.shadow,
-              }}
-            >
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                  marginHorizontal: 10,
-                }}
-              >
-                <Text style={{ ...Fonts.Black16Regular }}>{item.appDescription.map((el)=>el.description)}</Text>
-                <Link
-                  href="#"
-                  _text={{ ...Fonts.Primary16Medium }}
+              <View>
+                <Text
+                  style={{
+                    ...Fonts.Black16Regular,
+                    textAlign: "center",
+                    marginTop: 20,
+                  }}
                 >
-                  https://#
-                </Link>
+                    {item.salesChannels.description}
+                </Text>
+
+                <Text
+                  style={{
+                    ...Fonts.Green14Medium,
+                    textAlign: "center",
+                    marginTop: 10,
+                  }}
+                >
+                  Price: {item.value !== "0" ? item.value + "€" : "0€"}
+                </Text>
+
+                <Text style={{ ...Fonts.Red14Medium, textAlign: "center", marginTop: 10 }}>
+                  Cashback: {item.appCashback.map((el) => " cash " + el.cashback !== 0 ? el.cashback + '' + "€" : 0 + '' + "€")}
+                </Text>
               </View>
             </View>
           </ScrollView>
