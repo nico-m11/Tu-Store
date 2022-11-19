@@ -38,11 +38,11 @@ export const ServiziScreen = ({ navigation }) => {
     /** fetch data GET tutela*/
   }
   const DataTutela = () => {
-    fetch("https://be.control-room.app/api/offers?sale_channel_id=3&limit=3", {
+    fetch("https://api.tu-store.soluzionitop.cloud/api/offers?sale_channel_id=3", {
       method: "GET",
       headers: {
         Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlRVTzYiLCJpZCI6NiwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNjY3OTAwOTcxLCJleHAiOjE2NzA1NzkzNzF9.523N8oDpL_AufsFeSydhthNFrIls_0Q1ttA3LGHT8TQ",
+          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlRVTzYiLCJpZCI6MSwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNjY3OTIxNDY2LCJleHAiOjE2NzA1OTk4NjZ9.CSxPPECi4PvvpxzDF7ZfQnaoIRlvko1qB03ZMyHJp9I",
       },
     })
       .then((res) => {
@@ -62,11 +62,11 @@ export const ServiziScreen = ({ navigation }) => {
   }
 
   const DataComparaTu = () => {
-    fetch("https://be.control-room.app/api/offers?limit=3&sale_channel_id=0", {
+    fetch("https://api.tu-store.soluzionitop.cloud/api/offers?sale_channel_id=4", {
       method: "GET",
       headers: {
         Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlRVTzYiLCJpZCI6NiwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNjY3OTAwOTcxLCJleHAiOjE2NzA1NzkzNzF9.523N8oDpL_AufsFeSydhthNFrIls_0Q1ttA3LGHT8TQ",
+          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlRVTzYiLCJpZCI6MSwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNjY3OTIxNDY2LCJleHAiOjE2NzA1OTk4NjZ9.CSxPPECi4PvvpxzDF7ZfQnaoIRlvko1qB03ZMyHJp9I",
       },
     })
       .then((res) => {
@@ -85,11 +85,11 @@ export const ServiziScreen = ({ navigation }) => {
     /** fetch data GET Credi Tu*/
   }
   const DataCrediTu = () => {
-    fetch("https://be.control-room.app/api/offers?sale_channel_id=1&limit=3", {
+    fetch("https://api.tu-store.soluzionitop.cloud/api/offers?sale_channel_id=1", {
       method: "GET",
       headers: {
         Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlRVTzYiLCJpZCI6NiwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNjY3OTAwOTcxLCJleHAiOjE2NzA1NzkzNzF9.523N8oDpL_AufsFeSydhthNFrIls_0Q1ttA3LGHT8TQ",
+          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlRVTzYiLCJpZCI6MSwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNjY3OTIxNDY2LCJleHAiOjE2NzA1OTk4NjZ9.CSxPPECi4PvvpxzDF7ZfQnaoIRlvko1qB03ZMyHJp9I",
       },
     })
       .then((res) => {
@@ -107,11 +107,11 @@ export const ServiziScreen = ({ navigation }) => {
     /** fetch data GET TU MARKET*/
   }
   const DataTuMarket = () => {
-    fetch("https://be.control-room.app/api/offers?sale_channel_id=2&limit=3", {
+    fetch("https://api.tu-store.soluzionitop.cloud/api/offers?sale_channel_id=2", {
       method: "GET",
       headers: {
         Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlRVTzYiLCJpZCI6NiwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNjY3OTAwOTcxLCJleHAiOjE2NzA1NzkzNzF9.523N8oDpL_AufsFeSydhthNFrIls_0Q1ttA3LGHT8TQ",
+          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlRVTzYiLCJpZCI6MSwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNjY3OTIxNDY2LCJleHAiOjE2NzA1OTk4NjZ9.CSxPPECi4PvvpxzDF7ZfQnaoIRlvko1qB03ZMyHJp9I",
       },
     })
       .then((res) => {
@@ -129,11 +129,11 @@ export const ServiziScreen = ({ navigation }) => {
     /** fetch data GET ASSICURA TU*/
   }
   const DataAssicuraTu = () => {
-    fetch("https://be.control-room.app/api/offers?limit=3&sale_channel_id=5", {
+    fetch("https://api.tu-store.soluzionitop.cloud/api/offers?sale_channel_id=5", {
       method: "GET",
       headers: {
         Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlRVTzYiLCJpZCI6NiwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNjY3OTAwOTcxLCJleHAiOjE2NzA1NzkzNzF9.523N8oDpL_AufsFeSydhthNFrIls_0Q1ttA3LGHT8TQ",
+          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlRVTzYiLCJpZCI6MSwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNjY3OTIxNDY2LCJleHAiOjE2NzA1OTk4NjZ9.CSxPPECi4PvvpxzDF7ZfQnaoIRlvko1qB03ZMyHJp9I",
       },
     })
       .then((res) => {
@@ -190,7 +190,7 @@ export const ServiziScreen = ({ navigation }) => {
                 >
                   <View style={{ alignItems: "center" }}>
                     <Image
-                      source={{ uri: element.image }}
+                      source={{ uri: element.partners.image }}
                       style={{ width: 80, height: 45, marginRight: 15 }}
                     />
                   </View>
@@ -233,7 +233,7 @@ export const ServiziScreen = ({ navigation }) => {
                             textAlign: "right",
                           }}
                         >
-                          CashBack
+                          {element.appCashback.map((el) => " cash " + el.cashback + "€")}
                         </Text>
                       </View>
                     </View>
@@ -262,7 +262,7 @@ export const ServiziScreen = ({ navigation }) => {
                 >
                   <View style={{ alignItems: "center" }}>
                     <Image
-                      source={{ uri: element.image }}
+                      source={{ uri: element.partners.image }}
                       style={{ width: 50, height: 15, marginRight: 15 }}
                     />
                   </View>
@@ -299,7 +299,7 @@ export const ServiziScreen = ({ navigation }) => {
                         <Text
                           style={{ ...Fonts.Red14Medium, textAlign: "right" }}
                         >
-                          CashBack
+                          {element.appCashback.map((el) => " cash " + el.cashback + "€")}
                         </Text>
                       </View>
                     </View>
@@ -327,7 +327,7 @@ export const ServiziScreen = ({ navigation }) => {
                 >
                   <View style={{ alignItems: "center" }}>
                     <Image
-                      source={{ uri: element.image }}
+                      source={{ uri: element.partners.image }}
                       style={{ width: 50, height: 55, marginRight: 15 }}
                     />
                   </View>
@@ -364,7 +364,7 @@ export const ServiziScreen = ({ navigation }) => {
                         <Text
                           style={{ ...Fonts.Red14Medium, textAlign: "right" }}
                         >
-                          CashBack
+                          {element.appCashback.map((el) => " cash " + el.cashback + "€")}
                         </Text>
                       </View>
                     </View>
@@ -373,8 +373,8 @@ export const ServiziScreen = ({ navigation }) => {
               </>
             ))}
           </View>
-           {/* TuMarket */}
-           <View>
+          {/* TuMarket */}
+          <View>
             {listDataTuMarket.map((element, index) => (
               <>
                 <TouchableOpacity
@@ -394,7 +394,7 @@ export const ServiziScreen = ({ navigation }) => {
                 >
                   <View style={{ alignItems: "center" }}>
                     <Image
-                      source={{ uri: element.image }}
+                      source={{ uri: element.partners.image }}
                       style={{ width: 80, height: 45, marginRight: 15 }}
                     />
                   </View>
@@ -437,7 +437,7 @@ export const ServiziScreen = ({ navigation }) => {
                             textAlign: "right",
                           }}
                         >
-                          CashBack
+                          {element.appCashback.map((el) => " cash " + el.cashback + "€")}
                         </Text>
                       </View>
                     </View>
@@ -446,8 +446,8 @@ export const ServiziScreen = ({ navigation }) => {
               </>
             ))}
           </View>
-                     {/* AssicuraTu */}
-                     <View>
+          {/* AssicuraTu */}
+          <View>
             {listDataAssicuraTu.map((element, index) => (
               <>
                 <TouchableOpacity
@@ -467,7 +467,7 @@ export const ServiziScreen = ({ navigation }) => {
                 >
                   <View style={{ alignItems: "center" }}>
                     <Image
-                      source={{ uri: element.image }}
+                      source={{ uri: element.partners.image }}
                       style={{ width: 45, height: 55, marginRight: 15 }}
                     />
                   </View>
@@ -510,7 +510,7 @@ export const ServiziScreen = ({ navigation }) => {
                             textAlign: "right",
                           }}
                         >
-                          CashBack
+                          {element.appCashback.map((el) => " cash " + el.cashback + "€")}
                         </Text>
                       </View>
                     </View>

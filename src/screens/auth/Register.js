@@ -6,6 +6,7 @@ import {
   ImageBackground,
   TouchableOpacity,
   Image,
+  Pressable,
   ScrollView,
   StyleSheet,
   I18nManager,
@@ -19,8 +20,8 @@ import {
 } from "react-native";
 import Checkbox from "expo-checkbox";
 import RNPickerSelect from "react-native-picker-select";
-import DateTimePicker from "@react-native-community/datetimepicker";
 import DatePicker from 'react-native-datepicker';
+import DateTimePicker from "@react-native-community/datetimepicker";
 
 import { Ionicons, Feather } from "@expo/vector-icons";
 import { Fonts } from "../../themes/fonts";
@@ -74,9 +75,17 @@ export const RegisterScreen = ({ navigation }) => {
 
 
 
-  const [date, setDate] = useState(new Date());
   // const [mode, setMode] = useState('date');
-  // const [show, setShow] = useState(false);
+  const [date, setDate] = useState("");
+  const [show, setShow] = useState(false);
+
+  const onDateChange = (event, selectedDate) => {
+      setShow(false);
+      let newDate = new Date(selectedDate);
+      newDate = newDate.toISOString().substring(0, 10);
+      setDate(newDate);
+  }
+
 
 
   // const showDatepicker = () => {
@@ -838,32 +847,17 @@ export const RegisterScreen = ({ navigation }) => {
                   <Text style={{ ...Fonts.Grey14Bold, marginHorizontal: 15 }}>
                     {t("Birth Date")}
                   </Text>
-                  <DatePicker
-          //style={styles.datePickerStyle}
-          date={date} //initial date from state
-          mode="date" //The enum of date, datetime and time
-          placeholder="select date"
-          format="DD-MM-YYYY"
-          minDate="01-01-2016"
-          maxDate="01-01-2019"
-          confirmBtnText="Confirm"
-          cancelBtnText="Cancel"
-          customStyles={{
-            dateIcon: {
-              //display: 'none',
-              position: 'absolute',
-              left: 0,
-              top: 4,
-              marginLeft: 0,
-            },
-            dateInput: {
-              marginLeft: 36,
-            },
-          }}
-          onDateChange={(date) => {
-            setDate(date);
-          }}
-        />
+                  <Pressable onPress={() => { setShow(true) }} style={{width:'100%'}}>
+                    <View style={{
+                        flexDirection: 'row',
+                        width: '100%',
+                        borderRadius: 10, borderColor: '#e0e0e0', borderWidth: 1.5, paddingVertical: 12, paddingHorizontal:8
+                    }}>
+                        <Feather name="calendar" size={20} color={Colors.grey} style={{ marginRight: 16 }} />
+                        <Text style={{ color: date === ""? Colors.grey:Colors.black, fontSize: 14, fontFamily:'Roboto-Regular' }}>{date === ""? "Date of birth":date}</Text>
+                    </View>
+                </Pressable>
+                {show && <DateTimePicker value={new Date()} onChange={onDateChange} />}
 {/* 
                   {show === false  && (
                   <DateTimePicker

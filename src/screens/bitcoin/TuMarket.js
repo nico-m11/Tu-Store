@@ -86,7 +86,7 @@ export const TuMarket = ({ navigation }) => {
                   <View style={{ alignItems: "center" }}>
                     <Image
                       source={{ uri: element.partners.image }}
-                      style={{ width: 85, height: 50, marginRight: 15 }}
+                      style={{ width: 45, height: 30, marginRight: 15 }}
                     />
                   </View>
                   <View style={{ flex: 1 }}>
