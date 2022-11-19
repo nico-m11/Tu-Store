@@ -20,7 +20,7 @@ import {
 import Checkbox from "expo-checkbox";
 import RNPickerSelect from "react-native-picker-select";
 import DateTimePicker from "@react-native-community/datetimepicker";
-import DatePicker from 'react-native-datepicker'
+import DatePicker from 'react-native-datepicker';
 
 import { Ionicons, Feather } from "@expo/vector-icons";
 import { Fonts } from "../../themes/fonts";
@@ -75,28 +75,28 @@ export const RegisterScreen = ({ navigation }) => {
 
 
   const [date, setDate] = useState(new Date());
-  const [mode, setMode] = useState('date');
-  const [show, setShow] = useState(false);
+  // const [mode, setMode] = useState('date');
+  // const [show, setShow] = useState(false);
 
 
-  const showDatepicker = () => {
-    showMode('date');
-  };
+  // const showDatepicker = () => {
+  //   showMode('date');
+  // };
 
-  const showMode = (currentMode) => {
-    if (Platform.OS === 'android') {
-      setShow(false);
-      // for iOS, add a button that closes the picker
-    }
-    setMode(currentMode);
-  };
+  // const showMode = (currentMode) => {
+  //   if (Platform.OS === 'android') {
+  //     setShow(false);
+  //     // for iOS, add a button that closes the picker
+  //   }
+  //   setMode(currentMode);
+  // };
 
 
-  const onChange = (event, selectedDate) => {
-    const currentDate = selectedDate;
-    setShow(false);
-    setDate(currentDate);
-  };
+  // const onChange = (event, selectedDate) => {
+  //   const currentDate = selectedDate;
+  //   setShow(false);
+  //   setDate(currentDate);
+  // };
 
 
   return (
@@ -838,7 +838,33 @@ export const RegisterScreen = ({ navigation }) => {
                   <Text style={{ ...Fonts.Grey14Bold, marginHorizontal: 15 }}>
                     {t("Birth Date")}
                   </Text>
-
+                  <DatePicker
+          //style={styles.datePickerStyle}
+          date={date} //initial date from state
+          mode="date" //The enum of date, datetime and time
+          placeholder="select date"
+          format="DD-MM-YYYY"
+          minDate="01-01-2016"
+          maxDate="01-01-2019"
+          confirmBtnText="Confirm"
+          cancelBtnText="Cancel"
+          customStyles={{
+            dateIcon: {
+              //display: 'none',
+              position: 'absolute',
+              left: 0,
+              top: 4,
+              marginLeft: 0,
+            },
+            dateInput: {
+              marginLeft: 36,
+            },
+          }}
+          onDateChange={(date) => {
+            setDate(date);
+          }}
+        />
+{/* 
                   {show === false  && (
                   <DateTimePicker
                     testID="dateTimePicker"
@@ -848,7 +874,8 @@ export const RegisterScreen = ({ navigation }) => {
                     onChange={onChange}
                   />
                   )}
-                  <Text>selected: {date.toLocaleString()}</Text>
+                  <Text>selected: {date.toLocaleString()}</Text> */}
+
 
                   <Text style={{ ...Fonts.Grey14Bold, marginHorizontal: 15 }}>
                     {t("Birth Place")}
