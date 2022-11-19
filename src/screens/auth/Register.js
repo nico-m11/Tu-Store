@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, Component } from "react";
 import {
   SafeAreaView,
   Text,
@@ -20,6 +20,8 @@ import {
 import Checkbox from "expo-checkbox";
 import RNPickerSelect from "react-native-picker-select";
 import DateTimePicker from "@react-native-community/datetimepicker";
+import DatePicker from 'react-native-datepicker'
+
 import { Ionicons, Feather } from "@expo/vector-icons";
 import { Fonts } from "../../themes/fonts";
 import ConstantStyle from "../../themes/styles";
@@ -836,17 +838,17 @@ export const RegisterScreen = ({ navigation }) => {
                   <Text style={{ ...Fonts.Grey14Bold, marginHorizontal: 15 }}>
                     {t("Birth Date")}
                   </Text>
-     
+
+                  {show === false  && (
                   <DateTimePicker
-                    title='select Birth Date'
                     testID="dateTimePicker"
                     value={date}
                     mode={mode}
                     is24Hour={true}
                     onChange={onChange}
                   />
+                  )}
                   <Text>selected: {date.toLocaleString()}</Text>
-
 
                   <Text style={{ ...Fonts.Grey14Bold, marginHorizontal: 15 }}>
                     {t("Birth Place")}
