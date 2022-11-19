@@ -71,11 +71,24 @@ export const RegisterScreen = ({ navigation }) => {
     }
   };
 
-  
+
 
   const [date, setDate] = useState(new Date());
   const [mode, setMode] = useState('date');
   const [show, setShow] = useState(false);
+
+
+  const showDatepicker = () => {
+    showMode('date');
+  };
+
+  const showMode = (currentMode) => {
+    if (Platform.OS === 'android') {
+      setShow(false);
+      // for iOS, add a button that closes the picker
+    }
+    setMode(currentMode);
+  };
 
 
   const onChange = (event, selectedDate) => {
@@ -825,10 +838,12 @@ export const RegisterScreen = ({ navigation }) => {
                     {t("Birth Date")}
                   </Text>
 
+                  <Button onPress={showDatepicker} title="Show date picker!" />
+     
                   <DateTimePicker
                     testID="dateTimePicker"
                     value={date}
-                    //mode={mode}
+                    mode={mode}
                     is24Hour={true}
                     onChange={onChange}
                   />
