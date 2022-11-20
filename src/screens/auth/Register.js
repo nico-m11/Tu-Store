@@ -153,12 +153,27 @@ export const RegisterScreen = ({ navigation }) => {
         <Formik
           initialValues={{
             name: "",
-            surname: "",
+            lastName: "",
             email: "",
+            mobile: "",
+            phone: "",
             password: "",
             confirm_password: "",
+            country: "",
+            region: "",
+            province: "",
+            city: "",
+            zip_code: "",
+            address: "",
+            date: "",
+            birth_place: "",
             fiscal_code: "",
-            company_name: "",
+            job: "",
+            salary: "",
+            skype: "",
+            linkedin: "",
+            twitter: "",
+            facebook: "",
           }}
           onSubmit={(values) => Alert.alert(JSON.stringify(values))}
           validationSchema={yup.object().shape({
@@ -519,18 +534,19 @@ export const RegisterScreen = ({ navigation }) => {
                       {errors.confirm_password}
                     </Text>
                   )}
-                  <View className="split-btn-wrap">
-                    <Button
-                      color="#3740FE"
-                      title="Next"
-                      // disabled={
-                      //   values.name == "" &&
-                      //   values.email == "" &&
-                      //   values.password == "" &&
-                      //   values.confirm_password == ""
-                      // }
-                      //disabled={!isValid}
-                      //onPress={() => navigation.navigate("OtpScreen")}
+                  <View style={{ marginHorizontal: 15, marginVertical: 20 }}>
+                    <MainButton
+                      name={t("Next")}
+                      style={{
+                        shadowColor: "#000",
+                        shadowOffset: {
+                          width: 10,
+                          height: 5,
+                        },
+                        shadowOpacity: 0.34,
+                        shadowRadius: 6.27,
+                        elevation: 10,
+                      }}
                       onPress={(e) => handlingStep(false, true, false, false)}
                     />
                   </View>
@@ -671,7 +687,7 @@ export const RegisterScreen = ({ navigation }) => {
                     {t("City Address")}
                   </Text>
                   <Input
-                    placeholder={t("City Address")}
+                    placeholder={t("City")}
                     containerStyle={{
                       marginTop: 8,
                       marginBottom: -10,
@@ -690,11 +706,11 @@ export const RegisterScreen = ({ navigation }) => {
                     }}
                     inputStyle={{ ...Fonts.Black14Medium }}
                     secureTextEntry={false}
-                    value={values.city_address}
-                    onChangeText={handleChange("city_address")}
-                    onBlur={() => setFieldTouched("city_address")}
+                    value={values.city}
+                    onChangeText={handleChange("city")}
+                    onBlur={() => setFieldTouched("city")}
                   />
-                  {touched.city_address && errors.city_address && (
+                  {touched.city && errors.city && (
                     <Text
                       style={{
                         fontSize: 12,
@@ -703,7 +719,7 @@ export const RegisterScreen = ({ navigation }) => {
                         marginBottom: 15,
                       }}
                     >
-                      {errors.city_address}
+                      {errors.city}
                     </Text>
                   )}
 
@@ -750,10 +766,10 @@ export const RegisterScreen = ({ navigation }) => {
                   )}
 
                   <Text style={{ ...Fonts.Grey14Bold, marginHorizontal: 15 }}>
-                    {t("Region")}
+                    {t("Address")}
                   </Text>
                   <Input
-                    placeholder={t("Region")}
+                    placeholder={t("Address")}
                     containerStyle={{
                       marginTop: 8,
                       marginBottom: -10,
@@ -772,11 +788,11 @@ export const RegisterScreen = ({ navigation }) => {
                     }}
                     inputStyle={{ ...Fonts.Black14Medium }}
                     secureTextEntry={false}
-                    value={values.region}
-                    onChangeText={handleChange("region")}
-                    onBlur={() => setFieldTouched("region")}
+                    value={values.address}
+                    onChangeText={handleChange("address")}
+                    onBlur={() => setFieldTouched("address")}
                   />
-                  {touched.region && errors.region && (
+                  {touched.address && errors.address && (
                     <Text
                       style={{
                         fontSize: 12,
@@ -785,24 +801,31 @@ export const RegisterScreen = ({ navigation }) => {
                         marginBottom: 15,
                       }}
                     >
-                      {errors.region}
+                      {errors.address}
                     </Text>
                   )}
 
-                  <View className="split-btn-wrap">
+                  <View style={{ marginHorizontal: 15, marginVertical: 20 }}>
+                    <MainButton
+                      name={t("Next")}
+                      style={{
+                        shadowColor: "#000",
+                        shadowOffset: {
+                          width: 10,
+                          height: 5,
+                        },
+                        shadowOpacity: 0.34,
+                        shadowRadius: 6.27,
+                        elevation: 10,
+                      }}
+                      onPress={(e) => handlingStep(false, false, true, false)}
+                    />
                     <Button
                       color="#3740FE"
                       title="Back"
                       //disabled={!isValid}
                       //onPress={() => navigation.navigate("OtpScreen")}
                       onPress={(e) => handlingStep(true, false, false, false)}
-                    />
-                    <Button
-                      //color="#3740FE"
-                      title="Next"
-                      //disabled={!isValid}
-                      //onPress={() => navigation.navigate("OtpScreen")}
-                      onPress={(e) => handlingStep(false, false, true, false)}
                     />
                   </View>
                 </>
@@ -879,12 +902,12 @@ export const RegisterScreen = ({ navigation }) => {
                         borderRadius: 10,
                         borderColor: "#e0e0e0",
                         borderBottomWidth: 0,
-                      ...ConstantStyle.shadow,
-                      backgroundColor: Colors.white,
-                      borderRadius: 10,
-                      paddingHorizontal: 15,
-                      width: "95%",
-                      height: 45,
+                        ...ConstantStyle.shadow,
+                        backgroundColor: Colors.white,
+                        borderRadius: 10,
+                        paddingHorizontal: 15,
+                        width: "95%",
+                        height: 45,
                         borderWidth: 1.5,
                         paddingVertical: 12,
                         paddingHorizontal: 10,
@@ -1106,20 +1129,27 @@ export const RegisterScreen = ({ navigation }) => {
                     </Text>
                   )}
 
-                  <View className="split-btn-wrap">
+                  <View style={{ marginHorizontal: 15, marginVertical: 20 }}>
+                    <MainButton
+                      name={t("Next")}
+                      style={{
+                        shadowColor: "#000",
+                        shadowOffset: {
+                          width: 10,
+                          height: 5,
+                        },
+                        shadowOpacity: 0.34,
+                        shadowRadius: 6.27,
+                        elevation: 10,
+                      }}
+                      onPress={(e) => handlingStep(false, false, false, true)}
+                    />
                     <Button
                       color="#3740FE"
                       title="Back"
                       //disabled={!isValid}
                       //onPress={() => navigation.navigate("OtpScreen")}
                       onPress={(e) => handlingStep(false, true, false, false)}
-                    />
-                    <Button
-                      color="#3740FE"
-                      title="Next"
-                      //disabled={!isValid}
-                      //onPress={() => navigation.navigate("OtpScreen")}
-                      onPress={(e) => handlingStep(false, false, false, true)}
                     />
                   </View>
                 </>
@@ -1133,7 +1163,14 @@ export const RegisterScreen = ({ navigation }) => {
                     Step4
                   </Text>
 
-                  <Text style={{ ...Fonts.Grey14Bold, marginHorizontal: 15, marginTop:10, marginBottom:10 }}>
+                  <Text
+                    style={{
+                      ...Fonts.Grey14Bold,
+                      marginHorizontal: 15,
+                      marginTop: 10,
+                      marginBottom: 10,
+                    }}
+                  >
                     {t("Educational Qualification")}
                   </Text>
                   <View
@@ -1169,7 +1206,13 @@ export const RegisterScreen = ({ navigation }) => {
                       ]}
                     />
                   </View>
-                  <Text style={{ ...Fonts.Grey14Bold, marginHorizontal: 15, marginTop:10 }}>
+                  <Text
+                    style={{
+                      ...Fonts.Grey14Bold,
+                      marginHorizontal: 15,
+                      marginTop: 10,
+                    }}
+                  >
                     {t("Job")}
                   </Text>
                   <Input
@@ -1411,28 +1454,36 @@ export const RegisterScreen = ({ navigation }) => {
                     </Text>
                   )}
 
-                  <View className="split-btn-wrap">
-                    <View style={{ marginHorizontal: 15, marginVertical: 20 }}>
-                      <Button
-                        color="#3740FE"
-                        title="Back"
-                        //disabled={!isValid}
-                        //onPress={() => navigation.navigate("OtpScreen")}
-                        onPress={(e) => handlingStep(false, false, true, false)}
-                      />
-                    </View>
-                  </View>
                   <View style={{ marginHorizontal: 15, marginVertical: 20 }}>
                     <MainButton
                       name={t("sign_up")}
                       onPress={() => navigation.navigate("OtpScreen")}
                     />
+                    <View style={{ marginHorizontal: 15, marginVertical: 20 }}>
+                      <MainButton
+                        name={t("Submit")}
+                        style={{
+                          shadowColor: "#000",
+                          shadowOffset: {
+                            width: 10,
+                            height: 5,
+                          },
+                          shadowOpacity: 0.34,
+                          shadowRadius: 6.27,
+                          elevation: 10,
+                        }}
+                        onPress={() => handleSubmit()}
+                      />
+                    </View>
+                  </View>
+
+                  <View style={{ marginHorizontal: 15, marginVertical: 20 }}>
                     <Button
                       color="#3740FE"
-                      title="Submit"
-                      disabled={!isValid}
+                      title="Back"
+                      //disabled={!isValid}
                       //onPress={() => navigation.navigate("OtpScreen")}
-                      onPress={() => handleSubmit()}
+                      onPress={(e) => handlingStep(false, false, true, false)}
                     />
                   </View>
                 </>
