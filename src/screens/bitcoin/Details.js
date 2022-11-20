@@ -64,7 +64,7 @@ export const Details = ({ navigation, route }) => {
                     marginTop: 20,
                   }}
                 >
-                    {item.salesChannels.description}
+                    {item.appDescription.map((el)=>el.description)}
                 </Text>
 
                 <Text
