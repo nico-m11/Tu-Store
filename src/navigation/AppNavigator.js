@@ -32,7 +32,7 @@ import { TuMarket } from "../screens/bitcoin/TuMarket";
 import { AssicuraTu } from "../screens/bitcoin/AssicuraTu";
 
 // pagina test
-//import { TesoScreen } from "../screens/bitcoin/Teso";
+import { TesoScreen } from "../screens/bitcoin/Teso";
 
 const BottomTabNavigator = createBottomTabNavigator();
 
@@ -112,11 +112,11 @@ export const TabNavigator = () => {
       />
 
       {/*pagina test*/}
-      {/* <BottomTabNavigator.Screen
+      <BottomTabNavigator.Screen
         name="Teso"
         component={TesoScreen}
         options={{ headerShown: false, tabBarLabel: t("Teso") }}
-      /> */}
+      />
     </BottomTabNavigator.Navigator>
   );
 };
