@@ -17,15 +17,11 @@ import {
   TextInput,
   Button,
   Alert,
-  Picker,
   FlatList,
   BackHandler,
 } from "react-native";
 import Checkbox from "expo-checkbox";
-import RNPickerSelect from "react-native-picker-select";
-import DatePicker from "react-native-datepicker";
 import DateTimePicker from "@react-native-community/datetimepicker";
-
 import { Ionicons, Feather } from "@expo/vector-icons";
 import { Fonts } from "../../themes/fonts";
 import ConstantStyle from "../../themes/styles";
@@ -34,11 +30,18 @@ import { Input } from "react-native-elements";
 import MainButton from "../components/MainButton";
 import { useTranslation } from "react-i18next";
 import { Formik } from "formik";
+import { Picker } from "@react-native-picker/picker";
 import * as yup from "yup";
 
 export const RegisterScreen = ({ navigation }) => {
   const { height, width } = Dimensions.get("window");
   const { t, i18n } = useTranslation();
+  const [cursor, setCursor] = useState(
+    ['Nicola', 'Pasquale', 'Sto Cazzo']
+    );
+
+  const [cursorSelect, setCursorSelect] = useState([]);
+
 
   // show and hide multiple input box
   const [values, setValues] = useState({
@@ -56,6 +59,10 @@ export const RegisterScreen = ({ navigation }) => {
   const [step2, setStep2] = useState(false);
   const [step3, setStep3] = useState(false);
   const [step4, setStep4] = useState(false);
+
+const optionIndividual = [{text: 'M', value:1, text: 'F', value:2}]
+
+
   const [isCheckedF, setCheckedF] = useState(false);
   const [isCheckedM, setCheckedM] = useState(false);
 
@@ -174,6 +181,9 @@ export const RegisterScreen = ({ navigation }) => {
             linkedin: "",
             twitter: "",
             facebook: "",
+            customer_type: '',
+            marital_status: '',
+            educational_qualification: '',
           }}
           onSubmit={(values) => Alert.alert(JSON.stringify(values))}
           validationSchema={yup.object().shape({
@@ -850,30 +860,34 @@ export const RegisterScreen = ({ navigation }) => {
                     {t("Customer type")}
                   </Text>
                   <View
-                    style={{
-                      backgroundColor: Colors.white,
-                      borderRadius: 10,
-                      paddingHorizontal: 15,
-                      //width: 10,
-                      height: 25,
-                      ...ConstantStyle.shadow,
-                      backgroundColor: Colors.white,
-                      borderRadius: 10,
-                      paddingHorizontal: 15,
-                      width: "95%",
-                      marginLeft: 15,
-                      height: 45,
-                    }}
+                    // style={{
+                    //   backgroundColor: Colors.white,
+                    //   borderRadius: 10,
+                    //   paddingHorizontal: 15,
+                    //   //width: 10,
+                    //   height: 25,
+                    //   ...ConstantStyle.shadow,
+                    //   backgroundColor: Colors.white,
+                    //   borderRadius: 10,
+                    //   paddingHorizontal: 15,
+                    //   width: "95%",
+                    //   marginLeft: 15,
+                    //   height: 45,
+                    // }}
                   >
-                    <RNPickerSelect
-                      value={values.customer_type}
-                      onChangeValue={handleChange("customer_type")}
-                      items={[
-                        { label: "Customer", value: "customer" },
-                        { label: "Freelance", value: "freelance" },
-                        { label: "Company", value: "company" },
-                      ]}
-                    />
+                    <Picker
+                      //value={values.customer_type}
+                      selectedValue={cursorSelect}
+                      onValueChange={(itemValue) => 
+                        setCursorSelect(itemValue)
+                      }
+                    >
+                      {
+                        cursor.map(el => {
+                          return <Picker.Item label={el} value={el}/>
+                        })
+                      }
+                    </Picker>
                   </View>
                   <Text
                     style={{
@@ -1048,39 +1062,34 @@ export const RegisterScreen = ({ navigation }) => {
                     {t("Marital status")}
                   </Text>
                   <View
-                    style={{
-                      backgroundColor: Colors.white,
-                      borderRadius: 10,
-                      paddingHorizontal: 15,
-                      //width: 10,
-                      height: 25,
-                      ...ConstantStyle.shadow,
-                      backgroundColor: Colors.white,
-                      borderRadius: 10,
-                      paddingHorizontal: 15,
-                      width: "95%",
-                      marginLeft: 15,
-                      height: 45,
-                    }}
+                    // style={{
+                    //   backgroundColor: Colors.white,
+                    //   borderRadius: 10,
+                    //   paddingHorizontal: 15,
+                    //   //width: 10,
+                    //   height: 25,
+                    //   ...ConstantStyle.shadow,
+                    //   backgroundColor: Colors.white,
+                    //   borderRadius: 10,
+                    //   paddingHorizontal: 15,
+                    //   width: "95%",
+                    //   marginLeft: 15,
+                    //   height: 45,
+                    // }}
                   >
-                    <RNPickerSelect
-                      style={{
-                        flexDirection: "row",
-                        width: "90%",
-                        marginLeft: 15,
-                        alignItems: "center",
-                        justifyContent: "center",
-                        textAlign: "center",
-                      }}
-                      value={values.marital_status}
-                      onChangeValue={handleChange("marital_status")}
-                      items={[
-                        { label: "Single", value: "single" },
-                        { label: "Divorziato", value: "divorziato" },
-                        { label: "Sposato", value: "sposato" },
-                        { label: "Vedovo", value: "Vedovo" },
-                      ]}
-                    />
+                      <Picker
+                      //value={values.customer_type}
+                      selectedValue={cursorSelect}
+                      onValueChange={(itemValue) => 
+                        setCursorSelect(itemValue)
+                      }
+                    >
+                      {
+                        cursor.map(el => {
+                          return <Picker.Item label={el} value={el}/>
+                        })
+                      }
+                    </Picker>
                   </View>
                   <Text
                     style={{
@@ -1174,37 +1183,34 @@ export const RegisterScreen = ({ navigation }) => {
                     {t("Educational Qualification")}
                   </Text>
                   <View
-                    style={{
-                      backgroundColor: Colors.white,
-                      borderRadius: 10,
-                      paddingHorizontal: 15,
-                      //width: 10,
-                      height: 25,
-                      ...ConstantStyle.shadow,
-                      backgroundColor: Colors.white,
-                      borderRadius: 10,
-                      paddingHorizontal: 15,
-                      width: "95%",
-                      marginLeft: 15,
-                      height: 45,
-                    }}
+                    // style={{
+                    //   backgroundColor: Colors.white,
+                    //   borderRadius: 10,
+                    //   paddingHorizontal: 15,
+                    //   //width: 10,
+                    //   height: 25,
+                    //   ...ConstantStyle.shadow,
+                    //   backgroundColor: Colors.white,
+                    //   borderRadius: 10,
+                    //   paddingHorizontal: 15,
+                    //   width: "95%",
+                    //   marginLeft: 15,
+                    //   height: 45,
+                    // }}
                   >
-                    <RNPickerSelect
-                      value={values.marital_status}
-                      onChangeValue={handleChange("marital_status")}
-                      items={[
-                        { label: "Scuola Media", value: "scuola_media" },
-                        { label: "Diplomato", value: "diplomato" },
-                        {
-                          label: "Laurea Triennale",
-                          value: "laurea_triennale",
-                        },
-                        {
-                          label: "Laurea Magistrale",
-                          value: "laurea_magistrale",
-                        },
-                      ]}
-                    />
+                     <Picker
+                      //value={values.customer_type}
+                      selectedValue={cursorSelect}
+                      onValueChange={(itemValue) => 
+                        setCursorSelect(itemValue)
+                      }
+                    >
+                      {
+                        cursor.map(el => {
+                          return <Picker.Item label={el} value={el}/>
+                        })
+                      }
+                    </Picker>
                   </View>
                   <Text
                     style={{
