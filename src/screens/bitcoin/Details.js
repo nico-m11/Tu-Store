@@ -4,6 +4,7 @@ import {
   Text,
   View,
   Image,
+  Button,
   TouchableOpacity,
   Dimensions,
   StyleSheet,
@@ -17,12 +18,23 @@ import { LinearGradient } from "expo-linear-gradient";
 import { LineChart } from "react-native-chart-kit";
 import { Link } from "native-base";
 import { useTranslation } from "react-i18next";
+import * as DocumentPicker from 'expo-document-picker';
 
 export const Details = ({ navigation, route }) => {
   const item = route.params.item;
-  console.log(item);
+  //console.log(item);
   const { t, i18n } = useTranslation();
   const width = Dimensions.get("window").width - 60;
+
+
+  const pickDocument = async () => {
+    let result = await DocumentPicker.getDocumentAsync({});
+
+    alert(result.uri);
+
+    console.log(result);
+  };
+
   return (
     <SafeAreaView style={{ ...ConstantStyle.container }}>
       <CustomHeader navigation={navigation} title={item.name} isStar={false} />
@@ -64,7 +76,7 @@ export const Details = ({ navigation, route }) => {
                     marginTop: 20,
                   }}
                 >
-                    {item.appDescription.map((el)=>el.description)}
+                  {item.appDescription.map((el) => el.description)}
                 </Text>
 
                 <Text
@@ -77,9 +89,31 @@ export const Details = ({ navigation, route }) => {
                   Price: {item.value !== "0" ? item.value + "€" : "0€"}
                 </Text>
 
-                <Text style={{ ...Fonts.Red14Medium, textAlign: "center", marginTop: 10 }}>
-                  Cashback: {item.appCashback.map((el) => " cash " + el.cashback !== 0 ? el.cashback + '' + "€" : 0 + '' + "€")}
+                <Text
+                  style={{
+                    ...Fonts.Red14Medium,
+                    textAlign: "center",
+                    marginTop: 10,
+                  }}
+                >
+                  Cashback:{" "}
+                  {item.appCashback.map((el) =>
+                    " cash " + el.cashback !== 0
+                      ? el.cashback + "" + "€"
+                      : 0 + "" + "€"
+                  )}
                 </Text>
+              </View>
+              <View>
+                <View
+                  style={{
+                    flex: 1,
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <Button title="Select Document" onPress={pickDocument} multiple={true}/>
+                </View>
               </View>
             </View>
           </ScrollView>
