@@ -21,7 +21,6 @@ import {
   BackHandler,
 } from "react-native";
 import Checkbox from "expo-checkbox";
-import DateTimePicker from "@react-native-community/datetimepicker";
 import { Ionicons, Feather } from "@expo/vector-icons";
 import { Fonts } from "../../themes/fonts";
 import ConstantStyle from "../../themes/styles";
@@ -30,18 +29,20 @@ import { Input } from "react-native-elements";
 import MainButton from "../components/MainButton";
 import { useTranslation } from "react-i18next";
 import { Formik } from "formik";
-import { Picker } from "@react-native-picker/picker";
 import * as yup from "yup";
+import { SelectList } from "react-native-dropdown-select-list";
 
 export const RegisterScreen = ({ navigation }) => {
   const { height, width } = Dimensions.get("window");
   const { t, i18n } = useTranslation();
-  const [cursor, setCursor] = useState(
-    ['Nicola', 'Pasquale', 'Sto Cazzo']
-    );
+  const [selected, setSelected] = useState([""]);
 
-  const [cursorSelect, setCursorSelect] = useState([]);
-
+  const data = [
+    { key: 1, value: "ITALIA" },
+    { key: 2, value: "SPAGNA" },
+    { key: 3, value: "FRANCIA" },
+    { key: 4, value: "GERMANIA" },
+  ];
 
   // show and hide multiple input box
   const [values, setValues] = useState({
@@ -60,8 +61,7 @@ export const RegisterScreen = ({ navigation }) => {
   const [step3, setStep3] = useState(false);
   const [step4, setStep4] = useState(false);
 
-const optionIndividual = [{text: 'M', value:1, text: 'F', value:2}]
-
+  const optionIndividual = [{ text: "M", value: 1, text: "F", value: 2 }];
 
   const [isCheckedF, setCheckedF] = useState(false);
   const [isCheckedM, setCheckedM] = useState(false);
@@ -181,9 +181,9 @@ const optionIndividual = [{text: 'M', value:1, text: 'F', value:2}]
             linkedin: "",
             twitter: "",
             facebook: "",
-            customer_type: '',
-            marital_status: '',
-            educational_qualification: '',
+            customer_type: "",
+            marital_status: "",
+            educational_qualification: "",
           }}
           onSubmit={(values) => Alert.alert(JSON.stringify(values))}
           validationSchema={yup.object().shape({
@@ -860,34 +860,25 @@ const optionIndividual = [{text: 'M', value:1, text: 'F', value:2}]
                     {t("Customer type")}
                   </Text>
                   <View
-                    // style={{
-                    //   backgroundColor: Colors.white,
-                    //   borderRadius: 10,
-                    //   paddingHorizontal: 15,
-                    //   //width: 10,
-                    //   height: 25,
-                    //   ...ConstantStyle.shadow,
-                    //   backgroundColor: Colors.white,
-                    //   borderRadius: 10,
-                    //   paddingHorizontal: 15,
-                    //   width: "95%",
-                    //   marginLeft: 15,
-                    //   height: 45,
-                    // }}
+                  // style={{
+                  //   backgroundColor: Colors.white,
+                  //   borderRadius: 10,
+                  //   paddingHorizontal: 15,
+                  //   width: 10,
+                  //   height: 25,
+                  //   ...ConstantStyle.shadow,
+                  //   backgroundColor: Colors.white,
+                  //   borderRadius: 10,
+                  //   paddingHorizontal: 15,
+                  //   width: "95%",
+                  //   marginLeft: 15,
+                  //   height: 45,
+                  // }}
                   >
-                    <Picker
-                      //value={values.customer_type}
-                      selectedValue={cursorSelect}
-                      onValueChange={(itemValue) => 
-                        setCursorSelect(itemValue)
-                      }
-                    >
-                      {
-                        cursor.map(el => {
-                          return <Picker.Item label={el} value={el}/>
-                        })
-                      }
-                    </Picker>
+                    <SelectList
+                      data={data}
+                      setSelected={(val) => setSelected(val)}
+                    />
                   </View>
                   <Text
                     style={{
@@ -1062,34 +1053,25 @@ const optionIndividual = [{text: 'M', value:1, text: 'F', value:2}]
                     {t("Marital status")}
                   </Text>
                   <View
-                    // style={{
-                    //   backgroundColor: Colors.white,
-                    //   borderRadius: 10,
-                    //   paddingHorizontal: 15,
-                    //   //width: 10,
-                    //   height: 25,
-                    //   ...ConstantStyle.shadow,
-                    //   backgroundColor: Colors.white,
-                    //   borderRadius: 10,
-                    //   paddingHorizontal: 15,
-                    //   width: "95%",
-                    //   marginLeft: 15,
-                    //   height: 45,
-                    // }}
+                  // style={{
+                  //   backgroundColor: Colors.white,
+                  //   borderRadius: 10,
+                  //   paddingHorizontal: 15,
+                  //   //width: 10,
+                  //   height: 25,
+                  //   ...ConstantStyle.shadow,
+                  //   backgroundColor: Colors.white,
+                  //   borderRadius: 10,
+                  //   paddingHorizontal: 15,
+                  //   width: "95%",
+                  //   marginLeft: 15,
+                  //   height: 45,
+                  // }}
                   >
-                      <Picker
-                      //value={values.customer_type}
-                      selectedValue={cursorSelect}
-                      onValueChange={(itemValue) => 
-                        setCursorSelect(itemValue)
-                      }
-                    >
-                      {
-                        cursor.map(el => {
-                          return <Picker.Item label={el} value={el}/>
-                        })
-                      }
-                    </Picker>
+                    <SelectList
+                      data={data}
+                      setSelected={(val) => setSelected(val)}
+                    />
                   </View>
                   <Text
                     style={{
@@ -1183,34 +1165,25 @@ const optionIndividual = [{text: 'M', value:1, text: 'F', value:2}]
                     {t("Educational Qualification")}
                   </Text>
                   <View
-                    // style={{
-                    //   backgroundColor: Colors.white,
-                    //   borderRadius: 10,
-                    //   paddingHorizontal: 15,
-                    //   //width: 10,
-                    //   height: 25,
-                    //   ...ConstantStyle.shadow,
-                    //   backgroundColor: Colors.white,
-                    //   borderRadius: 10,
-                    //   paddingHorizontal: 15,
-                    //   width: "95%",
-                    //   marginLeft: 15,
-                    //   height: 45,
-                    // }}
+                  // style={{
+                  //   backgroundColor: Colors.white,
+                  //   borderRadius: 10,
+                  //   paddingHorizontal: 15,
+                  //   //width: 10,
+                  //   height: 25,
+                  //   ...ConstantStyle.shadow,
+                  //   backgroundColor: Colors.white,
+                  //   borderRadius: 10,
+                  //   paddingHorizontal: 15,
+                  //   width: "95%",
+                  //   marginLeft: 15,
+                  //   height: 45,
+                  // }}
                   >
-                     <Picker
-                      //value={values.customer_type}
-                      selectedValue={cursorSelect}
-                      onValueChange={(itemValue) => 
-                        setCursorSelect(itemValue)
-                      }
-                    >
-                      {
-                        cursor.map(el => {
-                          return <Picker.Item label={el} value={el}/>
-                        })
-                      }
-                    </Picker>
+                    <SelectList
+                      data={data}
+                      setSelected={(val) => setSelected(val)}
+                    />
                   </View>
                   <Text
                     style={{
