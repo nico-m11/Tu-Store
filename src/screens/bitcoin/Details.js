@@ -18,14 +18,13 @@ import { LinearGradient } from "expo-linear-gradient";
 import { LineChart } from "react-native-chart-kit";
 import { Link } from "native-base";
 import { useTranslation } from "react-i18next";
-import * as DocumentPicker from 'expo-document-picker';
+import * as DocumentPicker from "expo-document-picker";
 
 export const Details = ({ navigation, route }) => {
   const item = route.params.item;
   //console.log(item);
   const { t, i18n } = useTranslation();
   const width = Dimensions.get("window").width - 60;
-
 
   const pickDocument = async () => {
     let result = await DocumentPicker.getDocumentAsync({});
@@ -112,25 +111,7 @@ export const Details = ({ navigation, route }) => {
                     justifyContent: "center",
                   }}
                 >
-                  {/* <MainButton title="Select Document" onPress={pickDocument} multiple={true} /> */}
-                  <MainButton
-                    name={t("Select Document")}
-                    style={{
-                      shadowColor: "#000",
-                      shadowOffset: {
-                        width: 10,
-                        height: 5,
-                      },
-                      shadowOpacity: 0.34,
-                      shadowRadius: 6.27,
-                      elevation: 10,
-                    }}
-                    onPress={pickDocument} multiple={true}
-  //onPress={() => handleSubmit()}
-                  />
-
-                  Invia un messaggio in #dev-react-native
-
+                  <Button title="Select Document" onPress={pickDocument} />
                 </View>
               </View>
             </View>

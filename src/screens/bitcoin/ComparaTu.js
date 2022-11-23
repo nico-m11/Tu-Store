@@ -78,6 +78,7 @@ export const ComparaTu = ({ navigation }) => {
             {listData.map((element, index) => (
               <>
                 <TouchableOpacity
+                key={index}
                   activeOpacity={0.8}
                   onPress={() =>
                     navigation.navigate("Details", { item: element })
