@@ -16,11 +16,12 @@ import CustomHeader from "../components/CustomHeader";
 import MainButton from "../components/MainButton";
 import { useTranslation } from "react-i18next";
 import { cos } from "react-native-reanimated";
+import Loader from "../components/Loader";
 
 export const Tutela = ({ navigation }) => {
   const { t, i18n } = useTranslation();
   const [listData, setListData] = useState([]); // salvo i dati del fetch
-
+  const [loader, setLoader] = useState(false)
   useEffect(() => {
     Data();
   }, []);
@@ -29,6 +30,7 @@ export const Tutela = ({ navigation }) => {
     /** fetch data GET Tutela */
   }
   const Data = () => {
+    setLoader(true)
     fetch("https://api.tu-store.soluzionitop.cloud/api/offers?sale_channel_id=3", {
       method: "GET",
       headers: {
@@ -37,6 +39,7 @@ export const Tutela = ({ navigation }) => {
       },
     })
       .then((res) => {
+        setLoader(false)
         return res.json();
       })
       .then((value) => {
@@ -66,7 +69,10 @@ export const Tutela = ({ navigation }) => {
         }}
       >
         <View style={{ marginTop: 15 }}>
-          <ScrollView showsVerticalScrollIndicator={true}>
+
+          {
+            loader === false ? (<>
+                    <ScrollView showsVerticalScrollIndicator={true}>
             {/*** fetch data */}
             <View
               style={{
@@ -155,6 +161,11 @@ export const Tutela = ({ navigation }) => {
               </View>
             </View>
           </ScrollView>
+            </>) : (<>
+            <Loader visible= {true} /> 
+            </>)
+          }
+  
         </View>
       </View>
       {/* <ExitModel

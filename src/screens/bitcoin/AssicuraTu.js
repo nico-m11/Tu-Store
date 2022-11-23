@@ -15,11 +15,12 @@ import { Colors } from "../../themes/colors";
 import CustomHeader from "../components/CustomHeader";
 import MainButton from "../components/MainButton";
 import { useTranslation } from "react-i18next";
+import Loader from "../components/Loader";
 
 export const AssicuraTu = ({ navigation }) => {
   const { t, i18n } = useTranslation();
   const [listData, setListData] = useState([]); // salvo i dati del fetch
-
+  const [loader, setLoader] = useState(false)
   useEffect(() => {
     Data();
   }, []);
@@ -28,6 +29,7 @@ export const AssicuraTu = ({ navigation }) => {
     /** fetch data GET COMPARA TU*/
   }
   const Data = () => {
+    setLoader(true)
     fetch("https://api.tu-store.soluzionitop.cloud/api/offers?sale_channel_id=5", {
       method: "GET",
       headers: {
@@ -36,6 +38,7 @@ export const AssicuraTu = ({ navigation }) => {
       },
     })
       .then((res) => {
+        setLoader(false)
         return res.json();
       })
       .then((value) => {
@@ -64,7 +67,9 @@ export const AssicuraTu = ({ navigation }) => {
           paddingHorizontal: 15,
         }}
       >
-        <ScrollView showsVerticalScrollIndicator={true}>
+        {
+          loader === false ? (<>
+          <ScrollView showsVerticalScrollIndicator={true}>
           {/*** fetch data */}
           <View>
             {listData.map((element, index) => (
@@ -133,6 +138,11 @@ export const AssicuraTu = ({ navigation }) => {
             ))}
           </View>
         </ScrollView>
+          </>) : (<>
+          <Loader visible= {true} />
+          </>)
+        }
+        
       </View>
       {/* <ExitModel
         onCancel={() => setExitModel(!exitModel)}
