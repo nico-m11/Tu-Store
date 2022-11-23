@@ -41,7 +41,7 @@ export const TesoScreen = ({ navigation }) => {
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
       <Button title="Select Document" onPress={pickDocument} 
-        allowMultiSelection={ytrue}
+        allowMultiSelection={true}
       />
     </View>
   );
