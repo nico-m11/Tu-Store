@@ -112,7 +112,25 @@ export const Details = ({ navigation, route }) => {
                     justifyContent: "center",
                   }}
                 >
-                  <Button title="Select Document" onPress={pickDocument} multiple={true}/>
+                  {/* <MainButton title="Select Document" onPress={pickDocument} multiple={true} /> */}
+                  <MainButton
+                    name={t("Select Document")}
+                    style={{
+                      shadowColor: "#000",
+                      shadowOffset: {
+                        width: 10,
+                        height: 5,
+                      },
+                      shadowOpacity: 0.34,
+                      shadowRadius: 6.27,
+                      elevation: 10,
+                    }}
+                    onPress={pickDocument} multiple={true}
+  //onPress={() => handleSubmit()}
+                  />
+
+                  Invia un messaggio in #dev-react-native
+
                 </View>
               </View>
             </View>
