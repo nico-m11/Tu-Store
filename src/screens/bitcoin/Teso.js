@@ -30,8 +30,6 @@ export const TesoScreen = ({ navigation }) => {
 
   const pickDocument = async () => {
     let result = await DocumentPicker.getDocumentAsync({});
-
-    DocumentPicker.pickMultiple(result)
     alert(result.uri);
 
     console.log(result);
