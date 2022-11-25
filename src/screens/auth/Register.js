@@ -1,4 +1,4 @@
-import React, { useState, Component } from "react";
+import React, { useState, Component, useEffect } from "react";
 import {
   SafeAreaView,
   Text,
@@ -33,9 +33,43 @@ import * as yup from "yup";
 import { SelectList } from "react-native-dropdown-select-list";
 
 export const RegisterScreen = ({ navigation }) => {
+  useEffect(() => {
+    DataCustomer();
+  }, []);
+
   const { height, width } = Dimensions.get("window");
   const { t, i18n } = useTranslation();
   const [selected, setSelected] = useState([""]);
+
+  const [customer_type, setCustomer_type] = useState([]);
+
+  const DataCustomer = () => {
+    //setLoader(true)
+    fetch(
+      "https://api.tu-store.soluzionitop.cloud/api/dictionary?column=customer_type",
+      {
+        method: "GET",
+        headers: {
+          Authorization:
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlRVTzYiLCJpZCI6MSwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNjY5Mjg2OTk4LCJleHAiOjE2NzE5NjUzOTh9.BT-aKLt5R6KTduXXGSFyAQNfQph55h7YyrgZ4pNfOF0",
+        },
+      }
+    )
+      .then((res) => {
+        //setLoader(false)
+        return res.json();
+      })
+      .then((value) => {
+        setCustomer_type(value.items); // salvo nel array i dati del fetch
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const optionCustomer = customer_type.map((el) => {
+    return el.name;
+  });
 
   const data = [
     { key: 1, value: "ITALIA" },
@@ -43,6 +77,11 @@ export const RegisterScreen = ({ navigation }) => {
     { key: 3, value: "FRANCIA" },
     { key: 4, value: "GERMANIA" },
   ];
+  const gender = [
+    { key: 1, value: "M" },
+    { key: 2, value: "F" },
+  ];
+
 
   // show and hide multiple input box
   const [values, setValues] = useState({
@@ -859,24 +898,9 @@ export const RegisterScreen = ({ navigation }) => {
                   >
                     {t("Customer type")}
                   </Text>
-                  <View
-                  // style={{
-                  //   backgroundColor: Colors.white,
-                  //   borderRadius: 10,
-                  //   paddingHorizontal: 15,
-                  //   width: 10,
-                  //   height: 25,
-                  //   ...ConstantStyle.shadow,
-                  //   backgroundColor: Colors.white,
-                  //   borderRadius: 10,
-                  //   paddingHorizontal: 15,
-                  //   width: "95%",
-                  //   marginLeft: 15,
-                  //   height: 45,
-                  // }}
-                  >
+                  <View>
                     <SelectList
-                      data={data}
+                      data={optionCustomer}
                       setSelected={(val) => setSelected(val)}
                     />
                   </View>
@@ -1011,36 +1035,10 @@ export const RegisterScreen = ({ navigation }) => {
                       paddingHorizontal: 10,
                     }}
                   >
-                    <Checkbox
-                      style={{
-                        marginRight: 5,
-                        borderRadius: 10,
-                        borderColor: "#e0e0e0",
-                        borderBottomWidth: 0,
-                        ...ConstantStyle.shadow,
-                        backgroundColor: Colors.white,
-                        borderWidth: 1.5,
-                      }}
-                      value={isCheckedM}
-                      onValueChange={setCheckedM}
-                      color={isCheckedM ? "#4630EB" : undefined}
-                    />
-                    <Text style={{ marginRight: 5 }}>M</Text>
-                    <Checkbox
-                      style={{
-                        marginRight: 5,
-                        borderRadius: 10,
-                        borderColor: "#e0e0e0",
-                        borderBottomWidth: 0,
-                        ...ConstantStyle.shadow,
-                        backgroundColor: Colors.white,
-                        borderWidth: 1.5,
-                      }}
-                      value={isCheckedF}
-                      onValueChange={setCheckedF}
-                      color={isCheckedF ? "#4630EB" : undefined}
-                    />
-                    <Text style={{ marginLeft: 5 }}>F</Text>
+                   <SelectList
+                      data={gender}
+                      setSelected={(val) => setSelected(val)}
+                    />                
                   </View>
                   <Text
                     style={{
