@@ -890,12 +890,12 @@ export const RegisterScreen = ({ navigation }) => {
                   </Text>
 
                   <Text
-                    style={{
-                      ...Fonts.Grey14Bold,
-                      marginHorizontal: 15,
-                      marginTop: 10,
-                      marginBottom: 5,
-                    }}
+                  style={{
+                    ...Fonts.Grey14Bold,
+                    marginHorizontal: 15,
+                    marginTop: 2,
+                    marginBottom: -10,
+                  }}
                   >
                     {t("Customer type")}
                   </Text>
@@ -1048,6 +1048,8 @@ export const RegisterScreen = ({ navigation }) => {
                     placeholder={t("Birth Place")}
                     containerStyle={{
                       marginTop: 8,
+                      marginHorizontal:6,
+                      width:"97%",
                       marginBottom: -10,
                       alignItems: "center",
                       justifyContent: "center",
@@ -1082,48 +1084,30 @@ export const RegisterScreen = ({ navigation }) => {
                   )}
 
                   <Text
-                    style={{
-                      ...Fonts.Grey14Bold,
-                      marginHorizontal: 15,
-                      marginTop: 10,
-                      marginBottom: 5,
-                      
-                    }}
+                        style={{
+                          ...Fonts.Grey14Bold,
+                          marginHorizontal: 15,
+                          marginTop: 2,
+                          marginBottom: -10,
+                        }}
                   >
                     {t("Gender")}
                   </Text>
-                  <View
-                  // style={{
-                  //   backgroundColor: Colors.white,
-                  //   borderRadius: 10,
-                  //   paddingHorizontal: 15,
-                  //   //width: 10,
-                  //   height: 25,
-                  //   ...ConstantStyle.shadow,
-                  //   backgroundColor: Colors.white,
-                  //   borderRadius: 10,
-                  //   paddingHorizontal: 15,
-                  //   width: "95%",
-                  //   marginLeft: 15,
-                  //   height: 45,
-                  // }}
-                  >
-                     <SearchableDropdown
-                       style={{
-                        marginHorizontal:10,
-                        ...ConstantStyle.shadow,
-                        backgroundColor: Colors.white,
-                        borderRadius: 10,
-                        paddingHorizontal: 10,
-                        width: width - 30,
-                        height: 45,
-                      }}
-                      //onTextChange={(text) => console.log(text)}
+                  <View>
+                    <SearchableDropdown
+                    style={{
+                      margin:10,
+                      ...ConstantStyle.shadow,
+                      backgroundColor: Colors.white,
+                      borderRadius: 10,
+                      paddingHorizontal: 15,
+                      width: width - 30,
+                      height: 45,
+                    }}
+                      onTextChange={(text) => console.log(text)}
                       //On text change listner on the searchable input
-                      onItemSelect={(item) => setGenderSelect(item.name)}
+                      onItemSelect={(item) => setGenderSelect(item.name) && selectedItem(item)}
                       //onItemSelect called after the selection from the dropdown
-                      containerStyle={{ padding: 5 }}
-                      //suggestion container style
                       itemStyle={{
                         padding: 5,
                         margin:7,
@@ -1175,50 +1159,34 @@ export const RegisterScreen = ({ navigation }) => {
                       //reset textInput Value with true and false state
                       underlineColorAndroid="transparent"
                       //To remove the underline from the android input
+                      
                     />
                   </View>
                   <Text
-                    style={{
-                      ...Fonts.Grey14Bold,
-                      marginHorizontal: 15,
-                      marginBottom: 10,
-                      marginTop: 10,
-                    }}
+                       style={{
+                        ...Fonts.Grey14Bold,
+                        marginHorizontal: 15,
+                        marginTop: 2,
+                        marginBottom: -10,
+                      }}
                   >
                     {t("Marital status")}
                   </Text>
-                  <View
-                  // style={{
-                  //   backgroundColor: Colors.white,
-                  //   borderRadius: 10,
-                  //   paddingHorizontal: 15,
-                  //   //width: 10,
-                  //   height: 25,
-                  //   ...ConstantStyle.shadow,
-                  //   backgroundColor: Colors.white,
-                  //   borderRadius: 10,
-                  //   paddingHorizontal: 15,
-                  //   width: "95%",
-                  //   marginLeft: 15,
-                  //   height: 45,
-                  // }}
-                  >
-                     <SearchableDropdown
-                       style={{
-                        margin:10,
-                        ...ConstantStyle.shadow,
-                        backgroundColor: Colors.white,
-                        borderRadius: 10,
-                        paddingHorizontal: 15,
-                        width: width - 30,
-                        height: 45,
-                      }}
-                      //onTextChange={(text) => console.log(text)}
+                  <View>
+                    <SearchableDropdown
+                    style={{
+                      margin:10,
+                      ...ConstantStyle.shadow,
+                      backgroundColor: Colors.white,
+                      borderRadius: 10,
+                      paddingHorizontal: 15,
+                      width: width - 30,
+                      height: 45,
+                    }}
+                      onTextChange={(text) => console.log(text)}
                       //On text change listner on the searchable input
-                      //onItemSelect={(item) => setGenderSelect(item.name)}
+                      onItemSelect={(item) => setGenderSelect(item.name) && selectedItem(item)}
                       //onItemSelect called after the selection from the dropdown
-                      containerStyle={{ padding: 5 }}
-                      //suggestion container style
                       itemStyle={{
                         padding: 5,
                         margin:7,
@@ -1270,6 +1238,7 @@ export const RegisterScreen = ({ navigation }) => {
                       //reset textInput Value with true and false state
                       underlineColorAndroid="transparent"
                       //To remove the underline from the android input
+                      
                     />
                   </View>
                   <Text
@@ -1357,44 +1326,27 @@ export const RegisterScreen = ({ navigation }) => {
                     style={{
                       ...Fonts.Grey14Bold,
                       marginHorizontal: 15,
-                      marginTop: 10,
-                      marginBottom: 10,
+                      marginTop: 2,
+                      marginBottom: -10,
                     }}
                   >
                     {t("Educational Qualification")}
                   </Text>
-                  <View
-                  // style={{
-                  //   backgroundColor: Colors.white,
-                  //   borderRadius: 10,
-                  //   paddingHorizontal: 15,
-                  //   //width: 10,
-                  //   height: 25,
-                  //   ...ConstantStyle.shadow,
-                  //   backgroundColor: Colors.white,
-                  //   borderRadius: 10,
-                  //   paddingHorizontal: 15,
-                  //   width: "95%",
-                  //   marginLeft: 15,
-                  //   height: 45,
-                  // }}
-                  >
-                                    <SearchableDropdown
-                       style={{
-                        marginHorizontal:10,
-                        ...ConstantStyle.shadow,
-                        backgroundColor: Colors.white,
-                        borderRadius: 10,
-                        paddingHorizontal: 10,
-                        width: width - 30,
-                        height: 35,
-                      }}
-                      //onTextChange={(text) => console.log(text)}
+                  <View>
+                    <SearchableDropdown
+                    style={{
+                      margin:10,
+                      ...ConstantStyle.shadow,
+                      backgroundColor: Colors.white,
+                      borderRadius: 10,
+                      paddingHorizontal: 15,
+                      width: width - 30,
+                      height: 45,
+                    }}
+                      onTextChange={(text) => console.log(text)}
                       //On text change listner on the searchable input
-                      onItemSelect={(item) => setGenderSelect(item.name)}
+                      onItemSelect={(item) => setGenderSelect(item.name) && selectedItem(item)}
                       //onItemSelect called after the selection from the dropdown
-                      containerStyle={{ padding: 5 }}
-                      //suggestion container style
                       itemStyle={{
                         padding: 5,
                         margin:7,
@@ -1411,7 +1363,7 @@ export const RegisterScreen = ({ navigation }) => {
                       }}
                       textInputProps={
                         {
-                          placeholder: "gender",
+                          placeholder: "educational_qualification",
                           borderBottomWidth: 0,
                           margin:15,
                           ...ConstantStyle.shadow,
@@ -1446,6 +1398,7 @@ export const RegisterScreen = ({ navigation }) => {
                       //reset textInput Value with true and false state
                       underlineColorAndroid="transparent"
                       //To remove the underline from the android input
+                      
                     />
                   </View>
                   <Text
