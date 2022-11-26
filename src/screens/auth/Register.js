@@ -28,9 +28,10 @@ import { Colors } from "../../themes/colors";
 import { Input } from "react-native-elements";
 import MainButton from "../components/MainButton";
 import { useTranslation } from "react-i18next";
-import { Formik } from "formik";
+import { Formik, setFieldValue } from "formik";
 import * as yup from "yup";
 import { SelectList } from "react-native-dropdown-select-list";
+import SearchableDropdown from "react-native-searchable-dropdown";
 
 export const RegisterScreen = ({ navigation }) => {
   useEffect(() => {
@@ -42,6 +43,12 @@ export const RegisterScreen = ({ navigation }) => {
   const [selected, setSelected] = useState([""]);
 
   const [customer_type, setCustomer_type] = useState([]);
+  const [customerSelect, setCustomerSelect] = useState("");
+
+  const [genderSelect, setGenderSelect] = useState("");
+
+  console.log(customerSelect);
+  console.log(genderSelect);
 
   const DataCustomer = () => {
     //setLoader(true)
@@ -60,34 +67,32 @@ export const RegisterScreen = ({ navigation }) => {
         return res.json();
       })
       .then((value) => {
-        setCustomer_type(value.items); // salvo nel array i dati del fetch
+        setCustomer_type(value.items);
       })
       .catch((err) => {
         console.log(err);
       });
   };
 
-  const optionCustomer = customer_type.map((el) => {
-    return el.name;
-  });
-
   const data = [
-    { key: 1, value: "ITALIA" },
+    { id: 1, name: "ITALIA" }, // fare modifica
+
     { key: 2, value: "SPAGNA" },
     { key: 3, value: "FRANCIA" },
     { key: 4, value: "GERMANIA" },
   ];
-  const gender = [
-    { key: 1, value: "M" },
-    { key: 2, value: "F" },
-  ];
 
+  const gender = [
+    { id: 1, name: "M" },
+    { id: 2, name: "F" },
+  ];
 
   // show and hide multiple input box
   const [values, setValues] = useState({
     password: "",
     showPassword: false,
   });
+
   const handleClick = (fieldName) => {
     setValues({
       ...values,
@@ -99,11 +104,6 @@ export const RegisterScreen = ({ navigation }) => {
   const [step2, setStep2] = useState(false);
   const [step3, setStep3] = useState(false);
   const [step4, setStep4] = useState(false);
-
-  const optionIndividual = [{ text: "M", value: 1, text: "F", value: 2 }];
-
-  const [isCheckedF, setCheckedF] = useState(false);
-  const [isCheckedM, setCheckedM] = useState(false);
 
   const handlingStep = (step1, step2, step3, step4) => {
     setStep1(step1);
@@ -257,6 +257,7 @@ export const RegisterScreen = ({ navigation }) => {
             touched,
             isValid,
             handleSubmit,
+            setFieldValue,
           }) => (
             <View
               style={{
@@ -899,9 +900,51 @@ export const RegisterScreen = ({ navigation }) => {
                     {t("Customer type")}
                   </Text>
                   <View>
-                    <SelectList
-                      data={optionCustomer}
-                      setSelected={(val) => setSelected(val)}
+                    <SearchableDropdown
+                      onTextChange={(text) => console.log(text)}
+                      //On text change listner on the searchable input
+                      onItemSelect={(item) => setCustomerSelect(item.name)}
+                      //onItemSelect called after the selection from the dropdown
+                      containerStyle={{ padding: 5 }}
+                      // onItemSelect={(itemValue) =>
+                      //   formik.setFieldValue("language", itemValue)
+                      // }
+
+                      //suggestion container style
+                      textInputStyle={{
+                        //inserted text style
+                        padding: 12,
+                        borderWidth: 1,
+                        borderColor: "#ccc",
+                        backgroundColor: "#FAF7F6",
+                      }}
+                      itemStyle={{
+                        //single dropdown item style
+                        padding: 10,
+                        marginTop: 2,
+                        backgroundColor: "#FAF9F8",
+                        borderColor: "#bbb",
+                        borderWidth: 1,
+                      }}
+                      itemTextStyle={{
+                        //text style of a single dropdown item
+                        color: "#222",
+                      }}
+                      itemsContainerStyle={{
+                        //items container style you can pass maxHeight
+                        //to restrict the items dropdown hieght
+                        maxHeight: "50%",
+                      }}
+                      items={customer_type}
+                      //mapping of item array
+                      defaultIndex={2}
+                      //default selected item index
+                      placeholder="placeholder"
+                      //place holder for the search input
+                      resetValue={false}
+                      //reset textInput Value with true and false state
+                      underlineColorAndroid="transparent"
+                      //To remove the underline from the android input
                     />
                   </View>
                   <Text
@@ -1024,21 +1067,63 @@ export const RegisterScreen = ({ navigation }) => {
                     {t("Gender")}
                   </Text>
                   <View
-                    style={{
-                      flexDirection: "row",
-                      width: "90%",
-                      marginLeft: 15,
-                      alignItems: "center",
-                      justifyContent: "center",
-                      textAlign: "center",
-                      paddingVertical: 12,
-                      paddingHorizontal: 10,
-                    }}
+                  // style={{
+                  //   backgroundColor: Colors.white,
+                  //   borderRadius: 10,
+                  //   paddingHorizontal: 15,
+                  //   //width: 10,
+                  //   height: 25,
+                  //   ...ConstantStyle.shadow,
+                  //   backgroundColor: Colors.white,
+                  //   borderRadius: 10,
+                  //   paddingHorizontal: 15,
+                  //   width: "95%",
+                  //   marginLeft: 15,
+                  //   height: 45,
+                  // }}
                   >
-                   <SelectList
-                      data={gender}
-                      setSelected={(val) => setSelected(val)}
-                    />                
+                     <SearchableDropdown
+                      //onTextChange={(text) => console.log(text)}
+                      //On text change listner on the searchable input
+                      onItemSelect={(item) => setGenderSelect(item.name)}
+                      //onItemSelect called after the selection from the dropdown
+                      containerStyle={{ padding: 5 }}
+                      //suggestion container style
+                      textInputStyle={{
+                        //inserted text style
+                        padding: 12,
+                        borderWidth: 1,
+                        borderColor: "#ccc",
+                        backgroundColor: "#FAF7F6",
+                      }}
+                      itemStyle={{
+                        //single dropdown item style
+                        padding: 10,
+                        marginTop: 2,
+                        backgroundColor: "#FAF9F8",
+                        borderColor: "#bbb",
+                        borderWidth: 1,
+                      }}
+                      itemTextStyle={{
+                        //text style of a single dropdown item
+                        color: "#222",
+                      }}
+                      itemsContainerStyle={{
+                        //items container style you can pass maxHeight
+                        //to restrict the items dropdown hieght
+                        maxHeight: "60%",
+                      }}
+                      items={gender}
+                      //mapping of item array
+                      defaultIndex={2}
+                      //default selected item index
+                      placeholder="placeholder"
+                      //place holder for the search input
+                      resetValue={false}
+                      //reset textInput Value with true and false state
+                      underlineColorAndroid="transparent"
+                      //To remove the underline from the android input
+                    />
                   </View>
                   <Text
                     style={{
@@ -1066,9 +1151,47 @@ export const RegisterScreen = ({ navigation }) => {
                   //   height: 45,
                   // }}
                   >
-                    <SelectList
-                      data={data}
-                      setSelected={(val) => setSelected(val)}
+                     <SearchableDropdown
+                      //onTextChange={(text) => console.log(text)}
+                      //On text change listner on the searchable input
+                      //onItemSelect={(item) => setGenderSelect(item.name)}
+                      //onItemSelect called after the selection from the dropdown
+                      containerStyle={{ padding: 5 }}
+                      //suggestion container style
+                      textInputStyle={{
+                        //inserted text style
+                        padding: 12,
+                        borderWidth: 1,
+                        borderColor: "#ccc",
+                        backgroundColor: "#FAF7F6",
+                      }}
+                      itemStyle={{
+                        //single dropdown item style
+                        padding: 10,
+                        marginTop: 2,
+                        backgroundColor: "#FAF9F8",
+                        borderColor: "#bbb",
+                        borderWidth: 1,
+                      }}
+                      itemTextStyle={{
+                        //text style of a single dropdown item
+                        color: "#222",
+                      }}
+                      itemsContainerStyle={{
+                        //items container style you can pass maxHeight
+                        //to restrict the items dropdown hieght
+                        maxHeight: "60%",
+                      }}
+                      items={gender}
+                      //mapping of item array
+                      defaultIndex={2}
+                      //default selected item index
+                      placeholder="placeholder"
+                      //place holder for the search input
+                      resetValue={false}
+                      //reset textInput Value with true and false state
+                      underlineColorAndroid="transparent"
+                      //To remove the underline from the android input
                     />
                   </View>
                   <Text
@@ -1178,9 +1301,47 @@ export const RegisterScreen = ({ navigation }) => {
                   //   height: 45,
                   // }}
                   >
-                    <SelectList
-                      data={data}
-                      setSelected={(val) => setSelected(val)}
+                     <SearchableDropdown
+                      //onTextChange={(text) => console.log(text)}
+                      //On text change listner on the searchable input
+                      //onItemSelect={(item) => setGenderSelect(item.name)}
+                      //onItemSelect called after the selection from the dropdown
+                      containerStyle={{ padding: 5 }}
+                      //suggestion container style
+                      textInputStyle={{
+                        //inserted text style
+                        padding: 12,
+                        borderWidth: 1,
+                        borderColor: "#ccc",
+                        backgroundColor: "#FAF7F6",
+                      }}
+                      itemStyle={{
+                        //single dropdown item style
+                        padding: 10,
+                        marginTop: 2,
+                        backgroundColor: "#FAF9F8",
+                        borderColor: "#bbb",
+                        borderWidth: 1,
+                      }}
+                      itemTextStyle={{
+                        //text style of a single dropdown item
+                        color: "#222",
+                      }}
+                      itemsContainerStyle={{
+                        //items container style you can pass maxHeight
+                        //to restrict the items dropdown hieght
+                        maxHeight: "60%",
+                      }}
+                      items={gender}
+                      //mapping of item array
+                      defaultIndex={2}
+                      //default selected item index
+                      placeholder="placeholder"
+                      //place holder for the search input
+                      resetValue={false}
+                      //reset textInput Value with true and false state
+                      underlineColorAndroid="transparent"
+                      //To remove the underline from the android input
                     />
                   </View>
                   <Text

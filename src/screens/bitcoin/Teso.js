@@ -2,6 +2,7 @@ import React, { useEffect, useState, Component } from "react";
 import {
   SafeAreaView,
   Text,
+  Item,
   TextInput,
   View,
   Button,
@@ -10,6 +11,7 @@ import {
   TouchableOpacity,
   Image,
   ScrollView,
+  Picker,
   StatusBar,
   BackHandler,
 } from "react-native";
@@ -26,6 +28,7 @@ import * as DocumentPicker from "expo-document-picker";
 import { SelectList } from "react-native-dropdown-select-list";
 import { StyleSheet } from "react-native";
 import { CheckBox } from "@rneui/themed";
+//import { Picker } from '@react-native-picker/picker';
 
 export const TesoScreen = ({ navigation }) => {
   const { t, i18n } = useTranslation();
@@ -49,6 +52,14 @@ export const TesoScreen = ({ navigation }) => {
     setDataCheck(newData);
   };
 
+  const yupSchema = yup.object().shape({
+    language: yup.string().required(),
+  });
+
+  const initialValues = {
+    language: "",
+  };
+
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
       <Button
@@ -70,7 +81,9 @@ export const TesoScreen = ({ navigation }) => {
           );
         })}
       </View>
-      <View></View>
+      <View>
+        
+      </View>
     </View>
   );
 };
