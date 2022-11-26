@@ -32,7 +32,7 @@ import { Formik, setFieldValue } from "formik";
 import * as yup from "yup";
 import { SelectList } from "react-native-dropdown-select-list";
 import SearchableDropdown from "react-native-searchable-dropdown";
-
+import DateTimePicker from '@react-native-community/datetimepicker';
 export const RegisterScreen = ({ navigation }) => {
   useEffect(() => {
     DataCustomer();
@@ -894,47 +894,67 @@ export const RegisterScreen = ({ navigation }) => {
                       ...Fonts.Grey14Bold,
                       marginHorizontal: 15,
                       marginTop: 10,
-                      marginBottom: 10,
+                      marginBottom: 5,
                     }}
                   >
                     {t("Customer type")}
                   </Text>
                   <View>
                     <SearchableDropdown
+                    style={{
+                      margin:10,
+                      ...ConstantStyle.shadow,
+                      backgroundColor: Colors.white,
+                      borderRadius: 10,
+                      paddingHorizontal: 15,
+                      width: width - 30,
+                      height: 45,
+                    }}
                       onTextChange={(text) => console.log(text)}
                       //On text change listner on the searchable input
-                      onItemSelect={(item) => setCustomerSelect(item.name)}
+                      onItemSelect={(item) => setCustomerSelect(item.name) && selectedItem(item)}
                       //onItemSelect called after the selection from the dropdown
-                      containerStyle={{ padding: 5 }}
-                      // onItemSelect={(itemValue) =>
-                      //   formik.setFieldValue("language", itemValue)
-                      // }
-
-                      //suggestion container style
-                      textInputStyle={{
-                        //inserted text style
-                        padding: 12,
-                        borderWidth: 1,
-                        borderColor: "#ccc",
-                        backgroundColor: "#FAF7F6",
-                      }}
                       itemStyle={{
-                        //single dropdown item style
-                        padding: 10,
-                        marginTop: 2,
-                        backgroundColor: "#FAF9F8",
-                        borderColor: "#bbb",
-                        borderWidth: 1,
+                        padding: 5,
+                        margin:7,
+                        marginTop:5,
+                        marginButton:5,
+                        backgroundColor: '#fff',
+                        borderColor: '#bbb',
+                        borderWidth: 0,
+                        borderRadius: 5,
+                        
                       }}
-                      itemTextStyle={{
-                        //text style of a single dropdown item
-                        color: "#222",
+                      itemTextStyle={{ color: '#fffffff' }}
+                      itemsContainerStyle={{ maxHeight: 145
                       }}
-                      itemsContainerStyle={{
-                        //items container style you can pass maxHeight
-                        //to restrict the items dropdown hieght
-                        maxHeight: "50%",
-                      }}
+                      textInputProps={
+                        {
+                          placeholder: "customer_type",
+                          borderBottomWidth: 0,
+                          margin:15,
+                          ...ConstantStyle.shadow,
+                          backgroundColor: Colors.white,
+                          borderRadius: 10,
+                          paddingHorizontal: 15,
+                          width: width - 30,
+                          height: 45,
+                          underlineColorAndroid: "transparent",
+                          style: {
+                              padding: 12,
+                              borderWidth: 1,
+                              borderColor: '#ccc',
+                              borderRadius: 5,
+                          },
+                          onTextChange: text => alert(text)
+                        }
+                      }
+                      listProps={
+                        {
+                          nestedScrollEnabled: true,
+                        }}
+                   
+                      inputStyle={{ ...Fonts.Black14Medium }}
                       items={customer_type}
                       //mapping of item array
                       defaultIndex={2}
@@ -945,6 +965,7 @@ export const RegisterScreen = ({ navigation }) => {
                       //reset textInput Value with true and false state
                       underlineColorAndroid="transparent"
                       //To remove the underline from the android input
+                      
                     />
                   </View>
                   <Text
@@ -961,13 +982,15 @@ export const RegisterScreen = ({ navigation }) => {
                     onPress={() => {
                       setShow(true);
                     }}
-                    style={{ width: "100%" }}
+                    style={{ marginHorizontal:5}}
                   >
                     <View
                       style={{
                         flexDirection: "row",
                         width: "95%",
-                        marginLeft: 15,
+                        margin: 10,
+                        marginTop:5,
+                        marginBottom:5,
                         // alignItems: "center",
                         // justifyContent: "center",
                         // textAlign: "center",
@@ -1015,6 +1038,8 @@ export const RegisterScreen = ({ navigation }) => {
                       ...Fonts.Grey14Bold,
                       marginHorizontal: 15,
                       marginTop: 10,
+                      marginButton: 10,
+                      
                     }}
                   >
                     {t("Birth Place")}
@@ -1062,6 +1087,7 @@ export const RegisterScreen = ({ navigation }) => {
                       marginHorizontal: 15,
                       marginTop: 10,
                       marginBottom: 5,
+                      
                     }}
                   >
                     {t("Gender")}
@@ -1083,36 +1109,62 @@ export const RegisterScreen = ({ navigation }) => {
                   // }}
                   >
                      <SearchableDropdown
+                       style={{
+                        marginHorizontal:10,
+                        ...ConstantStyle.shadow,
+                        backgroundColor: Colors.white,
+                        borderRadius: 10,
+                        paddingHorizontal: 10,
+                        width: width - 30,
+                        height: 45,
+                      }}
                       //onTextChange={(text) => console.log(text)}
                       //On text change listner on the searchable input
                       onItemSelect={(item) => setGenderSelect(item.name)}
                       //onItemSelect called after the selection from the dropdown
                       containerStyle={{ padding: 5 }}
                       //suggestion container style
-                      textInputStyle={{
-                        //inserted text style
-                        padding: 12,
-                        borderWidth: 1,
-                        borderColor: "#ccc",
-                        backgroundColor: "#FAF7F6",
-                      }}
                       itemStyle={{
-                        //single dropdown item style
-                        padding: 10,
-                        marginTop: 2,
-                        backgroundColor: "#FAF9F8",
-                        borderColor: "#bbb",
-                        borderWidth: 1,
+                        padding: 5,
+                        margin:7,
+                        marginTop:5,
+                        marginButton:5,
+                        backgroundColor: '#fff',
+                        borderColor: '#bbb',
+                        borderWidth: 0,
+                        borderRadius: 5,
+                        
                       }}
-                      itemTextStyle={{
-                        //text style of a single dropdown item
-                        color: "#222",
+                      itemTextStyle={{ color: '#fffffff' }}
+                      itemsContainerStyle={{ maxHeight: 145
                       }}
-                      itemsContainerStyle={{
-                        //items container style you can pass maxHeight
-                        //to restrict the items dropdown hieght
-                        maxHeight: "60%",
-                      }}
+                      textInputProps={
+                        {
+                          placeholder: "gender",
+                          borderBottomWidth: 0,
+                          margin:15,
+                          ...ConstantStyle.shadow,
+                          backgroundColor: Colors.white,
+                          borderRadius: 10,
+                          paddingHorizontal: 15,
+                          width: width - 30,
+                          height: 45,
+                          underlineColorAndroid: "transparent",
+                          style: {
+                              padding: 12,
+                              borderWidth: 1,
+                              borderColor: '#ccc',
+                              borderRadius: 5,
+                          },
+                          onTextChange: text => alert(text)
+                        }
+                      }
+                      listProps={
+                        {
+                          nestedScrollEnabled: true,
+                        }}
+                   
+                      inputStyle={{ ...Fonts.Black14Medium }}
                       items={gender}
                       //mapping of item array
                       defaultIndex={2}
@@ -1152,36 +1204,62 @@ export const RegisterScreen = ({ navigation }) => {
                   // }}
                   >
                      <SearchableDropdown
+                       style={{
+                        margin:10,
+                        ...ConstantStyle.shadow,
+                        backgroundColor: Colors.white,
+                        borderRadius: 10,
+                        paddingHorizontal: 15,
+                        width: width - 30,
+                        height: 45,
+                      }}
                       //onTextChange={(text) => console.log(text)}
                       //On text change listner on the searchable input
                       //onItemSelect={(item) => setGenderSelect(item.name)}
                       //onItemSelect called after the selection from the dropdown
                       containerStyle={{ padding: 5 }}
                       //suggestion container style
-                      textInputStyle={{
-                        //inserted text style
-                        padding: 12,
-                        borderWidth: 1,
-                        borderColor: "#ccc",
-                        backgroundColor: "#FAF7F6",
-                      }}
                       itemStyle={{
-                        //single dropdown item style
-                        padding: 10,
-                        marginTop: 2,
-                        backgroundColor: "#FAF9F8",
-                        borderColor: "#bbb",
-                        borderWidth: 1,
+                        padding: 5,
+                        margin:7,
+                        marginTop:5,
+                        marginButton:5,
+                        backgroundColor: '#fff',
+                        borderColor: '#bbb',
+                        borderWidth: 0,
+                        borderRadius: 5,
+                        
                       }}
-                      itemTextStyle={{
-                        //text style of a single dropdown item
-                        color: "#222",
+                      itemTextStyle={{ color: '#fffffff' }}
+                      itemsContainerStyle={{ maxHeight: 145
                       }}
-                      itemsContainerStyle={{
-                        //items container style you can pass maxHeight
-                        //to restrict the items dropdown hieght
-                        maxHeight: "60%",
-                      }}
+                      textInputProps={
+                        {
+                          placeholder: "marital_status",
+                          borderBottomWidth: 0,
+                          margin:15,
+                          ...ConstantStyle.shadow,
+                          backgroundColor: Colors.white,
+                          borderRadius: 10,
+                          paddingHorizontal: 15,
+                          width: width - 30,
+                          height: 45,
+                          underlineColorAndroid: "transparent",
+                          style: {
+                              padding: 12,
+                              borderWidth: 1,
+                              borderColor: '#ccc',
+                              borderRadius: 5,
+                          },
+                          onTextChange: text => alert(text)
+                        }
+                      }
+                      listProps={
+                        {
+                          nestedScrollEnabled: true,
+                        }}
+                   
+                      inputStyle={{ ...Fonts.Black14Medium }}
                       items={gender}
                       //mapping of item array
                       defaultIndex={2}
@@ -1301,37 +1379,63 @@ export const RegisterScreen = ({ navigation }) => {
                   //   height: 45,
                   // }}
                   >
-                     <SearchableDropdown
+                                    <SearchableDropdown
+                       style={{
+                        marginHorizontal:10,
+                        ...ConstantStyle.shadow,
+                        backgroundColor: Colors.white,
+                        borderRadius: 10,
+                        paddingHorizontal: 10,
+                        width: width - 30,
+                        height: 35,
+                      }}
                       //onTextChange={(text) => console.log(text)}
                       //On text change listner on the searchable input
-                      //onItemSelect={(item) => setGenderSelect(item.name)}
+                      onItemSelect={(item) => setGenderSelect(item.name)}
                       //onItemSelect called after the selection from the dropdown
                       containerStyle={{ padding: 5 }}
                       //suggestion container style
-                      textInputStyle={{
-                        //inserted text style
-                        padding: 12,
-                        borderWidth: 1,
-                        borderColor: "#ccc",
-                        backgroundColor: "#FAF7F6",
-                      }}
                       itemStyle={{
-                        //single dropdown item style
-                        padding: 10,
-                        marginTop: 2,
-                        backgroundColor: "#FAF9F8",
-                        borderColor: "#bbb",
-                        borderWidth: 1,
+                        padding: 5,
+                        margin:7,
+                        marginTop:5,
+                        marginButton:5,
+                        backgroundColor: '#fff',
+                        borderColor: '#bbb',
+                        borderWidth: 0,
+                        borderRadius: 5,
+                        
                       }}
-                      itemTextStyle={{
-                        //text style of a single dropdown item
-                        color: "#222",
+                      itemTextStyle={{ color: '#fffffff' }}
+                      itemsContainerStyle={{ maxHeight: 145
                       }}
-                      itemsContainerStyle={{
-                        //items container style you can pass maxHeight
-                        //to restrict the items dropdown hieght
-                        maxHeight: "60%",
-                      }}
+                      textInputProps={
+                        {
+                          placeholder: "gender",
+                          borderBottomWidth: 0,
+                          margin:15,
+                          ...ConstantStyle.shadow,
+                          backgroundColor: Colors.white,
+                          borderRadius: 10,
+                          paddingHorizontal: 15,
+                          width: width - 30,
+                          height: 45,
+                          underlineColorAndroid: "transparent",
+                          style: {
+                              padding: 12,
+                              borderWidth: 1,
+                              borderColor: '#ccc',
+                              borderRadius: 5,
+                          },
+                          onTextChange: text => alert(text)
+                        }
+                      }
+                      listProps={
+                        {
+                          nestedScrollEnabled: true,
+                        }}
+                   
+                      inputStyle={{ ...Fonts.Black14Medium }}
                       items={gender}
                       //mapping of item array
                       defaultIndex={2}
