@@ -33,6 +33,7 @@ import * as yup from "yup";
 import { SelectList } from "react-native-dropdown-select-list";
 import SearchableDropdown from "react-native-searchable-dropdown";
 import DateTimePicker from '@react-native-community/datetimepicker';
+
 export const RegisterScreen = ({ navigation }) => {
   useEffect(() => {
     DataCustomer();
@@ -46,6 +47,9 @@ export const RegisterScreen = ({ navigation }) => {
   const [customerSelect, setCustomerSelect] = useState("");
 
   const [genderSelect, setGenderSelect] = useState("");
+
+  const [maritialStatusSelect, setMaritialStatusSelect] = useState("");
+
 
   console.log(customerSelect);
   console.log(genderSelect);
@@ -74,12 +78,12 @@ export const RegisterScreen = ({ navigation }) => {
       });
   };
 
-  const data = [
-    { id: 1, name: "ITALIA" }, // fare modifica
-
-    { key: 2, value: "SPAGNA" },
-    { key: 3, value: "FRANCIA" },
-    { key: 4, value: "GERMANIA" },
+  const maritial_status = [
+    { id: 1, name: "Nubile/Celibe" }, 
+    { id: 2, name: "Sposato/a" },
+    { id: 3, name: "Separato/a" },
+    { id: 4, name: "Divorziato/a" },
+    { id: 5, name: "Vedovo/a" },
   ];
 
   const gender = [
@@ -1185,7 +1189,7 @@ export const RegisterScreen = ({ navigation }) => {
                     }}
                       onTextChange={(text) => console.log(text)}
                       //On text change listner on the searchable input
-                      onItemSelect={(item) => setGenderSelect(item.name) && selectedItem(item)}
+                      onItemSelect={(item) => setMaritialStatusSelect(item.name) && selectedItem(item)}
                       //onItemSelect called after the selection from the dropdown
                       itemStyle={{
                         padding: 5,
@@ -1228,7 +1232,7 @@ export const RegisterScreen = ({ navigation }) => {
                         }}
                    
                       inputStyle={{ ...Fonts.Black14Medium }}
-                      items={gender}
+                      items={maritial_status}
                       //mapping of item array
                       defaultIndex={2}
                       //default selected item index
