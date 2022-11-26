@@ -30,9 +30,10 @@ import { Tutela } from "../screens/bitcoin/Tutela";
 import { ComparaTu } from "../screens/bitcoin/ComparaTu";
 import { TuMarket } from "../screens/bitcoin/TuMarket";
 import { AssicuraTu } from "../screens/bitcoin/AssicuraTu";
-
 // pagina test
 import { TesoScreen } from "../screens/bitcoin/Teso";
+import {TestScreen} from "../screens/bitcoin/Test";
+
 
 const BottomTabNavigator = createBottomTabNavigator();
 
@@ -116,6 +117,11 @@ export const TabNavigator = () => {
         name="Teso"
         component={TesoScreen}
         options={{ headerShown: false, tabBarLabel: t("Teso") }}
+      />
+       <BottomTabNavigator.Screen
+        name="Test"
+        component={TestScreen}
+        options={{ headerShown: false, tabBarLabel: t("Test") }}
       />
     </BottomTabNavigator.Navigator>
   );
