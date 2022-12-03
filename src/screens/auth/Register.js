@@ -965,6 +965,7 @@ export const RegisterScreen = ({ navigation }) => {
                   </Text>
                   <View>
                     <SelectDropdown
+                    
                       data={object_customer}
                       onSelect={(selectedItem, index) => {
                         console.log(selectedItem, index);
