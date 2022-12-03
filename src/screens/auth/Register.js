@@ -30,7 +30,7 @@ import MainButton from "../components/MainButton";
 import { useTranslation } from "react-i18next";
 import { Formik, setFieldValue } from "formik";
 import * as yup from "yup";
-
+import SelectDropdown from "react-native-select-dropdown";
 import { SelectList } from "react-native-dropdown-select-list";
 import SearchableDropdown from "react-native-searchable-dropdown";
 import DateTimePicker from "@react-native-community/datetimepicker";
@@ -38,9 +38,8 @@ import DateTimePicker from "@react-native-community/datetimepicker";
 export const RegisterScreen = ({ navigation }) => {
   useEffect(() => {
     DataCustomer();
-    GeoIpLocalization()
+    GeoIpLocalization();
   }, []);
-console.log(customer_type)
   const { height, width } = Dimensions.get("window");
   const { t, i18n } = useTranslation();
   const [selected, setSelected] = useState([""]);
@@ -53,12 +52,16 @@ console.log(customer_type)
   const [maritialStatusSelect, setMaritialStatusSelect] = useState("");
 
   const [country, setCountry] = useState([]);
-  
-  const [countrySelect, setCountrySelect] = useState('');
+
+  const [countrySelect, setCountrySelect] = useState("");
+  const [educational_qualification_select, Seteducational_qualification_select] = useState("");
 
   const GeoIpLocalization = () => {
     var headers = new Headers();
-    headers.append("X-CSCAPI-KEY", "OVhvZHYxeGVTVVBoRHdpQ0pBNjJuMzJaa2xzMU9pdUVlWnhnY0l4Nw==");
+    headers.append(
+      "X-CSCAPI-KEY",
+      "OVhvZHYxeGVTVVBoRHdpQ0pBNjJuMzJaa2xzMU9pdUVlWnhnY0l4Nw=="
+    );
 
     var requestOptions = {
       method: "GET",
@@ -66,14 +69,14 @@ console.log(customer_type)
       redirect: "follow",
     };
     //setLoader(true)
-    fetch("https://api.countrystatecity.in/v1/countries/IT/cities", requestOptions)
+    fetch(
+      "https://api.countrystatecity.in/v1/countries/IT/cities",
+      requestOptions
+    )
       .then((response) => response.json())
-      .then((result) => setCountry(result))
-      // .catch((error) => console.log("error", error));
+      .then((result) => setCountry(result));
+    // .catch((error) => console.log("error", error));
   };
-
-
-
 
   // console.log(customerSelect);
   // console.log(genderSelect);
@@ -102,32 +105,26 @@ console.log(customer_type)
       });
   };
 
+  const object_customer = Object.keys(customer_type).map(
+    (key) => customer_type[key].name
+  );
+
   const maritial_status = [
-    { id: 1, name: "Nubile/Celibe" },
-    { id: 2, name: "Sposato/a" },
-    { id: 3, name: "Separato/a" },
-    { id: 4, name: "Divorziato/a" },
-    { id: 5, name: "Vedovo/a" },
+    "Nubile/Celibe",
+    "Sposato/a",
+    "Separato/a",
+    "Divorziato/a",
+    "Vedovo/a",
   ];
+  const educational_qualification = [
+    "morto",
+    "Sposato/a",
+    "Separato/a",
+    "Divorziato/a",
+    "Vedovo/a",
+  ]
 
-  const items = [
-    //name key is must.It is to show the text in front
-    { id: 1, name: 'angellist' },
-    { id: 2, name: 'codepen' },
-    { id: 3, name: 'envelope' },
-    { id: 4, name: 'etsy' },
-    { id: 5, name: 'facebook' },
-    { id: 6, name: 'foursquare' },
-    { id: 7, name: 'github-alt' },
-    { id: 8, name: 'github' },
-    { id: 9, name: 'gitlab' },
-    { id: 10, name: 'instagram' },
-  ]; 
-
-  const gender = [
-    { id: 1, name: "M" },
-    { id: 2, name: "F" },
-  ];
+  const gender = ["M", "F"];
 
   // show and hide multiple input box
   const [values, setValues] = useState({
@@ -720,7 +717,6 @@ console.log(customer_type)
                       //To remove the underline from the android input
                     /> */}
 
-       
                   <Text style={{ ...Fonts.Grey14Bold, marginHorizontal: 15 }}>
                     {t("Region")}
                   </Text>
@@ -968,67 +964,22 @@ console.log(customer_type)
                     {t("Customer type")}
                   </Text>
                   <View>
-                    <SearchableDropdown
-                      style={{
-                        margin: 10,
-                        ...ConstantStyle.shadow,
-                        backgroundColor: Colors.white,
-                        borderRadius: 10,
-                        paddingHorizontal: 15,
-                        width: width - 30,
-                        height: 45,
+                    <SelectDropdown
+                      data={object_customer}
+                      onSelect={(selectedItem, index) => {
+                        console.log(selectedItem, index);
                       }}
-                      onTextChange={(text) => console.log(text)}
-                      //On text change listner on the searchable input
-                      onItemSelect={(item) =>
-                        setCustomerSelect(item.name) && selectedItem(item)
-                      }
-                      //onItemSelect called after the selection from the dropdown
-                      itemStyle={{
-                        padding: 5,
-                        margin: 7,
-                        marginTop: 5,
-                        marginButton: 5,
-                        backgroundColor: "#fff",
-                        borderColor: "#bbb",
-                        borderWidth: 0,
-                        borderRadius: 5,
+                      buttonTextAfterSelection={(selectedItem, index) => {
+                        // text represented after item is selected
+                        // if data array is an array of objects then return selectedItem.property to render after item is selected
+                        setCustomerSelect(selectedItem);
+                        return selectedItem;
                       }}
-                      itemTextStyle={{ color: "#fffffff" }}
-                      itemsContainerStyle={{ maxHeight: 145 }}
-                      textInputProps={{
-                        placeholder: "customer_type",
-                        borderBottomWidth: 0,
-                        margin: 15,
-                        ...ConstantStyle.shadow,
-                        backgroundColor: Colors.white,
-                        borderRadius: 10,
-                        paddingHorizontal: 15,
-                        width: width - 30,
-                        height: 45,
-                        underlineColorAndroid: "transparent",
-                        style: {
-                          padding: 12,
-                          borderWidth: 1,
-                          borderColor: "#ccc",
-                          borderRadius: 5,
-                        },
-                        onTextChange: (text) => alert(text),
+                      rowTextForSelection={(item, index) => {
+                        // text represented for each item in dropdown
+                        // if data array is an array of objects then return item.property to represent item in dropdown
+                        return item;
                       }}
-                      listProps={{
-                        nestedScrollEnabled: true,
-                      }}
-                      inputStyle={{ ...Fonts.Black14Medium }}
-                      items={customer_type}
-                      //mapping of item array
-                      defaultIndex={2}
-                      //default selected item index
-                      placeholder="placeholder"
-                      //place holder for the search input
-                      resetValue={false}
-                      //reset textInput Value with true and false state
-                      underlineColorAndroid="transparent"
-                      //To remove the underline from the android input
                     />
                   </View>
                   <Text
@@ -1156,67 +1107,22 @@ console.log(customer_type)
                     {t("Gender")}
                   </Text>
                   <View>
-                    <SearchableDropdown
-                      style={{
-                        margin: 10,
-                        ...ConstantStyle.shadow,
-                        backgroundColor: Colors.white,
-                        borderRadius: 10,
-                        paddingHorizontal: 15,
-                        width: width - 30,
-                        height: 45,
+                    <SelectDropdown
+                      data={gender}
+                      onSelect={(selectedItem, index) => {
+                        console.log(selectedItem, index);
                       }}
-                      onTextChange={(text) => console.log(text)}
-                      //On text change listner on the searchable input
-                      onItemSelect={(item) =>
-                        setGenderSelect(item.name) && selectedItem(item)
-                      }
-                      //onItemSelect called after the selection from the dropdown
-                      itemStyle={{
-                        padding: 5,
-                        margin: 7,
-                        marginTop: 5,
-                        marginButton: 5,
-                        backgroundColor: "#fff",
-                        borderColor: "#bbb",
-                        borderWidth: 0,
-                        borderRadius: 5,
+                      buttonTextAfterSelection={(selectedItem, index) => {
+                        // text represented after item is selected
+                        // if data array is an array of objects then return selectedItem.property to render after item is selected
+                        return selectedItem;
                       }}
-                      itemTextStyle={{ color: "#fffffff" }}
-                      itemsContainerStyle={{ maxHeight: 145 }}
-                      textInputProps={{
-                        placeholder: "gender",
-                        borderBottomWidth: 0,
-                        margin: 15,
-                        ...ConstantStyle.shadow,
-                        backgroundColor: Colors.white,
-                        borderRadius: 10,
-                        paddingHorizontal: 15,
-                        width: width - 30,
-                        height: 45,
-                        underlineColorAndroid: "transparent",
-                        style: {
-                          padding: 12,
-                          borderWidth: 1,
-                          borderColor: "#ccc",
-                          borderRadius: 5,
-                        },
-                        onTextChange: (text) => alert(text),
+                      rowTextForSelection={(item, index) => {
+                        // text represented for each item in dropdown
+                        // if data array is an array of objects then return item.property to represent item in dropdown
+                        setGenderSelect(item);
+                        return item;
                       }}
-                      listProps={{
-                        nestedScrollEnabled: true,
-                      }}
-                      inputStyle={{ ...Fonts.Black14Medium }}
-                      items={gender}
-                      //mapping of item array
-                      defaultIndex={2}
-                      //default selected item index
-                      placeholder="placeholder"
-                      //place holder for the search input
-                      resetValue={false}
-                      //reset textInput Value with true and false state
-                      underlineColorAndroid="transparent"
-                      //To remove the underline from the android input
                     />
                   </View>
                   <Text
@@ -1230,67 +1136,22 @@ console.log(customer_type)
                     {t("Marital status")}
                   </Text>
                   <View>
-                    <SearchableDropdown
-                      style={{
-                        margin: 10,
-                        ...ConstantStyle.shadow,
-                        backgroundColor: Colors.white,
-                        borderRadius: 10,
-                        paddingHorizontal: 15,
-                        width: width - 30,
-                        height: 45,
+                    <SelectDropdown
+                      data={maritial_status}
+                      onSelect={(selectedItem, index) => {
+                        console.log(selectedItem, index);
                       }}
-                      onTextChange={(text) => console.log(text)}
-                      //On text change listner on the searchable input
-                      onItemSelect={(item) =>
-                        setMaritialStatusSelect(item.name) && selectedItem(item)
-                      }
-                      //onItemSelect called after the selection from the dropdown
-                      itemStyle={{
-                        padding: 5,
-                        margin: 7,
-                        marginTop: 5,
-                        marginButton: 5,
-                        backgroundColor: "#fff",
-                        borderColor: "#bbb",
-                        borderWidth: 0,
-                        borderRadius: 5,
+                      buttonTextAfterSelection={(selectedItem, index) => {
+                        // text represented after item is selected
+                        // if data array is an array of objects then return selectedItem.property to render after item is selected
+                        return selectedItem;
                       }}
-                      itemTextStyle={{ color: "#fffffff" }}
-                      itemsContainerStyle={{ maxHeight: 145 }}
-                      textInputProps={{
-                        placeholder: "marital_status",
-                        borderBottomWidth: 0,
-                        margin: 15,
-                        ...ConstantStyle.shadow,
-                        backgroundColor: Colors.white,
-                        borderRadius: 10,
-                        paddingHorizontal: 15,
-                        width: width - 30,
-                        height: 45,
-                        underlineColorAndroid: "transparent",
-                        style: {
-                          padding: 12,
-                          borderWidth: 1,
-                          borderColor: "#ccc",
-                          borderRadius: 5,
-                        },
-                        onTextChange: (text) => alert(text),
+                      rowTextForSelection={(item, index) => {
+                        // text represented for each item in dropdown
+                        // if data array is an array of objects then return item.property to represent item in dropdown
+                        setMaritialStatusSelect(item);
+                        return item;
                       }}
-                      listProps={{
-                        nestedScrollEnabled: true,
-                      }}
-                      inputStyle={{ ...Fonts.Black14Medium }}
-                      items={maritialStatusSelect}
-                      //mapping of item array
-                      defaultIndex={2}
-                      //default selected item index
-                      placeholder="placeholder"
-                      //place holder for the search input
-                      resetValue={false}
-                      //reset textInput Value with true and false state
-                      underlineColorAndroid="transparent"
-                      //To remove the underline from the android input
                     />
                   </View>
                   <Text
@@ -1385,67 +1246,22 @@ console.log(customer_type)
                     {t("Educational Qualification")}
                   </Text>
                   <View>
-                    <SearchableDropdown
-                      style={{
-                        margin: 10,
-                        ...ConstantStyle.shadow,
-                        backgroundColor: Colors.white,
-                        borderRadius: 10,
-                        paddingHorizontal: 15,
-                        width: width - 30,
-                        height: 45,
+                    <SelectDropdown
+                      data={educational_qualification}
+                      onSelect={(selectedItem, index) => {
+                        console.log(selectedItem, index);
                       }}
-                      onTextChange={(text) => console.log(text)}
-                      //On text change listner on the searchable input
-                      onItemSelect={(item) =>
-                        setGenderSelect(item.name) && selectedItem(item)
-                      }
-                      //onItemSelect called after the selection from the dropdown
-                      itemStyle={{
-                        padding: 5,
-                        margin: 7,
-                        marginTop: 5,
-                        marginButton: 5,
-                        backgroundColor: "#fff",
-                        borderColor: "#bbb",
-                        borderWidth: 0,
-                        borderRadius: 5,
+                      buttonTextAfterSelection={(selectedItem, index) => {
+                        // text represented after item is selected
+                        // if data array is an array of objects then return selectedItem.property to render after item is selected
+                        return selectedItem;
                       }}
-                      itemTextStyle={{ color: "#fffffff" }}
-                      itemsContainerStyle={{ maxHeight: 145 }}
-                      textInputProps={{
-                        placeholder: "educational_qualification",
-                        borderBottomWidth: 0,
-                        margin: 15,
-                        ...ConstantStyle.shadow,
-                        backgroundColor: Colors.white,
-                        borderRadius: 10,
-                        paddingHorizontal: 15,
-                        width: width - 30,
-                        height: 45,
-                        underlineColorAndroid: "transparent",
-                        style: {
-                          padding: 12,
-                          borderWidth: 1,
-                          borderColor: "#ccc",
-                          borderRadius: 5,
-                        },
-                        onTextChange: (text) => alert(text),
+                      rowTextForSelection={(item, index) => {
+                        // text represented for each item in dropdown
+                        // if data array is an array of objects then return item.property to represent item in dropdown
+                        Seteducational_qualification_select(item);
+                        return item;
                       }}
-                      listProps={{
-                        nestedScrollEnabled: true,
-                      }}
-                      inputStyle={{ ...Fonts.Black14Medium }}
-                      items={gender}
-                      //mapping of item array
-                      defaultIndex={2}
-                      //default selected item index
-                      placeholder="placeholder"
-                      //place holder for the search input
-                      resetValue={false}
-                      //reset textInput Value with true and false state
-                      underlineColorAndroid="transparent"
-                      //To remove the underline from the android input
                     />
                   </View>
                   <Text
