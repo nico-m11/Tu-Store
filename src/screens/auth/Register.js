@@ -38,7 +38,6 @@ import DateTimePicker from "@react-native-community/datetimepicker";
 export const RegisterScreen = ({ navigation }) => {
   useEffect(() => {
     DataCustomer();
-    GeoIpLocalization();
   }, []);
   const { height, width } = Dimensions.get("window");
   const { t, i18n } = useTranslation();
@@ -46,40 +45,13 @@ export const RegisterScreen = ({ navigation }) => {
 
   const [customer_type, setCustomer_type] = useState([]);
   const [customerSelect, setCustomerSelect] = useState("");
-
   const [genderSelect, setGenderSelect] = useState("");
-
   const [maritialStatusSelect, setMaritialStatusSelect] = useState("");
-
   const [country, setCountry] = useState([]);
-
-  const [countrySelect, setCountrySelect] = useState("");
-  const [educational_qualification_select, Seteducational_qualification_select] = useState("");
-
-  const GeoIpLocalization = () => {
-    var headers = new Headers();
-    headers.append(
-      "X-CSCAPI-KEY",
-      "OVhvZHYxeGVTVVBoRHdpQ0pBNjJuMzJaa2xzMU9pdUVlWnhnY0l4Nw=="
-    );
-
-    var requestOptions = {
-      method: "GET",
-      headers: headers,
-      redirect: "follow",
-    };
-    //setLoader(true)
-    fetch(
-      "https://api.countrystatecity.in/v1/countries/IT/cities",
-      requestOptions
-    )
-      .then((response) => response.json())
-      .then((result) => setCountry(result));
-    // .catch((error) => console.log("error", error));
-  };
-
-  // console.log(customerSelect);
-  // console.log(genderSelect);
+  const [
+    educational_qualification_select,
+    Seteducational_qualification_select,
+  ] = useState("");
 
   const DataCustomer = () => {
     //setLoader(true)
@@ -116,13 +88,7 @@ export const RegisterScreen = ({ navigation }) => {
     "Divorziato/a",
     "Vedovo/a",
   ];
-  const educational_qualification = [
-    "morto",
-    "Sposato/a",
-    "Separato/a",
-    "Divorziato/a",
-    "Vedovo/a",
-  ]
+  const educational_qualification = ["diploma", "laurea", "dottorato"];
 
   const gender = ["M", "F"];
 
@@ -244,6 +210,7 @@ export const RegisterScreen = ({ navigation }) => {
             phone: "",
             password: "",
             confirm_password: "",
+            country: "",
             region: "",
             province: "",
             city: "",
@@ -654,68 +621,43 @@ export const RegisterScreen = ({ navigation }) => {
                   <Text style={{ ...Fonts.Grey14Bold, marginHorizontal: 15 }}>
                     {t("Country")}
                   </Text>
-                  {/* <SearchableDropdown
+
+                  <Input
+                    placeholder={t("country")}
+                    containerStyle={{
+                      marginTop: 8,
+                      marginBottom: -10,
+                      alignItems: "center",
+                      justifyContent: "center",
+                      textAlign: "center",
+                    }}
+                    inputContainerStyle={{
+                      borderBottomWidth: 0,
+                      ...ConstantStyle.shadow,
+                      backgroundColor: Colors.white,
+                      borderRadius: 10,
+                      paddingHorizontal: 15,
+                      width: width - 30,
+                      height: 45,
+                    }}
+                    inputStyle={{ ...Fonts.Black14Medium }}
+                    secureTextEntry={false}
+                    value={values.country}
+                    onChangeText={handleChange("country")}
+                    onBlur={() => setFieldTouched("country")}
+                  />
+                  {touched.region && errors.region && (
+                    <Text
                       style={{
-                        margin: 10,
-                        ...ConstantStyle.shadow,
-                        backgroundColor: Colors.white,
-                        borderRadius: 10,
-                        paddingHorizontal: 15,
-                        width: width - 30,
-                        height: 45,
+                        fontSize: 12,
+                        color: "#FF0D10",
+                        marginLeft: "5%",
+                        marginBottom: 15,
                       }}
-                      onTextChange={(text) => console.log(text)}
-                      On text change listner on the searchable input
-                      // onItemSelect={(item) =>
-                      //   console.log(item)
-                      // }
-                      //onItemSelect called after the selection from the dropdown
-                      itemStyle={{
-                        padding: 5,
-                        margin: 7,
-                        marginTop: 5,
-                        marginButton: 5,
-                        backgroundColor: "#fff",
-                        borderColor: "#bbb",
-                        borderWidth: 0,
-                        borderRadius: 5,
-                      }}
-                      itemTextStyle={{ color: "#fffffff" }}
-                      itemsContainerStyle={{ maxHeight: 145 }}
-                      textInputProps={{
-                        placeholder: "Country",
-                        borderBottomWidth: 0,
-                        margin: 15,
-                        ...ConstantStyle.shadow,
-                        backgroundColor: Colors.white,
-                        borderRadius: 10,
-                        paddingHorizontal: 15,
-                        width: width - 30,
-                        height: 45,
-                        underlineColorAndroid: "transparent",
-                        style: {
-                          padding: 12,
-                          borderWidth: 1,
-                          borderColor: "#ccc",
-                          borderRadius: 5,
-                        },
-                        onTextChange: (text) => alert(text),
-                      }}
-                      listProps={{
-                        nestedScrollEnabled: true,
-                      }}
-                      inputStyle={{ ...Fonts.Black14Medium }}
-                      items={country.map((el) => console.log(el))}
-                      //mapping of item array
-                      defaultIndex={2}
-                      //default selected item index
-                      placeholder="placeholder"
-                      //place holder for the search input
-                      resetValue={false}
-                      //reset textInput Value with true and false state
-                      underlineColorAndroid="transparent"
-                      //To remove the underline from the android input
-                    /> */}
+                    >
+                      {errors.region}
+                    </Text>
+                  )}
 
                   <Text style={{ ...Fonts.Grey14Bold, marginHorizontal: 15 }}>
                     {t("Region")}
@@ -980,7 +922,7 @@ export const RegisterScreen = ({ navigation }) => {
                         height: 45,
                       }}
                       buttonTextStyle={{
-                        textAlign: 'left',
+                        textAlign: "left",
                         fontSize: 14,
                       }}
                       data={object_customer}
@@ -1143,7 +1085,7 @@ export const RegisterScreen = ({ navigation }) => {
                         height: 45,
                       }}
                       buttonTextStyle={{
-                        textAlign: 'left',
+                        textAlign: "left",
                         fontSize: 14,
                       }}
                       data={gender}
@@ -1190,9 +1132,8 @@ export const RegisterScreen = ({ navigation }) => {
                         height: 45,
                       }}
                       buttonTextStyle={{
-                        textAlign: 'left',
+                        textAlign: "left",
                         fontSize: 14,
-
                       }}
                       data={maritial_status}
                       onSelect={(selectedItem, index) => {
@@ -1319,9 +1260,8 @@ export const RegisterScreen = ({ navigation }) => {
                         height: 45,
                       }}
                       buttonTextStyle={{
-                        textAlign: 'left',
+                        textAlign: "left",
                         fontSize: 14,
-
                       }}
                       data={educational_qualification}
                       onSelect={(selectedItem, index) => {
@@ -1386,7 +1326,6 @@ export const RegisterScreen = ({ navigation }) => {
                     </Text>
                   )}
 
-
                   <Text style={{ ...Fonts.Grey14Bold, marginHorizontal: 15 }}>
                     {t("Linkedin")}
                   </Text>
@@ -1426,8 +1365,6 @@ export const RegisterScreen = ({ navigation }) => {
                       {errors.linkedin}
                     </Text>
                   )}
-
-
 
                   <View style={{ marginHorizontal: 15, marginVertical: 20 }}>
                     <MainButton
