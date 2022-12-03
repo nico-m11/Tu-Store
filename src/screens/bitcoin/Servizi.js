@@ -45,7 +45,7 @@ export const ServiziScreen = ({ navigation }) => {
         method: "GET",
         headers: {
           Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlRVTzYiLCJpZCI6MSwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNjY5Mjg2OTk4LCJleHAiOjE2NzE5NjUzOTh9.BT-aKLt5R6KTduXXGSFyAQNfQph55h7YyrgZ4pNfOF0",
+          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlRVTzYiLCJpZCI6MSwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNjcwMDYwMjc5LCJleHAiOjE2NzI3Mzg2Nzl9.cPlvl2t2Cr3Epvb5ybthZHepLdmRi6vk-Cr8ybfHXPs",
         },
       }
     )
@@ -74,7 +74,7 @@ export const ServiziScreen = ({ navigation }) => {
         method: "GET",
         headers: {
           Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlRVTzYiLCJpZCI6MSwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNjY5Mjg2OTk4LCJleHAiOjE2NzE5NjUzOTh9.BT-aKLt5R6KTduXXGSFyAQNfQph55h7YyrgZ4pNfOF0",
+          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlRVTzYiLCJpZCI6MSwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNjcwMDYwMjc5LCJleHAiOjE2NzI3Mzg2Nzl9.cPlvl2t2Cr3Epvb5ybthZHepLdmRi6vk-Cr8ybfHXPs",
         },
       }
     )
@@ -102,7 +102,7 @@ export const ServiziScreen = ({ navigation }) => {
         method: "GET",
         headers: {
           Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlRVTzYiLCJpZCI6MSwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNjY5Mjg2OTk4LCJleHAiOjE2NzE5NjUzOTh9.BT-aKLt5R6KTduXXGSFyAQNfQph55h7YyrgZ4pNfOF0",
+          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlRVTzYiLCJpZCI6MSwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNjcwMDYwMjc5LCJleHAiOjE2NzI3Mzg2Nzl9.cPlvl2t2Cr3Epvb5ybthZHepLdmRi6vk-Cr8ybfHXPs",
         },
       }
     )
@@ -129,7 +129,7 @@ export const ServiziScreen = ({ navigation }) => {
         method: "GET",
         headers: {
           Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlRVTzYiLCJpZCI6MSwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNjY5Mjg2OTk4LCJleHAiOjE2NzE5NjUzOTh9.BT-aKLt5R6KTduXXGSFyAQNfQph55h7YyrgZ4pNfOF0",
+          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlRVTzYiLCJpZCI6MSwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNjcwMDYwMjc5LCJleHAiOjE2NzI3Mzg2Nzl9.cPlvl2t2Cr3Epvb5ybthZHepLdmRi6vk-Cr8ybfHXPs",
         },
       }
     )
@@ -156,7 +156,7 @@ export const ServiziScreen = ({ navigation }) => {
         method: "GET",
         headers: {
           Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlRVTzYiLCJpZCI6MSwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNjY5Mjg2OTk4LCJleHAiOjE2NzE5NjUzOTh9.BT-aKLt5R6KTduXXGSFyAQNfQph55h7YyrgZ4pNfOF0",
+          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlRVTzYiLCJpZCI6MSwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNjcwMDYwMjc5LCJleHAiOjE2NzI3Mzg2Nzl9.cPlvl2t2Cr3Epvb5ybthZHepLdmRi6vk-Cr8ybfHXPs",
         },
       }
     )

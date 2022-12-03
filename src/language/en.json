@@ -147,6 +147,8 @@
         "set_password":"set the new password for you account so you can login and access all the features",
         "exit":"Exit",
         "exit_Text":"Are you sure you want to exit app ?",
-        "copy":"Copied"
+        "copy":"Copied",
+        "lorem_8":"fuck!"
+
     }
 }

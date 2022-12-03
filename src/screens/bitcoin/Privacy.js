@@ -25,7 +25,7 @@ export const Privacy = ({ navigation, route }) => {
           <Text style={{ ...Fonts.Black18Bold, marginTop: 15 }}>
             {t("term_of_use")}
           </Text>
-          <Text style={{ ...Fonts.Black14Medium }}>{t("lorem_7")}</Text>
+          <Text style={{ ...Fonts.Black14Medium }}>{t("lorem_8")}</Text>
         </View>
       </View>
     </SafeAreaView>

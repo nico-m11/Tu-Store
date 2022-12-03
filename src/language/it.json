@@ -146,6 +146,7 @@
         "set_password":"Setta la nuova password per poter accedere ",
         "exit":"Esci",
         "exit_Text":"Sei Sicuro di voler uscire dall'app?",
-        "copy":"Copiato!"
+        "copy":"Copiato!",
+        "lorem_8":"Stocazzo"
     }
 }
