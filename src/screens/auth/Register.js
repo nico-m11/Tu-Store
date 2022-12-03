@@ -965,6 +965,24 @@ export const RegisterScreen = ({ navigation }) => {
                   </Text>
                   <View>
                     <SelectDropdown
+                      buttonStyle={{
+                        marginTop: 10,
+                        marginHorizontal: 10,
+                        borderColor: "#e0e0e0",
+                        borderWidth: 1.5,
+                        borderBottomWidth: 1,
+                        ...ConstantStyle.shadow,
+                        backgroundColor: Colors.white,
+                        borderRadius: 10,
+                        //paddingHorizontal: 15,
+                        marginBottom: 2,
+                        width: "95%",
+                        height: 45,
+                      }}
+                      buttonTextStyle={{
+                        textAlign: 'left',
+                        fontSize: 14,
+                      }}
                       data={object_customer}
                       onSelect={(selectedItem, index) => {
                         console.log(selectedItem, index);
@@ -1032,7 +1050,7 @@ export const RegisterScreen = ({ navigation }) => {
                         style={{
                           color: date === "" ? Colors.grey : Colors.black,
                           fontSize: 14,
-                          fontFamily: "Roboto-Regular",
+                          //fontFamily: "Roboto-Regular",
                         }}
                       >
                         {date === "" ? "Date of birth" : date}
@@ -1108,6 +1126,26 @@ export const RegisterScreen = ({ navigation }) => {
                   </Text>
                   <View>
                     <SelectDropdown
+                      placeholder={t("Fiscal Code")}
+                      buttonStyle={{
+                        marginTop: 20,
+                        marginBottom: 20,
+                        marginHorizontal: 10,
+                        borderColor: "#e0e0e0",
+                        borderWidth: 1.5,
+                        borderBottomWidth: 1,
+                        ...ConstantStyle.shadow,
+                        backgroundColor: Colors.white,
+                        borderRadius: 10,
+                        //paddingHorizontal: 15,
+                        marginBottom: 2,
+                        width: "95%",
+                        height: 45,
+                      }}
+                      buttonTextStyle={{
+                        textAlign: 'left',
+                        fontSize: 14,
+                      }}
                       data={gender}
                       onSelect={(selectedItem, index) => {
                         console.log(selectedItem, index);
@@ -1137,6 +1175,25 @@ export const RegisterScreen = ({ navigation }) => {
                   </Text>
                   <View>
                     <SelectDropdown
+                      buttonStyle={{
+                        marginTop: 20,
+                        marginHorizontal: 10,
+                        borderColor: "#e0e0e0",
+                        borderWidth: 1.5,
+                        borderBottomWidth: 1,
+                        ...ConstantStyle.shadow,
+                        backgroundColor: Colors.white,
+                        borderRadius: 10,
+                        //paddingHorizontal: 15,
+                        marginBottom: 2,
+                        width: "95%",
+                        height: 45,
+                      }}
+                      buttonTextStyle={{
+                        textAlign: 'left',
+                        fontSize: 14,
+
+                      }}
                       data={maritial_status}
                       onSelect={(selectedItem, index) => {
                         console.log(selectedItem, index);
@@ -1247,6 +1304,25 @@ export const RegisterScreen = ({ navigation }) => {
                   </Text>
                   <View>
                     <SelectDropdown
+                      buttonStyle={{
+                        marginTop: 20,
+                        marginHorizontal: 10,
+                        borderColor: "#e0e0e0",
+                        borderWidth: 1.5,
+                        borderBottomWidth: 1,
+                        ...ConstantStyle.shadow,
+                        backgroundColor: Colors.white,
+                        borderRadius: 10,
+                        //paddingHorizontal: 15,
+                        marginBottom: 2,
+                        width: "95%",
+                        height: 45,
+                      }}
+                      buttonTextStyle={{
+                        textAlign: 'left',
+                        fontSize: 14,
+
+                      }}
                       data={educational_qualification}
                       onSelect={(selectedItem, index) => {
                         console.log(selectedItem, index);
@@ -1310,87 +1386,6 @@ export const RegisterScreen = ({ navigation }) => {
                     </Text>
                   )}
 
-                  <Text style={{ ...Fonts.Grey14Bold, marginHorizontal: 15 }}>
-                    {t("Salary")}
-                  </Text>
-                  <Input
-                    placeholder={t("Salary")}
-                    keyboardType="number-pad"
-                    maxLength={10}
-                    containerStyle={{
-                      marginTop: 8,
-                      marginBottom: -10,
-                      alignItems: "center",
-                      justifyContent: "center",
-                      textAlign: "center",
-                    }}
-                    inputContainerStyle={{
-                      borderBottomWidth: 0,
-                      ...ConstantStyle.shadow,
-                      backgroundColor: Colors.white,
-                      borderRadius: 10,
-                      paddingHorizontal: 15,
-                      width: width - 30,
-                      height: 45,
-                    }}
-                    inputStyle={{ ...Fonts.Black14Medium }}
-                    secureTextEntry={false}
-                    value={values.salary}
-                    onChangeText={handleChange("salary")}
-                    onBlur={() => setFieldTouched("salary")}
-                  />
-                  {touched.salary && errors.salary && (
-                    <Text
-                      style={{
-                        fontSize: 12,
-                        color: "#FF0D10",
-                        marginLeft: "5%",
-                        marginBottom: 15,
-                      }}
-                    >
-                      {errors.salary}
-                    </Text>
-                  )}
-
-                  <Text style={{ ...Fonts.Grey14Bold, marginHorizontal: 15 }}>
-                    {t("Skype")}
-                  </Text>
-                  <Input
-                    placeholder={t("Skype")}
-                    containerStyle={{
-                      marginTop: 8,
-                      marginBottom: -10,
-                      alignItems: "center",
-                      justifyContent: "center",
-                      textAlign: "center",
-                    }}
-                    inputContainerStyle={{
-                      borderBottomWidth: 0,
-                      ...ConstantStyle.shadow,
-                      backgroundColor: Colors.white,
-                      borderRadius: 10,
-                      paddingHorizontal: 15,
-                      width: width - 30,
-                      height: 45,
-                    }}
-                    inputStyle={{ ...Fonts.Black14Medium }}
-                    secureTextEntry={false}
-                    value={values.skype}
-                    onChangeText={handleChange("skype")}
-                    onBlur={() => setFieldTouched("skype")}
-                  />
-                  {touched.skype && errors.skype && (
-                    <Text
-                      style={{
-                        fontSize: 12,
-                        color: "#FF0D10",
-                        marginLeft: "5%",
-                        marginBottom: 15,
-                      }}
-                    >
-                      {errors.skype}
-                    </Text>
-                  )}
 
                   <Text style={{ ...Fonts.Grey14Bold, marginHorizontal: 15 }}>
                     {t("Linkedin")}
@@ -1432,85 +1427,7 @@ export const RegisterScreen = ({ navigation }) => {
                     </Text>
                   )}
 
-                  <Text style={{ ...Fonts.Grey14Bold, marginHorizontal: 15 }}>
-                    {t("Twitter")}
-                  </Text>
-                  <Input
-                    placeholder={t("Twitter")}
-                    containerStyle={{
-                      marginTop: 8,
-                      marginBottom: -10,
-                      alignItems: "center",
-                      justifyContent: "center",
-                      textAlign: "center",
-                    }}
-                    inputContainerStyle={{
-                      borderBottomWidth: 0,
-                      ...ConstantStyle.shadow,
-                      backgroundColor: Colors.white,
-                      borderRadius: 10,
-                      paddingHorizontal: 15,
-                      width: width - 30,
-                      height: 45,
-                    }}
-                    inputStyle={{ ...Fonts.Black14Medium }}
-                    secureTextEntry={false}
-                    value={values.twitter}
-                    onChangeText={handleChange("twitter")}
-                    onBlur={() => setFieldTouched("twitter")}
-                  />
-                  {touched.twitter && errors.twitter && (
-                    <Text
-                      style={{
-                        fontSize: 12,
-                        color: "#FF0D10",
-                        marginLeft: "5%",
-                        marginBottom: 15,
-                      }}
-                    >
-                      {errors.twitter}
-                    </Text>
-                  )}
 
-                  <Text style={{ ...Fonts.Grey14Bold, marginHorizontal: 15 }}>
-                    {t("Facebook")}
-                  </Text>
-                  <Input
-                    placeholder={t("Facebook")}
-                    containerStyle={{
-                      marginTop: 8,
-                      marginBottom: -10,
-                      alignItems: "center",
-                      justifyContent: "center",
-                      textAlign: "center",
-                    }}
-                    inputContainerStyle={{
-                      borderBottomWidth: 0,
-                      ...ConstantStyle.shadow,
-                      backgroundColor: Colors.white,
-                      borderRadius: 10,
-                      paddingHorizontal: 15,
-                      width: width - 30,
-                      height: 45,
-                    }}
-                    inputStyle={{ ...Fonts.Black14Medium }}
-                    secureTextEntry={false}
-                    value={values.facebook}
-                    onChangeText={handleChange("facebook")}
-                    onBlur={() => setFieldTouched("facebook")}
-                  />
-                  {touched.facebook && errors.facebook && (
-                    <Text
-                      style={{
-                        fontSize: 12,
-                        color: "#FF0D10",
-                        marginLeft: "5%",
-                        marginBottom: 15,
-                      }}
-                    >
-                      {errors.facebook}
-                    </Text>
-                  )}
 
                   <View style={{ marginHorizontal: 15, marginVertical: 20 }}>
                     <MainButton
