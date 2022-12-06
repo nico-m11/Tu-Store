@@ -55,16 +55,13 @@ export const RegisterScreen = ({ navigation }) => {
 
   const DataCustomer = () => {
     //setLoader(true)
-    fetch(
-      "https://api.tu-store.soluzionitop.cloud/api/dictionary?column=customer_type",
-      {
-        method: "GET",
-        headers: {
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlRVTzYiLCJpZCI6MSwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNjcwMDYwMjc5LCJleHAiOjE2NzI3Mzg2Nzl9.cPlvl2t2Cr3Epvb5ybthZHepLdmRi6vk-Cr8ybfHXPs",
-        },
-      }
-    )
+    fetch("https://api.tu-store.soluzionitop.cloud/api/customers", {
+      method: "GET",
+      headers: {
+        Authorization:
+          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlRVTzYiLCJpZCI6MSwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNjcwMDYwMjc5LCJleHAiOjE2NzI3Mzg2Nzl9.cPlvl2t2Cr3Epvb5ybthZHepLdmRi6vk-Cr8ybfHXPs",
+      },
+    })
       .then((res) => {
         //setLoader(false)
         return res.json();
@@ -135,6 +132,46 @@ export const RegisterScreen = ({ navigation }) => {
     let newDate = new Date(selectedDate);
     newDate = newDate.toISOString().substring(0, 10);
     setDate(newDate);
+  };
+
+  const onSubmitValue = () => {
+    const requestOption = {
+      headers: {
+        BearerToken:
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlRVTzYiLCJpZCI6NiwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNjY3OTAwOTcxLCJleHAiOjE2NzA1NzkzNzF9.523N8oDpL_AufsFeSydhthNFrIls_0Q1ttA3LGHT8TQs",
+      },
+      method: "POST",
+      body: JSON.stringify({
+        name: values.name,
+        last_name: values.lastName,
+        email: values.email,
+        mobile: values.mobile,
+        phone: values.phone,
+        password: values.password,
+        //confirm_password: values.confirm_password,
+        country: values.country,
+        region: values.region,
+        province: values.province,
+        city_address: values.city_address,
+        zip_code: values.zip_code,
+        address: values.address,
+        customer_type: customerSelect,
+        birth_date: date,
+        birth_place: values.birth_place,
+        gender: genderSelect,
+        maritial_status: maritialStatusSelect,
+        fiscal_code: values.fiscal_code,
+        educational_qualification: educational_qualification_select,
+        job: values.job,
+        linkedin: values.linkedin,
+      })
+        .fetch(
+          "https://api.tu-store.soluzionitop.cloud/api/customers",
+          requestOption
+        )
+        .then((response) => response.json())
+        .then((data) => console.log(data)),
+    };
   };
 
   return (
@@ -220,16 +257,11 @@ export const RegisterScreen = ({ navigation }) => {
             birth_place: "",
             fiscal_code: "",
             job: "",
-            salary: "",
-            skype: "",
             linkedin: "",
-            twitter: "",
-            facebook: "",
             customer_type: "",
             marital_status: "",
             educational_qualification: "",
           }}
-          onSubmit={(values) => Alert.alert(JSON.stringify(values))}
           validationSchema={yup.object().shape({
             name: yup.string().required("Please, provide your name!"),
             lastName: yup
@@ -253,6 +285,45 @@ export const RegisterScreen = ({ navigation }) => {
             //     "Password and Confirm Password didn't match"
             //   ),
           })}
+          onSubmit={(values) => {
+            const requestOption = {
+              headers: {
+                BearerToken:
+                  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlRVTzYiLCJpZCI6NiwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNjY3OTAwOTcxLCJleHAiOjE2NzA1NzkzNzF9.523N8oDpL_AufsFeSydhthNFrIls_0Q1ttA3LGHT8TQs",
+              },
+              method: "POST",
+              body: JSON.stringify({
+                name: values.name,
+                last_name: values.lastName,
+                email: values.email,
+                mobile: values.mobile,
+                phone: values.phone,
+                password: values.password,
+                //confirm_password: values.confirm_password,
+                country: values.country,
+                region: values.region,
+                province: values.province,
+                city_address: values.city_address,
+                zip_code: values.zip_code,
+                address: values.address,
+                customer_type: customerSelect,
+                birth_date: date,
+                birth_place: values.birth_place,
+                gender: genderSelect,
+                maritial_status: maritialStatusSelect,
+                fiscal_code: values.fiscal_code,
+                educational_qualification: educational_qualification_select,
+                job: values.job,
+                linkedin: values.linkedin,
+              })
+                .fetch(
+                  "https://api.tu-store.soluzionitop.cloud/api/customers",
+                  requestOption
+                )
+                .then((response) => response.json())
+                .then((data) => console.log(data)),
+            };
+          }}
         >
           {({
             values,
