@@ -57,11 +57,6 @@ export const TestScreen = ({ navigation }) => {
     //var dataToSend = {formData.email, formData.password};
     //making data to send on server
     var formBody = [];
-    // for (var key in dataToSend) {
-    //   var encodedKey = encodeURIComponent(key);
-    //   var encodedValue = encodeURIComponent(dataToSend[key]);
-    //   formBody.push(encodedKey + '=' + encodedValue);
-    // }
     formBody = formData;
     //POST request
     fetch('https://api.tu-store.soluzionitop.cloud/api/customers', {
@@ -96,12 +91,20 @@ export const TestScreen = ({ navigation }) => {
   );
 
   useEffect(() => {
+    register('name');
     register('email');
     register('password');
   }, [register]);
 
   return (
     <View style={{marginLeft:40, marginTop:50}}>
+        <TextInput
+        autoCompleteType="name"
+        keyboardType="email-address"
+        textContentType="emailAddress"
+        placeholder="name"
+        onChangeText={onChangeField('name')}
+      />
       <TextInput
         autoCompleteType="email"
         keyboardType="email-address"

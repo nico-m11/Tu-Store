@@ -1,4 +1,4 @@
-import React, { useState, Component, useEffect } from "react";
+import React, { useState, Component, useEffect, useCallback } from "react";
 import {
   SafeAreaView,
   Text,
@@ -34,6 +34,7 @@ import SelectDropdown from "react-native-select-dropdown";
 import { SelectList } from "react-native-dropdown-select-list";
 import SearchableDropdown from "react-native-searchable-dropdown";
 import DateTimePicker from "@react-native-community/datetimepicker";
+import { useForm } from 'react-hook-form';
 
 export const RegisterScreen = ({ navigation }) => {
   useEffect(() => {
@@ -47,7 +48,7 @@ export const RegisterScreen = ({ navigation }) => {
   const [customerSelect, setCustomerSelect] = useState("");
   const [genderSelect, setGenderSelect] = useState("");
   const [maritialStatusSelect, setMaritialStatusSelect] = useState("");
-  const [country, setCountry] = useState([]);
+
   const [
     educational_qualification_select,
     Seteducational_qualification_select,
@@ -55,19 +56,22 @@ export const RegisterScreen = ({ navigation }) => {
 
   const DataCustomer = () => {
     //setLoader(true)
-    fetch("https://api.tu-store.soluzionitop.cloud/api/dictionary?column=customer_type", {
-      method: "GET",
-      headers: {
-        Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InAubWFyYXNjYTg5QGdtYWlsLmNvbSIsImlkIjo4LCJpYXQiOjE2NzA0OTcwNTEsImV4cCI6MTY3MzE3NTQ1MX0.TvaEDRJwkGQYdWXeTbutep0_GdG1qPBDhHOgOmnkEFg",
-      },
-    })
+    fetch(
+      "https://api.tu-store.soluzionitop.cloud/api/dictionary?column=customer_type",
+      {
+        method: "GET",
+        headers: {
+          Authorization:
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InAubWFyYXNjYTg5QGdtYWlsLmNvbSIsImlkIjo4LCJpYXQiOjE2NzA0OTcwNTEsImV4cCI6MTY3MzE3NTQ1MX0.TvaEDRJwkGQYdWXeTbutep0_GdG1qPBDhHOgOmnkEFg",
+        },
+      }
+    )
       .then((res) => {
         //setLoader(false)
         return res.json();
       })
       .then((value) => {
-        console.log(value)
+        console.log(value);
         setCustomer_type(value.items);
       })
       .catch((err) => {
@@ -135,45 +139,68 @@ export const RegisterScreen = ({ navigation }) => {
     setDate(newDate);
   };
 
-  const onSubmitValue = () => {
-    const requestOption = {
+  const { register, handleSubmit, setValue } = useForm();
+  const onSubmit = useCallback((formData) => {
+    //console.log(formData);
+
+ var formBody = [];
+
+formData['data'] = date;
+formData['customer_type'] = customerSelect;
+formData['gender'] = genderSelect;
+formData['educational_qualification'] = educational_qualification_select;
+formData['maritial_status'] = maritialStatusSelect;
+
+formBody.push(formData);
+
+console.log(formBody); 
+//     var formBody = [
+//       date,
+//       customerSelect,
+//       genderSelect,
+//       educational_qualification_select,
+//       maritialStatusSelect,
+//       formData
+//     ];
+//     //formBody = formData;
+//     console.log(formBody);
+    
+    //POST request
+    fetch("https://api.tu-store.soluzionitop.cloud/api/customers", {
+      method: "POST", //Request Type
+      body: {formBody}, //post body
       headers: {
-        BearerToken:
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlRVTzYiLCJpZCI6NiwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNjY3OTAwOTcxLCJleHAiOjE2NzA1NzkzNzF9.523N8oDpL_AufsFeSydhthNFrIls_0Q1ttA3LGHT8TQs",
+        //Header Defination
+        "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
+        Authorization:
+          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InAubWFyYXNjYTg5QGdtYWlsLmNvbSIsImlkIjo4LCJpYXQiOjE2NzA0OTcwNTEsImV4cCI6MTY3MzE3NTQ1MX0.TvaEDRJwkGQYdWXeTbutep0_GdG1qPBDhHOgOmnkEFg",
       },
-      method: "POST",
-      body: JSON.stringify({
-        name: values.name,
-        last_name: values.lastName,
-        email: values.email,
-        mobile: values.mobile,
-        phone: values.phone,
-        password: values.password,
-        //confirm_password: values.confirm_password,
-        country: values.country,
-        region: values.region,
-        province: values.province,
-        city_address: values.city_address,
-        zip_code: values.zip_code,
-        address: values.address,
-        customer_type: customerSelect,
-        birth_date: date,
-        birth_place: values.birth_place,
-        gender: genderSelect,
-        maritial_status: maritialStatusSelect,
-        fiscal_code: values.fiscal_code,
-        educational_qualification: educational_qualification_select,
-        job: values.job,
-        linkedin: values.linkedin,
+    })
+      .then((response) => response.json())
+      //If response is in json then in success
+      .then((responseJson) => {
+        alert(JSON.stringify(responseJson));
+        console.log(responseJson);
       })
-        .fetch(
-          "https://api.tu-store.soluzionitop.cloud/api/customers",
-          requestOption
-        )
-        .then((response) => response.json())
-        .then((data) => console.log(data)),
-    };
-  };
+      //If response is not in json then in error
+      .catch((error) => {
+        alert(JSON.stringify(error));
+        console.error(error);
+      });
+  }, []);
+
+  const onChangeField = useCallback(
+    (name) => (text) => {
+      setValue(name, text);
+    },
+    []
+  );
+
+  useEffect(() => {
+    register("name");
+    register("email");
+    register("password");
+  }, [register]);
 
   return (
     <SafeAreaView style={{ ...ConstantStyle.container }}>
@@ -220,1323 +247,917 @@ export const RegisterScreen = ({ navigation }) => {
           borderTopRightRadius: 30,
         }}
       >
-        {/* <View className="PannelStep">
-          <Text className={step1 == true ? "step active" : "step"}>
-            Step <Text className="stepNumber">1</Text>
-          </Text>
-          <Text className="step-separator">&raquo;</Text>
-          <Text className={step2 == true ? "step active" : "step"}>
-            Step <Text className="stepNumber">2</Text>
-          </Text>
-          <Text className="step-separator">&raquo;</Text>
-          <Text className={step3 == true ? "step active" : "step"}>
-            Step <Text className="stepNumber">3</Text>
-          </Text>
-          <Text className="step-separator">&raquo;</Text>
-          <Text className={step4 == true ? "step active" : "step"}>
-            Step <Text className="stepNumber">4</Text>
-          </Text>
-          <Text className="step-separator">&raquo;</Text>
-        </View> */}
-
-        <Formik
-          initialValues={{
-            name: "",
-            lastName: "",
-            email: "",
-            mobile: "",
-            phone: "",
-            password: "",
-            confirm_password: "",
-            country: "",
-            region: "",
-            province: "",
-            city: "",
-            zip_code: "",
-            address: "",
-            date: "",
-            birth_place: "",
-            fiscal_code: "",
-            job: "",
-            linkedin: "",
-            customer_type: "",
-            marital_status: "",
-            educational_qualification: "",
-          }}
-          validationSchema={yup.object().shape({
-            name: yup.string().required("Please, provide your name!"),
-            lastName: yup
-              .string()
-              .required('"Please, provide your Last Name!"'),
-            mobile: yup
-              .number()
-              .required("Please, provide your mobile number!"),
-            email: yup.string().email().required(),
-            password: yup
-              .string()
-              .min(4)
-              .max(10, "Password should not excced 10 chars.")
-              .required(),
-            // confirm_password: yup.string(),
-            // is: (val) => (val && val.length > 0 ? true : false),
-            // then: yup
-            //   .string()
-            //   .oneOf(
-            //     [yup.ref("password")],
-            //     "Password and Confirm Password didn't match"
-            //   ),
-          })}
-          onSubmit={ async (values, { setSubmitting }) => {
-            const requestOption = {
-              headers: {
-                Authorization:
-                "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InAubWFyYXNjYTg5QGdtYWlsLmNvbSIsImlkIjo4LCJpYXQiOjE2NzA0OTcwNTEsImV4cCI6MTY3MzE3NTQ1MX0.TvaEDRJwkGQYdWXeTbutep0_GdG1qPBDhHOgOmnkEFg",
-              },
-              method: "POST",
-              body: JSON.stringify({
-                name: values.name,
-                last_name: values.lastName,
-                email: values.email,
-                mobile: values.mobile,
-                phone: values.phone,
-                //password: values.password,
-                //confirm_password: values.confirm_password,
-                country: values.country,
-                region: values.region,
-                province: values.province,
-                city_address: values.city_address,
-                zip_code: values.zip_code,
-                address: values.address,
-                customer_type: customerSelect,
-                birth_date: date,
-                birth_place: values.birth_place,
-                gender: genderSelect,
-                maritial_status: maritialStatusSelect,
-                fiscal_code: values.fiscal_code,
-                educational_qualification: educational_qualification_select,
-                job: values.job,
-                linkedin: values.linkedin,
-              })
-                .fetch(
-                  "https://api.tu-store.soluzionitop.cloud/api/customers",
-                  requestOption
-                )
-                .then((response) => response.json())
-                .then((data) => console.log(data)),
-            };
+        <View
+          style={{
+            paddingTop: 20,
           }}
         >
-          {({
-            values,
-            handleChange,
-            errors,
-            setFieldTouched,
-            touched,
-            isValid,
-            handleSubmit,
-            setFieldValue,
-            formik
-          }) => (
-            <View
-              style={{
-                paddingTop: 20,
-              }}
-            >
-              {step1 == true ? (
-                <>
-                  <Text style={{ textAlign: "center", fontSize: 20 }}>
-                    Step1
-                  </Text>
-                  <Text style={{ ...Fonts.Grey14Bold, marginHorizontal: 15 }}>
-                    {t("Name")}
-                  </Text>
-                  <Input
-                    placeholder={t("name")}
-                    containerStyle={{
-                      marginTop: 8,
-                      marginBottom: -10,
-                      alignItems: "center",
-                      justifyContent: "center",
-                      textAlign: "center",
-                    }}
-                    inputContainerStyle={{
-                      borderBottomWidth: 0,
-                      ...ConstantStyle.shadow,
-                      backgroundColor: Colors.white,
-                      borderRadius: 10,
-                      paddingHorizontal: 15,
-                      width: width - 30,
-                      height: 45,
-                    }}
-                    inputStyle={{ ...Fonts.Black14Medium }}
-                    secureTextEntry={false}
-                    value={values.name}
-                    onChangeText={handleChange("name")}
-                    onBlur={() => setFieldTouched("name")}
-                  />
-                  {touched.name && errors.name && (
-                    <Text
-                      style={{
-                        fontSize: 12,
-                        color: "#FF0D10",
-                        marginLeft: "5%",
-                        marginBottom: 15,
-                      }}
-                    >
-                      {errors.name}
-                    </Text>
-                  )}
-
-                  <Text style={{ ...Fonts.Grey14Bold, marginHorizontal: 15 }}>
-                    {t("Last Name")}
-                  </Text>
-                  <Input
-                    placeholder={t("Last Name")}
-                    containerStyle={{
-                      marginTop: 8,
-                      marginBottom: -10,
-                      alignItems: "center",
-                      justifyContent: "center",
-                      textAlign: "center",
-                    }}
-                    inputContainerStyle={{
-                      borderBottomWidth: 0,
-                      ...ConstantStyle.shadow,
-                      backgroundColor: Colors.white,
-                      borderRadius: 10,
-                      paddingHorizontal: 15,
-                      width: width - 30,
-                      height: 45,
-                    }}
-                    inputStyle={{ ...Fonts.Black14Medium }}
-                    secureTextEntry={false}
-                    value={values.lastName}
-                    onChangeText={handleChange("lastName")}
-                    onBlur={() => setFieldTouched("lastName")}
-                  />
-                  {touched.lastName && errors.lastName && (
-                    <Text
-                      style={{
-                        fontSize: 12,
-                        color: "#FF0D10",
-                        marginLeft: "5%",
-                        marginBottom: 15,
-                      }}
-                    >
-                      {errors.lastName}
-                    </Text>
-                  )}
-
-                  <Text style={{ ...Fonts.Grey14Bold, marginHorizontal: 15 }}>
-                    {t("email")}
-                  </Text>
-                  <Input
-                    placeholder={t("email")}
-                    containerStyle={{
-                      marginTop: 8,
-                      marginBottom: -10,
-                      alignItems: "center",
-                      justifyContent: "center",
-                      textAlign: "center",
-                    }}
-                    inputContainerStyle={{
-                      borderBottomWidth: 0,
-                      ...ConstantStyle.shadow,
-                      backgroundColor: Colors.white,
-                      borderRadius: 10,
-                      paddingHorizontal: 15,
-                      width: width - 30,
-                      height: 45,
-                    }}
-                    inputStyle={{ ...Fonts.Black14Medium }}
-                    keyboardType="email-address"
-                    secureTextEntry={false}
-                    value={values.email}
-                    style={{ marginBottom: 20 }}
-                    onChangeText={handleChange("email")}
-                    onBlur={() => setFieldTouched("email")}
-                  />
-                  {touched.email && errors.email && (
-                    <Text
-                      style={{
-                        fontSize: 12,
-                        color: "#FF0D10",
-                        marginLeft: "5%",
-                        marginBottom: 15,
-                      }}
-                    >
-                      {errors.email}
-                    </Text>
-                  )}
-
-                  <Text style={{ ...Fonts.Grey14Bold, marginHorizontal: 15 }}>
-                    {t("mobile")}
-                  </Text>
-                  <Input
-                    placeholder={t("mobile")}
-                    containerStyle={{
-                      marginTop: 8,
-                      marginBottom: -10,
-                      alignItems: "center",
-                      justifyContent: "center",
-                      textAlign: "center",
-                    }}
-                    inputContainerStyle={{
-                      borderBottomWidth: 0,
-                      ...ConstantStyle.shadow,
-                      backgroundColor: Colors.white,
-                      borderRadius: 10,
-                      paddingHorizontal: 15,
-                      width: width - 30,
-                      height: 45,
-                    }}
-                    inputStyle={{ ...Fonts.Black14Medium }}
-                    secureTextEntry={false}
-                    keyboardType="number-pad"
-                    maxLength={10}
-                    value={values.mobile}
-                    style={{ marginBottom: 20 }}
-                    onChangeText={handleChange("mobile")}
-                    onBlur={() => setFieldTouched("mobile")}
-                  />
-                  {touched.mobile && errors.mobile && (
-                    <Text
-                      style={{
-                        fontSize: 12,
-                        color: "#FF0D10",
-                        marginLeft: "5%",
-                        marginBottom: 15,
-                      }}
-                    >
-                      {errors.mobile}
-                    </Text>
-                  )}
-
-                  <Text style={{ ...Fonts.Grey14Bold, marginHorizontal: 15 }}>
-                    {t("phone")}
-                  </Text>
-                  <Input
-                    placeholder={t("phone")}
-                    containerStyle={{
-                      marginTop: 8,
-                      marginBottom: -10,
-                      alignItems: "center",
-                      justifyContent: "center",
-                      textAlign: "center",
-                    }}
-                    inputContainerStyle={{
-                      borderBottomWidth: 0,
-                      ...ConstantStyle.shadow,
-                      backgroundColor: Colors.white,
-                      borderRadius: 10,
-                      paddingHorizontal: 15,
-                      width: width - 30,
-                      height: 45,
-                    }}
-                    inputStyle={{ ...Fonts.Black14Medium }}
-                    secureTextEntry={false}
-                    keyboardType="number-pad"
-                    maxLength={10}
-                    value={values.phone}
-                    style={{ marginBottom: 20 }}
-                    onChangeText={handleChange("phone")}
-                    onBlur={() => setFieldTouched("phone")}
-                  />
-                  {touched.phone && errors.phone && (
-                    <Text
-                      style={{
-                        fontSize: 12,
-                        color: "#FF0D10",
-                        marginLeft: "5%",
-                        marginBottom: 15,
-                      }}
-                    >
-                      {errors.phone}
-                    </Text>
-                  )}
-
-                  <Text style={{ ...Fonts.Grey14Bold, marginHorizontal: 15 }}>
-                    {t("password")}
-                  </Text>
-                  <Input
-                    placeholder={t("password")}
-                    containerStyle={{
-                      marginTop: 8,
-                      marginBottom: -10,
-                      alignItems: "center",
-                      justifyContent: "center",
-                      textAlign: "center",
-                    }}
-                    inputContainerStyle={{
-                      borderBottomWidth: 0,
-                      ...ConstantStyle.shadow,
-                      backgroundColor: Colors.white,
-                      borderRadius: 10,
-                      paddingHorizontal: 15,
-                      width: width - 30,
-                      height: 45,
-                    }}
-                    inputStyle={{ ...Fonts.Black14Medium }}
-                    rightIcon={
-                      <Ionicons
-                        name={
-                          values.password === "Password" ? "eye" : "eye-off"
-                        }
-                        style={{ marginLeft: 15 }}
-                        color={Colors.grey}
-                        size={20}
-                      />
-                    }
-                    secureTextEntry={
-                      values.password === "Password" ? false : true
-                    }
-                    value={values.password}
-                    onChangeText={handleChange("password")}
-                    onBlur={() => setFieldTouched("password")}
-                  />
-                  {touched.password && errors.password && (
-                    <Text
-                      style={{
-                        fontSize: 12,
-                        color: "#FF0D10",
-                        marginLeft: "5%",
-                        marginBottom: 15,
-                      }}
-                    >
-                      {errors.password}
-                    </Text>
-                  )}
-                  <Text style={{ ...Fonts.Grey14Bold, marginHorizontal: 15 }}>
-                    {t("confirm_password")}
-                  </Text>
-                  <Input
-                    placeholder={t("confirm_password")}
-                    containerStyle={{
-                      marginTop: 8,
-                      marginBottom: -10,
-                      alignItems: "center",
-                      justifyContent: "center",
-                      textAlign: "center",
-                    }}
-                    inputContainerStyle={{
-                      borderBottomWidth: 0,
-                      ...ConstantStyle.shadow,
-                      backgroundColor: Colors.white,
-                      borderRadius: 10,
-                      paddingHorizontal: 15,
-                      width: width - 30,
-                      height: 45,
-                    }}
-                    inputStyle={{ ...Fonts.Black14Medium }}
-                    rightIcon={
-                      <Ionicons
-                        name={
-                          values.confirm_password === "confirm_password"
-                            ? "eye"
-                            : "eye-off"
-                        }
-                        style={{ marginLeft: 15 }}
-                        color={Colors.grey}
-                        size={20}
-                        onPress={() => handleClick("confirm_password")}
-                      />
-                    }
-                    secureTextEntry={
-                      values.confirm_password === "confirm_password"
-                        ? false
-                        : true
-                    }
-                    value={values.confirm_password}
-                    onChangeText={handleChange("confirm_password")}
-                    onBlur={() => setFieldTouched("confirm_password")}
-                  />
-                  {touched.confirm_password && errors.confirm_password && (
-                    <Text
-                      style={{
-                        fontSize: 12,
-                        color: "#FF0D10",
-                        marginLeft: "5%",
-                        marginBottom: 15,
-                      }}
-                    >
-                      {errors.confirm_password}
-                    </Text>
-                  )}
-                  <View style={{ marginHorizontal: 15, marginVertical: 20 }}>
-                    <MainButton
-                      name={t("Next")}
-                      style={{
-                        shadowColor: "#000",
-                        shadowOffset: {
-                          width: 10,
-                          height: 5,
-                        },
-                        shadowOpacity: 0.34,
-                        shadowRadius: 6.27,
-                        elevation: 10,
-                      }}
-                      onPress={(e) => handlingStep(false, true, false, false)}
-                    />
-                  </View>
-                </>
-              ) : (
-                <></>
-              )}
-
-              {step2 == true ? (
-                <>
-                  <View>
-                    <Text style={{ textAlign: "center", fontSize: 20 }}>
-                      Address
-                    </Text>
-                  </View>
-
-                  <Text style={{ ...Fonts.Grey14Bold, marginHorizontal: 15 }}>
-                    {t("Country")}
-                  </Text>
-
-                  <Input
-                    placeholder={t("country")}
-                    containerStyle={{
-                      marginTop: 8,
-                      marginBottom: -10,
-                      alignItems: "center",
-                      justifyContent: "center",
-                      textAlign: "center",
-                    }}
-                    inputContainerStyle={{
-                      borderBottomWidth: 0,
-                      ...ConstantStyle.shadow,
-                      backgroundColor: Colors.white,
-                      borderRadius: 10,
-                      paddingHorizontal: 15,
-                      width: width - 30,
-                      height: 45,
-                    }}
-                    inputStyle={{ ...Fonts.Black14Medium }}
-                    secureTextEntry={false}
-                    value={values.country}
-                    onChangeText={handleChange("country")}
-                    onBlur={() => setFieldTouched("country")}
-                  />
-                  {touched.region && errors.region && (
-                    <Text
-                      style={{
-                        fontSize: 12,
-                        color: "#FF0D10",
-                        marginLeft: "5%",
-                        marginBottom: 15,
-                      }}
-                    >
-                      {errors.region}
-                    </Text>
-                  )}
-
-                  <Text style={{ ...Fonts.Grey14Bold, marginHorizontal: 15 }}>
-                    {t("Region")}
-                  </Text>
-                  <Input
-                    placeholder={t("Region")}
-                    containerStyle={{
-                      marginTop: 8,
-                      marginBottom: -10,
-                      alignItems: "center",
-                      justifyContent: "center",
-                      textAlign: "center",
-                    }}
-                    inputContainerStyle={{
-                      borderBottomWidth: 0,
-                      ...ConstantStyle.shadow,
-                      backgroundColor: Colors.white,
-                      borderRadius: 10,
-                      paddingHorizontal: 15,
-                      width: width - 30,
-                      height: 45,
-                    }}
-                    inputStyle={{ ...Fonts.Black14Medium }}
-                    secureTextEntry={false}
-                    value={values.region}
-                    onChangeText={handleChange("region")}
-                    onBlur={() => setFieldTouched("region")}
-                  />
-                  {touched.region && errors.region && (
-                    <Text
-                      style={{
-                        fontSize: 12,
-                        color: "#FF0D10",
-                        marginLeft: "5%",
-                        marginBottom: 15,
-                      }}
-                    >
-                      {errors.region}
-                    </Text>
-                  )}
-
-                  <Text style={{ ...Fonts.Grey14Bold, marginHorizontal: 15 }}>
-                    {t("Province")}
-                  </Text>
-                  <Input
-                    placeholder={t("Province")}
-                    containerStyle={{
-                      marginTop: 8,
-                      marginBottom: -10,
-                      alignItems: "center",
-                      justifyContent: "center",
-                      textAlign: "center",
-                    }}
-                    inputContainerStyle={{
-                      borderBottomWidth: 0,
-                      ...ConstantStyle.shadow,
-                      backgroundColor: Colors.white,
-                      borderRadius: 10,
-                      paddingHorizontal: 15,
-                      width: width - 30,
-                      height: 45,
-                    }}
-                    inputStyle={{ ...Fonts.Black14Medium }}
-                    secureTextEntry={false}
-                    value={values.province}
-                    onChangeText={handleChange("province")}
-                    onBlur={() => setFieldTouched("province")}
-                  />
-                  {touched.province && errors.province && (
-                    <Text
-                      style={{
-                        fontSize: 12,
-                        color: "#FF0D10",
-                        marginLeft: "5%",
-                        marginBottom: 15,
-                      }}
-                    >
-                      {errors.province}
-                    </Text>
-                  )}
-
-                  <Text style={{ ...Fonts.Grey14Bold, marginHorizontal: 15 }}>
-                    {t("City Address")}
-                  </Text>
-                  <Input
-                    placeholder={t("City")}
-                    containerStyle={{
-                      marginTop: 8,
-                      marginBottom: -10,
-                      alignItems: "center",
-                      justifyContent: "center",
-                      textAlign: "center",
-                    }}
-                    inputContainerStyle={{
-                      borderBottomWidth: 0,
-                      ...ConstantStyle.shadow,
-                      backgroundColor: Colors.white,
-                      borderRadius: 10,
-                      paddingHorizontal: 15,
-                      width: width - 30,
-                      height: 45,
-                    }}
-                    inputStyle={{ ...Fonts.Black14Medium }}
-                    secureTextEntry={false}
-                    value={values.city}
-                    onChangeText={handleChange("city")}
-                    onBlur={() => setFieldTouched("city")}
-                  />
-                  {touched.city && errors.city && (
-                    <Text
-                      style={{
-                        fontSize: 12,
-                        color: "#FF0D10",
-                        marginLeft: "5%",
-                        marginBottom: 15,
-                      }}
-                    >
-                      {errors.city}
-                    </Text>
-                  )}
-
-                  <Text style={{ ...Fonts.Grey14Bold, marginHorizontal: 15 }}>
-                    {t("Zip Code")}
-                  </Text>
-                  <Input
-                    placeholder={t("Zip Code")}
-                    containerStyle={{
-                      marginTop: 8,
-                      marginBottom: -10,
-                      alignItems: "center",
-                      justifyContent: "center",
-                      textAlign: "center",
-                    }}
-                    inputContainerStyle={{
-                      borderBottomWidth: 0,
-                      ...ConstantStyle.shadow,
-                      backgroundColor: Colors.white,
-                      borderRadius: 10,
-                      paddingHorizontal: 15,
-                      width: width - 30,
-                      height: 45,
-                    }}
-                    inputStyle={{ ...Fonts.Black14Medium }}
-                    secureTextEntry={false}
-                    keyboardType="number-pad"
-                    maxLength={6}
-                    value={values.zip_code}
-                    onChangeText={handleChange("zip_code")}
-                    onBlur={() => setFieldTouched("zip_code")}
-                  />
-                  {touched.zip_code && errors.zip_code && (
-                    <Text
-                      style={{
-                        fontSize: 12,
-                        color: "#FF0D10",
-                        marginLeft: "5%",
-                        marginBottom: 15,
-                      }}
-                    >
-                      {errors.zip_code}
-                    </Text>
-                  )}
-
-                  <Text style={{ ...Fonts.Grey14Bold, marginHorizontal: 15 }}>
-                    {t("Address")}
-                  </Text>
-                  <Input
-                    placeholder={t("Address")}
-                    containerStyle={{
-                      marginTop: 8,
-                      marginBottom: -10,
-                      alignItems: "center",
-                      justifyContent: "center",
-                      textAlign: "center",
-                    }}
-                    inputContainerStyle={{
-                      borderBottomWidth: 0,
-                      ...ConstantStyle.shadow,
-                      backgroundColor: Colors.white,
-                      borderRadius: 10,
-                      paddingHorizontal: 15,
-                      width: width - 30,
-                      height: 45,
-                    }}
-                    inputStyle={{ ...Fonts.Black14Medium }}
-                    secureTextEntry={false}
-                    value={values.address}
-                    onChangeText={handleChange("address")}
-                    onBlur={() => setFieldTouched("address")}
-                  />
-                  {touched.address && errors.address && (
-                    <Text
-                      style={{
-                        fontSize: 12,
-                        color: "#FF0D10",
-                        marginLeft: "5%",
-                        marginBottom: 15,
-                      }}
-                    >
-                      {errors.address}
-                    </Text>
-                  )}
-
-                  <View style={{ marginHorizontal: 15, marginVertical: 20 }}>
-                    <MainButton
-                      name={t("Next")}
-                      style={{
-                        shadowColor: "#000",
-                        shadowOffset: {
-                          width: 10,
-                          height: 5,
-                        },
-                        shadowOpacity: 0.34,
-                        shadowRadius: 6.27,
-                        elevation: 10,
-                      }}
-                      onPress={(e) => handlingStep(false, false, true, false)}
-                    />
-                    <Button
-                      color="#3740FE"
-                      title="Back"
-                      //disabled={!isValid}
-                      //onPress={() => navigation.navigate("OtpScreen")}
-                      onPress={(e) => handlingStep(true, false, false, false)}
-                    />
-                  </View>
-                </>
-              ) : (
-                <></>
-              )}
-
-              {step3 == true ? (
-                <>
-                  <Text style={{ textAlign: "center", fontSize: 20 }}>
-                    Step3
-                  </Text>
-
-                  <Text
-                    style={{
-                      ...Fonts.Grey14Bold,
-                      marginHorizontal: 15,
-                      marginTop: 2,
-                      marginBottom: -10,
-                    }}
-                  >
-                    {t("Customer type")}
-                  </Text>
-                  <View>
-                    <SelectDropdown
-                      buttonStyle={{
-                        marginTop: 10,
-                        marginHorizontal: 10,
-                        borderColor: "#e0e0e0",
-                        borderWidth: 1.5,
-                        borderBottomWidth: 1,
-                        ...ConstantStyle.shadow,
-                        backgroundColor: Colors.white,
-                        borderRadius: 10,
-                        //paddingHorizontal: 15,
-                        marginBottom: 2,
-                        width: "95%",
-                        height: 45,
-                      }}
-                      buttonTextStyle={{
-                        textAlign: "left",
-                        fontSize: 14,
-                      }}
-                      data={object_customer}
-                      onSelect={(selectedItem, index) => {
-                        console.log(selectedItem, index);
-                      }}
-                      buttonTextAfterSelection={(selectedItem, index) => {
-                        // text represented after item is selected
-                        // if data array is an array of objects then return selectedItem.property to render after item is selected
-                        setCustomerSelect(selectedItem);
-                        return selectedItem;
-                      }}
-                      rowTextForSelection={(item, index) => {
-                        // text represented for each item in dropdown
-                        // if data array is an array of objects then return item.property to represent item in dropdown
-                        return item;
-                      }}
-                    />
-                  </View>
-                  <Text
-                    style={{
-                      ...Fonts.Grey14Bold,
-                      marginHorizontal: 15,
-                      marginTop: 10,
-                      marginBottom: 10,
-                    }}
-                  >
-                    {t("Birth Date")}
-                  </Text>
-                  <Pressable
-                    onPress={() => {
-                      setShow(true);
-                    }}
-                    style={{ marginHorizontal: 5 }}
-                  >
-                    <View
-                      style={{
-                        flexDirection: "row",
-                        width: "95%",
-                        margin: 10,
-                        marginTop: 5,
-                        marginBottom: 5,
-                        // alignItems: "center",
-                        // justifyContent: "center",
-                        // textAlign: "center",
-                        borderRadius: 10,
-                        borderColor: "#e0e0e0",
-                        borderBottomWidth: 0,
-                        ...ConstantStyle.shadow,
-                        backgroundColor: Colors.white,
-                        borderRadius: 10,
-                        paddingHorizontal: 15,
-                        width: "95%",
-                        height: 45,
-                        borderWidth: 1.5,
-                        paddingVertical: 12,
-                        paddingHorizontal: 10,
-                      }}
-                    >
-                      <Feather
-                        name="calendar"
-                        size={20}
-                        color={Colors.grey}
-                        style={{ marginRight: 15 }}
-                      />
-                      <Text
-                        style={{
-                          color: date === "" ? Colors.grey : Colors.black,
-                          fontSize: 14,
-                          //fontFamily: "Roboto-Regular",
-                        }}
-                      >
-                        {date === "" ? "Date of birth" : date}
-                      </Text>
-                    </View>
-                  </Pressable>
-                  {show && (
-                    <DateTimePicker
-                      style={{ marginRight: 30, marginTop: 5 }}
-                      value={new Date()}
-                      onChange={onDateChange}
-                    />
-                  )}
-
-                  <Text
-                    style={{
-                      ...Fonts.Grey14Bold,
-                      marginHorizontal: 15,
-                      marginTop: 10,
-                      marginButton: 10,
-                    }}
-                  >
-                    {t("Birth Place")}
-                  </Text>
-                  <Input
-                    placeholder={t("Birth Place")}
-                    containerStyle={{
-                      marginTop: 8,
-                      marginHorizontal: 6,
-                      width: "97%",
-                      marginBottom: -10,
-                      alignItems: "center",
-                      justifyContent: "center",
-                      textAlign: "center",
-                    }}
-                    inputContainerStyle={{
-                      borderBottomWidth: 0,
-                      ...ConstantStyle.shadow,
-                      backgroundColor: Colors.white,
-                      borderRadius: 10,
-                      paddingHorizontal: 15,
-                      width: "100%",
-                      height: 45,
-                    }}
-                    inputStyle={{ ...Fonts.Black14Medium }}
-                    secureTextEntry={false}
-                    value={values.birth_place}
-                    onChangeText={handleChange("birth_place")}
-                    onBlur={() => setFieldTouched("birth_place")}
-                  />
-                  {touched.birth_place && errors.birth_place && (
-                    <Text
-                      style={{
-                        fontSize: 12,
-                        color: "#FF0D10",
-                        marginLeft: "5%",
-                        marginBottom: 15,
-                      }}
-                    >
-                      {errors.birth_place}
-                    </Text>
-                  )}
-
-                  <Text
-                    style={{
-                      ...Fonts.Grey14Bold,
-                      marginHorizontal: 15,
-                      marginTop: 2,
-                      marginBottom: -10,
-                    }}
-                  >
-                    {t("Gender")}
-                  </Text>
-                  <View>
-                    <SelectDropdown
-                      placeholder={t("Fiscal Code")}
-                      buttonStyle={{
-                        marginTop: 20,
-                        marginBottom: 20,
-                        marginHorizontal: 10,
-                        borderColor: "#e0e0e0",
-                        borderWidth: 1.5,
-                        borderBottomWidth: 1,
-                        ...ConstantStyle.shadow,
-                        backgroundColor: Colors.white,
-                        borderRadius: 10,
-                        //paddingHorizontal: 15,
-                        marginBottom: 2,
-                        width: "95%",
-                        height: 45,
-                      }}
-                      buttonTextStyle={{
-                        textAlign: "left",
-                        fontSize: 14,
-                      }}
-                      data={gender}
-                      onSelect={(selectedItem, index) => {
-                        console.log(selectedItem, index);
-                      }}
-                      buttonTextAfterSelection={(selectedItem, index) => {
-                        // text represented after item is selected
-                        // if data array is an array of objects then return selectedItem.property to render after item is selected
-                        return selectedItem;
-                      }}
-                      rowTextForSelection={(item, index) => {
-                        // text represented for each item in dropdown
-                        // if data array is an array of objects then return item.property to represent item in dropdown
-                        setGenderSelect(item);
-                        return item;
-                      }}
-                    />
-                  </View>
-                  <Text
-                    style={{
-                      ...Fonts.Grey14Bold,
-                      marginHorizontal: 15,
-                      marginTop: 2,
-                      marginBottom: -10,
-                    }}
-                  >
-                    {t("Marital status")}
-                  </Text>
-                  <View>
-                    <SelectDropdown
-                      buttonStyle={{
-                        marginTop: 20,
-                        marginHorizontal: 10,
-                        borderColor: "#e0e0e0",
-                        borderWidth: 1.5,
-                        borderBottomWidth: 1,
-                        ...ConstantStyle.shadow,
-                        backgroundColor: Colors.white,
-                        borderRadius: 10,
-                        //paddingHorizontal: 15,
-                        marginBottom: 2,
-                        width: "95%",
-                        height: 45,
-                      }}
-                      buttonTextStyle={{
-                        textAlign: "left",
-                        fontSize: 14,
-                      }}
-                      data={maritial_status}
-                      onSelect={(selectedItem, index) => {
-                        console.log(selectedItem, index);
-                      }}
-                      buttonTextAfterSelection={(selectedItem, index) => {
-                        // text represented after item is selected
-                        // if data array is an array of objects then return selectedItem.property to render after item is selected
-                        return selectedItem;
-                      }}
-                      rowTextForSelection={(item, index) => {
-                        // text represented for each item in dropdown
-                        // if data array is an array of objects then return item.property to represent item in dropdown
-                        setMaritialStatusSelect(item);
-                        return item;
-                      }}
-                    />
-                  </View>
-                  <Text
-                    style={{
-                      ...Fonts.Grey14Bold,
-                      marginHorizontal: 15,
-                      marginBottom: 10,
-                      marginTop: 10,
-                    }}
-                  >
-                    {t("Fiscal Code")}
-                  </Text>
-                  <Input
-                    placeholder={t("Fiscal Code")}
-                    containerStyle={{
-                      marginTop: 8,
-                      marginBottom: -10,
-                      alignItems: "center",
-                      justifyContent: "center",
-                      textAlign: "center",
-                    }}
-                    inputContainerStyle={{
-                      borderBottomWidth: 0,
-                      ...ConstantStyle.shadow,
-                      backgroundColor: Colors.white,
-                      borderRadius: 10,
-                      paddingHorizontal: 15,
-                      width: width - 30,
-                      height: 45,
-                    }}
-                    inputStyle={{ ...Fonts.Black14Medium }}
-                    secureTextEntry={false}
-                    value={values.fiscal_code}
-                    onChangeText={handleChange("fiscal_code")}
-                    onBlur={() => setFieldTouched("fiscal_code")}
-                  />
-                  {touched.fiscal_code && errors.fiscal_code && (
-                    <Text
-                      style={{
-                        fontSize: 12,
-                        color: "#FF0D10",
-                        marginLeft: "5%",
-                        marginBottom: 15,
-                      }}
-                    >
-                      {errors.fiscal_code}
-                    </Text>
-                  )}
-
-                  <View style={{ marginHorizontal: 15, marginVertical: 20 }}>
-                    <MainButton
-                      name={t("Next")}
-                      style={{
-                        shadowColor: "#000",
-                        shadowOffset: {
-                          width: 10,
-                          height: 5,
-                        },
-                        shadowOpacity: 0.34,
-                        shadowRadius: 6.27,
-                        elevation: 10,
-                      }}
-                      onPress={(e) => handlingStep(false, false, false, true)}
-                    />
-                    <Button
-                      color="#3740FE"
-                      title="Back"
-                      //disabled={!isValid}
-                      //onPress={() => navigation.navigate("OtpScreen")}
-                      onPress={(e) => handlingStep(false, true, false, false)}
-                    />
-                  </View>
-                </>
-              ) : (
-                <></>
-              )}
-
-              {step4 == true ? (
-                <>
-                  <Text style={{ textAlign: "center", fontSize: 20 }}>
-                    Step4
-                  </Text>
-
-                  <Text
-                    style={{
-                      ...Fonts.Grey14Bold,
-                      marginHorizontal: 15,
-                      marginTop: 2,
-                      marginBottom: -10,
-                    }}
-                  >
-                    {t("Educational Qualification")}
-                  </Text>
-                  <View>
-                    <SelectDropdown
-                      buttonStyle={{
-                        marginTop: 20,
-                        marginHorizontal: 10,
-                        borderColor: "#e0e0e0",
-                        borderWidth: 1.5,
-                        borderBottomWidth: 1,
-                        ...ConstantStyle.shadow,
-                        backgroundColor: Colors.white,
-                        borderRadius: 10,
-                        //paddingHorizontal: 15,
-                        marginBottom: 2,
-                        width: "95%",
-                        height: 45,
-                      }}
-                      buttonTextStyle={{
-                        textAlign: "left",
-                        fontSize: 14,
-                      }}
-                      data={educational_qualification}
-                      onSelect={(selectedItem, index) => {
-                        console.log(selectedItem, index);
-                      }}
-                      buttonTextAfterSelection={(selectedItem, index) => {
-                        // text represented after item is selected
-                        // if data array is an array of objects then return selectedItem.property to render after item is selected
-                        return selectedItem;
-                      }}
-                      rowTextForSelection={(item, index) => {
-                        // text represented for each item in dropdown
-                        // if data array is an array of objects then return item.property to represent item in dropdown
-                        Seteducational_qualification_select(item);
-                        return item;
-                      }}
-                    />
-                  </View>
-                  <Text
-                    style={{
-                      ...Fonts.Grey14Bold,
-                      marginHorizontal: 15,
-                      marginTop: 10,
-                    }}
-                  >
-                    {t("Job")}
-                  </Text>
-                  <Input
-                    placeholder={t("Job")}
-                    containerStyle={{
-                      marginTop: 8,
-                      marginBottom: -10,
-                      alignItems: "center",
-                      justifyContent: "center",
-                      textAlign: "center",
-                    }}
-                    inputContainerStyle={{
-                      borderBottomWidth: 0,
-                      ...ConstantStyle.shadow,
-                      backgroundColor: Colors.white,
-                      borderRadius: 10,
-                      paddingHorizontal: 15,
-                      width: width - 30,
-                      height: 45,
-                    }}
-                    inputStyle={{ ...Fonts.Black14Medium }}
-                    secureTextEntry={false}
-                    value={values.job}
-                    onChangeText={handleChange("job")}
-                    onBlur={() => setFieldTouched("job")}
-                  />
-                  {touched.job && errors.job && (
-                    <Text
-                      style={{
-                        fontSize: 12,
-                        color: "#FF0D10",
-                        marginLeft: "5%",
-                        marginBottom: 15,
-                      }}
-                    >
-                      {errors.job}
-                    </Text>
-                  )}
-
-                  <Text style={{ ...Fonts.Grey14Bold, marginHorizontal: 15 }}>
-                    {t("Linkedin")}
-                  </Text>
-                  <Input
-                    placeholder={t("Linkedin")}
-                    containerStyle={{
-                      marginTop: 8,
-                      marginBottom: -10,
-                      alignItems: "center",
-                      justifyContent: "center",
-                      textAlign: "center",
-                    }}
-                    inputContainerStyle={{
-                      borderBottomWidth: 0,
-                      ...ConstantStyle.shadow,
-                      backgroundColor: Colors.white,
-                      borderRadius: 10,
-                      paddingHorizontal: 15,
-                      width: width - 30,
-                      height: 45,
-                    }}
-                    inputStyle={{ ...Fonts.Black14Medium }}
-                    secureTextEntry={false}
-                    value={values.linkedin}
-                    onChangeText={handleChange("linkedin")}
-                    onBlur={() => setFieldTouched("linkedin")}
-                  />
-                  {touched.linkedin && errors.linkedin && (
-                    <Text
-                      style={{
-                        fontSize: 12,
-                        color: "#FF0D10",
-                        marginLeft: "5%",
-                        marginBottom: 15,
-                      }}
-                    >
-                      {errors.linkedin}
-                    </Text>
-                  )}
-
-                  <View style={{ marginHorizontal: 15, marginVertical: 20 }}>
-                    <MainButton
-                      name={t("sign_up")}
-                      onPress={() => navigation.navigate("OtpScreen")}
-                    />
-                    <View style={{ marginHorizontal: 15, marginVertical: 20 }}>
-                      <MainButton
-                        name={t("Submit")}
-                        style={{
-                          shadowColor: "#000",
-                          shadowOffset: {
-                            width: 10,
-                            height: 5,
-                          },
-                          shadowOpacity: 0.34,
-                          shadowRadius: 6.27,
-                          elevation: 10,
-                        }}
-                        onPress={() => (handleSubmit)}
-                      />
-                    </View>
-                  </View>
-
-                  <View style={{ marginHorizontal: 15, marginVertical: 20 }}>
-                    <Button
-                      color="#3740FE"
-                      title="Back"
-                      //disabled={!isValid}
-                      //onPress={() => navigation.navigate("OtpScreen")}
-                      onPress={(e) => handlingStep(false, false, true, false)}
-                    />
-                  </View>
-                </>
-              ) : (
-                <></>
-              )}
-
-              {/* <Text style={{ ...Fonts.Grey14Bold, textAlign: "center" }}>
-                {t("or")}
-              </Text> 
-               <View
-                style={{
+          {step1 == true ? (
+            <>
+              <Text style={{ textAlign: "center", fontSize: 20 }}>Step1</Text>
+              <Text style={{ ...Fonts.Grey14Bold, marginHorizontal: 15 }}>
+                {t("Name")}
+              </Text>
+              <Input
+                placeholder={t("name")}
+                containerStyle={{
+                  marginTop: 8,
+                  marginBottom: -10,
                   alignItems: "center",
                   justifyContent: "center",
-                  marginVertical: 15,
-                  flexDirection: "row",
+                  textAlign: "center",
                 }}
-              > 
-                <TouchableOpacity
-              activeOpacity={0.7}
-              style={{ marginHorizontal: 10 }}
-            >
-              <Image
-                style={{
-                  width: 50,
-                  height: 50,
-                  resizeMode: "contain",
-                  borderRadius: 25,
+                inputContainerStyle={{
+                  borderBottomWidth: 0,
+                  ...ConstantStyle.shadow,
+                  backgroundColor: Colors.white,
+                  borderRadius: 10,
+                  paddingHorizontal: 15,
+                  width: width - 30,
+                  height: 45,
                 }}
-                alt="facebook"
-                source={require("../../../assets/icons/facebook.png")}
+                inputStyle={{ ...Fonts.Black14Medium }}
+                secureTextEntry={false}
+                autoCompleteType="name"
+                keyboardType="name"
+                textContentType="name"
+                onChangeText={onChangeField("name")}
               />
-            </TouchableOpacity>
-            <TouchableOpacity
-              activeOpacity={0.7}
-              style={{ marginHorizontal: 10 }}
-            >
-              <Image
-                style={{
-                  width: 46,
-                  height: 46,
-                  resizeMode: "contain",
-                  borderRadius: 25,
+
+              <Text style={{ ...Fonts.Grey14Bold, marginHorizontal: 15 }}>
+                {t("Last Name")}
+              </Text>
+              
+              <Input
+                placeholder={t("Last Name")}
+                containerStyle={{
+                  marginTop: 8,
+                  marginBottom: -10,
+                  alignItems: "center",
+                  justifyContent: "center",
+                  textAlign: "center",
                 }}
-                alt="goggle"
-                source={require("../../../assets/icons/google.png")}
+                inputContainerStyle={{
+                  borderBottomWidth: 0,
+                  ...ConstantStyle.shadow,
+                  backgroundColor: Colors.white,
+                  borderRadius: 10,
+                  paddingHorizontal: 15,
+                  width: width - 30,
+                  height: 45,
+                }}
+                inputStyle={{ ...Fonts.Black14Medium }}
+                secureTextEntry={false}
+                autoCompleteType="lastName"
+                keyboardType="lastName"
+                textContentType="lastName"
+                onChangeText={onChangeField("lastName")}
               />
-            </TouchableOpacity> 
-              </View> */}
-            </View>
+
+              <Text style={{ ...Fonts.Grey14Bold, marginHorizontal: 15 }}>
+                {t("email")}
+              </Text>
+              <Input
+                placeholder={t("email")}
+                containerStyle={{
+                  marginTop: 8,
+                  marginBottom: -10,
+                  alignItems: "center",
+                  justifyContent: "center",
+                  textAlign: "center",
+                }}
+                inputContainerStyle={{
+                  borderBottomWidth: 0,
+                  ...ConstantStyle.shadow,
+                  backgroundColor: Colors.white,
+                  borderRadius: 10,
+                  paddingHorizontal: 15,
+                  width: width - 30,
+                  height: 45,
+                }}
+                inputStyle={{ ...Fonts.Black14Medium }}
+                secureTextEntry={false}
+                autoCompleteType="email"
+                keyboardType="email"
+                textContentType="email"
+                onChangeText={onChangeField("email")}
+              />
+             
+
+              <Text style={{ ...Fonts.Grey14Bold, marginHorizontal: 15 }}>
+                {t("mobile")}
+              </Text>
+              <Input
+                placeholder={t("mobile")}
+                containerStyle={{
+                  marginTop: 8,
+                  marginBottom: -10,
+                  alignItems: "center",
+                  justifyContent: "center",
+                  textAlign: "center",
+                }}
+                inputContainerStyle={{
+                  borderBottomWidth: 0,
+                  ...ConstantStyle.shadow,
+                  backgroundColor: Colors.white,
+                  borderRadius: 10,
+                  paddingHorizontal: 15,
+                  width: width - 30,
+                  height: 45,
+                }}
+                inputStyle={{ ...Fonts.Black14Medium }}
+                secureTextEntry={false}
+                keyboardType="number-pad"
+                maxLength={10}
+                style={{ marginBottom: 20 }}
+                onChangeText={onChangeField("mobile")}
+              />
+             
+
+              <Text style={{ ...Fonts.Grey14Bold, marginHorizontal: 15 }}>
+                {t("phone")}
+              </Text>
+              <Input
+                placeholder={t("phone")}
+                containerStyle={{
+                  marginTop: 8,
+                  marginBottom: -10,
+                  alignItems: "center",
+                  justifyContent: "center",
+                  textAlign: "center",
+                }}
+                inputContainerStyle={{
+                  borderBottomWidth: 0,
+                  ...ConstantStyle.shadow,
+                  backgroundColor: Colors.white,
+                  borderRadius: 10,
+                  paddingHorizontal: 15,
+                  width: width - 30,
+                  height: 45,
+                }}
+                inputStyle={{ ...Fonts.Black14Medium }}
+                secureTextEntry={false}
+                keyboardType="number-pad"
+                maxLength={10}
+                style={{ marginBottom: 20 }}
+                onChangeText={onChangeField("phone")}
+              />
+             
+
+              <Text style={{ ...Fonts.Grey14Bold, marginHorizontal: 15 }}>
+                {t("password")}
+              </Text>
+              <Input
+                placeholder={t("password")}
+                containerStyle={{
+                  marginTop: 8,
+                  marginBottom: -10,
+                  alignItems: "center",
+                  justifyContent: "center",
+                  textAlign: "center",
+                }}
+                inputContainerStyle={{
+                  borderBottomWidth: 0,
+                  ...ConstantStyle.shadow,
+                  backgroundColor: Colors.white,
+                  borderRadius: 10,
+                  paddingHorizontal: 15,
+                  width: width - 30,
+                  height: 45,
+                }}
+                inputStyle={{ ...Fonts.Black14Medium }}
+                rightIcon={
+                  <Ionicons
+                    name={values.password === "Password" ? "eye" : "eye-off"}
+                    style={{ marginLeft: 15 }}
+                    color={Colors.grey}
+                    size={20}
+                  />
+                }
+                secureTextEntry={values.password === "Password" ? false : true}
+                onChangeText={onChangeField("password")}
+              />
+              
+              <Text style={{ ...Fonts.Grey14Bold, marginHorizontal: 15 }}>
+                {t("confirm_password")}
+              </Text>
+              <Input
+                placeholder={t("confirm_password")}
+                containerStyle={{
+                  marginTop: 8,
+                  marginBottom: -10,
+                  alignItems: "center",
+                  justifyContent: "center",
+                  textAlign: "center",
+                }}
+                inputContainerStyle={{
+                  borderBottomWidth: 0,
+                  ...ConstantStyle.shadow,
+                  backgroundColor: Colors.white,
+                  borderRadius: 10,
+                  paddingHorizontal: 15,
+                  width: width - 30,
+                  height: 45,
+                }}
+                inputStyle={{ ...Fonts.Black14Medium }}
+                rightIcon={
+                  <Ionicons
+                    name={
+                      values.confirm_password === "confirm_password"
+                        ? "eye"
+                        : "eye-off"
+                    }
+                    style={{ marginLeft: 15 }}
+                    color={Colors.grey}
+                    size={20}
+                    onPress={() => handleClick("confirm_password")}
+                  />
+                }
+                secureTextEntry={
+                  values.confirm_password === "confirm_password" ? false : true
+                }
+                onChangeText={onChangeField("confirm_password")}
+              />
+              
+              <View style={{ marginHorizontal: 15, marginVertical: 20 }}>
+                <MainButton
+                  name={t("Next")}
+                  style={{
+                    shadowColor: "#000",
+                    shadowOffset: {
+                      width: 10,
+                      height: 5,
+                    },
+                    shadowOpacity: 0.34,
+                    shadowRadius: 6.27,
+                    elevation: 10,
+                  }}
+                  onPress={(e) => handlingStep(false, true, false, false)}
+                />
+              </View>
+            </>
+          ) : (
+            <></>
           )}
-        </Formik>
-        {/* <View
-          style={{
-            alignItems: "center",
-            flexDirection: "row",
-            alignSelf: "center",
-            marginVertical: 15,
-          }}
-        >
-          <Text style={{ ...Fonts.Grey16Medium }}>{t("already_account")}</Text>
-          <TouchableOpacity
-            activeOpacity={0.7}
-            onPress={() => navigation.navigate("LoginScreen")}
-          >
-            <Text style={{ ...Fonts.Primary16Medium }}> {t("sign_in")}</Text>
-          </TouchableOpacity>
-        </View> */}
+
+          {step2 == true ? (
+            <>
+              <View>
+                <Text style={{ textAlign: "center", fontSize: 20 }}>
+                  Address
+                </Text>
+              </View>
+
+              <Text style={{ ...Fonts.Grey14Bold, marginHorizontal: 15 }}>
+                {t("Country")}
+              </Text>
+
+              <Input
+                placeholder={t("country")}
+                containerStyle={{
+                  marginTop: 8,
+                  marginBottom: -10,
+                  alignItems: "center",
+                  justifyContent: "center",
+                  textAlign: "center",
+                }}
+                inputContainerStyle={{
+                  borderBottomWidth: 0,
+                  ...ConstantStyle.shadow,
+                  backgroundColor: Colors.white,
+                  borderRadius: 10,
+                  paddingHorizontal: 15,
+                  width: width - 30,
+                  height: 45,
+                }}
+                inputStyle={{ ...Fonts.Black14Medium }}
+                secureTextEntry={false}
+                onChangeText={onChangeField("country")}
+              />
+              
+
+              <Text style={{ ...Fonts.Grey14Bold, marginHorizontal: 15 }}>
+                {t("Region")}
+              </Text>
+              <Input
+                placeholder={t("Region")}
+                containerStyle={{
+                  marginTop: 8,
+                  marginBottom: -10,
+                  alignItems: "center",
+                  justifyContent: "center",
+                  textAlign: "center",
+                }}
+                inputContainerStyle={{
+                  borderBottomWidth: 0,
+                  ...ConstantStyle.shadow,
+                  backgroundColor: Colors.white,
+                  borderRadius: 10,
+                  paddingHorizontal: 15,
+                  width: width - 30,
+                  height: 45,
+                }}
+                inputStyle={{ ...Fonts.Black14Medium }}
+                secureTextEntry={false}
+                onChangeText={onChangeField("region")}
+              />
+              
+              <Text style={{ ...Fonts.Grey14Bold, marginHorizontal: 15 }}>
+                {t("Province")}
+              </Text>
+              <Input
+                placeholder={t("Province")}
+                containerStyle={{
+                  marginTop: 8,
+                  marginBottom: -10,
+                  alignItems: "center",
+                  justifyContent: "center",
+                  textAlign: "center",
+                }}
+                inputContainerStyle={{
+                  borderBottomWidth: 0,
+                  ...ConstantStyle.shadow,
+                  backgroundColor: Colors.white,
+                  borderRadius: 10,
+                  paddingHorizontal: 15,
+                  width: width - 30,
+                  height: 45,
+                }}
+                inputStyle={{ ...Fonts.Black14Medium }}
+                secureTextEntry={false}
+                onChangeText={onChangeField("province")}
+              />
+            
+          
+              <Text style={{ ...Fonts.Grey14Bold, marginHorizontal: 15 }}>
+                {t("City Address")}
+              </Text>
+              <Input
+                placeholder={t("City")}
+                containerStyle={{
+                  marginTop: 8,
+                  marginBottom: -10,
+                  alignItems: "center",
+                  justifyContent: "center",
+                  textAlign: "center",
+                }}
+                inputContainerStyle={{
+                  borderBottomWidth: 0,
+                  ...ConstantStyle.shadow,
+                  backgroundColor: Colors.white,
+                  borderRadius: 10,
+                  paddingHorizontal: 15,
+                  width: width - 30,
+                  height: 45,
+                }}
+                inputStyle={{ ...Fonts.Black14Medium }}
+                secureTextEntry={false}
+                onChangeText={onChangeField("city_address")}
+              />
+           
+
+              <Text style={{ ...Fonts.Grey14Bold, marginHorizontal: 15 }}>
+                {t("Zip Code")}
+              </Text>
+              <Input
+                placeholder={t("Zip Code")}
+                containerStyle={{
+                  marginTop: 8,
+                  marginBottom: -10,
+                  alignItems: "center",
+                  justifyContent: "center",
+                  textAlign: "center",
+                }}
+                inputContainerStyle={{
+                  borderBottomWidth: 0,
+                  ...ConstantStyle.shadow,
+                  backgroundColor: Colors.white,
+                  borderRadius: 10,
+                  paddingHorizontal: 15,
+                  width: width - 30,
+                  height: 45,
+                }}
+                inputStyle={{ ...Fonts.Black14Medium }}
+                secureTextEntry={false}
+                keyboardType="number-pad"
+                maxLength={6}
+                onChangeText={onChangeField("zip_code")}
+              />
+            
+
+              <Text style={{ ...Fonts.Grey14Bold, marginHorizontal: 15 }}>
+                {t("Address")}
+              </Text>
+              <Input
+                placeholder={t("Address")}
+                containerStyle={{
+                  marginTop: 8,
+                  marginBottom: -10,
+                  alignItems: "center",
+                  justifyContent: "center",
+                  textAlign: "center",
+                }}
+                inputContainerStyle={{
+                  borderBottomWidth: 0,
+                  ...ConstantStyle.shadow,
+                  backgroundColor: Colors.white,
+                  borderRadius: 10,
+                  paddingHorizontal: 15,
+                  width: width - 30,
+                  height: 45,
+                }}
+                inputStyle={{ ...Fonts.Black14Medium }}
+                secureTextEntry={false}
+                onChangeText={onChangeField("address")}
+              />
+              
+              <View style={{ marginHorizontal: 15, marginVertical: 20 }}>
+                <MainButton
+                  name={t("Next")}
+                  style={{
+                    shadowColor: "#000",
+                    shadowOffset: {
+                      width: 10,
+                      height: 5,
+                    },
+                    shadowOpacity: 0.34,
+                    shadowRadius: 6.27,
+                    elevation: 10,
+                  }}
+                  onPress={(e) => handlingStep(false, false, true, false)}
+                />
+                <Button
+                  color="#3740FE"
+                  title="Back"
+                  //disabled={!isValid}
+                  //onPress={() => navigation.navigate("OtpScreen")}
+                  onPress={(e) => handlingStep(true, false, false, false)}
+                />
+              </View>
+            </>
+          ) : (
+            <></>
+          )}
+
+          {step3 == true ? (
+            <>
+              <Text style={{ textAlign: "center", fontSize: 20 }}>Step3</Text>
+
+              <Text
+                style={{
+                  ...Fonts.Grey14Bold,
+                  marginHorizontal: 15,
+                  marginTop: 2,
+                  marginBottom: -10,
+                }}
+              >
+                {t("Customer type")}
+              </Text>
+              <View>
+                <SelectDropdown
+                  buttonStyle={{
+                    marginTop: 10,
+                    marginHorizontal: 10,
+                    borderColor: "#e0e0e0",
+                    borderWidth: 1.5,
+                    borderBottomWidth: 1,
+                    ...ConstantStyle.shadow,
+                    backgroundColor: Colors.white,
+                    borderRadius: 10,
+                    //paddingHorizontal: 15,
+                    marginBottom: 2,
+                    width: "95%",
+                    height: 45,
+                  }}
+                  buttonTextStyle={{
+                    textAlign: "left",
+                    fontSize: 14,
+                  }}
+                  data={object_customer}
+                  onSelect={(selectedItem, index) => {
+                    console.log(selectedItem, index);
+                  }}
+                  buttonTextAfterSelection={(selectedItem, index) => {
+                    // text represented after item is selected
+                    // if data array is an array of objects then return selectedItem.property to render after item is selected
+                    setCustomerSelect(selectedItem);
+                    return selectedItem;
+                  }}
+                  rowTextForSelection={(item, index) => {
+                    // text represented for each item in dropdown
+                    // if data array is an array of objects then return item.property to represent item in dropdown
+                    return item;
+                  }}
+                />
+              </View>
+              <Text
+                style={{
+                  ...Fonts.Grey14Bold,
+                  marginHorizontal: 15,
+                  marginTop: 10,
+                  marginBottom: 10,
+                }}
+              >
+                {t("Birth Date")}
+              </Text>
+              <Pressable
+                onPress={() => {
+                  setShow(true);
+                }}
+                style={{ marginHorizontal: 5 }}
+              >
+                <View
+                  style={{
+                    flexDirection: "row",
+                    width: "95%",
+                    margin: 10,
+                    marginTop: 5,
+                    marginBottom: 5,
+                    // alignItems: "center",
+                    // justifyContent: "center",
+                    // textAlign: "center",
+                    borderRadius: 10,
+                    borderColor: "#e0e0e0",
+                    borderBottomWidth: 0,
+                    ...ConstantStyle.shadow,
+                    backgroundColor: Colors.white,
+                    borderRadius: 10,
+                    paddingHorizontal: 15,
+                    width: "95%",
+                    height: 45,
+                    borderWidth: 1.5,
+                    paddingVertical: 12,
+                    paddingHorizontal: 10,
+                  }}
+                >
+                  <Feather
+                    name="calendar"
+                    size={20}
+                    color={Colors.grey}
+                    style={{ marginRight: 15 }}
+                  />
+                  <Text
+                    style={{
+                      color: date === "" ? Colors.grey : Colors.black,
+                      fontSize: 14,
+                      //fontFamily: "Roboto-Regular",
+                    }}
+                  >
+                    {date === "" ? "Date of birth" : date}
+                  </Text>
+                </View>
+              </Pressable>
+              {show && (
+                <DateTimePicker
+                  style={{ marginRight: 30, marginTop: 5 }}
+                  value={new Date()}
+                  onChange={onDateChange}
+                />
+              )}
+
+              <Text
+                style={{
+                  ...Fonts.Grey14Bold,
+                  marginHorizontal: 15,
+                  marginTop: 10,
+                  marginButton: 10,
+                }}
+              >
+                {t("Birth Place")}
+              </Text>
+              <Input
+                placeholder={t("Birth Place")}
+                containerStyle={{
+                  marginTop: 8,
+                  marginHorizontal: 6,
+                  width: "97%",
+                  marginBottom: -10,
+                  alignItems: "center",
+                  justifyContent: "center",
+                  textAlign: "center",
+                }}
+                inputContainerStyle={{
+                  borderBottomWidth: 0,
+                  ...ConstantStyle.shadow,
+                  backgroundColor: Colors.white,
+                  borderRadius: 10,
+                  paddingHorizontal: 15,
+                  width: "100%",
+                  height: 45,
+                }}
+                inputStyle={{ ...Fonts.Black14Medium }}
+                secureTextEntry={false}
+                onChangeText={onChangeField("birth_place")}
+              />
+            
+              <Text
+                style={{
+                  ...Fonts.Grey14Bold,
+                  marginHorizontal: 15,
+                  marginTop: 2,
+                  marginBottom: -10,
+                }}
+              >
+                {t("Gender")}
+              </Text>
+              <View>
+                <SelectDropdown
+                  placeholder={t("Fiscal Code")}
+                  buttonStyle={{
+                    marginTop: 20,
+                    marginBottom: 20,
+                    marginHorizontal: 10,
+                    borderColor: "#e0e0e0",
+                    borderWidth: 1.5,
+                    borderBottomWidth: 1,
+                    ...ConstantStyle.shadow,
+                    backgroundColor: Colors.white,
+                    borderRadius: 10,
+                    //paddingHorizontal: 15,
+                    marginBottom: 2,
+                    width: "95%",
+                    height: 45,
+                  }}
+                  buttonTextStyle={{
+                    textAlign: "left",
+                    fontSize: 14,
+                  }}
+                  data={gender}
+                  onSelect={(selectedItem, index) => {
+                    console.log(selectedItem, index);
+                  }}
+                  buttonTextAfterSelection={(selectedItem, index) => {
+                    // text represented after item is selected
+                    // if data array is an array of objects then return selectedItem.property to render after item is selected
+                    return selectedItem;
+                  }}
+                  rowTextForSelection={(item, index) => {
+                    // text represented for each item in dropdown
+                    // if data array is an array of objects then return item.property to represent item in dropdown
+                    setGenderSelect(item);
+                    return item;
+                  }}
+                />
+              </View>
+              <Text
+                style={{
+                  ...Fonts.Grey14Bold,
+                  marginHorizontal: 15,
+                  marginTop: 2,
+                  marginBottom: -10,
+                }}
+              >
+                {t("Marital status")}
+              </Text>
+              <View>
+                <SelectDropdown
+                  buttonStyle={{
+                    marginTop: 20,
+                    marginHorizontal: 10,
+                    borderColor: "#e0e0e0",
+                    borderWidth: 1.5,
+                    borderBottomWidth: 1,
+                    ...ConstantStyle.shadow,
+                    backgroundColor: Colors.white,
+                    borderRadius: 10,
+                    //paddingHorizontal: 15,
+                    marginBottom: 2,
+                    width: "95%",
+                    height: 45,
+                  }}
+                  buttonTextStyle={{
+                    textAlign: "left",
+                    fontSize: 14,
+                  }}
+                  data={maritial_status}
+                  onSelect={(selectedItem, index) => {
+                    console.log(selectedItem, index);
+                  }}
+                  buttonTextAfterSelection={(selectedItem, index) => {
+                    // text represented after item is selected
+                    // if data array is an array of objects then return selectedItem.property to render after item is selected
+                    return selectedItem;
+                  }}
+                  rowTextForSelection={(item, index) => {
+                    // text represented for each item in dropdown
+                    // if data array is an array of objects then return item.property to represent item in dropdown
+                    setMaritialStatusSelect(item);
+                    
+                    return item;
+                  }}
+                />
+              </View>
+              <Text
+                style={{
+                  ...Fonts.Grey14Bold,
+                  marginHorizontal: 15,
+                  marginBottom: 10,
+                  marginTop: 10,
+                }}
+              >
+                {t("Fiscal Code")}
+              </Text>
+              <Input
+                placeholder={t("Fiscal Code")}
+                containerStyle={{
+                  marginTop: 8,
+                  marginBottom: -10,
+                  alignItems: "center",
+                  justifyContent: "center",
+                  textAlign: "center",
+                }}
+                inputContainerStyle={{
+                  borderBottomWidth: 0,
+                  ...ConstantStyle.shadow,
+                  backgroundColor: Colors.white,
+                  borderRadius: 10,
+                  paddingHorizontal: 15,
+                  width: width - 30,
+                  height: 45,
+                }}
+                inputStyle={{ ...Fonts.Black14Medium }}
+                secureTextEntry={false}
+                onChangeText={onChangeField("fiscal_code")}
+              />
+             
+
+              <View style={{ marginHorizontal: 15, marginVertical: 20 }}>
+                <MainButton
+                  name={t("Next")}
+                  style={{
+                    shadowColor: "#000",
+                    shadowOffset: {
+                      width: 10,
+                      height: 5,
+                    },
+                    shadowOpacity: 0.34,
+                    shadowRadius: 6.27,
+                    elevation: 10,
+                  }}
+                  onPress={(e) => handlingStep(false, false, false, true)}
+                />
+                <Button
+                  color="#3740FE"
+                  title="Back"
+                  //disabled={!isValid}
+                  //onPress={() => navigation.navigate("OtpScreen")}
+                  onPress={(e) => handlingStep(false, true, false, false)}
+                />
+              </View>
+            </>
+          ) : (
+            <></>
+          )}
+
+          {step4 == true ? (
+            <>
+              <Text style={{ textAlign: "center", fontSize: 20 }}>Step4</Text>
+
+              <Text
+                style={{
+                  ...Fonts.Grey14Bold,
+                  marginHorizontal: 15,
+                  marginTop: 2,
+                  marginBottom: -10,
+                }}
+              >
+                {t("Educational Qualification")}
+              </Text>
+              <View>
+                <SelectDropdown
+                  buttonStyle={{
+                    marginTop: 20,
+                    marginHorizontal: 10,
+                    borderColor: "#e0e0e0",
+                    borderWidth: 1.5,
+                    borderBottomWidth: 1,
+                    ...ConstantStyle.shadow,
+                    backgroundColor: Colors.white,
+                    borderRadius: 10,
+                    //paddingHorizontal: 15,
+                    marginBottom: 2,
+                    width: "95%",
+                    height: 45,
+                  }}
+                  buttonTextStyle={{
+                    textAlign: "left",
+                    fontSize: 14,
+                  }}
+                  data={educational_qualification}
+                  onSelect={(selectedItem, index) => {
+                    console.log(selectedItem, index);
+                  }}
+                  buttonTextAfterSelection={(selectedItem, index) => {
+                    // text represented after item is selected
+                    // if data array is an array of objects then return selectedItem.property to render after item is selected
+                    return selectedItem;
+                  }}
+                  rowTextForSelection={(item, index) => {
+                    // text represented for each item in dropdown
+                    // if data array is an array of objects then return item.property to represent item in dropdown
+                    Seteducational_qualification_select(item);
+                    return item;
+                  }}
+                />
+              </View>
+              <Text
+                style={{
+                  ...Fonts.Grey14Bold,
+                  marginHorizontal: 15,
+                  marginTop: 10,
+                }}
+              >
+                {t("Job")}
+              </Text>
+              <Input
+                placeholder={t("Job")}
+                containerStyle={{
+                  marginTop: 8,
+                  marginBottom: -10,
+                  alignItems: "center",
+                  justifyContent: "center",
+                  textAlign: "center",
+                }}
+                inputContainerStyle={{
+                  borderBottomWidth: 0,
+                  ...ConstantStyle.shadow,
+                  backgroundColor: Colors.white,
+                  borderRadius: 10,
+                  paddingHorizontal: 15,
+                  width: width - 30,
+                  height: 45,
+                }}
+                inputStyle={{ ...Fonts.Black14Medium }}
+                secureTextEntry={false}
+                onChangeText={onChangeField("job")}
+              />
+              
+              <Text style={{ ...Fonts.Grey14Bold, marginHorizontal: 15 }}>
+                {t("Linkedin")}
+              </Text>
+              <Input
+                placeholder={t("Linkedin")}
+                containerStyle={{
+                  marginTop: 8,
+                  marginBottom: -10,
+                  alignItems: "center",
+                  justifyContent: "center",
+                  textAlign: "center",
+                }}
+                inputContainerStyle={{
+                  borderBottomWidth: 0,
+                  ...ConstantStyle.shadow,
+                  backgroundColor: Colors.white,
+                  borderRadius: 10,
+                  paddingHorizontal: 15,
+                  width: width - 30,
+                  height: 45,
+                }}
+                inputStyle={{ ...Fonts.Black14Medium }}
+                secureTextEntry={false}
+                onChangeText={onChangeField("linkedin")}
+              />
+             
+              <View style={{ marginHorizontal: 15, marginVertical: 20 }}>
+                <MainButton
+                  name={t("sign_up")}
+                  onPress={() => navigation.navigate("OtpScreen")}
+                />
+                <View style={{ marginHorizontal: 15, marginVertical: 20 }}>
+                  {/* <MainButton
+                    name={t("Submit")}
+                    style={{
+                      shadowColor: "#000",
+                      shadowOffset: {
+                        width: 10,
+                        height: 5,
+                      },
+                      shadowOpacity: 0.34,
+                      shadowRadius: 6.27,
+                      elevation: 10,
+                    }}
+                    onPress={() => handleSubmit}
+                  /> */}
+
+<Button title="Submit" onPress={handleSubmit(onSubmit)} />
+                </View>
+
+              </View>
+
+              <View style={{ marginHorizontal: 15, marginVertical: 20 }}>
+                <Button
+                  color="#3740FE"
+                  title="Back"
+                  //disabled={!isValid}
+                  //onPress={() => navigation.navigate("OtpScreen")}
+                  onPress={(e) => handlingStep(false, false, true, false)}
+                />
+              </View>
+            </>
+          ) : (
+            <></>
+          )}
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
