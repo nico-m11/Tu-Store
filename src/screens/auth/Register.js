@@ -28,7 +28,7 @@ import { Colors } from "../../themes/colors";
 import { Input } from "react-native-elements";
 import MainButton from "../components/MainButton";
 import { useTranslation } from "react-i18next";
-import { Formik, setFieldValue } from "formik";
+import { Formik, Form, Field } from "formik";
 import * as yup from "yup";
 import SelectDropdown from "react-native-select-dropdown";
 import { SelectList } from "react-native-dropdown-select-list";
@@ -55,11 +55,11 @@ export const RegisterScreen = ({ navigation }) => {
 
   const DataCustomer = () => {
     //setLoader(true)
-    fetch("https://api.tu-store.soluzionitop.cloud/api/customers", {
+    fetch("https://api.tu-store.soluzionitop.cloud/api/dictionary?column=customer_type", {
       method: "GET",
       headers: {
         Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlRVTzYiLCJpZCI6MSwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNjcwMDYwMjc5LCJleHAiOjE2NzI3Mzg2Nzl9.cPlvl2t2Cr3Epvb5ybthZHepLdmRi6vk-Cr8ybfHXPs",
+          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InAubWFyYXNjYTg5QGdtYWlsLmNvbSIsImlkIjo4LCJpYXQiOjE2NzA0OTcwNTEsImV4cCI6MTY3MzE3NTQ1MX0.TvaEDRJwkGQYdWXeTbutep0_GdG1qPBDhHOgOmnkEFg",
       },
     })
       .then((res) => {
@@ -67,6 +67,7 @@ export const RegisterScreen = ({ navigation }) => {
         return res.json();
       })
       .then((value) => {
+        console.log(value)
         setCustomer_type(value.items);
       })
       .catch((err) => {
@@ -285,11 +286,11 @@ export const RegisterScreen = ({ navigation }) => {
             //     "Password and Confirm Password didn't match"
             //   ),
           })}
-          onSubmit={(values) => {
+          onSubmit={ async (values, { setSubmitting }) => {
             const requestOption = {
               headers: {
-                BearerToken:
-                  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlRVTzYiLCJpZCI6NiwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNjY3OTAwOTcxLCJleHAiOjE2NzA1NzkzNzF9.523N8oDpL_AufsFeSydhthNFrIls_0Q1ttA3LGHT8TQs",
+                Authorization:
+                "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InAubWFyYXNjYTg5QGdtYWlsLmNvbSIsImlkIjo4LCJpYXQiOjE2NzA0OTcwNTEsImV4cCI6MTY3MzE3NTQ1MX0.TvaEDRJwkGQYdWXeTbutep0_GdG1qPBDhHOgOmnkEFg",
               },
               method: "POST",
               body: JSON.stringify({
@@ -298,7 +299,7 @@ export const RegisterScreen = ({ navigation }) => {
                 email: values.email,
                 mobile: values.mobile,
                 phone: values.phone,
-                password: values.password,
+                //password: values.password,
                 //confirm_password: values.confirm_password,
                 country: values.country,
                 region: values.region,
@@ -334,6 +335,7 @@ export const RegisterScreen = ({ navigation }) => {
             isValid,
             handleSubmit,
             setFieldValue,
+            formik
           }) => (
             <View
               style={{
@@ -1455,7 +1457,7 @@ export const RegisterScreen = ({ navigation }) => {
                           shadowRadius: 6.27,
                           elevation: 10,
                         }}
-                        onPress={() => handleSubmit()}
+                        onPress={() => (handleSubmit)}
                       />
                     </View>
                   </View>

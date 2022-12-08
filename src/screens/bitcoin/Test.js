@@ -1,4 +1,4 @@
-import React, { useEffect, useState, Component } from "react";
+import React, { useEffect, useState, Component, useCallback } from "react";
 import {
   SafeAreaView,
   Text,
@@ -9,6 +9,7 @@ import {
   FlatList,
   TouchableOpacity,
   Image,
+  Input,
   ScrollView,
   StatusBar,
   BackHandler,
@@ -28,84 +29,96 @@ import { StyleSheet } from "react-native";
 import { CheckBox } from "@rneui/themed";
 import SearchableDropdown from "react-native-searchable-dropdown";
 import SelectDropdown from "react-native-select-dropdown";
+import { render } from "react-dom";
+import { useForm } from 'react-hook-form';
 
 export const TestScreen = ({ navigation }) => {
   const { t, i18n } = useTranslation();
 
-  const [serverData, setServerData] = useState([]);
-  const [onlyData, setOnlyData] = useState("");
+  
+  const { register, handleSubmit, setValue } = useForm();
+  const onSubmit = useCallback(formData => {
+    console.log(formData);
+    // const requestOption = {
+    //   headers: {
+    //     Authorization:
+    //     "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InAubWFyYXNjYTg5QGdtYWlsLmNvbSIsImlkIjo4LCJpYXQiOjE2NzA0OTcwNTEsImV4cCI6MTY3MzE3NTQ1MX0.TvaEDRJwkGQYdWXeTbutep0_GdG1qPBDhHOgOmnkEFg",
+    //   },
+    //   method: "POST",
+    //   body: formData
+    //     .fetch(
+    //       "https://api.tu-store.soluzionitop.cloud/api/customers",
+    //       requestOption
+    //     )
+    //     .then((response) => console.log(response))
+    //     //.then((data) => console.log(data)),
+    // };
 
-  useEffect(() => {
-    fetch("https://aboutreact.herokuapp.com/demosearchables.php")
+    //var dataToSend = {formData.email, formData.password};
+    //making data to send on server
+    var formBody = [];
+    // for (var key in dataToSend) {
+    //   var encodedKey = encodeURIComponent(key);
+    //   var encodedValue = encodeURIComponent(dataToSend[key]);
+    //   formBody.push(encodedKey + '=' + encodedValue);
+    // }
+    formBody = formData;
+    //POST request
+    fetch('https://api.tu-store.soluzionitop.cloud/api/customers', {
+      method: 'POST', //Request Type
+      body: formBody, //post body
+      headers: {
+        //Header Defination
+        'Content-Type': 
+          'application/x-www-form-urlencoded;charset=UTF-8',
+          Authorization:
+          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InAubWFyYXNjYTg5QGdtYWlsLmNvbSIsImlkIjo4LCJpYXQiOjE2NzA0OTcwNTEsImV4cCI6MTY3MzE3NTQ1MX0.TvaEDRJwkGQYdWXeTbutep0_GdG1qPBDhHOgOmnkEFg",
+      },
+    })
       .then((response) => response.json())
+      //If response is in json then in success
       .then((responseJson) => {
-        //Successful response from the API Call
-        setServerData(responseJson.results);
+        alert(JSON.stringify(responseJson));
+        console.log(responseJson);
       })
+      //If response is not in json then in error
       .catch((error) => {
+        alert(JSON.stringify(error));
         console.error(error);
       });
+
   }, []);
+  const onChangeField = useCallback(
+    name => text => {
+      setValue(name, text);
+    },
+    []
+  );
 
-  const yupSchema = yup.object().shape({
-    language: yup.string().required(),
-  });
-
-  const initialValues = {
-    language: "",
-  };
-
-  const countries = ["Egypt", "Canada", "Australia", "Ireland"]
-
-
+  useEffect(() => {
+    register('email');
+    register('password');
+  }, [register]);
 
   return (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      <View>
-        <Formik
-          initialValues={initialValues}
-          validationSchema={yupSchema}
-          onSubmit={(values) => Alert.alert(JSON.stringify(values))}
-        >
-          {(formik) => (
-            <>
-              <View>
-                <SelectDropdown
-                  data={countries}
-                  onSelect={(selectedItem, index) => {
-                    console.log(selectedItem, index);
-                  }}
-                  buttonTextAfterSelection={(selectedItem, index) => {
-                    // text represented after item is selected
-                    // if data array is an array of objects then return selectedItem.property to render after item is selected
-                    return selectedItem;
-                  }}
-                  rowTextForSelection={(item, index) => {
-                    // text represented for each item in dropdown
-                    // if data array is an array of objects then return item.property to represent item in dropdown
-                    return item;
-                  }}
-                />
-
-                {/* <Picker
-                    selectedValue={formik.values.language}
-                    style={{ height: 50, width: 150 }}
-                    onValueChange={(itemValue) =>
-                      formik.setFieldValue("language", itemValue)
-                    }
-                  >
-                    <Picker.Item value={initialValues.language} key={0} />
-                    <Picker.Item label="JavaScript" value="js" />
-                  </Picker> */}
-              </View>
-
-              <Button title="Submit" onPress={formik.handleSubmit} />
-            </>
-          )}
-        </Formik>
-      </View>
+    <View style={{marginLeft:40, marginTop:50}}>
+      <TextInput
+        autoCompleteType="email"
+        keyboardType="email-address"
+        textContentType="emailAddress"
+        placeholder="Email"
+        onChangeText={onChangeField('email')}
+      />
+      <TextInput
+        secureTextEntry
+        autoCompleteType="password"
+        placeholder="Password"
+        onChangeText={onChangeField('password')}
+      />
+      <Button title="Submit" onPress={handleSubmit(onSubmit)} />
     </View>
   );
+
 };
 
 const styles = StyleSheet.create({
