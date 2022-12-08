@@ -148,7 +148,15 @@
         "exit":"Exit",
         "exit_Text":"Are you sure you want to exit app ?",
         "copy":"Copied",
-        "lorem_8":"fuck!"
+        "lorem_8":"fuck!",
+        "treatment":"Data Controller and Data Protection Officer",
+        "Text_treatment":"The Data Controller is: Compara Tu Italia s.r.l., Via Garibaldi 78, 25015, Desenzano del Garda (BS), contactable at the following email address: privacy@compara-tu.it The Data Protection Officer (DPO) named is Do+. Adriano Bertolino can be contacted at dpo@compara-tu.it.",
+        "object":"Object of the treatment",
+        "Text_object":"The Data Controller processes personal identification data, such as e.g. name, surname, e-mail, telephone number, mobile phone, postal address, financial, economic and identification data in general (hereinafter Data)  provided by you when subscribing to access the services provided by Compara Tu Italia or,in general of the existing contractual relationship with the Data Controller.",
+        "treatment_low":"Purpose and legal basis of the processing",
+        "Finality_treatment":"Further purposes of the processing",
+        "fin_treat_text":"The data collected, with your prior free and explicit consent (Article 6 letter a) GDPR), may also be used for the additional purposes indicated below under the terms and conditions specified therein: 1.(a) Direct marketing: to send you newsletters, material promotional and commercial communications, through both automated (e.g. e-mail, SMS, MMS, Social Network, App) and traditional (paper mail and telephone calls with operator) contact methods, including by our commercial partners, (at by way of example but not limited to, services of: telephony, gas and electricity, consumer credit, digital web marketing products, etc.) also for third party clients. 2.(b) Profiling: for profiling purposes, i.e. to analyze or predict, thanks to algorithms and other automated systems, your potential habits, personal preferences, interests, economic situation, reliability, behaviour, location, in order to be able to offer you products and services that are increasingly suited to your real interests and needs and to be able to develop personalized offers and commercial communications. 3.(c) Communication of data to third parties (e.g. commercial partner companies), including the companies of the TU-STORE S.r.l. (parent companies, subsidiaries, affiliates) that produce or market goods or services related to the services requested also on behalf of third parties, subjects who deal with the promotion of goods or services, or subjects who deal with the processing of such data in anonymous form for statistical purposes , in accordance with applicable laws and regulations. methods and for the purposes described below: It is understood that, if you do not want to give your consent to the processing of your data for the aforementioned purposes, this will not prevent you from accessing services made available by the Data Controller."
+
 
     }
 }

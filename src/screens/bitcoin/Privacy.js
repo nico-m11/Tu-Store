@@ -20,10 +20,10 @@ export const Privacy = ({ navigation, route }) => {
         }}
       >
         <View style={{ marginTop: 15, marginHorizontal: 15 }}>
-          <Text style={{ ...Fonts.Black18Bold }}>{t("privacy")}</Text>
-          <Text style={{ ...Fonts.Black14Medium }}>{t("lorem_7")}</Text>
+          <Text style={{ ...Fonts.Black18Bold }}>{t("treatment")}</Text>
+          <Text style={{ ...Fonts.Black14Medium }}>{t("Text_treatment")}</Text>
           <Text style={{ ...Fonts.Black18Bold, marginTop: 15 }}>
-            {t("term_of_use")}
+            {t("object")}
           </Text>
           <Text style={{ ...Fonts.Black14Medium }}>{t("lorem_8")}</Text>
         </View>

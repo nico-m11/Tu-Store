@@ -35,7 +35,7 @@ export const Tutela = ({ navigation }) => {
       method: "GET",
       headers: {
         Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlRVTzYiLCJpZCI6MSwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNjcwMDYwMjc5LCJleHAiOjE2NzI3Mzg2Nzl9.cPlvl2t2Cr3Epvb5ybthZHepLdmRi6vk-Cr8ybfHXPs",
+          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InAubWFyYXNjYTg5QGdtYWlsLmNvbSIsImlkIjo4LCJpYXQiOjE2NzA0MjQ1OTcsImV4cCI6MTY3MzEwMjk5N30.yLzIp0UIApgRh-MJ_9NYR94Gkb7CLiA0dG0FWGppeJQ",
       },
     })
       .then((res) => {
