@@ -34,7 +34,7 @@ import SelectDropdown from "react-native-select-dropdown";
 import { SelectList } from "react-native-dropdown-select-list";
 import SearchableDropdown from "react-native-searchable-dropdown";
 import DateTimePicker from "@react-native-community/datetimepicker";
-import { useForm } from 'react-hook-form';
+import { useForm } from "react-hook-form";
 
 export const RegisterScreen = ({ navigation }) => {
   useEffect(() => {
@@ -71,7 +71,7 @@ export const RegisterScreen = ({ navigation }) => {
         return res.json();
       })
       .then((value) => {
-        console.log(value);
+        //console.log(value);
         setCustomer_type(value.items);
       })
       .catch((err) => {
@@ -141,41 +141,33 @@ export const RegisterScreen = ({ navigation }) => {
 
   const { register, handleSubmit, setValue } = useForm();
   const onSubmit = useCallback((formData) => {
-    //console.log(formData);
-
- var formBody = [];
-
-formData['data'] = date;
-formData['customer_type'] = customerSelect;
-formData['gender'] = genderSelect;
-formData['educational_qualification'] = educational_qualification_select;
-formData['maritial_status'] = maritialStatusSelect;
-
-formBody.push(formData);
-
-console.log(formBody); 
-//     var formBody = [
-//       date,
-//       customerSelect,
-//       genderSelect,
-//       educational_qualification_select,
-//       maritialStatusSelect,
-//       formData
-//     ];
-//     //formBody = formData;
-//     console.log(formBody);
     
+
+    var formBody = [
+      formData,
+      formData.birth_date = date,
+      formData.customer_type = customerSelect,
+      formData.educational_qualification = educational_qualification_select,
+      formData.maritial_status = maritialStatusSelect,
+      formData.gender = genderSelect,
+    ];
+
+    formBody = formData;
+
+    //console.log(date);
+
+    console.log(formBody);
+
     //POST request
-    /**
-     *  
-     *  {
-      "fiscal_code": "string",
-  "first_name": "string",
-  "last_name": "string",
+  /**
+   * {
+  "fiscal_code": "string",
+  "first_name": "Nicola",
+  "last_name": "Melito",
   "company": "string",
-  "birth_date": "2022-12-08T14:12:58.197Z",
+  "birth_date": "2022-12-06T16:48:54.877Z",
   "birth_place": "string",
-  "email": "string",
+  "email": "mail@it.com",
   "phone": "string",
   "mobile": "string",
   "fax": "string",
@@ -187,19 +179,29 @@ console.log(formBody);
   "address": "string",
   "zip_code": "string",
   "notes": "string",
-  "password": "string"
-  }
-     */
-
+  "customersExtrafields":[{
+        "customer_type": "Privato",
+        "status": "true",
+        "ip_last_login": "string",
+        "photo": "string",
+        "last_login_date": "2020-05-12 12:00:04.000000",
+        "gender": "M",
+        "job": "Dev",
+        "marital_status": "Celibe/nubile",
+        "educational_qualification": "laurea",
+        "linkedin": "string"
+  }]
+}
+   */
 
     fetch("https://api.tu-store.soluzionitop.cloud/api/customers", {
       method: "POST", //Request Type
-      body: {formBody}, //post body
+      body: { formBody }, //post body
       headers: {
         //Header Defination
         "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
         Authorization:
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InAubWFyYXNjYTg5QGdtYWlsLmNvbSIsImlkIjo4LCJpYXQiOjE2NzA0OTcwNTEsImV4cCI6MTY3MzE3NTQ1MX0.TvaEDRJwkGQYdWXeTbutep0_GdG1qPBDhHOgOmnkEFg",
+        "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InAubWFyYXNjYTg5QGdtYWlsLmNvbSIsImlkIjo4LCJpYXQiOjE2NzA0OTcwNTEsImV4cCI6MTY3MzE3NTQ1MX0.TvaEDRJwkGQYdWXeTbutep0_GdG1qPBDhHOgOmnkEFg",
       },
     })
       .then((response) => response.json())
@@ -223,7 +225,7 @@ console.log(formBody);
   );
 
   useEffect(() => {
-    register("name");
+    register("first_name");
     register("email");
     register("password");
   }, [register]);
@@ -307,13 +309,13 @@ console.log(formBody);
                 autoCompleteType="name"
                 keyboardType="name"
                 textContentType="name"
-                onChangeText={onChangeField("name")}
+                onChangeText={onChangeField("first_name")}
               />
 
               <Text style={{ ...Fonts.Grey14Bold, marginHorizontal: 15 }}>
                 {t("Last Name")}
               </Text>
-              
+
               <Input
                 placeholder={t("Last Name")}
                 containerStyle={{
@@ -337,7 +339,7 @@ console.log(formBody);
                 autoCompleteType="lastName"
                 keyboardType="lastName"
                 textContentType="lastName"
-                onChangeText={onChangeField("lastName")}
+                onChangeText={onChangeField("last_name")}
               />
 
               <Text style={{ ...Fonts.Grey14Bold, marginHorizontal: 15 }}>
@@ -368,7 +370,6 @@ console.log(formBody);
                 textContentType="email"
                 onChangeText={onChangeField("email")}
               />
-             
 
               <Text style={{ ...Fonts.Grey14Bold, marginHorizontal: 15 }}>
                 {t("mobile")}
@@ -398,7 +399,6 @@ console.log(formBody);
                 style={{ marginBottom: 20 }}
                 onChangeText={onChangeField("mobile")}
               />
-             
 
               <Text style={{ ...Fonts.Grey14Bold, marginHorizontal: 15 }}>
                 {t("phone")}
@@ -428,7 +428,6 @@ console.log(formBody);
                 style={{ marginBottom: 20 }}
                 onChangeText={onChangeField("phone")}
               />
-             
 
               <Text style={{ ...Fonts.Grey14Bold, marginHorizontal: 15 }}>
                 {t("password")}
@@ -463,7 +462,7 @@ console.log(formBody);
                 secureTextEntry={values.password === "Password" ? false : true}
                 onChangeText={onChangeField("password")}
               />
-              
+
               <Text style={{ ...Fonts.Grey14Bold, marginHorizontal: 15 }}>
                 {t("confirm_password")}
               </Text>
@@ -504,7 +503,7 @@ console.log(formBody);
                 }
                 onChangeText={onChangeField("confirm_password")}
               />
-              
+
               <View style={{ marginHorizontal: 15, marginVertical: 20 }}>
                 <MainButton
                   name={t("Next")}
@@ -560,7 +559,6 @@ console.log(formBody);
                 secureTextEntry={false}
                 onChangeText={onChangeField("country")}
               />
-              
 
               <Text style={{ ...Fonts.Grey14Bold, marginHorizontal: 15 }}>
                 {t("Region")}
@@ -587,7 +585,7 @@ console.log(formBody);
                 secureTextEntry={false}
                 onChangeText={onChangeField("region")}
               />
-              
+
               <Text style={{ ...Fonts.Grey14Bold, marginHorizontal: 15 }}>
                 {t("Province")}
               </Text>
@@ -613,8 +611,7 @@ console.log(formBody);
                 secureTextEntry={false}
                 onChangeText={onChangeField("province")}
               />
-            
-          
+
               <Text style={{ ...Fonts.Grey14Bold, marginHorizontal: 15 }}>
                 {t("City Address")}
               </Text>
@@ -640,7 +637,6 @@ console.log(formBody);
                 secureTextEntry={false}
                 onChangeText={onChangeField("city_address")}
               />
-           
 
               <Text style={{ ...Fonts.Grey14Bold, marginHorizontal: 15 }}>
                 {t("Zip Code")}
@@ -669,7 +665,6 @@ console.log(formBody);
                 maxLength={6}
                 onChangeText={onChangeField("zip_code")}
               />
-            
 
               <Text style={{ ...Fonts.Grey14Bold, marginHorizontal: 15 }}>
                 {t("Address")}
@@ -696,7 +691,7 @@ console.log(formBody);
                 secureTextEntry={false}
                 onChangeText={onChangeField("address")}
               />
-              
+
               <View style={{ marginHorizontal: 15, marginVertical: 20 }}>
                 <MainButton
                   name={t("Next")}
@@ -875,7 +870,7 @@ console.log(formBody);
                 secureTextEntry={false}
                 onChangeText={onChangeField("birth_place")}
               />
-            
+
               <Text
                 style={{
                   ...Fonts.Grey14Bold,
@@ -968,7 +963,7 @@ console.log(formBody);
                     // text represented for each item in dropdown
                     // if data array is an array of objects then return item.property to represent item in dropdown
                     setMaritialStatusSelect(item);
-                    
+
                     return item;
                   }}
                 />
@@ -1005,7 +1000,6 @@ console.log(formBody);
                 secureTextEntry={false}
                 onChangeText={onChangeField("fiscal_code")}
               />
-             
 
               <View style={{ marginHorizontal: 15, marginVertical: 20 }}>
                 <MainButton
@@ -1117,7 +1111,7 @@ console.log(formBody);
                 secureTextEntry={false}
                 onChangeText={onChangeField("job")}
               />
-              
+
               <Text style={{ ...Fonts.Grey14Bold, marginHorizontal: 15 }}>
                 {t("Linkedin")}
               </Text>
@@ -1143,7 +1137,7 @@ console.log(formBody);
                 secureTextEntry={false}
                 onChangeText={onChangeField("linkedin")}
               />
-             
+
               <View style={{ marginHorizontal: 15, marginVertical: 20 }}>
                 <MainButton
                   name={t("sign_up")}
@@ -1165,9 +1159,8 @@ console.log(formBody);
                     onPress={() => handleSubmit}
                   /> */}
 
-<Button title="Submit" onPress={handleSubmit(onSubmit)} />
+                  <Button title="Submit" onPress={handleSubmit(onSubmit)} />
                 </View>
-
               </View>
 
               <View style={{ marginHorizontal: 15, marginVertical: 20 }}>
