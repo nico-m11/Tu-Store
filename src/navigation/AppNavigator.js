@@ -30,6 +30,7 @@ import { Tutela } from "../screens/bitcoin/Tutela";
 import { ComparaTu } from "../screens/bitcoin/ComparaTu";
 import { TuMarket } from "../screens/bitcoin/TuMarket";
 import { AssicuraTu } from "../screens/bitcoin/AssicuraTu";
+import { Survery } from "../screens/bitcoin/Survery";
 // pagina test
 import { TesoScreen } from "../screens/bitcoin/Teso";
 import {TestScreen} from "../screens/bitcoin/Test";
@@ -240,6 +241,11 @@ export const AppNavigator = () => {
       <AppStackNavigator.Screen
         name="Language"
         component={Language}
+        options={{ headerShown: false }}
+      />
+      <AppStackNavigator.Screen
+        name="Survery"
+        component={Survery}
         options={{ headerShown: false }}
       />
     </AppStackNavigator.Navigator>
