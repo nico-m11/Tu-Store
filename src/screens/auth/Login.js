@@ -27,7 +27,7 @@ import {
   BottomSheetModal,
   BottomSheetScrollView,
 } from "@gorhom/bottom-sheet";
-
+import { useForm } from "react-hook-form";
 export const LoginScreen = ({ navigation }) => {
   const { height, width } = Dimensions.get("window");
   const { t, i18n } = useTranslation();
@@ -58,6 +58,57 @@ export const LoginScreen = ({ navigation }) => {
   const handleRegister = () => {
     navigation.navigate("RegisterScreen");
   };
+  
+
+  const { register, handleSubmit, setValue } = useForm();
+  const onSubmit = useCallback(() => {
+    var formBody = {
+      email,
+      password
+    };
+  
+
+    console.log(formBody)
+    //formBody = formData;
+
+    //console.log(date);
+
+    //console.log(formBody);
+
+    //POST request
+
+    var raw = JSON.stringify({
+      "email":email,
+      "password":password
+    });
+
+    fetch("https://api.tu-store.soluzionitop.cloud/api/customers/login", {
+      method: "POST", //Request Type
+      body: raw,//post body
+      headers: {
+        //Header Defination
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      //If response is in json then in success
+      .then((responseJson) => {
+        alert(JSON.stringify(responseJson));
+        console.log(responseJson);
+      })
+      //If response is not in json then in error
+      .catch((error) => {
+        alert(JSON.stringify(error));
+        console.error(error);
+      });
+  }, []);
+
+  const onChangeField = useCallback(
+    (name) => (text) => {
+      setValue(name, text);
+    },
+    []
+  );
   //render View
   const [rendered, setRendered] = useState();
 
@@ -94,17 +145,14 @@ export const LoginScreen = ({ navigation }) => {
       <View style={{ flexDirection: isRtl ? "column" : "column-reverse" }}>
         <ImageBackground
           style={{
-            width: "auto" ,
+            width: "auto",
             height: height / 3.5,
             //justifyContent: "flex-center",
-           
-            marginTop:20,
+
+            marginTop: 20,
           }}
           source={require("../../../assets/images/header_login.png")}
-        >
-       
-        </ImageBackground>
-
+        ></ImageBackground>
       </View>
       <View>
         <ImageBackground
@@ -114,10 +162,7 @@ export const LoginScreen = ({ navigation }) => {
             ...StyleSheet.absoluteFillObject,
           }}
           source={require("../../../assets/images/header.png")}
-        >
- 
-        </ImageBackground>
-
+        ></ImageBackground>
       </View>
 
       <View
@@ -128,7 +173,7 @@ export const LoginScreen = ({ navigation }) => {
           flex: 1,
           borderTopLeftRadius: 30,
           borderTopRightRadius: 30,
-          marginTop:30,
+          marginTop: 30,
         }}
       >
         <ScrollView
@@ -137,16 +182,27 @@ export const LoginScreen = ({ navigation }) => {
             borderTopRightRadius: 30,
           }}
         >
-                    <View style={{ marginVertical: 10, top:20, buttom:20}}>
-            <Text style={{ ...Fonts.Black24Bold, marginHorizontal: 15, marginLeft:140 }}>
+          <View style={{ marginVertical: 10, top: 20, buttom: 20 }}>
+            <Text
+              style={{
+                ...Fonts.Black24Bold,
+                marginHorizontal: 15,
+                marginLeft: 140,
+              }}
+            >
               {t("welcome")}
             </Text>
-            <Text style={{ ...Fonts.Black14Medium, marginHorizontal: 15, marginLeft:70 }}>
+            <Text
+              style={{
+                ...Fonts.Black14Medium,
+                marginHorizontal: 15,
+                marginLeft: 70,
+              }}
+            >
               {t("Collegati per consultare i nostri servizi")}
             </Text>
           </View>
           <View style={{ top: 20 }}>
-
             <Text style={{ ...Fonts.Grey14Bold, marginHorizontal: 15 }}>
               {t("email_placeholder")}
             </Text>
@@ -170,10 +226,10 @@ export const LoginScreen = ({ navigation }) => {
               }}
               inputStyle={{ ...Fonts.Black14Medium }}
               secureTextEntry={false}
-              value={email}
+              value={email}   
               onChangeText={(value) => {
                 setEmail(value);
-              }}
+              }}           
             />
             <Text style={{ ...Fonts.Grey14Bold, marginHorizontal: 15 }}>
               {t("password_label")}
@@ -227,7 +283,7 @@ export const LoginScreen = ({ navigation }) => {
               </Text>
             </TouchableOpacity>
             <View style={{ marginHorizontal: 15, marginVertical: 25 }}>
-              <MainButton name={t("sign_in")} onPress={handleRegister} />
+              <MainButton name={t("sign_in")} onPress={onSubmit} />
             </View>
             {/* <Text style={{ ...Fonts.Grey14Bold, textAlign: "center" }}>
               {t("or")}
