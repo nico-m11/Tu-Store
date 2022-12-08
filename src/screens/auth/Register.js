@@ -166,6 +166,32 @@ console.log(formBody);
 //     console.log(formBody);
     
     //POST request
+    /**
+     *  
+     *  {
+      "fiscal_code": "string",
+  "first_name": "string",
+  "last_name": "string",
+  "company": "string",
+  "birth_date": "2022-12-08T14:12:58.197Z",
+  "birth_place": "string",
+  "email": "string",
+  "phone": "string",
+  "mobile": "string",
+  "fax": "string",
+  "iban": "string",
+  "country": "string",
+  "region": "string",
+  "province": "string",
+  "city": "string",
+  "address": "string",
+  "zip_code": "string",
+  "notes": "string",
+  "password": "string"
+  }
+     */
+
+
     fetch("https://api.tu-store.soluzionitop.cloud/api/customers", {
       method: "POST", //Request Type
       body: {formBody}, //post body
@@ -173,7 +199,7 @@ console.log(formBody);
         //Header Defination
         "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
         Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InAubWFyYXNjYTg5QGdtYWlsLmNvbSIsImlkIjo4LCJpYXQiOjE2NzA0OTcwNTEsImV4cCI6MTY3MzE3NTQ1MX0.TvaEDRJwkGQYdWXeTbutep0_GdG1qPBDhHOgOmnkEFg",
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InAubWFyYXNjYTg5QGdtYWlsLmNvbSIsImlkIjo4LCJpYXQiOjE2NzA0OTcwNTEsImV4cCI6MTY3MzE3NTQ1MX0.TvaEDRJwkGQYdWXeTbutep0_GdG1qPBDhHOgOmnkEFg",
       },
     })
       .then((response) => response.json())
