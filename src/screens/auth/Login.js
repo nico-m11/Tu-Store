@@ -53,34 +53,23 @@ export const LoginScreen = ({ navigation }) => {
   const passwordShow = () => setShow(!show);
   // bottom actionsheet
   // const { isOpen, onOpen, onClose } = useDisclose();
-  //loader
+  //loader  
   const [loader, setLoader] = useState(false);
   const handleRegister = () => {
     navigation.navigate("RegisterScreen");
   };
   
+  console.log(email)
+  console.log(password)
 
   const { register, handleSubmit, setValue } = useForm();
   const onSubmit = useCallback(() => {
-    var formBody = {
-      email,
-      password
-    };
-  
-
-    console.log(formBody)
-    //formBody = formData;
-
-    //console.log(date);
-
-    //console.log(formBody);
-
     //POST request
-
     var raw = JSON.stringify({
       "email":email,
       "password":password
     });
+
 
     fetch("https://api.tu-store.soluzionitop.cloud/api/customers/login", {
       method: "POST", //Request Type
