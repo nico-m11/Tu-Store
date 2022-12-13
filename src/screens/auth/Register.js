@@ -48,6 +48,9 @@ export const RegisterScreen = ({ navigation }) => {
   const [customerSelect, setCustomerSelect] = useState("");
   const [genderSelect, setGenderSelect] = useState("");
   const [maritialStatusSelect, setMaritialStatusSelect] = useState("");
+  const [linkedin, setLinkedin] = useState('');
+  const [job, setJob] = useState('');
+
 
   const [
     educational_qualification_select,
@@ -142,66 +145,26 @@ export const RegisterScreen = ({ navigation }) => {
   const { register, handleSubmit, setValue } = useForm();
   const onSubmit = useCallback((formData) => {
     
+   formData.customersExtrafields = [{
+      birth_date: date,
+      customer_type: customerSelect,
+      educational_qualification: educational_qualification_select,
+      maritial_status: maritialStatusSelect,
+      gender: genderSelect,
+      job:job,
+      linkedin:linkedin
+  }];
+  
+    var formBody = formData;
 
-    var formBody = [
-      formData,
-      formData.birth_date = date,
-      formData.customer_type = customerSelect,
-      formData.educational_qualification = educational_qualification_select,
-      formData.maritial_status = maritialStatusSelect,
-      formData.gender = genderSelect,
-    ];
-
-    formBody = formData;
-
-    //console.log(date);
-
-    console.log(formBody);
-
-    //POST request
-  /**
-   * {
-  "fiscal_code": "string",
-  "first_name": "Nicola",
-  "last_name": "Melito",
-  "company": "string",
-  "birth_date": "2022-12-06T16:48:54.877Z",
-  "birth_place": "string",
-  "email": "mail@it.com",
-  "phone": "string",
-  "mobile": "string",
-  "fax": "string",
-  "iban": "string",
-  "country": "string",
-  "region": "string",
-  "province": "string",
-  "city": "string",
-  "address": "string",
-  "zip_code": "string",
-  "notes": "string",
-  "customersExtrafields":[{
-        "customer_type": "Privato",
-        "status": "true",
-        "ip_last_login": "string",
-        "photo": "string",
-        "last_login_date": "2020-05-12 12:00:04.000000",
-        "gender": "M",
-        "job": "Dev",
-        "marital_status": "Celibe/nubile",
-        "educational_qualification": "laurea",
-        "linkedin": "string"
-  }]
-}
-   */
-
-    fetch("https://api.tu-store.soluzionitop.cloud/api/customers", {
+    fetch("https://api.tu-store.soluzionitop.cloud/api/customers/registration", {
       method: "POST", //Request Type
-      body: { formBody }, //post body
+      body: JSON.stringify(formBody), //post body
       headers: {
         //Header Defination
-        "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
+        "Content-Type":  "application/json",
         Authorization:
-        "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InAubWFyYXNjYTg5QGdtYWlsLmNvbSIsImlkIjo4LCJpYXQiOjE2NzA0OTcwNTEsImV4cCI6MTY3MzE3NTQ1MX0.TvaEDRJwkGQYdWXeTbutep0_GdG1qPBDhHOgOmnkEFg",
+        'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwiYXBpIjoiY3VzdG9tZXJzL3JlZ2lzdHJhdGlvbiIsInByb2plY3QiOiJUVVN0b3JlIiwiaWF0IjoxNTE2MjM5MDIyfQ.-BW9IAKNsLYM-q57Eujecpp49FKgzEOfxIMdvbylIwg',
       },
     })
       .then((response) => response.json())
@@ -501,7 +464,7 @@ export const RegisterScreen = ({ navigation }) => {
                 secureTextEntry={
                   values.confirm_password === "confirm_password" ? false : true
                 }
-                onChangeText={onChangeField("confirm_password")}
+                //onChangeText={onChangeField("confirm_password")}
               />
 
               <View style={{ marginHorizontal: 15, marginVertical: 20 }}>
@@ -613,7 +576,7 @@ export const RegisterScreen = ({ navigation }) => {
               />
 
               <Text style={{ ...Fonts.Grey14Bold, marginHorizontal: 15 }}>
-                {t("City Address")}
+                {t("City")}
               </Text>
               <Input
                 placeholder={t("City")}
@@ -635,7 +598,7 @@ export const RegisterScreen = ({ navigation }) => {
                 }}
                 inputStyle={{ ...Fonts.Black14Medium }}
                 secureTextEntry={false}
-                onChangeText={onChangeField("city_address")}
+                onChangeText={onChangeField("city")}
               />
 
               <Text style={{ ...Fonts.Grey14Bold, marginHorizontal: 15 }}>
@@ -1109,7 +1072,8 @@ export const RegisterScreen = ({ navigation }) => {
                 }}
                 inputStyle={{ ...Fonts.Black14Medium }}
                 secureTextEntry={false}
-                onChangeText={onChangeField("job")}
+                defaultValue={job}
+                onChangeText={newText => setJob(newText)}
               />
 
               <Text style={{ ...Fonts.Grey14Bold, marginHorizontal: 15 }}>
@@ -1135,9 +1099,10 @@ export const RegisterScreen = ({ navigation }) => {
                 }}
                 inputStyle={{ ...Fonts.Black14Medium }}
                 secureTextEntry={false}
-                onChangeText={onChangeField("linkedin")}
+                defaultValue= {linkedin}
+                // onChangeText={onChangeField('linkedin')}
+                onChangeText={newText => setLinkedin(newText)}
               />
-
               <View style={{ marginHorizontal: 15, marginVertical: 20 }}>
                 <MainButton
                   name={t("sign_up")}
