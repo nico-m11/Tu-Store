@@ -38,7 +38,7 @@ import { useForm } from "react-hook-form";
 
 export const RegisterScreen = ({ navigation }) => {
   useEffect(() => {
-    DataCustomer();
+    //DataCustomer();
   }, []);
   const { height, width } = Dimensions.get("window");
   const { t, i18n } = useTranslation();
@@ -57,30 +57,30 @@ export const RegisterScreen = ({ navigation }) => {
     Seteducational_qualification_select,
   ] = useState("");
 
-  const DataCustomer = () => {
-    //setLoader(true)
-    fetch(
-      "https://api.tu-store.soluzionitop.cloud/api/dictionary?column=customer_type",
-      {
-        method: "GET",
-        headers: {
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InAubWFyYXNjYTg5QGdtYWlsLmNvbSIsImlkIjo4LCJpYXQiOjE2NzA0OTcwNTEsImV4cCI6MTY3MzE3NTQ1MX0.TvaEDRJwkGQYdWXeTbutep0_GdG1qPBDhHOgOmnkEFg",
-        },
-      }
-    )
-      .then((res) => {
-        //setLoader(false)
-        return res.json();
-      })
-      .then((value) => {
-        //console.log(value);
-        setCustomer_type(value.items);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+  // const DataCustomer = () => {
+  //   //setLoader(true)
+  //   fetch(
+  //     "https://api.tu-store.soluzionitop.cloud/api/dictionary?column=customer_type",
+  //     {
+  //       method: "GET",
+  //       headers: {
+  //         Authorization:
+  //           "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InAubWFyYXNjYTg5QGdtYWlsLmNvbSIsImlkIjo4LCJpYXQiOjE2NzExMzU1NjAsImV4cCI6MTY3MzgxMzk2MH0.wCfdYUq3PqSwfW4oGprlpNrYw4Sp2S-j3cla3h6L2SM",
+  //       },
+  //     }
+  //   )
+  //     .then((res) => {
+  //       //setLoader(false)
+  //       return res.json();
+  //     })
+  //     .then((value) => {
+  //       //console.log(value);
+  //       setCustomer_type(value.items);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // };
 
   const object_customer = Object.keys(customer_type).map(
     (key) => customer_type[key].name
