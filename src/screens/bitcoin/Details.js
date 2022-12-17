@@ -4,7 +4,7 @@ import {
   Text,
   View,
   Image,
-  Button,
+
   TouchableOpacity,
   Dimensions,
   StyleSheet,
@@ -18,6 +18,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { LineChart } from "react-native-chart-kit";
 import { Link } from "native-base";
 import { useTranslation } from "react-i18next";
+import { Button } from "@rneui/base";
 import * as DocumentPicker from "expo-document-picker";
 
 export const Details = ({ navigation, route }) => {
@@ -246,6 +247,7 @@ export const Details = ({ navigation, route }) => {
             onPress={pickDocument}
             allowMultiSelection={true}
           />
+            
         </>
       ) : (
         <></>

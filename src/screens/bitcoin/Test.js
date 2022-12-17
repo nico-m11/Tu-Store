@@ -4,7 +4,6 @@ import {
   Text,
   TextInput,
   View,
-  Button,
   Alert,
   FlatList,
   TouchableOpacity,
@@ -31,25 +30,16 @@ import SelectDropdown from "react-native-select-dropdown";
 import { render } from "react-dom";
 import { useForm } from "react-hook-form";
 import { value, CheckBox } from "@rneui/base";
+import { Button } from "@rneui/base";
 
 export const TestScreen = ({ navigation }) => {
   const { t, i18n } = useTranslation();
   const [checked, setChecked] = React.useState(false);
   console.log(checked);
+
   return (
     <View style={{ marginTop: "10%", marginLeft: "2%" }}>
-      <CheckBox
-        style={{backgroundColor:'#e0e0e0'}}
-        center
-        checked={checked}
-        checkedColor="blue"
-        checkedTitle="Si"
-        containerStyle={{ width: "25%" }}
-        onIconPress={() => setChecked(!checked)}
-        size={30}
-        title="Si"
-        uncheckedColor="#e0e0e0"
-      />
+    <Button size="md">Medium</Button>
     </View>
   );
 };
