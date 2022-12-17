@@ -39,17 +39,16 @@ export const TestScreen = ({ navigation }) => {
   return (
     <View style={{ marginTop: "10%", marginLeft: "2%" }}>
       <CheckBox
+        style={{backgroundColor:'#e0e0e0'}}
         center
         checked={checked}
-        checkedColor="#0F0"
-        checkedTitle="Great!"
-        containerStyle={{ width: "75%" }}
+        checkedColor="blue"
+        checkedTitle="Si"
+        containerStyle={{ width: "25%" }}
         onIconPress={() => setChecked(!checked)}
         size={30}
-        textStyle={{}}
-        title="Check for Awesomeness"
-        titleProps={{}}
-        uncheckedColor="#F00"
+        title="Si"
+        uncheckedColor="#e0e0e0"
       />
     </View>
   );

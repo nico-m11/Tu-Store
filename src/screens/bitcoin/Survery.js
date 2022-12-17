@@ -20,18 +20,22 @@ import { LineChart } from "react-native-chart-kit";
 import { Link } from "native-base";
 import { useTranslation } from "react-i18next";
 import * as DocumentPicker from "expo-document-picker";
-import CheckBox from "react-native-check-box";
+import { value, CheckBox } from "@rneui/base";
 import { Input } from "react-native-elements";
 
 export const Survery = ({ navigation, route }) => {
   //console.log(item);
   const { t, i18n } = useTranslation();
   const width = Dimensions.get("window").width - 60;
-  const [isSelected, setSelection] = useState(false);
-
+  const [checked, setChecked] = React.useState(false);
+  const [isSelected, setIsSelected] = useState(false);
   return (
     <SafeAreaView style={{ ...ConstantStyle.container }}>
-      <CustomHeader navigation={navigation} title={t("Survery")} isStar={false} />
+      <CustomHeader
+        navigation={navigation}
+        title={t("Survery")}
+        isStar={false}
+      />
       <View
         style={{
           backgroundColor: Colors.white,
@@ -55,30 +59,44 @@ export const Survery = ({ navigation, route }) => {
               {/**
                * first questiion
                */}
-              <View  >
+              <View>
                 <Text>{t("first_question")}</Text>
-                <CheckBox 
-                  style={{ flex: 1, padding: 10 }}
-                  // onClick={() => {
-                  // }}
-                  isChecked={isSelected}
-                  rightText={"Bollette"}
+
+                <CheckBox
+                  style={{ backgroundColor: "#e0e0e0" }}
+                  left
+                  checked={checked}
+                  checkedColor="blue"
+                  checkedTitle={t("Bollette")}
+                  s
+                  onIconPress={() => setChecked(!checked)}
+                  size={30}
+                  title={t("Bollette")}
+                  uncheckedColor="#e0e0e0"
                 />
 
                 <CheckBox
-                  style={{ flex: 1, padding: 10 }}
-                  // onClick={() => {
-                  // }}
-                  isChecked={isSelected}
-                  rightText={"Affitto"}
+                  style={{ backgroundColor: "#e0e0e0" }}
+                  left
+                  checked={checked}
+                  checkedColor="blue"
+                  checkedTitle={t("Affitto")}
+                  onIconPress={() => setChecked(!checked)}
+                  size={30}
+                  title={t("Affitto")}
+                  uncheckedColor="#e0e0e0"
                 />
 
                 <CheckBox
-                  style={{ flex: 1, padding: 10 }}
-                  // onClick={() => {
-                  // }}
-                  isChecked={isSelected}
-                  rightText={"trasporti"}
+                  style={{ backgroundColor: "#e0e0e0" }}
+                  left
+                  checked={checked}
+                  checkedColor="blue"
+                  checkedTitle={t("Trasport")}
+                  onIconPress={() => setChecked(!checked)}
+                  size={30}
+                  title={t("Trasporti")}
+                  uncheckedColor="#e0e0e0"
                 />
 
                 <Text>Altro</Text>
@@ -90,71 +108,101 @@ export const Survery = ({ navigation, route }) => {
               <View>
                 <Text>{t("second_question")}</Text>
                 <CheckBox
-                  style={{ flex: 1, padding: 10 }}
-                  // onClick={() => {
-                  // }}
-                  isChecked={isSelected}
-                  rightText={"1"}
+                  style={{ backgroundColor: "#e0e0e0" }}
+                  left
+                  checked={checked}
+                  checkedColor="blue"
+                  checkedTitle={t("1")}
+                  onIconPress={() => setChecked(!checked)}
+                  size={30}
+                  title={t("1")}
+                  uncheckedColor="#e0e0e0"
                 />
 
                 <CheckBox
-                  style={{ flex: 1, padding: 10 }}
-                  // onClick={() => {
-                  // }}
-                  isChecked={isSelected}
-                  rightText={"2"}
+                  style={{ backgroundColor: "#e0e0e0" }}
+                  left
+                  checked={checked}
+                  checkedColor="blue"
+                  checkedTitle={t("2")}
+                  onIconPress={() => setChecked(!checked)}
+                  size={30}
+                  title={t("2")}
+                  uncheckedColor="#e0e0e0"
                 />
 
                 <CheckBox
-                  style={{ flex: 1, padding: 10 }}
-                  // onClick={() => {
-                  // }}
-                  isChecked={isSelected}
-                  rightText={"3"}
+                  style={{ backgroundColor: "#e0e0e0" }}
+                  left
+                  checked={checked}
+                  checkedColor="blue"
+                  checkedTitle={t("3")}
+                  onIconPress={() => setChecked(!checked)}
+                  size={30}
+                  title={t("3")}
+                  uncheckedColor="#e0e0e0"
                 />
 
                 <CheckBox
-                  style={{ flex: 1, padding: 10}}
-                  // onClick={() => {
-                  // }}
-                  isChecked={isSelected}
-                  rightText={"4"}
+                  style={{ backgroundColor: "#e0e0e0" }}
+                  left
+                  checked={checked}
+                  checkedColor="blue"
+                  checkedTitle={t("4")}
+                  onIconPress={() => setChecked(!checked)}
+                  size={30}
+                  title={t("4")}
+                  uncheckedColor="#e0e0e0"
                 />
 
                 <Text>Altro</Text>
-                <Input 
-    
-                />
+                <Input />
 
                 <View>
                   <Text>{t("secondo_media question")}</Text>
                   <CheckBox
-                    style={{ flex: 1, padding: 10 }}
-                    // onClick={() => {
-                    // }}
-                    isChecked={isSelected}
-                    rightText={"1"}
+                    style={{ backgroundColor: "#e0e0e0" }}
+                    left
+                    checked={checked}
+                    checkedColor="blue"
+                    checkedTitle={t("1")}
+                    onIconPress={() => setChecked(!checked)}
+                    size={30}
+                    title={t("1")}
+                    uncheckedColor="#e0e0e0"
                   />
                   <CheckBox
-                    style={{ flex: 1, padding: 10 }}
-                    // onClick={() => {
-                    // }}
-                    isChecked={isSelected}
-                    rightText={"2"}
+                    style={{ backgroundColor: "#e0e0e0" }}
+                    left
+                    checked={checked}
+                    checkedColor="blue"
+                    checkedTitle={t("2")}
+                    onIconPress={() => setChecked(!checked)}
+                    size={30}
+                    title={t("2")}
+                    uncheckedColor="#e0e0e0"
                   />
                   <CheckBox
-                    style={{ flex: 1, padding: 10 }}
-                    // onClick={() => {
-                    // }}
-                    isChecked={isSelected}
-                    rightText={"3"}
+                    style={{ backgroundColor: "#e0e0e0" }}
+                    left
+                    checked={checked}
+                    checkedColor="blue"
+                    checkedTitle={t("3")}
+                    onIconPress={() => setChecked(!checked)}
+                    size={30}
+                    title={t("3")}
+                    uncheckedColor="#e0e0e0"
                   />
                   <CheckBox
-                    style={{ flex: 1, padding: 10 }}
-                    // onClick={() => {
-                    // }}
-                    isChecked={isSelected}
-                    rightText={"4"}
+                    style={{ backgroundColor: "#e0e0e0" }}
+                    left
+                    checked={checked}
+                    checkedColor="blue"
+                    checkedTitle={t("4")}
+                    onIconPress={() => setChecked(!checked)}
+                    size={30}
+                    title={t("4")}
+                    uncheckedColor="#e0e0e0"
                   />
                   <Text>Altro</Text>
                   <Input />
@@ -168,87 +216,138 @@ export const Survery = ({ navigation, route }) => {
                 <Text>{t("third_question")}</Text>
                 <View>
                   <CheckBox
-                    style={{ flex: 1, padding: 10 }}
-                    // onClick={() => {
-                    // }}
-                    isChecked={isSelected}
-                    rightText={"si"}
+                    style={{ backgroundColor: "#e0e0e0" }}
+                    left
+                    checked={checked}
+                    checkedColor="blue"
+                    checkedTitle={t("Si")}
+                    onIconPress={() => setChecked(!checked)}
+                    size={30}
+                    title={t("Si")}
+                    uncheckedColor="#e0e0e0"
                   />
                   <CheckBox
-                    style={{ flex: 1, padding: 10 }}
-                    // onClick={() => {
-                    // }}
-                    isChecked={isSelected}
-                    rightText={"No"}
+                    style={{ backgroundColor: "#e0e0e0" }}
+                    left
+                    checked={checked}
+                    checkedColor="blue"
+                    checkedTitle={t("No")}
+                    onIconPress={() => setChecked(!checked)}
+                    size={30}
+                    title={t("No")}
+                    uncheckedColor="#e0e0e0"
                   />
                   <Input />
                 </View>
                 <View>
                   <CheckBox
-                    style={{ flex: 1, padding: 10 }}
-                    // onClick={() => {
-                    // }}
-                    isChecked={isSelected}
-                    rightText={"Dipendente"}
+                    style={{ backgroundColor: "#e0e0e0" }}
+                    left
+                    checked={checked}
+                    checkedColor="blue"
+                    checkedTitle={t("Dipendente")}
+                    onIconPress={() => setChecked(!checked)}
+                    size={30}
+                    title={t("Dipendente")}
+                    uncheckedColor="#e0e0e0"
                   />
+
                   <CheckBox
-                    style={{ flex: 1, padding: 10 }}
-                    // onClick={() => {
-                    // }}
-                    isChecked={isSelected}
-                    rightText={"<10k"}
+                    style={{ backgroundColor: "#e0e0e0" }}
+                    left
+                    checked={checked}
+                    checkedColor="blue"
+                    checkedTitle={t("<10K")}
+                    onIconPress={() => setChecked(!checked)}
+                    size={30}
+                    title={t("<10k")}
+                    uncheckedColor="#e0e0e0"
                   />
+
                   <CheckBox
-                    style={{ flex: 1, padding: 10 }}
-                    // onClick={() => {
-                    // }}
-                    isChecked={isSelected}
-                    rightText={"11-30k"}
+                    style={{ backgroundColor: "#e0e0e0" }}
+                    left
+                    checked={checked}
+                    checkedColor="blue"
+                    checkedTitle={t("11-30k")}
+                    onIconPress={() => setChecked(!checked)}
+                    size={30}
+                    title={t("11-30k")}
+                    uncheckedColor="#e0e0e0"
                   />
+
                   <CheckBox
-                    style={{ flex: 1, padding: 10 }}
-                    // onClick={() => {
-                    // }}
-                    isChecked={isSelected}
-                    rightText={"31-50k"}
+                    style={{ backgroundColor: "#e0e0e0" }}
+                    left
+                    checked={checked}
+                    checkedColor="blue"
+                    checkedTitle={t("31-50k")}
+                    onIconPress={() => setChecked(!checked)}
+                    size={30}
+                    title={t("31-50k")}
+                    uncheckedColor="#e0e0e0"
                   />
+
                   <CheckBox
-                    style={{ flex: 1, padding: 10 }}
-                    // onClick={() => {
-                    // }}
-                    isChecked={isSelected}
-                    rightText={">50k"}
+                    style={{ backgroundColor: "#e0e0e0" }}
+                    left
+                    checked={checked}
+                    checkedColor="blue"
+                    checkedTitle={t(">50k")}
+                    onIconPress={() => setChecked(!checked)}
+                    size={30}
+                    title={t(">50k")}
+                    uncheckedColor="#e0e0e0"
                   />
                 </View>
 
                 <View>
                   <CheckBox
-                    style={{ flex: 1, padding: 10 }}
-                    // onClick={() => {
-                    // }}
-                    isChecked={isSelected}
-                    rightText={"Autonomi"}
+                    style={{ backgroundColor: "#e0e0e0" }}
+                    left
+                    checked={checked}
+                    checkedColor="blue"
+                    checkedTitle={t("Autonomi")}
+                    onIconPress={() => setChecked(!checked)}
+                    size={30}
+                    title={t("Autonomi")}
+                    uncheckedColor="#e0e0e0"
                   />
+
                   <CheckBox
-                    style={{ flex: 1, padding: 10 }}
-                    // onClick={() => {
-                    // }}
-                    isChecked={isSelected}
-                    rightText={"<250k"}
+                    style={{ backgroundColor: "#e0e0e0" }}
+                    left
+                    checked={checked}
+                    checkedColor="blue"
+                    checkedTitle={t("<250k")}
+                    onIconPress={() => setChecked(!checked)}
+                    size={30}
+                    title={t("<250k")}
+                    uncheckedColor="#e0e0e0"
                   />
+
                   <CheckBox
-                    style={{ flex: 1, padding: 10 }}
-                    // onClick={() => {
-                    // }}
-                    isChecked={isSelected}
-                    rightText={"250-500k"}
+                    style={{ backgroundColor: "#e0e0e0" }}
+                    left
+                    checked={checked}
+                    checkedColor="blue"
+                    checkedTitle={t("250-500k")}
+                    onIconPress={() => setChecked(!checked)}
+                    size={30}
+                    title={t("250-500k")}
+                    uncheckedColor="#e0e0e0"
                   />
+
                   <CheckBox
-                    style={{ flex: 1, padding: 10 }}
-                    // onClick={() => {
-                    // }}
-                    isChecked={isSelected}
-                    rightText={">500k"}
+                    style={{ backgroundColor: "#e0e0e0" }}
+                    left
+                    checked={checked}
+                    checkedColor="blue"
+                    checkedTitle={t(">500k")}
+                    onIconPress={() => setChecked(!checked)}
+                    size={30}
+                    title={t(">500k")}
+                    uncheckedColor="#e0e0e0"
                   />
                 </View>
               </View>
@@ -259,12 +358,17 @@ export const Survery = ({ navigation, route }) => {
 
               <View>
                 <Text>{t("fourth_question")}</Text>
+
                 <CheckBox
-                  style={{ flex: 1, padding: 10 }}
-                  // onClick={() => {
-                  // }}
-                  isChecked={isSelected}
-                  rightText={"si"}
+                  style={{ backgroundColor: "#e0e0e0" }}
+                  left
+                  checked={checked}
+                  checkedColor="blue"
+                  checkedTitle={t("Si")}
+                  onIconPress={() => setChecked(!checked)}
+                  size={30}
+                  title={t("Si")}
+                  uncheckedColor="#e0e0e0"
                 />
                 <CheckBox
                   style={{ flex: 1, padding: 10 }}
@@ -274,25 +378,50 @@ export const Survery = ({ navigation, route }) => {
                   rightText={"No"}
                 />
                 <CheckBox
-                  style={{ flex: 1, padding: 10 }}
-                  // onClick={() => {
-                  // }}
-                  isChecked={isSelected}
-                  rightText={"Immobiliare"}
+                  style={{ backgroundColor: "#e0e0e0" }}
+                  left
+                  checked={checked}
+                  checkedColor="blue"
+                  checkedTitle={t("No")}
+                  onIconPress={() => setChecked(!checked)}
+                  size={30}
+                  title={t("No")}
+                  uncheckedColor="#e0e0e0"
                 />
                 <CheckBox
-                  style={{ flex: 1, padding: 10 }}
-                  // onClick={() => {
-                  // }}
-                  isChecked={isSelected}
-                  rightText={"Veicoli"}
+                  style={{ backgroundColor: "#e0e0e0" }}
+                  left
+                  checked={checked}
+                  checkedColor="blue"
+                  checkedTitle={t("Immobilire")}
+                  onIconPress={() => setChecked(!checked)}
+                  size={30}
+                  title={t("Immobiliare")}
+                  uncheckedColor="#e0e0e0"
                 />
+
                 <CheckBox
-                  style={{ flex: 1, padding: 10 }}
-                  // onClick={() => {
-                  // }}
-                  isChecked={isSelected}
-                  rightText={"Preziosi"}
+                  style={{ backgroundColor: "#e0e0e0" }}
+                  left
+                  checked={checked}
+                  checkedColor="blue"
+                  checkedTitle={t("Veicoli")}
+                  onIconPress={() => setChecked(!checked)}
+                  size={30}
+                  title={t("Veicoli")}
+                  uncheckedColor="#e0e0e0"
+                />
+
+                <CheckBox
+                  style={{ backgroundColor: "#e0e0e0" }}
+                  left
+                  checked={checked}
+                  checkedColor="blue"
+                  checkedTitle={t("Preziosi")}
+                  onIconPress={() => setChecked(!checked)}
+                  size={30}
+                  title={t("Preziosi")}
+                  uncheckedColor="#e0e0e0"
                 />
                 <Text>Altro</Text>
                 <Input />
@@ -307,11 +436,26 @@ export const Survery = ({ navigation, route }) => {
                     rightText={"Si"}
                   />
                   <CheckBox
-                    style={{ flex: 1, padding: 10 }}
-                    // onClick={() => {
-                    // }}
-                    isChecked={isSelected}
-                    rightText={"No"}
+                    style={{ backgroundColor: "#e0e0e0" }}
+                    left
+                    checked={checked}
+                    checkedColor="blue"
+                    checkedTitle={t("Si")}
+                    onIconPress={() => setChecked(!checked)}
+                    size={30}
+                    title={t("Si")}
+                    uncheckedColor="#e0e0e0"
+                  />
+                  <CheckBox
+                    style={{ backgroundColor: "#e0e0e0" }}
+                    left
+                    checked={checked}
+                    checkedColor="blue"
+                    checkedTitle={t("No")}
+                    onIconPress={() => setChecked(!checked)}
+                    size={30}
+                    title={t("No")}
+                    uncheckedColor="#e0e0e0"
                   />
                 </View>
               </View>
@@ -322,43 +466,65 @@ export const Survery = ({ navigation, route }) => {
 
               <View>
                 <Text>Hai assicurazioni a veicoli</Text>
+
                 <CheckBox
-                  style={{ flex: 1, padding: 10 }}
-                  // onClick={() => {
-                  // }}
-                  isChecked={isSelected}
-                  rightText={"Si"}
+                  style={{ backgroundColor: "#e0e0e0" }}
+                  left
+                  checked={checked}
+                  checkedColor="blue"
+                  checkedTitle={t("Si")}
+                  onIconPress={() => setChecked(!checked)}
+                  size={30}
+                  title={t("Si")}
+                  uncheckedColor="#e0e0e0"
                 />
+
                 <CheckBox
-                  style={{ flex: 1, padding: 10 }}
-                  // onClick={() => {
-                  // }}
-                  isChecked={isSelected}
-                  rightText={"No"}
+                  style={{ backgroundColor: "#e0e0e0" }}
+                  left
+                  checked={checked}
+                  checkedColor="blue"
+                  checkedTitle={t("No")}
+                  onIconPress={() => setChecked(!checked)}
+                  size={30}
+                  title={t("No")}
+                  uncheckedColor="#e0e0e0"
                 />
                 <View>
                   <CheckBox
-                    style={{ flex: 1, padding: 10 }}
-                    // onClick={() => {
-                    // }}
-                    isChecked={isSelected}
-                    rightText={"Auto"}
+                    style={{ backgroundColor: "#e0e0e0" }}
+                    left
+                    checked={checked}
+                    checkedColor="blue"
+                    checkedTitle={t("Auto")}
+                    onIconPress={() => setChecked(!checked)}
+                    size={30}
+                    title={t("Auto")}
+                    uncheckedColor="#e0e0e0"
                   />
                   <Input />
                   <CheckBox
-                    style={{ flex: 1, padding: 10 }}
-                    // onClick={() => {
-                    // }}
-                    isChecked={isSelected}
-                    rightText={"moto"}
+                    style={{ backgroundColor: "#e0e0e0" }}
+                    left
+                    checked={checked}
+                    checkedColor="blue"
+                    checkedTitle={t("Moto")}
+                    onIconPress={() => setChecked(!checked)}
+                    size={30}
+                    title={t("Moto")}
+                    uncheckedColor="#e0e0e0"
                   />
                   <Input />
                   <CheckBox
-                    style={{ flex: 1, padding: 10 }}
-                    // onClick={() => {
-                    // }}
-                    isChecked={isSelected}
-                    rightText={"Mezzi"}
+                    style={{ backgroundColor: "#e0e0e0" }}
+                    left
+                    checked={checked}
+                    checkedColor="blue"
+                    checkedTitle={t("Mezzi")}
+                    onIconPress={() => setChecked(!checked)}
+                    size={30}
+                    title={t("Mezzi")}
+                    uncheckedColor="#e0e0e0"
                   />
                   <Input />
                 </View>
@@ -369,19 +535,29 @@ export const Survery = ({ navigation, route }) => {
                */}
               <View>
                 <Text>Hai altre assicurazioni ?</Text>
+
                 <CheckBox
-                  style={{ flex: 1, padding: 10 }}
-                  // onClick={() => {
-                  // }}
-                  isChecked={isSelected}
-                  rightText={"Si"}
+                  style={{ backgroundColor: "#e0e0e0" }}
+                  left
+                  checked={checked}
+                  checkedColor="blue"
+                  checkedTitle={t("Si")}
+                  onIconPress={() => setChecked(!checked)}
+                  size={30}
+                  title={t("Si")}
+                  uncheckedColor="#e0e0e0"
                 />
+
                 <CheckBox
-                  style={{ flex: 1, padding: 10 }}
-                  // onClick={() => {
-                  // }}
-                  isChecked={isSelected}
-                  rightText={"No"}
+                  style={{ backgroundColor: "#e0e0e0" }}
+                  left
+                  checked={checked}
+                  checkedColor="blue"
+                  checkedTitle={t("No")}
+                  onIconPress={() => setChecked(!checked)}
+                  size={30}
+                  title={t("No")}
+                  uncheckedColor="#e0e0e0"
                 />
                 <View>
                   <CheckBox
@@ -392,6 +568,17 @@ export const Survery = ({ navigation, route }) => {
                     rightText={"Vita"}
                   />
                   <CheckBox
+                    style={{ backgroundColor: "#e0e0e0" }}
+                    left
+                    checked={checked}
+                    checkedColor="blue"
+                    checkedTitle={t("Vita")}
+                    onIconPress={() => setChecked(!checked)}
+                    size={30}
+                    title={t("Vita")}
+                    uncheckedColor="#e0e0e0"
+                  />
+                  <CheckBox
                     style={{ flex: 1, padding: 10 }}
                     // onClick={() => {
                     // }}
@@ -399,11 +586,27 @@ export const Survery = ({ navigation, route }) => {
                     rightText={"Infortuni"}
                   />
                   <CheckBox
-                    style={{ flex: 1, padding: 10 }}
-                    // onClick={() => {
-                    // }}
-                    isChecked={isSelected}
-                    rightText={"Responsabilità civile"}
+                    style={{ backgroundColor: "#e0e0e0" }}
+                    left
+                    checked={checked}
+                    checkedColor="blue"
+                    checkedTitle={t("Infortuni")}
+                    onIconPress={() => setChecked(!checked)}
+                    size={30}
+                    title={t("Infortuni")}
+                    uncheckedColor="#e0e0e0"
+                  />
+
+                  <CheckBox
+                    style={{ backgroundColor: "#e0e0e0" }}
+                    left
+                    checked={checked}
+                    checkedColor="blue"
+                    checkedTitle={t("Responsabilità civile")}
+                    onIconPress={() => setChecked(!checked)}
+                    size={30}
+                    title={t("Responsabilità civile")}
+                    uncheckedColor="#e0e0e0"
                   />
                   <Text>Altro</Text>
                   <Input />
@@ -415,19 +618,29 @@ export const Survery = ({ navigation, route }) => {
                */}
               <View>
                 <Text>Hai mai richiesto un finanziamento?</Text>
+
                 <CheckBox
-                  style={{ flex: 1, padding: 10 }}
-                  // onClick={() => {
-                  // }}
-                  isChecked={isSelected}
-                  rightText={"Si"}
+                  style={{ backgroundColor: "#e0e0e0" }}
+                  left
+                  checked={checked}
+                  checkedColor="blue"
+                  checkedTitle={t("Si")}
+                  onIconPress={() => setChecked(!checked)}
+                  size={30}
+                  title={t("Si")}
+                  uncheckedColor="#e0e0e0"
                 />
+
                 <CheckBox
-                  style={{ flex: 1, padding: 10 }}
-                  // onClick={() => {
-                  // }}
-                  isChecked={isSelected}
-                  rightText={"No"}
+                  style={{ backgroundColor: "#e0e0e0" }}
+                  left
+                  checked={checked}
+                  checkedColor="blue"
+                  checkedTitle={t("No")}
+                  onIconPress={() => setChecked(!checked)}
+                  size={30}
+                  title={t("No")}
+                  uncheckedColor="#e0e0e0"
                 />
                 <View>
                   <CheckBox
@@ -436,6 +649,17 @@ export const Survery = ({ navigation, route }) => {
                     // }}
                     isChecked={isSelected}
                     rightText={"Personale"}
+                  />
+                  <CheckBox
+                    style={{ backgroundColor: "#e0e0e0" }}
+                    left
+                    checked={checked}
+                    checkedColor="blue"
+                    checkedTitle={t("Personale")}
+                    onIconPress={() => setChecked(!checked)}
+                    size={30}
+                    title={t("Personale")}
+                    uncheckedColor="#e0e0e0"
                   />
                   <Text>con quali istituti?</Text>
                   <Input />
@@ -451,6 +675,18 @@ export const Survery = ({ navigation, route }) => {
                     // }}
                     isChecked={isSelected}
                     rightText={"Aziendale"}
+                  />
+
+                  <CheckBox
+                    style={{ backgroundColor: "#e0e0e0" }}
+                    left
+                    checked={checked}
+                    checkedColor="blue"
+                    checkedTitle={t("Azindale")}
+                    onIconPress={() => setChecked(!checked)}
+                    size={30}
+                    title={t("Azindale")}
+                    uncheckedColor="#e0e0e0"
                   />
                   <Text>Con quali instituti?</Text>
                   <Input />
@@ -471,6 +707,17 @@ export const Survery = ({ navigation, route }) => {
                 isChecked={isSelected}
                 rightText={"Casa"}
               />
+              <CheckBox
+                style={{ backgroundColor: "#e0e0e0" }}
+                left
+                checked={checked}
+                checkedColor="blue"
+                checkedTitle={t("Casa")}
+                onIconPress={() => setChecked(!checked)}
+                size={30}
+                title={t("Casa")}
+                uncheckedColor="#e0e0e0"
+              />
               <Input />
               <CheckBox
                 style={{ flex: 1, padding: 10 }}
@@ -478,6 +725,17 @@ export const Survery = ({ navigation, route }) => {
                 // }}
                 isChecked={isSelected}
                 rightText={"Azienda"}
+              />
+              <CheckBox
+                style={{ backgroundColor: "#e0e0e0" }}
+                left
+                checked={checked}
+                checkedColor="blue"
+                checkedTitle={t("Azienda")}
+                onIconPress={() => setChecked(!checked)}
+                size={30}
+                title={t("Azienda")}
+                uncheckedColor="#e0e0e0"
               />
               <Input />
               <View>
@@ -494,49 +752,77 @@ export const Survery = ({ navigation, route }) => {
               <View>
                 <View>
                   <Text>Hai un abbonamento per la pay TV?</Text>
+
                   <CheckBox
-                    style={{ flex: 1, padding: 10 }}
-                    // onClick={() => {
-                    // }}
-                    isChecked={isSelected}
-                    rightText={"Si"}
+                    style={{ backgroundColor: "#e0e0e0" }}
+                    left
+                    checked={checked}
+                    checkedColor="blue"
+                    checkedTitle={t("Si")}
+                    onIconPress={() => setChecked(!checked)}
+                    size={30}
+                    title={t("Si")}
+                    uncheckedColor="#e0e0e0"
                   />
+
                   <CheckBox
-                    style={{ flex: 1, padding: 10 }}
-                    // onClick={() => {
-                    // }}
-                    isChecked={isSelected}
-                    rightText={"No"}
+                    style={{ backgroundColor: "#e0e0e0" }}
+                    left
+                    checked={checked}
+                    checkedColor="blue"
+                    checkedTitle={t("No")}
+                    onIconPress={() => setChecked(!checked)}
+                    size={30}
+                    title={t("No")}
+                    uncheckedColor="#e0e0e0"
                   />
                 </View>
                 <View>
                   <CheckBox
-                    style={{ flex: 1, padding: 10 }}
-                    // onClick={() => {
-                    // }}
-                    isChecked={isSelected}
-                    rightText={"SKy"}
+                    style={{ backgroundColor: "#e0e0e0" }}
+                    left
+                    checked={checked}
+                    checkedColor="blue"
+                    checkedTitle={t("Sky")}
+                    onIconPress={() => setChecked(!checked)}
+                    size={30}
+                    title={t("Sky")}
+                    uncheckedColor="#e0e0e0"
                   />
                   <CheckBox
-                    style={{ flex: 1, padding: 10 }}
-                    // onClick={() => {
-                    // }}
-                    isChecked={isSelected}
-                    rightText={"Netflix"}
+                    style={{ backgroundColor: "#e0e0e0" }}
+                    left
+                    checked={checked}
+                    checkedColor="blue"
+                    checkedTitle={t("Netflix")}
+                    onIconPress={() => setChecked(!checked)}
+                    size={30}
+                    title={t("Netflix")}
+                    uncheckedColor="#e0e0e0"
                   />
+
                   <CheckBox
-                    style={{ flex: 1, padding: 10 }}
-                    // onClick={() => {
-                    // }}
-                    isChecked={isSelected}
-                    rightText={"Amazon Prime"}
+                    style={{ backgroundColor: "#e0e0e0" }}
+                    left
+                    checked={checked}
+                    checkedColor="blue"
+                    checkedTitle={t("Amazon Prime")}
+                    onIconPress={() => setChecked(!checked)}
+                    size={30}
+                    title={t("Amazon Prime")}
+                    uncheckedColor="#e0e0e0"
                   />
+
                   <CheckBox
-                    style={{ flex: 1, padding: 10 }}
-                    // onClick={() => {
-                    // }}
-                    isChecked={isSelected}
-                    rightText={"Disney+"}
+                    style={{ backgroundColor: "#e0e0e0" }}
+                    left
+                    checked={checked}
+                    checkedColor="blue"
+                    checkedTitle={t("Disney +")}
+                    onIconPress={() => setChecked(!checked)}
+                    size={30}
+                    title={t("Display +")}
+                    uncheckedColor="#e0e0e0"
                   />
                   <Text>Altro</Text>
                   <Input />
@@ -548,50 +834,76 @@ export const Survery = ({ navigation, route }) => {
               <View>
                 <View>
                   <Text>E' present sui social network principali ?</Text>
+
                   <CheckBox
-                    style={{ flex: 1, padding: 10 }}
-                    // onClick={() => {
-                    // }}
-                    isChecked={isSelected}
-                    rightText={"Si"}
+                    style={{ backgroundColor: "#e0e0e0" }}
+                    left
+                    checked={checked}
+                    checkedColor="blue"
+                    checkedTitle={t("Si")}
+                    onIconPress={() => setChecked(!checked)}
+                    size={30}
+                    title={t("Si")}
+                    uncheckedColor="#e0e0e0"
                   />
                   <CheckBox
-                    style={{ flex: 1, padding: 10 }}
-                    // onClick={() => {
-                    // }}
-                    isChecked={isSelected}
-                    rightText={"No"}
+                    style={{ backgroundColor: "#e0e0e0" }}
+                    left
+                    checked={checked}
+                    checkedColor="blue"
+                    checkedTitle={t("No")}
+                    onIconPress={() => setChecked(!checked)}
+                    size={30}
+                    title={t("No")}
+                    uncheckedColor="#e0e0e0"
                   />
                 </View>
                 <View>
                   <CheckBox
-                    style={{ flex: 1, padding: 10 }}
-                    // onClick={() => {
-                    // }}
-                    isChecked={isSelected}
-                    rightText={"Facebook"}
+                    style={{ backgroundColor: "#e0e0e0" }}
+                    left
+                    checked={checked}
+                    checkedColor="blue"
+                    checkedTitle={t("Facebook")}
+                    onIconPress={() => setChecked(!checked)}
+                    size={30}
+                    title={t("Facebook")}
+                    uncheckedColor="#e0e0e0"
                   />
                   <CheckBox
-                    style={{ flex: 1, padding: 10 }}
-                    // onClick={() => {
-                    // }}
-                    isChecked={isSelected}
-                    rightText={"Instagram"}
+                    style={{ backgroundColor: "#e0e0e0" }}
+                    left
+                    checked={checked}
+                    checkedColor="blue"
+                    checkedTitle={t("Instagram")}
+                    onIconPress={() => setChecked(!checked)}
+                    size={30}
+                    title={t("Instagram")}
+                    uncheckedColor="#e0e0e0"
                   />
                   <CheckBox
-                    style={{ flex: 1, padding: 10 }}
-                    // onClick={() => {
-                    // }}
-                    isChecked={isSelected}
-                    rightText={"Tik Tok"}
+                    style={{ backgroundColor: "#e0e0e0" }}
+                    left
+                    checked={checked}
+                    checkedColor="blue"
+                    checkedTitle={t("Tik Tok")}
+                    onIconPress={() => setChecked(!checked)}
+                    size={30}
+                    title={t("Tik Tok")}
+                    uncheckedColor="#e0e0e0"
                   />
                   <CheckBox
-                    style={{ flex: 1, padding: 10 }}
-                    // onClick={() => {
-                    // }}
-                    isChecked={isSelected}
-                    rightText={"Twitter"}
+                    style={{ backgroundColor: "#e0e0e0" }}
+                    left
+                    checked={checked}
+                    checkedColor="blue"
+                    checkedTitle={t("Twitter")}
+                    onIconPress={() => setChecked(!checked)}
+                    size={30}
+                    title={t("Twitter")}
+                    uncheckedColor="#e0e0e0"
                   />
+
                   <Text>Altro</Text>
                   <Input />
                 </View>
@@ -610,34 +922,63 @@ export const Survery = ({ navigation, route }) => {
                     rightText={"Si"}
                   />
                   <CheckBox
-                    style={{ flex: 1, padding: 10 }}
-                    // onClick={() => {
-                    // }}
-                    isChecked={isSelected}
-                    rightText={"No"}
+                    style={{ backgroundColor: "#e0e0e0" }}
+                    left
+                    checked={checked}
+                    checkedColor="blue"
+                    checkedTitle={t("Si")}
+                    onIconPress={() => setChecked(!checked)}
+                    size={30}
+                    title={t("Si")}
+                    uncheckedColor="#e0e0e0"
+                  />
+
+                  <CheckBox
+                    style={{ backgroundColor: "#e0e0e0" }}
+                    left
+                    checked={checked}
+                    checkedColor="blue"
+                    checkedTitle={t("No")}
+                    onIconPress={() => setChecked(!checked)}
+                    size={30}
+                    title={t("No")}
+                    uncheckedColor="#e0e0e0"
                   />
                 </View>
                 <View>
                   <CheckBox
-                    style={{ flex: 1, padding: 10 }}
-                    // onClick={() => {
-                    // }}
-                    isChecked={isSelected}
-                    rightText={"Google"}
+                    style={{ backgroundColor: "#e0e0e0" }}
+                    left
+                    checked={checked}
+                    checkedColor="blue"
+                    checkedTitle={t("Google")}
+                    onIconPress={() => setChecked(!checked)}
+                    size={30}
+                    title={t("Google")}
+                    uncheckedColor="#e0e0e0"
                   />
                   <CheckBox
-                    style={{ flex: 1, padding: 10 }}
-                    // onClick={() => {
-                    // }}
-                    isChecked={isSelected}
-                    rightText={"Sito Web"}
+                    style={{ backgroundColor: "#e0e0e0" }}
+                    left
+                    checked={checked}
+                    checkedColor="blue"
+                    checkedTitle={t("Sito Web")}
+                    onIconPress={() => setChecked(!checked)}
+                    size={30}
+                    title={t("Sito Web")}
+                    uncheckedColor="#e0e0e0"
                   />
+
                   <CheckBox
-                    style={{ flex: 1, padding: 10 }}
-                    // onClick={() => {
-                    // }}
-                    isChecked={isSelected}
-                    rightText={"Ecommerce"}
+                    style={{ backgroundColor: "#e0e0e0" }}
+                    left
+                    checked={checked}
+                    checkedColor="blue"
+                    checkedTitle={t("E-commerce")}
+                    onIconPress={() => setChecked(!checked)}
+                    size={30}
+                    title={t("E-commerce")}
+                    uncheckedColor="#e0e0e0"
                   />
                   <Text>Altro </Text>
                   <Input />
@@ -651,26 +992,39 @@ export const Survery = ({ navigation, route }) => {
                   <Text>
                     Quante volte nell'ultimo anno ti sri rivolto/a ad un legale?
                   </Text>
+
                   <CheckBox
-                    style={{ flex: 1, padding: 10 }}
-                    // onClick={() => {
-                    // }}
-                    isChecked={isSelected}
-                    rightText={"Mai"}
+                    style={{ backgroundColor: "#e0e0e0" }}
+                    left
+                    checked={checked}
+                    checkedColor="blue"
+                    checkedTitle={t("Mai")}
+                    onIconPress={() => setChecked(!checked)}
+                    size={30}
+                    title={t("Mai")}
+                    uncheckedColor="#e0e0e0"
                   />
                   <CheckBox
-                    style={{ flex: 1, padding: 10 }}
-                    // onClick={() => {
-                    // }}
-                    isChecked={isSelected}
-                    rightText={"1/3"}
+                    style={{ backgroundColor: "#e0e0e0" }}
+                    left
+                    checked={checked}
+                    checkedColor="blue"
+                    checkedTitle={t("1/3")}
+                    onIconPress={() => setChecked(!checked)}
+                    size={30}
+                    title={t("1/3")}
+                    uncheckedColor="#e0e0e0"
                   />
                   <CheckBox
-                    style={{ flex: 1, padding: 10 }}
-                    // onClick={() => {
-                    // }}
-                    isChecked={isSelected}
-                    rightText={"3+"}
+                    style={{ backgroundColor: "#e0e0e0" }}
+                    left
+                    checked={checked}
+                    checkedColor="blue"
+                    checkedTitle={t("3+")}
+                    onIconPress={() => setChecked(!checked)}
+                    size={30}
+                    title={t("3+")}
+                    uncheckedColor="#e0e0e0"
                   />
                 </View>
                 <View>
@@ -683,11 +1037,27 @@ export const Survery = ({ navigation, route }) => {
                     rightText={"Si"}
                   />
                   <CheckBox
-                    style={{ flex: 1, padding: 10 }}
-                    // onClick={() => {
-                    // }}
-                    isChecked={isSelected}
-                    rightText={"No"}
+                    style={{ backgroundColor: "#e0e0e0" }}
+                    left
+                    checked={checked}
+                    checkedColor="blue"
+                    checkedTitle={t("Si")}
+                    onIconPress={() => setChecked(!checked)}
+                    size={30}
+                    title={t("Si")}
+                    uncheckedColor="#e0e0e0"
+                  />
+
+                  <CheckBox
+                    style={{ backgroundColor: "#e0e0e0" }}
+                    left
+                    checked={checked}
+                    checkedColor="blue"
+                    checkedTitle={t("No")}
+                    onIconPress={() => setChecked(!checked)}
+                    size={30}
+                    title={t("No")}
+                    uncheckedColor="#e0e0e0"
                   />
                 </View>
               </View>
@@ -698,55 +1068,87 @@ export const Survery = ({ navigation, route }) => {
                 <View>
                   <Text>Quanto viaggi in un anno ?</Text>
                 </View>
+
                 <CheckBox
-                  style={{ flex: 1, padding: 10 }}
-                  // onClick={() => {
-                  // }}
-                  isChecked={isSelected}
-                  rightText={"Vacanza Quante volte?"}
+                  style={{ backgroundColor: "#e0e0e0" }}
+                  left
+                  checked={checked}
+                  checkedColor="blue"
+                  checkedTitle={t("Vacanza quante volte?")}
+                  onIconPress={() => setChecked(!checked)}
+                  size={30}
+                  title={t("Responsabilità civile")}
+                  uncheckedColor="#e0e0e0"
                 />
                 <CheckBox
-                  style={{ flex: 1, padding: 10 }}
-                  // onClick={() => {
-                  // }}
-                  isChecked={isSelected}
-                  rightText={"<5"}
+                  style={{ backgroundColor: "#e0e0e0" }}
+                  left
+                  checked={checked}
+                  checkedColor="blue"
+                  checkedTitle={t("<5")}
+                  onIconPress={() => setChecked(!checked)}
+                  size={30}
+                  title={t("<5")}
+                  uncheckedColor="#e0e0e0"
+                />
+
+                <CheckBox
+                  style={{ backgroundColor: "#e0e0e0" }}
+                  left
+                  checked={checked}
+                  checkedColor="blue"
+                  checkedTitle={t("5-10")}
+                  onIconPress={() => setChecked(!checked)}
+                  size={30}
+                  title={t("5-10")}
+                  uncheckedColor="#e0e0e0"
+                />
+
+                <CheckBox
+                  style={{ backgroundColor: "#e0e0e0" }}
+                  left
+                  checked={checked}
+                  checkedColor="blue"
+                  checkedTitle={t(">10")}
+                  onIconPress={() => setChecked(!checked)}
+                  size={30}
+                  title={t(">10")}
+                  uncheckedColor="#e0e0e0"
                 />
                 <CheckBox
-                  style={{ flex: 1, padding: 10 }}
-                  // onClick={() => {
-                  // }}
-                  isChecked={isSelected}
-                  rightText={"5-10"}
+                  style={{ backgroundColor: "#e0e0e0" }}
+                  left
+                  checked={checked}
+                  checkedColor="blue"
+                  checkedTitle={t("Solo")}
+                  onIconPress={() => setChecked(!checked)}
+                  size={30}
+                  title={t("Solo")}
+                  uncheckedColor="#e0e0e0"
                 />
                 <CheckBox
-                  style={{ flex: 1, padding: 10 }}
-                  // onClick={() => {
-                  // }}
-                  isChecked={isSelected}
-                  rightText={">10"}
+                  style={{ backgroundColor: "#e0e0e0" }}
+                  left
+                  checked={checked}
+                  checkedColor="blue"
+                  checkedTitle={t("Coppia")}
+                  onIconPress={() => setChecked(!checked)}
+                  size={30}
+                  title={t("Coppia")}
+                  uncheckedColor="#e0e0e0"
                 />
                 <CheckBox
-                  style={{ flex: 1, padding: 10 }}
-                  // onClick={() => {
-                  // }}
-                  isChecked={isSelected}
-                  rightText={"Solo"}
+                  style={{ backgroundColor: "#e0e0e0" }}
+                  left
+                  checked={checked}
+                  checkedColor="blue"
+                  checkedTitle={t("Bambini > 12")}
+                  onIconPress={() => setChecked(!checked)}
+                  size={30}
+                  title={t("Bambini > 12")}
+                  uncheckedColor="#e0e0e0"
                 />
-                <CheckBox
-                  style={{ flex: 1, padding: 10 }}
-                  // onClick={() => {
-                  // }}
-                  isChecked={isSelected}
-                  rightText={"Coppia"}
-                />
-                <CheckBox
-                  style={{ flex: 1, padding: 10 }}
-                  // onClick={() => {
-                  // }}
-                  isChecked={isSelected}
-                  rightText={"Bambini > 12"}
-                />
+
                 <CheckBox
                   style={{ flex: 1, padding: 10 }}
                   // onClick={() => {
@@ -754,49 +1156,85 @@ export const Survery = ({ navigation, route }) => {
                   isChecked={isSelected}
                   rightText={"Gruppi"}
                 />
+                <CheckBox
+                  style={{ backgroundColor: "#e0e0e0" }}
+                  left
+                  checked={checked}
+                  checkedColor="blue"
+                  checkedTitle={t("Gruppi")}
+                  onIconPress={() => setChecked(!checked)}
+                  size={30}
+                  title={t("Gruppi")}
+                  uncheckedColor="#e0e0e0"
+                />
               </View>
               <View>
                 <CheckBox
-                  style={{ flex: 1, padding: 10 }}
-                  // onClick={() => {
-                  // }}
-                  isChecked={isSelected}
-                  rightText={"Lavoro Quante volte?"}
+                  style={{ backgroundColor: "#e0e0e0" }}
+                  left
+                  checked={checked}
+                  checkedColor="blue"
+                  checkedTitle={t("Lavoro quante volte?")}
+                  onIconPress={() => setChecked(!checked)}
+                  size={30}
+                  title={t("Responsabilità civile")}
+                  uncheckedColor="#e0e0e0"
                 />
                 <CheckBox
-                  style={{ flex: 1, padding: 10 }}
-                  // onClick={() => {
-                  // }}
-                  isChecked={isSelected}
-                  rightText={"<3"}
+                  style={{ backgroundColor: "#e0e0e0" }}
+                  left
+                  checked={checked}
+                  checkedColor="blue"
+                  checkedTitle={t("<3")}
+                  onIconPress={() => setChecked(!checked)}
+                  size={30}
+                  title={t("<3")}
+                  uncheckedColor="#e0e0e0"
                 />
                 <CheckBox
-                  style={{ flex: 1, padding: 10 }}
-                  // onClick={() => {
-                  // }}
-                  isChecked={isSelected}
-                  rightText={"3-6"}
+                  style={{ backgroundColor: "#e0e0e0" }}
+                  left
+                  checked={checked}
+                  checkedColor="blue"
+                  checkedTitle={t("3-6")}
+                  onIconPress={() => setChecked(!checked)}
+                  size={30}
+                  title={t("3-6")}
+                  uncheckedColor="#e0e0e0"
+                />
+
+                <CheckBox
+                  style={{ backgroundColor: "#e0e0e0" }}
+                  left
+                  checked={checked}
+                  checkedColor="blue"
+                  checkedTitle={t("> 6")}
+                  onIconPress={() => setChecked(!checked)}
+                  size={30}
+                  title={t("> 6")}
+                  uncheckedColor="#e0e0e0"
                 />
                 <CheckBox
-                  style={{ flex: 1, padding: 10 }}
-                  // onClick={() => {
-                  // }}
-                  isChecked={isSelected}
-                  rightText={"> 6"}
+                  style={{ backgroundColor: "#e0e0e0" }}
+                  left
+                  checked={checked}
+                  checkedColor="blue"
+                  checkedTitle={t("Sceglie l'azienda")}
+                  onIconPress={() => setChecked(!checked)}
+                  size={30}
+                  title={t("Responsabilità civile")}
+                  uncheckedColor="#e0e0e0"
                 />
                 <CheckBox
-                  style={{ flex: 1, padding: 10 }}
-                  // onClick={() => {
-                  // }}
-                  isChecked={isSelected}
-                  rightText={"Sceglie l'azienda"}
-                />
-                <CheckBox
-                  style={{ flex: 1, padding: 10 }}
-                  // onClick={() => {
-                  // }}
-                  isChecked={isSelected}
-                  rightText={"Ha autonomia di scelta"}
+                  style={{ backgroundColor: "#e0e0e0" }}
+                  left
+                  checked={checked}
+                  checkedColor="blue"
+                  checkedTitle={t("Ha un autonomia di scelta")}
+                  onIconPress={() => setChecked(!checked)}
+                  size={30}
+                  title={t("Responsabilità civile")}
+                  uncheckedColor="#e0e0e0"
                 />
               </View>
               {/**
@@ -805,34 +1243,53 @@ export const Survery = ({ navigation, route }) => {
               <View>
                 <View>
                   <Text>Per la prossima vacanza sceglieresti:</Text>
-                  <CheckBox
-                    style={{ flex: 1, padding: 10 }}
-                    // onClick={() => {
-                    // }}
-                    isChecked={isSelected}
-                    rightText={"Europa/mediterraneo"}
+                 
+                   <CheckBox
+                    style={{ backgroundColor: "#e0e0e0" }}
+                    left
+                    checked={checked}
+                    checkedColor="blue"
+                    checkedTitle={t("Europa/mediterraneo")}
+                    onIconPress={() => setChecked(!checked)}
+                    size={30}
+                    title={t("Europa/Mediterraneo")}
+                    uncheckedColor="#e0e0e0"
                   />
-                  <CheckBox
-                    style={{ flex: 1, padding: 10 }}
-                    // onClick={() => {
-                    // }}
-                    isChecked={isSelected}
-                    rightText={"Lungo raggio"}
+              
+                   <CheckBox
+                    style={{ backgroundColor: "#e0e0e0" }}
+                    left
+                    checked={checked}
+                    checkedColor="blue"
+                    checkedTitle={t("Lungo raggio")}
+                    onIconPress={() => setChecked(!checked)}
+                    size={30}
+                    title={t("Lungo raggio")}
+                    uncheckedColor="#e0e0e0"
                   />
-                  <CheckBox
-                    style={{ flex: 1, padding: 10 }}
-                    // onClick={() => {
-                    // }}
-                    isChecked={isSelected}
-                    rightText={"Villaggio"}
+                   <CheckBox
+                    style={{ backgroundColor: "#e0e0e0" }}
+                    left
+                    checked={checked}
+                    checkedColor="blue"
+                    checkedTitle={t("Villaggio")}
+                    onIconPress={() => setChecked(!checked)}
+                    size={30}
+                    title={t("Villaggio")}
+                    uncheckedColor="#e0e0e0"
                   />
-                  <CheckBox
-                    style={{ flex: 1, padding: 10 }}
-                    // onClick={() => {
-                    // }}
-                    isChecked={isSelected}
-                    rightText={"Crociera"}
+                 <CheckBox
+                    style={{ backgroundColor: "#e0e0e0" }}
+                    left
+                    checked={checked}
+                    checkedColor="blue"
+                    checkedTitle={t("Crociera")}
+                    onIconPress={() => setChecked(!checked)}
+                    size={30}
+                    title={t("Crociera")}
+                    uncheckedColor="#e0e0e0"
                   />
+
                   <CheckBox
                     style={{ flex: 1, padding: 10 }}
                     // onClick={() => {
@@ -840,36 +1297,66 @@ export const Survery = ({ navigation, route }) => {
                     isChecked={isSelected}
                     rightText={"Città e tour "}
                   />
+                   <CheckBox
+                    style={{ backgroundColor: "#e0e0e0" }}
+                    left
+                    checked={checked}
+                    checkedColor="blue"
+                    checkedTitle={t("Città e tour")}
+                    onIconPress={() => setChecked(!checked)}
+                    size={30}
+                    title={t("Città e tour")}
+                    uncheckedColor="#e0e0e0"
+                  />
                 </View>
                 <View>
                   <Text>Come prenota i viaggi ?</Text>
-                  <CheckBox
-                    style={{ flex: 1, padding: 10 }}
-                    // onClick={() => {
-                    // }}
-                    isChecked={isSelected}
-                    rightText={"smartphone"}
+          
+                   <CheckBox
+                    style={{ backgroundColor: "#e0e0e0" }}
+                    left
+                    checked={checked}
+                    checkedColor="blue"
+                    checkedTitle={t("Smartphone")}
+                    onIconPress={() => setChecked(!checked)}
+                    size={30}
+                    title={t("Smartphone")}
+                    uncheckedColor="#e0e0e0"
                   />
-                  <CheckBox
-                    style={{ flex: 1, padding: 10 }}
-                    // onClick={() => {
-                    // }}
-                    isChecked={isSelected}
-                    rightText={"Online"}
+            
+                   <CheckBox
+                    style={{ backgroundColor: "#e0e0e0" }}
+                    left
+                    checked={checked}
+                    checkedColor="blue"
+                    checkedTitle={t("Online")}
+                    onIconPress={() => setChecked(!checked)}
+                    size={30}
+                    title={t("Online")}
+                    uncheckedColor="#e0e0e0"
                   />
-                  <CheckBox
-                    style={{ flex: 1, padding: 10 }}
-                    // onClick={() => {
-                    // }}
-                    isChecked={isSelected}
-                    rightText={"Agenzia Viaggi"}
+                   <CheckBox
+                    style={{ backgroundColor: "#e0e0e0" }}
+                    left
+                    checked={checked}
+                    checkedColor="blue"
+                    checkedTitle={t("Agenzia viaggi")}
+                    onIconPress={() => setChecked(!checked)}
+                    size={30}
+                    title={t("Agenzia Viaggi")}
+                    uncheckedColor="#e0e0e0"
                   />
-                  <CheckBox
-                    style={{ flex: 1, padding: 10 }}
-                    // onClick={() => {
-                    // }}
-                    isChecked={isSelected}
-                    rightText={"Altro"}
+           
+                   <CheckBox
+                    style={{ backgroundColor: "#e0e0e0" }}
+                    left
+                    checked={checked}
+                    checkedColor="blue"
+                    checkedTitle={t("Altro")}
+                    onIconPress={() => setChecked(!checked)}
+                    size={30}
+                    title={t("Altro")}
+                    uncheckedColor="#e0e0e0"
                   />
                   <Input />
                 </View>
@@ -894,19 +1381,29 @@ export const Survery = ({ navigation, route }) => {
                     automa4zza4 e non, anche a6raverso società terze
                     specializzate)
                   </Text>
-                  <CheckBox
-                    style={{ flex: 1, padding: 10 }}
-                    // onClick={() => {
-                    // }}
-                    isChecked={isSelected}
-                    rightText={"Si"}
+            
+                   <CheckBox
+                    style={{ backgroundColor: "#e0e0e0" }}
+                    left
+                    checked={checked}
+                    checkedColor="blue"
+                    checkedTitle={t("Si")}
+                    onIconPress={() => setChecked(!checked)}
+                    size={30}
+                    title={t("Si")}
+                    uncheckedColor="#e0e0e0"
                   />
-                  <CheckBox
-                    style={{ flex: 1, padding: 10 }}
-                    // onClick={() => {
-                    // }}
-                    isChecked={isSelected}
-                    rightText={"NO"}
+            
+                   <CheckBox
+                    style={{ backgroundColor: "#e0e0e0" }}
+                    left
+                    checked={checked}
+                    checkedColor="blue"
+                    checkedTitle={t("No")}
+                    onIconPress={() => setChecked(!checked)}
+                    size={30}
+                    title={t("No")}
+                    uncheckedColor="#e0e0e0"
                   />
                   <Text>
                     3.1.b) al tra6amento dei miei da4 personali per finalità di
@@ -917,18 +1414,26 @@ export const Survery = ({ navigation, route }) => {
                     comunicazioni commerciali personalizzate.
                   </Text>
                   <CheckBox
-                    style={{ flex: 1, padding: 10 }}
-                    // onClick={() => {
-                    // }}
-                    isChecked={isSelected}
-                    rightText={"Si"}
+                    style={{ backgroundColor: "#e0e0e0" }}
+                    left
+                    checked={checked}
+                    checkedColor="blue"
+                    checkedTitle={t("Si")}
+                    onIconPress={() => setChecked(!checked)}
+                    size={30}
+                    title={t("Si")}
+                    uncheckedColor="#e0e0e0"
                   />
-                  <CheckBox
-                    style={{ flex: 1, padding: 10 }}
-                    // onClick={() => {
-                    // }}
-                    isChecked={isSelected}
-                    rightText={"NO"}
+              <CheckBox
+                    style={{ backgroundColor: "#e0e0e0" }}
+                    left
+                    checked={checked}
+                    checkedColor="blue"
+                    checkedTitle={t("No")}
+                    onIconPress={() => setChecked(!checked)}
+                    size={30}
+                    title={t("No")}
+                    uncheckedColor="#e0e0e0"
                   />
                   <Text>
                     3.1.c) comunicazione dei miei da4 personali a sogge] Terzi
@@ -937,21 +1442,28 @@ export const Survery = ({ navigation, route }) => {
                     personalizzate di beni o servizi a]nen4 i servizi richies4.
                   </Text>
                   <CheckBox
-                    style={{ flex: 1, padding: 10 }}
-                    // onClick={() => {
-                    // }}
-                    isChecked={isSelected}
-                    rightText={"SI"}
+                    style={{ backgroundColor: "#e0e0e0" }}
+                    left
+                    checked={checked}
+                    checkedColor="blue"
+                    checkedTitle={t("Si")}
+                    onIconPress={() => setChecked(!checked)}
+                    size={30}
+                    title={t("Si")}
+                    uncheckedColor="#e0e0e0"
                   />
-                  <CheckBox
-                    style={{ flex: 1, padding: 10 }}
-                    // onClick={() => {
-                    // }}
-                    isChecked={isSelected}
-                    rightText={"NO"}
+                 <CheckBox
+                    style={{ backgroundColor: "#e0e0e0" }}
+                    left
+                    checked={checked}
+                    checkedColor="blue"
+                    checkedTitle={t("No")}
+                    onIconPress={() => setChecked(!checked)}
+                    size={30}
+                    title={t("No")}
+                    uncheckedColor="#e0e0e0"
                   />
                 </View>
-
               </View>
               <View>
                 <Text>
