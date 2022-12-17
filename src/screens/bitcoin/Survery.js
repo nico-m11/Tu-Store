@@ -28,10 +28,16 @@ export const Survery = ({ navigation, route }) => {
   const { t, i18n } = useTranslation();
   const width = Dimensions.get("window").width - 60;
   //definisco tutte le checkbox assegnando ad ogni uno la propria variabile
-  const [checked, setChecked] = useState(false);
+  const [checked, setChecked] = useState(false); // togliere quando creato tutto
+  // prima domanda
   const [checkBollette, setCheckBollette] = useState(false);
   const [checkAffitto, setCheckAffitto] = useState(false);
   const [checktrasporti, setCheckTraporti] = useState(false);
+  // seconda domanda
+  const [checknumberFamily1, setChecknumberFamily1] = useState(false);
+  const [checknumberFamily2, setChecknumberFamily2] = useState(false);
+  const [checknumberFamily3, setChecknumberFamily3] = useState(false);
+  const [checknumberFamily4, setChecknumberFamily4] = useState(false);
 
   return (
     <SafeAreaView style={{ ...ConstantStyle.container }}>
@@ -136,10 +142,10 @@ export const Survery = ({ navigation, route }) => {
                 <CheckBox
                   style={{ backgroundColor: "#e0e0e0" }}
                   left
-                  checked={checked}
+                  checked={checknumberFamily1}
                   checkedColor="blue"
                   checkedTitle={t("1")}
-                  onIconPress={() => setChecked(!checked)}
+                  onIconPress={() => setChecknumberFamily1(!checknumberFamily1)}
                   size={30}
                   title={t("1")}
                   uncheckedColor="#e0e0e0"
@@ -148,10 +154,10 @@ export const Survery = ({ navigation, route }) => {
                 <CheckBox
                   style={{ backgroundColor: "#e0e0e0" }}
                   left
-                  checked={checked}
+                  checked={checknumberFamily2}
                   checkedColor="blue"
                   checkedTitle={t("2")}
-                  onIconPress={() => setChecked(!checked)}
+                  onIconPress={() => setChecknumberFamily2(!checknumberFamily2)}
                   size={30}
                   title={t("2")}
                   uncheckedColor="#e0e0e0"
@@ -160,10 +166,10 @@ export const Survery = ({ navigation, route }) => {
                 <CheckBox
                   style={{ backgroundColor: "#e0e0e0" }}
                   left
-                  checked={checked}
+                  checked={checknumberFamily3}
                   checkedColor="blue"
                   checkedTitle={t("3")}
-                  onIconPress={() => setChecked(!checked)}
+                  onIconPress={() => setChecknumberFamily3(!checknumberFamily3)}
                   size={30}
                   title={t("3")}
                   uncheckedColor="#e0e0e0"
@@ -172,10 +178,10 @@ export const Survery = ({ navigation, route }) => {
                 <CheckBox
                   style={{ backgroundColor: "#e0e0e0" }}
                   left
-                  checked={checked}
+                  checked={checknumberFamily4}
                   checkedColor="blue"
                   checkedTitle={t("4")}
-                  onIconPress={() => setChecked(!checked)}
+                  onIconPress={() => setChecknumberFamily4(!checknumberFamily4)}
                   size={30}
                   title={t("4")}
                   uncheckedColor="#e0e0e0"
