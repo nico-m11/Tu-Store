@@ -31,7 +31,7 @@ export const Survery = ({ navigation, route }) => {
 
   return (
     <SafeAreaView style={{ ...ConstantStyle.container }}>
-      <CustomHeader navigation={navigation} title={"Survery"} isStar={false} />
+      <CustomHeader navigation={navigation} title={t("Survery")} isStar={false} />
       <View
         style={{
           backgroundColor: Colors.white,
@@ -55,14 +55,14 @@ export const Survery = ({ navigation, route }) => {
               {/**
                * first questiion
                */}
-              <View>
+              <View  >
                 <Text>{t("first_question")}</Text>
-                <CheckBox
+                <CheckBox 
                   style={{ flex: 1, padding: 10 }}
                   // onClick={() => {
                   // }}
                   isChecked={isSelected}
-                  rightText={"BOllette"}
+                  rightText={"Bollette"}
                 />
 
                 <CheckBox
@@ -114,7 +114,7 @@ export const Survery = ({ navigation, route }) => {
                 />
 
                 <CheckBox
-                  style={{ flex: 1, padding: 10 }}
+                  style={{ flex: 1, padding: 10}}
                   // onClick={() => {
                   // }}
                   isChecked={isSelected}
@@ -122,7 +122,9 @@ export const Survery = ({ navigation, route }) => {
                 />
 
                 <Text>Altro</Text>
-                <Input />
+                <Input 
+    
+                />
 
                 <View>
                   <Text>{t("secondo_media question")}</Text>
@@ -163,7 +165,7 @@ export const Survery = ({ navigation, route }) => {
                * terz question
                */}
               <View>
-                <Text>{t("terz question")}</Text>
+                <Text>{t("third_question")}</Text>
                 <View>
                   <CheckBox
                     style={{ flex: 1, padding: 10 }}
@@ -256,7 +258,7 @@ export const Survery = ({ navigation, route }) => {
                */}
 
               <View>
-                <Text>Hai Beni Di Proprietà</Text>
+                <Text>{t("fourth_question")}</Text>
                 <CheckBox
                   style={{ flex: 1, padding: 10 }}
                   // onClick={() => {
@@ -949,12 +951,7 @@ export const Survery = ({ navigation, route }) => {
                     rightText={"NO"}
                   />
                 </View>
-                <View>
-                  <Text>Luogo</Text>
-                  <Input />
-                  <Text>Firma</Text>
-                  <Input />
-                </View>
+
               </View>
               <View>
                 <Text>
