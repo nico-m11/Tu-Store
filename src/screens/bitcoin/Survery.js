@@ -27,8 +27,12 @@ export const Survery = ({ navigation, route }) => {
   //console.log(item);
   const { t, i18n } = useTranslation();
   const width = Dimensions.get("window").width - 60;
-  const [checked, setChecked] = React.useState(false);
-  const [isSelected, setIsSelected] = useState(false);
+  //definisco tutte le checkbox assegnando ad ogni uno la propria variabile
+  const [checked, setChecked] = useState(false);
+  const [checkBollette, setCheckBollette] = useState(false);
+  const [checkAffitto, setCheckAffitto] = useState(false);
+  const [checktrasporti, setCheckTraporti] = useState(false);
+
   return (
     <SafeAreaView style={{ ...ConstantStyle.container }}>
       <CustomHeader
@@ -65,11 +69,10 @@ export const Survery = ({ navigation, route }) => {
                 <CheckBox
                   style={{ backgroundColor: "#e0e0e0" }}
                   left
-                  checked={checked}
+                  checked={checkBollette}
                   checkedColor="blue"
                   checkedTitle={t("Bollette")}
-                  s
-                  onIconPress={() => setChecked(!checked)}
+                  onIconPress={() => setCheckBollette(!checkBollette)}
                   size={30}
                   title={t("Bollette")}
                   uncheckedColor="#e0e0e0"
@@ -78,10 +81,10 @@ export const Survery = ({ navigation, route }) => {
                 <CheckBox
                   style={{ backgroundColor: "#e0e0e0" }}
                   left
-                  checked={checked}
+                  checked={checkAffitto}
                   checkedColor="blue"
                   checkedTitle={t("Affitto")}
-                  onIconPress={() => setChecked(!checked)}
+                  onIconPress={() => setCheckAffitto(!checkAffitto)}
                   size={30}
                   title={t("Affitto")}
                   uncheckedColor="#e0e0e0"
@@ -90,17 +93,40 @@ export const Survery = ({ navigation, route }) => {
                 <CheckBox
                   style={{ backgroundColor: "#e0e0e0" }}
                   left
-                  checked={checked}
+                  checked={checktrasporti}
                   checkedColor="blue"
                   checkedTitle={t("Trasport")}
-                  onIconPress={() => setChecked(!checked)}
+                  onIconPress={() => setCheckTraporti(!checktrasporti)}
                   size={30}
                   title={t("Trasporti")}
                   uncheckedColor="#e0e0e0"
                 />
 
                 <Text>Altro</Text>
-                <Input />
+                <Input
+                  placeholder={t("Altro")}
+                  containerStyle={{
+                    marginTop: 8,
+                    marginBottom: -10,
+                    alignItems: "left",
+                    justifyContent: "start",
+                    textAlign: "center",
+                  }}
+                  inputContainerStyle={{
+                    borderBottomWidth: 0,
+                    ...ConstantStyle.shadow,
+                    backgroundColor: Colors.white,
+                    borderRadius: 10,
+                    paddingHorizontal: 15,
+                    width: width - 30,
+                    height: 45,
+                  }}
+                  inputStyle={{ ...Fonts.Black14Medium }}
+                  secureTextEntry={false}
+                  //defaultValue= {linkedin}
+                  // onChangeText={onChangeField('linkedin')}
+                  //onChangeText={newText => setLinkedin(newText)}
+                />
               </View>
               {/**
                * secondo question
@@ -156,7 +182,30 @@ export const Survery = ({ navigation, route }) => {
                 />
 
                 <Text>Altro</Text>
-                <Input />
+                <Input
+                  placeholder={t("Altro")}
+                  containerStyle={{
+                    marginTop: 8,
+                    marginBottom: -10,
+                    alignItems: "left",
+                    justifyContent: "start",
+                    textAlign: "center",
+                  }}
+                  inputContainerStyle={{
+                    borderBottomWidth: 0,
+                    ...ConstantStyle.shadow,
+                    backgroundColor: Colors.white,
+                    borderRadius: 10,
+                    paddingHorizontal: 15,
+                    width: width - 30,
+                    height: 45,
+                  }}
+                  inputStyle={{ ...Fonts.Black14Medium }}
+                  secureTextEntry={false}
+                  //defaultValue= {linkedin}
+                  // onChangeText={onChangeField('linkedin')}
+                  //onChangeText={newText => setLinkedin(newText)}
+                />
 
                 <View>
                   <Text>{t("secondo_media question")}</Text>
@@ -205,7 +254,30 @@ export const Survery = ({ navigation, route }) => {
                     uncheckedColor="#e0e0e0"
                   />
                   <Text>Altro</Text>
-                  <Input />
+                  <Input
+                    placeholder={t("Altro")}
+                    containerStyle={{
+                      marginTop: 8,
+                      marginBottom: -10,
+                      alignItems: "left",
+                      justifyContent: "start",
+                      textAlign: "center",
+                    }}
+                    inputContainerStyle={{
+                      borderBottomWidth: 0,
+                      ...ConstantStyle.shadow,
+                      backgroundColor: Colors.white,
+                      borderRadius: 10,
+                      paddingHorizontal: 15,
+                      width: width - 30,
+                      height: 45,
+                    }}
+                    inputStyle={{ ...Fonts.Black14Medium }}
+                    secureTextEntry={false}
+                    //defaultValue= {linkedin}
+                    // onChangeText={onChangeField('linkedin')}
+                    //onChangeText={newText => setLinkedin(newText)}
+                  />
                 </View>
               </View>
 
@@ -237,7 +309,30 @@ export const Survery = ({ navigation, route }) => {
                     title={t("No")}
                     uncheckedColor="#e0e0e0"
                   />
-                  <Input />
+                  <Input
+                    placeholder={t("Altro")}
+                    containerStyle={{
+                      marginTop: 8,
+                      marginBottom: -10,
+                      alignItems: "left",
+                      justifyContent: "start",
+                      textAlign: "center",
+                    }}
+                    inputContainerStyle={{
+                      borderBottomWidth: 0,
+                      ...ConstantStyle.shadow,
+                      backgroundColor: Colors.white,
+                      borderRadius: 10,
+                      paddingHorizontal: 15,
+                      width: width - 30,
+                      height: 45,
+                    }}
+                    inputStyle={{ ...Fonts.Black14Medium }}
+                    secureTextEntry={false}
+                    //defaultValue= {linkedin}
+                    // onChangeText={onChangeField('linkedin')}
+                    //onChangeText={newText => setLinkedin(newText)}
+                  />
                 </View>
                 <View>
                   <CheckBox
@@ -370,13 +465,7 @@ export const Survery = ({ navigation, route }) => {
                   title={t("Si")}
                   uncheckedColor="#e0e0e0"
                 />
-                <CheckBox
-                  style={{ flex: 1, padding: 10 }}
-                  // onClick={() => {
-                  // }}
-                  isChecked={isSelected}
-                  rightText={"No"}
-                />
+
                 <CheckBox
                   style={{ backgroundColor: "#e0e0e0" }}
                   left
@@ -424,17 +513,34 @@ export const Survery = ({ navigation, route }) => {
                   uncheckedColor="#e0e0e0"
                 />
                 <Text>Altro</Text>
-                <Input />
+                <Input
+                  placeholder={t("Altro")}
+                  containerStyle={{
+                    marginTop: 8,
+                    marginBottom: -10,
+                    alignItems: "left",
+                    justifyContent: "start",
+                    textAlign: "center",
+                  }}
+                  inputContainerStyle={{
+                    borderBottomWidth: 0,
+                    ...ConstantStyle.shadow,
+                    backgroundColor: Colors.white,
+                    borderRadius: 10,
+                    paddingHorizontal: 15,
+                    width: width - 30,
+                    height: 45,
+                  }}
+                  inputStyle={{ ...Fonts.Black14Medium }}
+                  secureTextEntry={false}
+                  //defaultValue= {linkedin}
+                  // onChangeText={onChangeField('linkedin')}
+                  //onChangeText={newText => setLinkedin(newText)}
+                />
 
                 <View>
                   <Text>Sono assicurati?</Text>
-                  <CheckBox
-                    style={{ flex: 1, padding: 10 }}
-                    // onClick={() => {
-                    // }}
-                    isChecked={isSelected}
-                    rightText={"Si"}
-                  />
+
                   <CheckBox
                     style={{ backgroundColor: "#e0e0e0" }}
                     left
@@ -502,7 +608,30 @@ export const Survery = ({ navigation, route }) => {
                     title={t("Auto")}
                     uncheckedColor="#e0e0e0"
                   />
-                  <Input />
+                  <Input
+                    placeholder={t("Altro")}
+                    containerStyle={{
+                      marginTop: 8,
+                      marginBottom: -10,
+                      alignItems: "left",
+                      justifyContent: "start",
+                      textAlign: "center",
+                    }}
+                    inputContainerStyle={{
+                      borderBottomWidth: 0,
+                      ...ConstantStyle.shadow,
+                      backgroundColor: Colors.white,
+                      borderRadius: 10,
+                      paddingHorizontal: 15,
+                      width: width - 30,
+                      height: 45,
+                    }}
+                    inputStyle={{ ...Fonts.Black14Medium }}
+                    secureTextEntry={false}
+                    //defaultValue= {linkedin}
+                    // onChangeText={onChangeField('linkedin')}
+                    //onChangeText={newText => setLinkedin(newText)}
+                  />
                   <CheckBox
                     style={{ backgroundColor: "#e0e0e0" }}
                     left
@@ -514,7 +643,30 @@ export const Survery = ({ navigation, route }) => {
                     title={t("Moto")}
                     uncheckedColor="#e0e0e0"
                   />
-                  <Input />
+                  <Input
+                    placeholder={t("Altro")}
+                    containerStyle={{
+                      marginTop: 8,
+                      marginBottom: -10,
+                      alignItems: "left",
+                      justifyContent: "start",
+                      textAlign: "center",
+                    }}
+                    inputContainerStyle={{
+                      borderBottomWidth: 0,
+                      ...ConstantStyle.shadow,
+                      backgroundColor: Colors.white,
+                      borderRadius: 10,
+                      paddingHorizontal: 15,
+                      width: width - 30,
+                      height: 45,
+                    }}
+                    inputStyle={{ ...Fonts.Black14Medium }}
+                    secureTextEntry={false}
+                    //defaultValue= {linkedin}
+                    // onChangeText={onChangeField('linkedin')}
+                    //onChangeText={newText => setLinkedin(newText)}
+                  />
                   <CheckBox
                     style={{ backgroundColor: "#e0e0e0" }}
                     left
@@ -526,7 +678,30 @@ export const Survery = ({ navigation, route }) => {
                     title={t("Mezzi")}
                     uncheckedColor="#e0e0e0"
                   />
-                  <Input />
+                  <Input
+                    placeholder={t("Altro")}
+                    containerStyle={{
+                      marginTop: 8,
+                      marginBottom: -10,
+                      alignItems: "left",
+                      justifyContent: "start",
+                      textAlign: "center",
+                    }}
+                    inputContainerStyle={{
+                      borderBottomWidth: 0,
+                      ...ConstantStyle.shadow,
+                      backgroundColor: Colors.white,
+                      borderRadius: 10,
+                      paddingHorizontal: 15,
+                      width: width - 30,
+                      height: 45,
+                    }}
+                    inputStyle={{ ...Fonts.Black14Medium }}
+                    secureTextEntry={false}
+                    //defaultValue= {linkedin}
+                    // onChangeText={onChangeField('linkedin')}
+                    //onChangeText={newText => setLinkedin(newText)}
+                  />
                 </View>
               </View>
 
@@ -561,13 +736,6 @@ export const Survery = ({ navigation, route }) => {
                 />
                 <View>
                   <CheckBox
-                    style={{ flex: 1, padding: 10 }}
-                    // onClick={() => {
-                    // }}
-                    isChecked={isSelected}
-                    rightText={"Vita"}
-                  />
-                  <CheckBox
                     style={{ backgroundColor: "#e0e0e0" }}
                     left
                     checked={checked}
@@ -578,13 +746,7 @@ export const Survery = ({ navigation, route }) => {
                     title={t("Vita")}
                     uncheckedColor="#e0e0e0"
                   />
-                  <CheckBox
-                    style={{ flex: 1, padding: 10 }}
-                    // onClick={() => {
-                    // }}
-                    isChecked={isSelected}
-                    rightText={"Infortuni"}
-                  />
+
                   <CheckBox
                     style={{ backgroundColor: "#e0e0e0" }}
                     left
@@ -609,7 +771,30 @@ export const Survery = ({ navigation, route }) => {
                     uncheckedColor="#e0e0e0"
                   />
                   <Text>Altro</Text>
-                  <Input />
+                  <Input
+                    placeholder={t("Altro")}
+                    containerStyle={{
+                      marginTop: 8,
+                      marginBottom: -10,
+                      alignItems: "left",
+                      justifyContent: "start",
+                      textAlign: "center",
+                    }}
+                    inputContainerStyle={{
+                      borderBottomWidth: 0,
+                      ...ConstantStyle.shadow,
+                      backgroundColor: Colors.white,
+                      borderRadius: 10,
+                      paddingHorizontal: 15,
+                      width: width - 30,
+                      height: 45,
+                    }}
+                    inputStyle={{ ...Fonts.Black14Medium }}
+                    secureTextEntry={false}
+                    //defaultValue= {linkedin}
+                    // onChangeText={onChangeField('linkedin')}
+                    //onChangeText={newText => setLinkedin(newText)}
+                  />
                 </View>
               </View>
 
@@ -644,13 +829,6 @@ export const Survery = ({ navigation, route }) => {
                 />
                 <View>
                   <CheckBox
-                    style={{ flex: 1, padding: 10 }}
-                    // onClick={() => {
-                    // }}
-                    isChecked={isSelected}
-                    rightText={"Personale"}
-                  />
-                  <CheckBox
                     style={{ backgroundColor: "#e0e0e0" }}
                     left
                     checked={checked}
@@ -662,21 +840,82 @@ export const Survery = ({ navigation, route }) => {
                     uncheckedColor="#e0e0e0"
                   />
                   <Text>con quali istituti?</Text>
-                  <Input />
+                  <Input
+                    placeholder={t("Con quali instituti?")}
+                    containerStyle={{
+                      marginTop: 8,
+                      marginBottom: -10,
+                      alignItems: "left",
+                      justifyContent: "start",
+                      textAlign: "center",
+                    }}
+                    inputContainerStyle={{
+                      borderBottomWidth: 0,
+                      ...ConstantStyle.shadow,
+                      backgroundColor: Colors.white,
+                      borderRadius: 10,
+                      paddingHorizontal: 15,
+                      width: width - 30,
+                      height: 45,
+                    }}
+                    inputStyle={{ ...Fonts.Black14Medium }}
+                    secureTextEntry={false}
+                    //defaultValue= {linkedin}
+                    // onChangeText={onChangeField('linkedin')}
+                    //onChangeText={newText => setLinkedin(newText)}
+                  />
                   <Text>importo?</Text>
-                  <Input />
+                  <Input
+                    placeholder={t("Importo")}
+                    containerStyle={{
+                      marginTop: 8,
+                      marginBottom: -10,
+                      alignItems: "left",
+                      justifyContent: "start",
+                      textAlign: "center",
+                    }}
+                    inputContainerStyle={{
+                      borderBottomWidth: 0,
+                      ...ConstantStyle.shadow,
+                      backgroundColor: Colors.white,
+                      borderRadius: 10,
+                      paddingHorizontal: 15,
+                      width: width - 30,
+                      height: 45,
+                    }}
+                    inputStyle={{ ...Fonts.Black14Medium }}
+                    secureTextEntry={false}
+                    //defaultValue= {linkedin}
+                    // onChangeText={onChangeField('linkedin')}
+                    //onChangeText={newText => setLinkedin(newText)}
+                  />
                   <Text>Quando?</Text>
-                  <Input />
+                  <Input
+                    placeholder={t("Quando")}
+                    containerStyle={{
+                      marginTop: 8,
+                      marginBottom: -10,
+                      alignItems: "left",
+                      justifyContent: "start",
+                      textAlign: "center",
+                    }}
+                    inputContainerStyle={{
+                      borderBottomWidth: 0,
+                      ...ConstantStyle.shadow,
+                      backgroundColor: Colors.white,
+                      borderRadius: 10,
+                      paddingHorizontal: 15,
+                      width: width - 30,
+                      height: 45,
+                    }}
+                    inputStyle={{ ...Fonts.Black14Medium }}
+                    secureTextEntry={false}
+                    //defaultValue= {linkedin}
+                    // onChangeText={onChangeField('linkedin')}
+                    //onChangeText={newText => setLinkedin(newText)}
+                  />
                 </View>
                 <View>
-                  <CheckBox
-                    style={{ flex: 1, padding: 10 }}
-                    // onClick={() => {
-                    // }}
-                    isChecked={isSelected}
-                    rightText={"Aziendale"}
-                  />
-
                   <CheckBox
                     style={{ backgroundColor: "#e0e0e0" }}
                     left
@@ -689,24 +928,87 @@ export const Survery = ({ navigation, route }) => {
                     uncheckedColor="#e0e0e0"
                   />
                   <Text>Con quali instituti?</Text>
-                  <Input />
+                  <Input
+                    placeholder={t("Con quali instituzioni")}
+                    containerStyle={{
+                      marginTop: 8,
+                      marginBottom: -10,
+                      alignItems: "left",
+                      justifyContent: "start",
+                      textAlign: "center",
+                    }}
+                    inputContainerStyle={{
+                      borderBottomWidth: 0,
+                      ...ConstantStyle.shadow,
+                      backgroundColor: Colors.white,
+                      borderRadius: 10,
+                      paddingHorizontal: 15,
+                      width: width - 30,
+                      height: 45,
+                    }}
+                    inputStyle={{ ...Fonts.Black14Medium }}
+                    secureTextEntry={false}
+                    //defaultValue= {linkedin}
+                    // onChangeText={onChangeField('linkedin')}
+                    //onChangeText={newText => setLinkedin(newText)}
+                  />
                   <Text>Importo ?</Text>
-                  <Input />
+                  <Input
+                    placeholder={t("Importo")}
+                    containerStyle={{
+                      marginTop: 8,
+                      marginBottom: -10,
+                      alignItems: "left",
+                      justifyContent: "start",
+                      textAlign: "center",
+                    }}
+                    inputContainerStyle={{
+                      borderBottomWidth: 0,
+                      ...ConstantStyle.shadow,
+                      backgroundColor: Colors.white,
+                      borderRadius: 10,
+                      paddingHorizontal: 15,
+                      width: width - 30,
+                      height: 45,
+                    }}
+                    inputStyle={{ ...Fonts.Black14Medium }}
+                    secureTextEntry={false}
+                    //defaultValue= {linkedin}
+                    // onChangeText={onChangeField('linkedin')}
+                    //onChangeText={newText => setLinkedin(newText)}
+                  />
                   <Text>Quando</Text>
-                  <Input />
+                  <Input
+                    placeholder={t("Quando")}
+                    containerStyle={{
+                      marginTop: 8,
+                      marginBottom: -10,
+                      alignItems: "left",
+                      justifyContent: "start",
+                      textAlign: "center",
+                    }}
+                    inputContainerStyle={{
+                      borderBottomWidth: 0,
+                      ...ConstantStyle.shadow,
+                      backgroundColor: Colors.white,
+                      borderRadius: 10,
+                      paddingHorizontal: 15,
+                      width: width - 30,
+                      height: 45,
+                    }}
+                    inputStyle={{ ...Fonts.Black14Medium }}
+                    secureTextEntry={false}
+                    //defaultValue= {linkedin}
+                    // onChangeText={onChangeField('linkedin')}
+                    //onChangeText={newText => setLinkedin(newText)}
+                  />
                 </View>
               </View>
               {/**
                * ottavo
                */}
               <Text>Che gestore utilizza per gas e luce ?</Text>
-              <CheckBox
-                style={{ flex: 1, padding: 10 }}
-                // onClick={() => {
-                // }}
-                isChecked={isSelected}
-                rightText={"Casa"}
-              />
+
               <CheckBox
                 style={{ backgroundColor: "#e0e0e0" }}
                 left
@@ -718,14 +1020,31 @@ export const Survery = ({ navigation, route }) => {
                 title={t("Casa")}
                 uncheckedColor="#e0e0e0"
               />
-              <Input />
-              <CheckBox
-                style={{ flex: 1, padding: 10 }}
-                // onClick={() => {
-                // }}
-                isChecked={isSelected}
-                rightText={"Azienda"}
+              <Input
+                placeholder={t("Casa")}
+                containerStyle={{
+                  marginTop: 8,
+                  marginBottom: -10,
+                  alignItems: "left",
+                  justifyContent: "start",
+                  textAlign: "center",
+                }}
+                inputContainerStyle={{
+                  borderBottomWidth: 0,
+                  ...ConstantStyle.shadow,
+                  backgroundColor: Colors.white,
+                  borderRadius: 10,
+                  paddingHorizontal: 15,
+                  width: width - 30,
+                  height: 45,
+                }}
+                inputStyle={{ ...Fonts.Black14Medium }}
+                secureTextEntry={false}
+                //defaultValue= {linkedin}
+                // onChangeText={onChangeField('linkedin')}
+                //onChangeText={newText => setLinkedin(newText)}
               />
+
               <CheckBox
                 style={{ backgroundColor: "#e0e0e0" }}
                 left
@@ -737,13 +1056,82 @@ export const Survery = ({ navigation, route }) => {
                 title={t("Azienda")}
                 uncheckedColor="#e0e0e0"
               />
-              <Input />
+              <Input
+                placeholder={t("Azienda")}
+                containerStyle={{
+                  marginTop: 8,
+                  marginBottom: -10,
+                  alignItems: "left",
+                  justifyContent: "start",
+                  textAlign: "center",
+                }}
+                inputContainerStyle={{
+                  borderBottomWidth: 0,
+                  ...ConstantStyle.shadow,
+                  backgroundColor: Colors.white,
+                  borderRadius: 10,
+                  paddingHorizontal: 15,
+                  width: width - 30,
+                  height: 45,
+                }}
+                inputStyle={{ ...Fonts.Black14Medium }}
+                secureTextEntry={false}
+                //defaultValue= {linkedin}
+                // onChangeText={onChangeField('linkedin')}
+                //onChangeText={newText => setLinkedin(newText)}
+              />
               <View>
                 <Text>Che gestore utilizza per il telefono e wifi?</Text>
                 <Text>Casa</Text>
-                <Input />
+                <Input
+                  placeholder={t("Casa")}
+                  containerStyle={{
+                    marginTop: 8,
+                    marginBottom: -10,
+                    alignItems: "left",
+                    justifyContent: "start",
+                    textAlign: "center",
+                  }}
+                  inputContainerStyle={{
+                    borderBottomWidth: 0,
+                    ...ConstantStyle.shadow,
+                    backgroundColor: Colors.white,
+                    borderRadius: 10,
+                    paddingHorizontal: 15,
+                    width: width - 30,
+                    height: 45,
+                  }}
+                  inputStyle={{ ...Fonts.Black14Medium }}
+                  secureTextEntry={false}
+                  //defaultValue= {linkedin}
+                  // onChangeText={onChangeField('linkedin')}
+                  //onChangeText={newText => setLinkedin(newText)}
+                />
                 <Text>Azienda</Text>
-                <Input />
+                <Input
+                  placeholder={t("Azinda")}
+                  containerStyle={{
+                    marginTop: 8,
+                    marginBottom: -10,
+                    alignItems: "left",
+                    justifyContent: "start",
+                    textAlign: "center",
+                  }}
+                  inputContainerStyle={{
+                    borderBottomWidth: 0,
+                    ...ConstantStyle.shadow,
+                    backgroundColor: Colors.white,
+                    borderRadius: 10,
+                    paddingHorizontal: 15,
+                    width: width - 30,
+                    height: 45,
+                  }}
+                  inputStyle={{ ...Fonts.Black14Medium }}
+                  secureTextEntry={false}
+                  //defaultValue= {linkedin}
+                  // onChangeText={onChangeField('linkedin')}
+                  //onChangeText={newText => setLinkedin(newText)}
+                />
               </View>
 
               {/**
@@ -825,7 +1213,30 @@ export const Survery = ({ navigation, route }) => {
                     uncheckedColor="#e0e0e0"
                   />
                   <Text>Altro</Text>
-                  <Input />
+                  <Input
+                    placeholder={t("Altro")}
+                    containerStyle={{
+                      marginTop: 8,
+                      marginBottom: -10,
+                      alignItems: "left",
+                      justifyContent: "start",
+                      textAlign: "center",
+                    }}
+                    inputContainerStyle={{
+                      borderBottomWidth: 0,
+                      ...ConstantStyle.shadow,
+                      backgroundColor: Colors.white,
+                      borderRadius: 10,
+                      paddingHorizontal: 15,
+                      width: width - 30,
+                      height: 45,
+                    }}
+                    inputStyle={{ ...Fonts.Black14Medium }}
+                    secureTextEntry={false}
+                    //defaultValue= {linkedin}
+                    // onChangeText={onChangeField('linkedin')}
+                    //onChangeText={newText => setLinkedin(newText)}
+                  />
                 </View>
               </View>
               {/**
@@ -905,7 +1316,30 @@ export const Survery = ({ navigation, route }) => {
                   />
 
                   <Text>Altro</Text>
-                  <Input />
+                  <Input
+                    placeholder={t("Altro")}
+                    containerStyle={{
+                      marginTop: 8,
+                      marginBottom: -10,
+                      alignItems: "left",
+                      justifyContent: "start",
+                      textAlign: "center",
+                    }}
+                    inputContainerStyle={{
+                      borderBottomWidth: 0,
+                      ...ConstantStyle.shadow,
+                      backgroundColor: Colors.white,
+                      borderRadius: 10,
+                      paddingHorizontal: 15,
+                      width: width - 30,
+                      height: 45,
+                    }}
+                    inputStyle={{ ...Fonts.Black14Medium }}
+                    secureTextEntry={false}
+                    //defaultValue= {linkedin}
+                    // onChangeText={onChangeField('linkedin')}
+                    //onChangeText={newText => setLinkedin(newText)}
+                  />
                 </View>
               </View>
               {/**
@@ -914,13 +1348,7 @@ export const Survery = ({ navigation, route }) => {
               <View>
                 <View>
                   <Text>Hai un buisiness online ?</Text>
-                  <CheckBox
-                    style={{ flex: 1, padding: 10 }}
-                    // onClick={() => {
-                    // }}
-                    isChecked={isSelected}
-                    rightText={"Si"}
-                  />
+
                   <CheckBox
                     style={{ backgroundColor: "#e0e0e0" }}
                     left
@@ -981,7 +1409,30 @@ export const Survery = ({ navigation, route }) => {
                     uncheckedColor="#e0e0e0"
                   />
                   <Text>Altro </Text>
-                  <Input />
+                  <Input
+                    placeholder={t("Altro")}
+                    containerStyle={{
+                      marginTop: 8,
+                      marginBottom: -10,
+                      alignItems: "left",
+                      justifyContent: "start",
+                      textAlign: "center",
+                    }}
+                    inputContainerStyle={{
+                      borderBottomWidth: 0,
+                      ...ConstantStyle.shadow,
+                      backgroundColor: Colors.white,
+                      borderRadius: 10,
+                      paddingHorizontal: 15,
+                      width: width - 30,
+                      height: 45,
+                    }}
+                    inputStyle={{ ...Fonts.Black14Medium }}
+                    secureTextEntry={false}
+                    //defaultValue= {linkedin}
+                    // onChangeText={onChangeField('linkedin')}
+                    //onChangeText={newText => setLinkedin(newText)}
+                  />
                 </View>
               </View>
               {/**
@@ -1029,13 +1480,7 @@ export const Survery = ({ navigation, route }) => {
                 </View>
                 <View>
                   <Text>Hai un avvocato di fiducia ?</Text>
-                  <CheckBox
-                    style={{ flex: 1, padding: 10 }}
-                    // onClick={() => {
-                    // }}
-                    isChecked={isSelected}
-                    rightText={"Si"}
-                  />
+
                   <CheckBox
                     style={{ backgroundColor: "#e0e0e0" }}
                     left
@@ -1150,13 +1595,6 @@ export const Survery = ({ navigation, route }) => {
                 />
 
                 <CheckBox
-                  style={{ flex: 1, padding: 10 }}
-                  // onClick={() => {
-                  // }}
-                  isChecked={isSelected}
-                  rightText={"Gruppi"}
-                />
-                <CheckBox
                   style={{ backgroundColor: "#e0e0e0" }}
                   left
                   checked={checked}
@@ -1243,8 +1681,8 @@ export const Survery = ({ navigation, route }) => {
               <View>
                 <View>
                   <Text>Per la prossima vacanza sceglieresti:</Text>
-                 
-                   <CheckBox
+
+                  <CheckBox
                     style={{ backgroundColor: "#e0e0e0" }}
                     left
                     checked={checked}
@@ -1255,8 +1693,8 @@ export const Survery = ({ navigation, route }) => {
                     title={t("Europa/Mediterraneo")}
                     uncheckedColor="#e0e0e0"
                   />
-              
-                   <CheckBox
+
+                  <CheckBox
                     style={{ backgroundColor: "#e0e0e0" }}
                     left
                     checked={checked}
@@ -1267,7 +1705,7 @@ export const Survery = ({ navigation, route }) => {
                     title={t("Lungo raggio")}
                     uncheckedColor="#e0e0e0"
                   />
-                   <CheckBox
+                  <CheckBox
                     style={{ backgroundColor: "#e0e0e0" }}
                     left
                     checked={checked}
@@ -1278,7 +1716,7 @@ export const Survery = ({ navigation, route }) => {
                     title={t("Villaggio")}
                     uncheckedColor="#e0e0e0"
                   />
-                 <CheckBox
+                  <CheckBox
                     style={{ backgroundColor: "#e0e0e0" }}
                     left
                     checked={checked}
@@ -1291,13 +1729,6 @@ export const Survery = ({ navigation, route }) => {
                   />
 
                   <CheckBox
-                    style={{ flex: 1, padding: 10 }}
-                    // onClick={() => {
-                    // }}
-                    isChecked={isSelected}
-                    rightText={"Città e tour "}
-                  />
-                   <CheckBox
                     style={{ backgroundColor: "#e0e0e0" }}
                     left
                     checked={checked}
@@ -1311,8 +1742,8 @@ export const Survery = ({ navigation, route }) => {
                 </View>
                 <View>
                   <Text>Come prenota i viaggi ?</Text>
-          
-                   <CheckBox
+
+                  <CheckBox
                     style={{ backgroundColor: "#e0e0e0" }}
                     left
                     checked={checked}
@@ -1323,8 +1754,8 @@ export const Survery = ({ navigation, route }) => {
                     title={t("Smartphone")}
                     uncheckedColor="#e0e0e0"
                   />
-            
-                   <CheckBox
+
+                  <CheckBox
                     style={{ backgroundColor: "#e0e0e0" }}
                     left
                     checked={checked}
@@ -1335,7 +1766,7 @@ export const Survery = ({ navigation, route }) => {
                     title={t("Online")}
                     uncheckedColor="#e0e0e0"
                   />
-                   <CheckBox
+                  <CheckBox
                     style={{ backgroundColor: "#e0e0e0" }}
                     left
                     checked={checked}
@@ -1346,8 +1777,8 @@ export const Survery = ({ navigation, route }) => {
                     title={t("Agenzia Viaggi")}
                     uncheckedColor="#e0e0e0"
                   />
-           
-                   <CheckBox
+
+                  <CheckBox
                     style={{ backgroundColor: "#e0e0e0" }}
                     left
                     checked={checked}
@@ -1358,7 +1789,30 @@ export const Survery = ({ navigation, route }) => {
                     title={t("Altro")}
                     uncheckedColor="#e0e0e0"
                   />
-                  <Input />
+                  <Input
+                    placeholder={t("Altro")}
+                    containerStyle={{
+                      marginTop: 8,
+                      marginBottom: -10,
+                      alignItems: "left",
+                      justifyContent: "start",
+                      textAlign: "center",
+                    }}
+                    inputContainerStyle={{
+                      borderBottomWidth: 0,
+                      ...ConstantStyle.shadow,
+                      backgroundColor: Colors.white,
+                      borderRadius: 10,
+                      paddingHorizontal: 15,
+                      width: width - 30,
+                      height: 45,
+                    }}
+                    inputStyle={{ ...Fonts.Black14Medium }}
+                    secureTextEntry={false}
+                    //defaultValue= {linkedin}
+                    // onChangeText={onChangeField('linkedin')}
+                    //onChangeText={newText => setLinkedin(newText)}
+                  />
                 </View>
               </View>
 
@@ -1381,8 +1835,8 @@ export const Survery = ({ navigation, route }) => {
                     automa4zza4 e non, anche a6raverso società terze
                     specializzate)
                   </Text>
-            
-                   <CheckBox
+
+                  <CheckBox
                     style={{ backgroundColor: "#e0e0e0" }}
                     left
                     checked={checked}
@@ -1393,8 +1847,8 @@ export const Survery = ({ navigation, route }) => {
                     title={t("Si")}
                     uncheckedColor="#e0e0e0"
                   />
-            
-                   <CheckBox
+
+                  <CheckBox
                     style={{ backgroundColor: "#e0e0e0" }}
                     left
                     checked={checked}
@@ -1424,7 +1878,7 @@ export const Survery = ({ navigation, route }) => {
                     title={t("Si")}
                     uncheckedColor="#e0e0e0"
                   />
-              <CheckBox
+                  <CheckBox
                     style={{ backgroundColor: "#e0e0e0" }}
                     left
                     checked={checked}
@@ -1452,7 +1906,7 @@ export const Survery = ({ navigation, route }) => {
                     title={t("Si")}
                     uncheckedColor="#e0e0e0"
                   />
-                 <CheckBox
+                  <CheckBox
                     style={{ backgroundColor: "#e0e0e0" }}
                     left
                     checked={checked}
