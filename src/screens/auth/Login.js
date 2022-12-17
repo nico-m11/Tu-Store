@@ -44,6 +44,8 @@ export const LoginScreen = ({ navigation }) => {
     bottomSheetRef.current?.present();
   }, []);
 
+  const [dataAccess, setDataAccess] = useState([]);
+
   // dispatch actions
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -58,22 +60,16 @@ export const LoginScreen = ({ navigation }) => {
   const handleRegister = () => {
     navigation.navigate("RegisterScreen");
   };
-  
-  console.log(email)
-  console.log(password)
 
   const { register, handleSubmit, setValue } = useForm();
   const onSubmit = useCallback(() => {
     //POST request
-    var raw = JSON.stringify({
-      "email":email,
-      "password":password
-    });
-
-
     fetch("https://api.tu-store.soluzionitop.cloud/api/customers/login", {
       method: "POST", //Request Type
-      body: raw,//post body
+      body: JSON.stringify({
+        "email":email,
+        "password":password
+      }),//post body
       headers: {
         //Header Defination
         "Content-Type": "application/json",
@@ -82,8 +78,13 @@ export const LoginScreen = ({ navigation }) => {
       .then((response) => response.json())
       //If response is in json then in success
       .then((responseJson) => {
-        alert(JSON.stringify(responseJson));
+        JSON.stringify(responseJson);
         console.log(responseJson);
+        if (200 == responseJson.status) {
+          setDataAccess(responseJson);
+        } else {
+          console.log('niente')
+        }
       })
       //If response is not in json then in error
       .catch((error) => {
@@ -272,11 +273,11 @@ export const LoginScreen = ({ navigation }) => {
               </Text>
             </TouchableOpacity>
             <View style={{ marginHorizontal: 15, marginVertical: 25 }}>
-              <MainButton name={t("sign_in")} onPress={onSubmit} />
+              <MainButton name={t("sign_in")} onClick={onSubmit}   
+              //onPress={() => navigation.navigate("Home")} 
+              />
             </View>
-            {/* <Text style={{ ...Fonts.Grey14Bold, textAlign: "center" }}>
-              {t("or")}
-            </Text> */}
+      
             <View
               style={{
                 alignItems: "center",
@@ -285,36 +286,6 @@ export const LoginScreen = ({ navigation }) => {
                 flexDirection: "row",
               }}
             >
-              {/* <TouchableOpacity
-                activeOpacity={0.7}
-                style={{ marginHorizontal: 10 }}
-              >
-                <Image
-                  style={{
-                    width: 50,
-                    height: 50,
-                    resizeMode: "contain",
-                    borderRadius: 25,
-                  }}
-                  alt="facebook"
-                  source={require("../../../assets/icons/facebook.png")}
-                />
-              </TouchableOpacity> */}
-              {/* <TouchableOpacity
-                activeOpacity={0.7}
-                style={{ marginHorizontal: 10 }}
-              >
-                <Image
-                  style={{
-                    width: 46,
-                    height: 46,
-                    resizeMode: "contain",
-                    borderRadius: 20,
-                  }}
-                  alt="goggle"
-                  source={require("../../../assets/icons/google.png")}
-                />
-              </TouchableOpacity> */}
             </View>
           </View>
           <View
