@@ -970,3 +970,4 @@ export const Survery = ({ navigation, route }) => {
     </SafeAreaView>
   );
 };
+const styles = StyleSheet.create({});
